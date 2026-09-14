@@ -33,6 +33,20 @@ NK_KEYWORDS = {
     "AsiaPress": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
 }
 
+def active_sources():
+    """SOURCES minus the names in NK_SKIP_SOURCES (comma-separated).
+
+    DailyNK Japan answers 200 from home and a Cloudflare 403 challenge from a
+    GitHub runner whatever the headers (measured 2026-09-14), so Actions turns
+    it off rather than logging the same DEAD every morning -- a daily alarm
+    that is always on hides the day a real feed dies. A name that matches no
+    source raises: a typo would otherwise switch nothing off and say nothing."""
+    off = {n.strip() for n in os.environ.get("NK_SKIP_SOURCES", "").split(",") if n.strip()}
+    unknown = off - {n for n, _u, _e in SOURCES}
+    if unknown:
+        raise ValueError(f"NK_SKIP_SOURCES names no such source: {sorted(unknown)}")
+    return [s for s in SOURCES if s[0] not in off], sorted(off)
+
 def link_key(link):
     """Identity of an article link. Strip only tracking tags: the query is
     often the article id itself (nkinfo view.do?...&trendMngNo=134739), and
@@ -61,8 +75,9 @@ def collect(state):
     # skipped items are NOT logged one by one -- that would bury the real signal.
     # counts only: bounded size, still lets you explain a drop in the total.
     skips = {}
+    sources, off = active_sources()
 
-    for name, url, _expect in SOURCES:
+    for name, url, _expect in sources:
         s = skips.setdefault(name, {"nodate": 0, "old": 0, "dup": 0, "offtopic": 0, "kept": 0})
         try:
             r = requests.get(url, headers=UA, timeout=20)
@@ -117,11 +132,11 @@ def collect(state):
     # a source that answered fine and still gave nothing: not an error, but the
     # one shape of trouble that leaves no other trace at all
     dead_names = {d["source"] for d in dead}
-    silent = [n for n, _u, expect in SOURCES
+    silent = [n for n, _u, expect in sources
               if expect and n not in dead_names and skips[n]["kept"] == 0]
 
     return {"items": items, "dead": dead, "silent": silent, "gaps": gaps,
-            "skips": skips, "seen_now": seen_now, "hours": hours}
+            "skips": skips, "seen_now": seen_now, "hours": hours, "off": off}
 
 if __name__ == "__main__":
     import sys
@@ -135,6 +150,8 @@ if __name__ == "__main__":
     print(f"{'source':<11}{'kept':>6}{'old':>6}{'dup':>6}{'off':>6}{'nodate':>8}")
     for name, s in res["skips"].items():
         print(f"{name:<11}{s['kept']:>6}{s['old']:>6}{s['dup']:>6}{s['offtopic']:>6}{s['nodate']:>8}")
+    for n in res["off"]:
+        print(f"-- OFF    {n}: switched off by NK_SKIP_SOURCES")
     for d in res["dead"]:
         print(f"!! DEAD   {d['source']}: {d['reason']}")
     for n in res["silent"]:
@@ -150,7 +167,7 @@ if __name__ == "__main__":
         fh.write(json.dumps({"ts": datetime.now(timezone.utc).isoformat(),
                              "hours": res["hours"], "collect": by_src,
                              "total": len(res["items"]),
-                             "dead": res["dead"], "silent": res["silent"],
+                             "dead": res["dead"], "silent": res["silent"], "off": res["off"],
                              "gaps": res["gaps"],
                              "skips": res["skips"],
                              "elapsed_s": round(time.time() - t0, 1)},

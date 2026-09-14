@@ -38,6 +38,9 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+          # Cloudflare answers runners with a 403 challenge whatever the headers
+          # (2026-09-14); from home the feed is 200. Off here, on locally.
+          NK_SKIP_SOURCES: DailyNK-JP
           TZ: Asia/Seoul
 
       - name: 실행 기록 보관

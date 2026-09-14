@@ -231,14 +231,19 @@ def collect(s: dict) -> dict:
     # collect_feeds judged "silent" over the 168h fetch, where a frozen daily
     # feed keeps its old items for a week. Judge daily sources over 24h here,
     # on everything fetched (ledger included: a published item is still a sign of life).
+    # Sources switched off by NK_SKIP_SOURCES are neither silent nor counted
+    # toward "every feed dead" -- otherwise the day all remaining feeds die
+    # would never reach the failure notice.
+    off = res.get("off", [])
+    active = [s for s in SOURCES if s[0] not in off]
     dead_names = {d["source"] for d in res["dead"]}
     alive_24h = {i["source"] for i in res["items"] if age_h(i, now) <= 24}
-    silent = [n for n, _u, expect in SOURCES
+    silent = [n for n, _u, expect in active
               if expect and n not in dead_names and n not in alive_24h]
     meta = {"window_h": hours, "escalated": hours != LADDER[0],
             "below_min": len(breaking) < MIN_ITEMS, "ledger_removed": len(res["items"]) - len(fresh),
-            "dead": res["dead"], "silent": silent, "gaps": res["gaps"],
-            "all_dead": len(dead_names) == len(SOURCES),
+            "dead": res["dead"], "silent": silent, "gaps": res["gaps"], "off": off,
+            "all_dead": len(dead_names) == len(active),
             "seen_now": res["seen_now"]}
     log = [f"① 수집   속보 {hours}h 창 {len(breaking)}건 · 심층 {len(deep)}건 · "
            f"1차 {t1['status']} · 원장 제외 {meta['ledger_removed']}건"]
@@ -246,6 +251,8 @@ def collect(s: dict) -> dict:
         log.append(f"   ESCALATED 24h에 {MIN_ITEMS}건 미만이라 {hours}h로 넓힘")
     if meta["below_min"]:
         log.append(f"   BELOW_MIN {LADDER[-1]}h에도 {MIN_ITEMS}건 미만 — 있는 만큼만")
+    for n in off:
+        log.append(f"   OFF    {n}: NK_SKIP_SOURCES로 끔")
     for d in res["dead"]:
         log.append(f"   DEAD   {d['source']}: {d['reason']}")
     for n in silent:
@@ -618,6 +625,7 @@ def run():
            "window_h": meta.get("window_h"), "escalated": meta.get("escalated"),
            "below_min": meta.get("below_min"),
            "dead": meta.get("dead"), "silent": meta.get("silent"), "gaps": meta.get("gaps"),
+           "off": meta.get("off", []),
            "by_source": by_source, "by_slot": by_slot,
            "elapsed_s": round(time.time() - t0, 1), "log": out["log"]}
     append_row(row)

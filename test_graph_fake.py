@@ -11,6 +11,8 @@ No key, no network. Checks the shape, not the judgement:
   6. one worker raising does not sink the others
   7. a daily feed whose newest item is older than 24h is SILENT even though
      it still has items inside the 168h fetch
+  12. a source switched off by NK_SKIP_SOURCES is logged, a typo stops the
+      run, and every remaining feed dead still raises the failure notice
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -186,5 +188,27 @@ merged = [p.index for p in graph.ranked_both_ways(items12, 3)]
 graph.parse = real_parse
 print("forward picks 0,1,2 · reversed picks 5,4,3 → merged", merged)
 assert merged == [0, 5, 1, 4, 2, 3], merged      # neither end of the list wins outright
+
+print("\n== 12. source switched off (NK_SKIP_SOURCES) ==")
+import collect_nk
+os.environ["NK_SKIP_SOURCES"] = "DailyNK-JP, AsiaPress"
+active, off = collect_nk.active_sources()
+assert off == ["AsiaPress", "DailyNK-JP"] and all(n not in off for n, _u, _e in active), (active, off)
+os.environ["NK_SKIP_SOURCES"] = "DailyNK-JPN"
+try:
+    collect_nk.active_sources()
+    raise AssertionError("typo in NK_SKIP_SOURCES accepted")
+except ValueError as exc:
+    print("typo stops the run:", exc)
+del os.environ["NK_SKIP_SOURCES"]
+rest = [n for n, _u, _e in graph.SOURCES if n != "DailyNK-JP"]
+graph.collect_feeds = lambda state: {"items": [], "dead": [{"source": d, "reason": "x"} for d in rest],
+                                     "silent": [], "gaps": [], "skips": {}, "seen_now": {},
+                                     "hours": state["hours"], "off": ["DailyNK-JP"]}
+graph.fetch_tier1 = lambda led: {"status": "DEAD", "reason": "x"}
+out = graph.build().compile().invoke(graph.INIT)
+show(out)
+assert any("OFF    DailyNK-JP" in l for l in out["log"]), "switched-off source not logged"
+assert out["meta"]["failed"], "every remaining feed dead must still raise the failure notice"
 
 print("\nALL OK")

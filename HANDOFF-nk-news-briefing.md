@@ -134,7 +134,12 @@
 0. **Actions 켜기 (사용자 몫)** — 디스코드 웹훅 만들기, 저장소 Secrets에 `OPENAI_API_KEY`·`DATA_GO_KR_KEY`·`DISCORD_WEBHOOK_URL` 등록, 그다음 push. Secrets 없이 push하면 매일 07:30 실행이 `DRY_RUN=0` + 웹훅 없음으로 실패한다. 첫 실행은 Actions 탭에서 `dry_run` 체크로 손으로 돌려 볼 것. data.go.kr가 해외(GitHub 러너) IP를 받는지 미확인 — 막히면 1차가 `DEAD`로 찍힌다
 0. **1차枠 OPEN 경로는 실데이터로 아직 못 봤다** (9/14 월요일 BELOW_BAR). 가짜 테스트로만 확인
 0. RFA 한국어 검수 통과 기여 0 (dry-run 6회). 몇 주 쌓아 성적표로 뺄지 결정
-0. `store/last_seen.json`·`published.json`은 첫 실발행(9/14 19:14) 값으로 커밋했다. 가짜 시각은 이 실행이 덮어써 없어졌다. **아직 push 안 함** — Secrets 없이 push하면 07:30 실행이 실패하므로 `gh secret list`로 3개 확인 후 push
+0. `store/last_seen.json`·`published.json`은 첫 실발행(9/14 19:14) 값으로 커밋·push했다. Secrets 3개 등록 확인(9/14 10:17 UTC)
+0. **Actions 첫 수동 실행(dry_run, 9/14 19:20 KST) 초록불.** data.go.kr은 러너에서도 열림(1차 `BELOW_BAR`, DEAD 아님). 원장 제외 9건으로 로컬 발행분 재선별 안 됨
+   - **데일리NK재팬은 러너에서 403.** 임시 브랜치에서 UA 5종(과정 UA·크롬·크롬+Accept/Accept-Language/Referer·Feedly·없음) × URL 4종(`/feed`·`/feed/`·`?feed=rss2`·기사 페이지) 20회 전부 403 + Cloudflare `Just a moment...` 챌린지. 로컬은 20회 전부 200. 헤더가 아니라 데이터센터 IP 차단 → 챌린지 우회는 하지 않음
+   - 그래서 `daily.yml`에 `NK_SKIP_SOURCES: DailyNK-JP`. 로컬 실행에선 켜져 있다. 끈 소스는 `OFF`로 로그·metrics `off`에 남고 DEAD/SILENT로 세지 않으며, "전부 DEAD" 판정은 켜진 소스 기준. 이름 오타는 시작 시 `ValueError`
+   - 매일 DEAD를 띄워 두지 않은 이유: 늘 켜진 경보는 진짜 피드가 죽은 날을 가린다
+   - 되살리려면 러너가 아닌 곳(자체 러너·로컬 수집 업로드)이 필요. 기여는 로컬 dry-run으로만 볼 수 있다
 0. 같은 사건 거르기는 **하루 안에서만** 한다. 어제 낸 사건의 후속 기사는 링크가 달라 원장에 안 걸린다 — 최근 발행 제목을 `find_dupes`에 같이 넘길지 검토
 0. 모델이 토픽을 목록 밖 이름(`대내 정치`)으로 붙이는 경우가 있다 — 지금은 빈칸 처리 + 로그
 1. **`cl` 주간·월간 코드 확인** — 포털이 문서화한 건 `ARGUMENT_DAIL` 하나뿐. `ARGUMENT_WEEK`/`ARGUMENT_MONT` 는 추측이고 둘 다 0건인데, **`NO_SUCH_CODE_XYZ` 도 똑같이 `resultCode 0 / totalCount 0 / normal_code`** 다. 0건이 "발행 없음"인지 "코드 틀림"인지 이 API로는 못 가른다. 포털 상세문서나 nkinfo 사이트에서 실제 코드를 확인할 것. 확인 전까지 주간·월간은 "없다"고 적지 말 것
