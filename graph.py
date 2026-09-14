@@ -5,8 +5,8 @@
 
 Three slots, each with its own entry rule:
   breaking -- daily feeds, 24h window widened to 48h/72h only when short,
-              ranked by the model, only items it ties to an importance
-              criterion; TARGET drafted, trimmed at publish to fit the brief
+              ranked by the model, TARGET drafted, trimmed at publish
+              to fit the brief
   deep     -- weekly analysis (38North), looked back 7 days, at most one,
               no competition against the daily news
   tier1    -- MOU trend API, opens only when a summary clears CN_MIN,
@@ -109,7 +109,7 @@ def build_criteria(cfg):
     out = [f"독자는 {cfg['독자']['누구']}입니다.",
            f"이미 아는 것: {cfg['독자']['이미_아는_것']}",
            "", "중요도 기준 (위에 있을수록 우선):"]
-    out += [f"{k}. {x}" for k, x in enumerate(cfg["중요도_기준"], 1)]
+    out += [f"- {x}" for x in cfg["중요도_기준"]]
     out += ["", "버릴 것:"]
     out += [f"- {x}" for x in cfg["버릴_것"]]
     return "\n".join(out)
@@ -152,10 +152,6 @@ class Pick(BaseModel):
     event: str = Field(description="이 기사가 다루는 구체적인 사건 하나. '누가 무엇을 했다' 모양으로 "
                                    "(예: '북, 9일 동해상 탄도미사일 발사'). '군사 동향'·'내부 생활' 같은 "
                                    "분야 이름은 금지. 같은 사건을 다룬 기사끼리만 같은 문장")
-    # measured 2026-09-14: "최대 N건" still came back full, and a DailyNK
-    # sketch of residents cooling off in parks went out 3rd of 5. A number the
-    # code can check makes "none of the criteria" a drop, not a filler
-    criterion: int = Field(description="이 기사가 실제로 해당하는 중요도 기준 번호(1부터). 어느 기준에도 해당하지 않으면 0")
 
 class Shortlist(BaseModel):
     picks: list[Pick]
@@ -278,8 +274,6 @@ def ask_picks(items, n):
     listing = "\n".join(f"{i}. [{it['source']}] {it['title']}" for i, it in enumerate(items))
     system = (f"{CRITERIA}\n\n아래 목록에서 중요한 순서대로 최대 {n}건을 고르세요.\n"
               "버릴 것에 해당하는 기사는 수를 못 채우더라도 고르지 마세요.\n"
-              "criterion에는 그 기사가 실제로 해당하는 중요도 기준 번호를 적으세요. "
-              "기준에 억지로 끼워 맞추지 말고, 해당하는 기준이 없으면 0을 적으세요.\n"
               "event에는 분야가 아니라 구체적인 사건을 적고, 같은 사건을 다룬 기사에만 같은 event를 붙이세요. "
               "같은 분야라도 다른 사건이면 다른 event입니다.\n"
               "반대로 같은 훈련·발표·조치를 다른 각도로 쓴 기사(종합·분석·후속·반응)는 "
@@ -297,22 +291,18 @@ def ranked_both_ways(items, n):
     (exp/step6.log), the same 12 titles listed forward and reversed shared 3
     of 5 picks and 0 of 5 ranks. Ask both orders and merge by rank points
     (n for 1st ... 1 for nth, 0 if not picked). An item both lists agree on
-    beats one that a single order happened to favour.
-    A criterion of 0 from either order sticks: an item one order could only
-    fit by stretching is not one to publish."""
+    beats one that a single order happened to favour."""
     fwd = ask_picks(items, n)
     order = list(range(len(items)))[::-1]
-    rev = [p.model_copy(update={"index": order[p.index]})
+    rev = [Pick(index=order[p.index], reason=p.reason, event=p.event)
            for p in ask_picks([items[i] for i in order], n)]
-    points, first, none = {}, {}, set()
+    points, first = {}, {}
     for ranked in (fwd, rev):
         for rank, p in enumerate(ranked[:n]):       # the model may return more than asked
             points[p.index] = points.get(p.index, 0) + (n - rank)
             first.setdefault(p.index, p)            # keep the forward call's label when both have it
-            if p.criterion == 0:
-                none.add(p.index)
     merged = sorted(points, key=lambda i: (-points[i], i))
-    return [first[i].model_copy(update={"criterion": 0}) if i in none else first[i] for i in merged]
+    return [first[i] for i in merged]
 
 def enforce(items, picks, target, banned=None):
     """The prompt asks for distinct events; the code makes sure of it.
@@ -325,9 +315,6 @@ def enforce(items, picks, target, banned=None):
         if len(kept) == target:
             break
         it = items[p.index]
-        if not 1 <= p.criterion <= len(CFG["중요도_기준"]):
-            dropped.append((it, "중요도 기준 해당 없음", None))
-            continue
         if p.index in banned:
             dropped.append((it, "같은 사건 (묶음 재확인)", banned[p.index]))
             continue
@@ -340,8 +327,7 @@ def enforce(items, picks, target, banned=None):
             continue
         events[ev] = it["link"]
         per_src[it["source"]] = per_src.get(it["source"], 0) + 1
-        kept.append(dict(it, reason=p.reason, event=p.event, criterion=p.criterion,
-                         rank=len(kept), _i=p.index))
+        kept.append(dict(it, reason=p.reason, event=p.event, rank=len(kept), _i=p.index))
     return kept, dropped
 
 
@@ -398,14 +384,14 @@ def select(s: dict) -> dict:
             log.append("   ! 중복 재확인 3회에도 남은 중복이 있을 수 있음")
     deep = []
     if s["deep"]:
-        p = ask_picks(s["deep"], 1) if len(s["deep"]) > 1 else [Pick(index=0, reason="", event="", criterion=0)]
+        p = ask_picks(s["deep"], 1) if len(s["deep"]) > 1 else [Pick(index=0, reason="", event="")]
         deep = [dict(s["deep"][p[0].index], reason=p[0].reason)] if p else []
     tier1 = [s["tier1"]["item"]] if s["tier1"].get("status") == "OPEN" else []
     picked = tier1 + breaking + deep
     log.append(f"② 선별   속보 {len(items)} → {len(breaking)} · 심층 {len(s['deep'])} → {len(deep)}"
                f" · 1차 {len(tier1)}")
     for it in breaking:                         # a drop is only readable next to what it lost to
-        log.append(f"   + [{it['source']}] {it['title'][:40]} — 기준 {it['criterion']} · {it['event']}")
+        log.append(f"   + [{it['source']}] {it['title'][:40]} — {it['event']}")
     for it, why, _twin in dropped:
         log.append(f"   − [{it['source']}] {it['title'][:40]} — {why}")
     # same-event drops ride along with their twin into the ledger once the twin
