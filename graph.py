@@ -5,7 +5,8 @@
 
 Three slots, each with its own entry rule:
   breaking -- daily feeds, 24h window widened to 48h/72h only when short,
-              ranked by the model, capped at TARGET
+              ranked by the model, only items it ties to an importance
+              criterion; TARGET drafted, trimmed at publish to fit the brief
   deep     -- weekly analysis (38North), looked back 7 days, at most one,
               no competition against the daily news
   tier1    -- MOU trend API, opens only when a summary clears CN_MIN,
@@ -35,7 +36,11 @@ ENV = os.environ.get("NK_ENV_FILE",
                      r"C:\Users\user\Documents\tigermorning.github.io\ko\.env")
 
 MODEL = os.environ.get("NK_MODEL", "gpt-4.1-mini")
-BATCH, PRELIM, TARGET = 40, 8, 5     # prelim chunk size, kept per chunk, breaking slot size
+BATCH, PRELIM = 40, 8                # prelim chunk size, kept per chunk
+# reader's rule 2026-09-14: 3 cards a day, a deep or tier1 item takes one of
+# the three, and only the day both run gets a fourth
+BRIEF_SIZE, BRIEF_MAX = 3, 4
+TARGET = BRIEF_SIZE + 1              # breaking drafts: a spare for a draft or check that drops out
 MAX_PER_SOURCE = 3                   # Yonhap alone fills the feed 9:1 otherwise
 BODY_MIN = 600                       # G1
 WEEKLY = {"38North", "AsiaPress"}    # deep slot sources
@@ -104,7 +109,7 @@ def build_criteria(cfg):
     out = [f"독자는 {cfg['독자']['누구']}입니다.",
            f"이미 아는 것: {cfg['독자']['이미_아는_것']}",
            "", "중요도 기준 (위에 있을수록 우선):"]
-    out += [f"- {x}" for x in cfg["중요도_기준"]]
+    out += [f"{k}. {x}" for k, x in enumerate(cfg["중요도_기준"], 1)]
     out += ["", "버릴 것:"]
     out += [f"- {x}" for x in cfg["버릴_것"]]
     return "\n".join(out)
@@ -147,6 +152,10 @@ class Pick(BaseModel):
     event: str = Field(description="이 기사가 다루는 구체적인 사건 하나. '누가 무엇을 했다' 모양으로 "
                                    "(예: '북, 9일 동해상 탄도미사일 발사'). '군사 동향'·'내부 생활' 같은 "
                                    "분야 이름은 금지. 같은 사건을 다룬 기사끼리만 같은 문장")
+    # measured 2026-09-14: "최대 N건" still came back full, and a DailyNK
+    # sketch of residents cooling off in parks went out 3rd of 5. A number the
+    # code can check makes "none of the criteria" a drop, not a filler
+    criterion: int = Field(description="이 기사가 실제로 해당하는 중요도 기준 번호(1부터). 어느 기준에도 해당하지 않으면 0")
 
 class Shortlist(BaseModel):
     picks: list[Pick]
@@ -269,6 +278,8 @@ def ask_picks(items, n):
     listing = "\n".join(f"{i}. [{it['source']}] {it['title']}" for i, it in enumerate(items))
     system = (f"{CRITERIA}\n\n아래 목록에서 중요한 순서대로 최대 {n}건을 고르세요.\n"
               "버릴 것에 해당하는 기사는 수를 못 채우더라도 고르지 마세요.\n"
+              "criterion에는 그 기사가 실제로 해당하는 중요도 기준 번호를 적으세요. "
+              "기준에 억지로 끼워 맞추지 말고, 해당하는 기준이 없으면 0을 적으세요.\n"
               "event에는 분야가 아니라 구체적인 사건을 적고, 같은 사건을 다룬 기사에만 같은 event를 붙이세요. "
               "같은 분야라도 다른 사건이면 다른 event입니다.\n"
               "반대로 같은 훈련·발표·조치를 다른 각도로 쓴 기사(종합·분석·후속·반응)는 "
@@ -286,18 +297,22 @@ def ranked_both_ways(items, n):
     (exp/step6.log), the same 12 titles listed forward and reversed shared 3
     of 5 picks and 0 of 5 ranks. Ask both orders and merge by rank points
     (n for 1st ... 1 for nth, 0 if not picked). An item both lists agree on
-    beats one that a single order happened to favour."""
+    beats one that a single order happened to favour.
+    A criterion of 0 from either order sticks: an item one order could only
+    fit by stretching is not one to publish."""
     fwd = ask_picks(items, n)
     order = list(range(len(items)))[::-1]
-    rev = [Pick(index=order[p.index], reason=p.reason, event=p.event)
+    rev = [p.model_copy(update={"index": order[p.index]})
            for p in ask_picks([items[i] for i in order], n)]
-    points, first = {}, {}
+    points, first, none = {}, {}, set()
     for ranked in (fwd, rev):
         for rank, p in enumerate(ranked[:n]):       # the model may return more than asked
             points[p.index] = points.get(p.index, 0) + (n - rank)
             first.setdefault(p.index, p)            # keep the forward call's label when both have it
+            if p.criterion == 0:
+                none.add(p.index)
     merged = sorted(points, key=lambda i: (-points[i], i))
-    return [first[i] for i in merged]
+    return [first[i].model_copy(update={"criterion": 0}) if i in none else first[i] for i in merged]
 
 def enforce(items, picks, target, banned=None):
     """The prompt asks for distinct events; the code makes sure of it.
@@ -310,6 +325,9 @@ def enforce(items, picks, target, banned=None):
         if len(kept) == target:
             break
         it = items[p.index]
+        if not 1 <= p.criterion <= len(CFG["중요도_기준"]):
+            dropped.append((it, "중요도 기준 해당 없음", None))
+            continue
         if p.index in banned:
             dropped.append((it, "같은 사건 (묶음 재확인)", banned[p.index]))
             continue
@@ -322,7 +340,8 @@ def enforce(items, picks, target, banned=None):
             continue
         events[ev] = it["link"]
         per_src[it["source"]] = per_src.get(it["source"], 0) + 1
-        kept.append(dict(it, reason=p.reason, event=p.event, _i=p.index))
+        kept.append(dict(it, reason=p.reason, event=p.event, criterion=p.criterion,
+                         rank=len(kept), _i=p.index))
     return kept, dropped
 
 
@@ -379,14 +398,14 @@ def select(s: dict) -> dict:
             log.append("   ! 중복 재확인 3회에도 남은 중복이 있을 수 있음")
     deep = []
     if s["deep"]:
-        p = ask_picks(s["deep"], 1) if len(s["deep"]) > 1 else [Pick(index=0, reason="", event="")]
+        p = ask_picks(s["deep"], 1) if len(s["deep"]) > 1 else [Pick(index=0, reason="", event="", criterion=0)]
         deep = [dict(s["deep"][p[0].index], reason=p[0].reason)] if p else []
     tier1 = [s["tier1"]["item"]] if s["tier1"].get("status") == "OPEN" else []
     picked = tier1 + breaking + deep
     log.append(f"② 선별   속보 {len(items)} → {len(breaking)} · 심층 {len(s['deep'])} → {len(deep)}"
                f" · 1차 {len(tier1)}")
     for it in breaking:                         # a drop is only readable next to what it lost to
-        log.append(f"   + [{it['source']}] {it['title'][:40]} — {it['event']}")
+        log.append(f"   + [{it['source']}] {it['title'][:40]} — 기준 {it['criterion']} · {it['event']}")
     for it, why, _twin in dropped:
         log.append(f"   − [{it['source']}] {it['title'][:40]} — {why}")
     # same-event drops ride along with their twin into the ledger once the twin
@@ -547,8 +566,18 @@ def send(payload, webhook, dry_run):
         raise RuntimeError(f"발행 실패 {r.status_code} {r.text[:120]}")
     return True
 
+def fit_brief(verified):
+    """Trim after verify, not at select: a deep or tier1 item that fails its
+    draft or check hands its card back to the next breaking item.
+    Breaking goes by the select rank -- parallel workers finish in any order."""
+    special = [a for a in verified if a["slot"] != "breaking"]
+    breaking = sorted((a for a in verified if a["slot"] == "breaking"), key=lambda a: a.get("rank", 0))
+    size = BRIEF_MAX if len(special) >= 2 else BRIEF_SIZE
+    keep = breaking[:max(0, size - len(special))]
+    return sorted(special + keep, key=lambda a: SLOT_ORDER[a["slot"]]), breaking[len(keep):]
+
 def publish(s: dict) -> dict:
-    ver = sorted(s["verified"], key=lambda a: SLOT_ORDER[a["slot"]])
+    ver, spare = fit_brief(s["verified"])
     arts = [{**a, "when": datetime.fromisoformat(a["at"]).astimezone(KST).strftime("%m-%d %H:%M")
              if a["slot"] != "tier1" else datetime.fromisoformat(a["at"]).strftime("%m-%d")}
             for a in ver]
@@ -569,11 +598,13 @@ def publish(s: dict) -> dict:
         twins = [t["item"] for t in meta.get("twins", []) if link_key(t["twin"]) in sent_keys]
         mark_published(shipped + twins)
     log = [f"⑤ 발행   {len(shipped)}건 · {'보냄' if sent else 'dry-run'}"]
+    for a in spare:
+        log.append(f"   [예비] [{a['source']}] {a['headline'][:30]} — 칸이 차서 안 실음, 내일 후보로 남음")
     if dropped:
         log.append(f"   [한도] 카드 {dropped}장을 빼고 보냄 — 뺀 기사는 원장에 안 올라 내일 후보로 남음")
     if failure:
         log.append(f"   FAILED {failure}")
-    return {"meta": {**meta, "failed": failure}, "log": log}
+    return {"meta": {**meta, "failed": failure, "shipped": len(shipped), "spare": len(spare)}, "log": log}
 
 
 # ---------------------------------------------------------------- graph
@@ -621,7 +652,8 @@ def run():
            "collected": len(out["collected"]), "deep": len(out["deep"]),
            "tier1": out["tier1"].get("status"),
            "picked": len(out["picked"]), "drafted": len(out["drafted"]),
-           "published": len(out["verified"]),
+           "published": len(out["verified"]),   # passed verify; the brief carries "shipped" of them
+           "shipped": meta.get("shipped"), "spare": meta.get("spare"),
            "window_h": meta.get("window_h"), "escalated": meta.get("escalated"),
            "below_min": meta.get("below_min"),
            "dead": meta.get("dead"), "silent": meta.get("silent"), "gaps": meta.get("gaps"),

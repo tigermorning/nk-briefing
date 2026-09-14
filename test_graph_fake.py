@@ -13,6 +13,8 @@ No key, no network. Checks the shape, not the judgement:
      it still has items inside the 168h fetch
   12. a source switched off by NK_SKIP_SOURCES is logged, a typo stops the
       run, and every remaining feed dead still raises the failure notice
+  13. 3 cards a day (4 only with both deep and tier1), breaking by select
+      rank; a criterion of 0 from either order drops the item
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -43,7 +45,8 @@ def fake_parse(system, user, schema):
     if schema is graph.Shortlist:
         lines = user.splitlines()
         # every line picked in order; lines 1 and 2 share an event label
-        return schema(picks=[graph.Pick(index=i, reason="가짜", event="사건A" if i in (1, 2) else f"사건{i}")
+        return schema(picks=[graph.Pick(index=i, reason="가짜", event="사건A" if i in (1, 2) else f"사건{i}",
+                                        criterion=1)
                              for i in range(len(lines))])
     if schema is graph.Dupes:
         # first check only: short-list items 0 and 1 are the same event under different labels
@@ -142,7 +145,10 @@ posted.clear(); WROTE.clear()
 many = [{**item("Yonhap-NK", i, 1), "url": f"https://ex.com/Yonhap-NK/{i}", "slot": "breaking",
          "headline": f"헤드라인 {i}", "summary": "가" * 700, "why": "나" * 100, "topic": "군사·핵"}
         for i in range(20)]
+brief = graph.BRIEF_SIZE, graph.BRIEF_MAX
+graph.BRIEF_SIZE = graph.BRIEF_MAX = 20        # the Discord limits, not the daily card count, are under test
 res = graph.publish({"verified": many, "picked": many, "drafted": many, "meta": {"window_h": 24}})
+graph.BRIEF_SIZE, graph.BRIEF_MAX = brief
 os.environ["DRY_RUN"] = "1"
 del os.environ["DISCORD_WEBHOOK_URL"]
 embeds = posted[-1]["embeds"]
@@ -182,7 +188,7 @@ print("\n== 11. forward/reversed merge ==")
 items12 = [item("DailyNK", k, 1) for k in range(6)]
 def order_biased(system, user, schema):
     lines = user.splitlines()                   # a model that always prefers whatever is listed first
-    return schema(picks=[graph.Pick(index=i, reason="", event=f"e{lines[i]}") for i in range(3)])
+    return schema(picks=[graph.Pick(index=i, reason="", event=f"e{lines[i]}", criterion=1) for i in range(3)])
 graph.parse = order_biased
 merged = [p.index for p in graph.ranked_both_ways(items12, 3)]
 graph.parse = real_parse
@@ -210,5 +216,31 @@ out = graph.build().compile().invoke(graph.INIT)
 show(out)
 assert any("OFF    DailyNK-JP" in l for l in out["log"]), "switched-off source not logged"
 assert out["meta"]["failed"], "every remaining feed dead must still raise the failure notice"
+
+print("\n== 13. card count and the criterion gate ==")
+def card(slot, rank=0):
+    return {"slot": slot, "rank": rank, "source": slot, "headline": f"{slot}{rank}"}
+brk = [card("breaking", r) for r in (3, 0, 2, 1)]                 # workers finish out of order
+for extra, want in (([], ["breaking0", "breaking1", "breaking2"]),
+                    ([card("deep")], ["breaking0", "breaking1", "deep0"]),
+                    ([card("tier1")], ["tier10", "breaking0", "breaking1"]),
+                    ([card("tier1"), card("deep")], ["tier10", "breaking0", "breaking1", "deep0"])):
+    ver, spare = graph.fit_brief(brk + extra)
+    got = [a["headline"] for a in ver]
+    print(f"{len(extra)} special -> {got} · spare {len(spare)}")
+    assert got == want, got
+items4 = [item("DailyNK", k, 1) for k in range(4)]
+def stretch_in_reverse(system, user, schema):
+    lines = user.splitlines()                   # reversed call gives item 3 (listed first there) no criterion
+    return schema(picks=[graph.Pick(index=i, reason="", event=f"e{lines[i]}",
+                                    criterion=0 if lines[i].endswith("기사 3") and lines[0] == lines[i] else 2)
+                         for i in range(len(lines))])
+graph.parse = stretch_in_reverse
+picks = graph.ranked_both_ways(items4, 4)
+graph.parse = real_parse
+kept, dropped = graph.enforce(items4, picks, 4)
+print("kept", [k["title"] for k in kept], "· dropped", [(d[0]["title"], d[1]) for d in dropped])
+assert [d[0]["title"] for d in dropped] == ["DailyNK 기사 3"] and dropped[0][1] == "중요도 기준 해당 없음"
+assert [k["rank"] for k in kept] == [0, 1, 2]
 
 print("\nALL OK")
