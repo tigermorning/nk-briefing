@@ -88,7 +88,24 @@
     - 워커 하나의 예외(원문·모델 거부·429)가 그래프 전체를 죽임 → report/verify에서 잡고 로그. 그래프 자체가 죽어도 metrics에 `error` 행
     - `test_graph_fake.py` 7개 시나리오로 위 경로 전부 발화 확인. 실데이터 dry-run 회귀 없음
 
+17. **외국 후보 21곳 재측정 + 소스 추가** (`probe_sources.py` → `probe_sources.json`, 2026-09-14 09:37 UTC)
+    - 새로 잰 것: 72h 북한 기사가 핵심 3곳(연합·DailyNK·RFA-KO) 96h 제목 59건과 같은 사건인지 모델 판정, 본문 앞 60자, KCNA 인용
+    - 새 사건을 준 곳: 데일리NK재팬 3/4, NK News 2/5(본문 추출이 `About the Author…` — 유료벽 티저라 요약 불가). 아시아프레스는 72h 0건(주간 연재)
+    - 0건 9곳: 신화망·TASS-ru·인테르팍스·RIA·레그눔·이스트러시아·VOA-en·발다이·IDE-JETRO. 중국신문망·TASS-en은 KCNA 재인용+국내 기보도, NHK 3/3 국내 기보도
+    - **죽은 피드**: 시나 국제 최신 글 69,913h 전(2018, 본문 추출도 무관한 민원 글), RFA 영문 230h, CSIS 617h(26일). 블로그 12편 표의 시나 "북한 기사 2건"은 2018년 기사다(표는 아직 안 고침)
+    - `collect_nk.SOURCES`에 `DailyNK-JP`(속보, expect_daily=False), `AsiaPress`(`WEEKLY` 심층) 추가. `NK_KEYWORDS`로 소스별 북한 키워드 필터, 걸러진 건 `skips.offtopic`. 7일 창 실측 DailyNK-JP 18건, AsiaPress 3건(1건 offtopic)
+    - 데일리NK재팬에 지도자 일가 체중·장남 존재설류가 섞여 `audience.yaml` 버릴_것에 추측 기사 1줄 추가
+    - 추가 후 dry-run: 속보 후보 17→20, 심층 후보 1→4. 이 실행에선 두 소스 기사가 뽑히지 않음(심층은 38North). 기여는 성적표로 몇 주 볼 것
+    - 블로그 12편 채택 문장 정정(CSIS 제외, NK News 제외 사유)
+18. **강의 더 해보기 중 키 없이 되는 것**
+    - 2강 mermaid: README에 그림. 조건부 엣지 `select -.-> verify`(0건 경로)가 점선으로 보인다
+    - 10강 20건 한도: `test_graph_fake.py` 8번. 20장 → embed 7장·5,161자로 덜고 14장 제외 로그, 원장엔 나간 6건만
+    - 9강 숫자 대조를 북한 원문에 (`test_number_check.py`, 아시아프레스 물가조사 8회 + 데일리NK재팬 제목): **5건 중 1건만 맞힘**. 정상인데 불합격 — 만 단위 풀어 쓰기(`35,000`), 전각 숫자(`５～６`). 가짜인데 합격 — "20배"는 원문 `2023` 안의 부분 문자열이라 통과, 숫자 자리 바꾸기는 원리상 못 봄. 일본어 소스가 들어오면서 숫자 대조는 더 못 쓰게 됐다
+    - 13강 pydantic: `load_cfg`가 `AudienceCfg`(extra=forbid)로 검증. `test_config.py` 5경우(키 오타·색·빈 문장·토픽 중복) 전부 시작 시점에 멈춤
+    - 12강 그래프: `python scorecard.py --plot out.png` — 단계별 통과율 추이. 라벨은 영문(matplotlib 기본 폰트에 한글 없음)
+
 ## 남은 일
+0. **강의 더 해보기 중 안 한 것**: 6강(북한 기사로 독립채점 vs 상대평가·토너먼트·temperature 0.7), 7강(묶음 크기 10/20/40, 구조화 출력 없이 20회), 8강(temperature 0 vs 0.7 요약), 9강(가짜 숫자 요약을 LLM 검수가 잡는지), 10강 실제 발행, 11강 전부(Secrets·수동 실행·cron 5분 시험·실패 알림), 14강 회고 퀴즈
 0. **Actions 켜기 (사용자 몫)** — 디스코드 웹훅 만들기, 저장소 Secrets에 `OPENAI_API_KEY`·`DATA_GO_KR_KEY`·`DISCORD_WEBHOOK_URL` 등록, 그다음 push. Secrets 없이 push하면 매일 07:30 실행이 `DRY_RUN=0` + 웹훅 없음으로 실패한다. 첫 실행은 Actions 탭에서 `dry_run` 체크로 손으로 돌려 볼 것. data.go.kr가 해외(GitHub 러너) IP를 받는지 미확인 — 막히면 1차가 `DEAD`로 찍힌다
 0. **1차枠 OPEN 경로는 실데이터로 아직 못 봤다** (9/14 월요일 BELOW_BAR). 가짜 테스트로만 확인
 0. RFA 한국어 검수 통과 기여 0 (dry-run 6회). 몇 주 쌓아 성적표로 뺄지 결정

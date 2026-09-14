@@ -1,0 +1,691 @@
+{
+ "measured_at": "2026-09-14T09:37:41.546720+00:00",
+ "core_titles_96h": 59,
+ "rows": [
+  {
+   "group": "핵심",
+   "name": "Yonhap-NK",
+   "lang": "ko",
+   "url": "https://www.yna.co.kr/rss/northkorea.xml",
+   "http": 200,
+   "entries": 89,
+   "nk": 89,
+   "h24": 11,
+   "d7": 89,
+   "newest_h": 1.1,
+   "g1": [
+    {
+     "len": 1430,
+     "status": "ok",
+     "head": "- 재일조선인 수백명, 오사카서 北여자축구 응원 - 방글라데시전 전반 7골 몰아치며 대승 과시 - 조총련 주",
+     "kcna": false
+    },
+    {
+     "len": 426,
+     "status": "ok",
+     "head": "(서울=연합뉴스) ▲ 재일본조선인총연합회(조총련) 교육일군(간부) 대표단이 지난 10일 북한 대성구역 6월9",
+     "kcna": true
+    },
+    {
+     "len": 1306,
+     "status": "ok",
+     "head": "병무청, 고아·귀화자·탈북민 병역감면 검토 정책토론회 개최…\"공정성·포용 균형\" 맞춤형 전환 제언 vs 현행",
+     "kcna": false
+    }
+   ]
+  },
+  {
+   "group": "핵심",
+   "name": "DailyNK",
+   "lang": "ko",
+   "url": "https://www.dailynk.com/feed",
+   "http": 200,
+   "entries": 10,
+   "nk": 10,
+   "h24": 5,
+   "d7": 10,
+   "newest_h": 1.5,
+   "g1": [
+    {
+     "len": 1522,
+     "status": "ok",
+     "head": "북한에도 무더위가 한풀 꺾이면서 저녁 시간대 야외 휴식처를 찾는 주민들이 크게 늘어난 것으로 전해졌다. 살림",
+     "kcna": false
+    },
+    {
+     "len": 1457,
+     "status": "ok",
+     "head": "함경북도가 도내 경공업공장들이 참가하는 소비품 도안 경연을 기획한 것으로 전해졌다. 다만 중국 측에서 주문한",
+     "kcna": false
+    },
+    {
+     "len": 1443,
+     "status": "ok",
+     "head": "북한이 최근 열린 제15차 전국 교원대회를 통해 ‘세계 일류급의 교육’을 강조했지만, 주민들 사이에서는 교원",
+     "kcna": false
+    }
+   ]
+  },
+  {
+   "group": "핵심",
+   "name": "RFA-KO",
+   "lang": "ko",
+   "url": "https://www.rfa.org/korean/rss2.xml",
+   "http": 200,
+   "entries": 30,
+   "nk": 30,
+   "h24": 2,
+   "d7": 12,
+   "newest_h": 0.2,
+   "g1": [
+    {
+     "len": 1537,
+     "status": "ok",
+     "head": "앵커: 북한 각 지역 학교 교육 개선과 교사 재교육을 담당한 교수강습소 교사들이 생계를 위해 가정교사로 나서",
+     "kcna": false
+    },
+    {
+     "len": 2360,
+     "status": "ok",
+     "head": "앵커: 한국 통일부는 남북 관계 경색 국면에 이뤄질 대북 의료지원이 부적절하다는 일각의 지적에 인도협력은 정",
+     "kcna": false
+    },
+    {
+     "len": 1363,
+     "status": "ok",
+     "head": "앵커:2026 아이치·나고야 아시안게임에 출전하는 북한 선수단이 일본에 첫발을 디뎠습니다. 스포츠 대회 참가",
+     "kcna": false
+    }
+   ]
+  },
+  {
+   "group": "종합 국제면",
+   "name": "NHK 국제",
+   "lang": "ja",
+   "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
+   "http": 200,
+   "entries": 139,
+   "nk": 7,
+   "h24": 1,
+   "d7": 7,
+   "newest_h": 1.2,
+   "g1": [
+    {
+     "len": 862,
+     "status": "ok",
+     "head": "北朝鮮のメディアは12日、弾道ミサイルや巡航ミサイル、それに無人機などの発射訓練が行われたと伝えました。韓国の専門家から",
+     "kcna": false
+    },
+    {
+     "len": 754,
+     "status": "ok",
+     "head": "韓国軍は、北朝鮮が12日午前、日本海に向けて短距離弾道ミサイルを数回発射したと発表しました。北朝鮮は11日まで行われた日",
+     "kcna": false
+    },
+    {
+     "len": 915,
+     "status": "ok",
+     "head": "9月19日に開幕する愛知・名古屋アジア大会に出場する北朝鮮の代表選手団が、日本政府の制裁措置の例外として入国を認められ、",
+     "kcna": false
+    }
+   ],
+   "novelty": [
+    {
+     "title": "北朝鮮 弾道ミサイルなど発射訓練 防空システム無力化ねらいか",
+     "covered": true,
+     "matched": "우크라전 학습한 北, 미사일·드론·방사포 등 4종 '섞어쏘기'(종합)",
+     "topic": "북한의 미사일, 드론, 방사포 등 다양한 무기 발사 훈련"
+    },
+    {
+     "title": "韓国軍「北朝鮮が短距離弾道ミサイル発射」日米韓訓練に反発か",
+     "covered": true,
+     "matched": "北, 한미일 프리덤에지 훈련 직후 단거리탄도미사일 수차례 발사(종합2보)",
+     "topic": "북한의 단거리 탄도미사일 발사 및 한미일 합동훈련에 대한 반발"
+    },
+    {
+     "title": "北朝鮮選手団 アジア大会出場へ来日 制裁措置の例外で入国",
+     "covered": true,
+     "matched": "[아시안게임] 北 선수단, 일본 도착…'역대급' 180여명 파견",
+     "topic": "아시안게임 북한 선수단 일본 입국"
+    }
+   ]
+  },
+  {
+   "group": "종합 국제면",
+   "name": "중국신문망 국제",
+   "lang": "zh",
+   "url": "https://www.chinanews.com.cn/rss/world.xml",
+   "http": 200,
+   "entries": 30,
+   "nk": 1,
+   "h24": 1,
+   "d7": 1,
+   "newest_h": 6.6,
+   "g1": [
+    {
+     "len": 601,
+     "status": "ok",
+     "head": "朝中社：朝鲜人民军进行协同火力打击训练 出动新型战斗系统 中新网9月14日电 据朝中社14日报道，朝鲜人民军各级联合部队",
+     "kcna": true
+    }
+   ],
+   "novelty": [
+    {
+     "title": "朝中社：朝鲜人民军进行协同火力打击训练 出动新型战斗系统",
+     "covered": true,
+     "matched": "北, 포·미사일 합동타격훈련 지각 확인…\"통합화력 지휘 숙달\"",
+     "topic": "북한군의 포병 및 미사일 합동 타격 훈련"
+    }
+   ]
+  },
+  {
+   "group": "종합 국제면",
+   "name": "시나 국제",
+   "lang": "zh",
+   "url": "http://rss.sina.com.cn/news/world/focus15.xml",
+   "http": 200,
+   "entries": 15,
+   "nk": 2,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": 69913.4,
+   "g1": [
+    {
+     "len": 373,
+     "status": "ok",
+     "head": "小电科技 租用小电充电宝已经及时归还却被收费99元。2月14日晚6点30分左右在南京市碑亭巷俺村活鱼使用支付宝租用小电充",
+     "kcna": false
+    },
+    {
+     "len": 373,
+     "status": "ok",
+     "head": "小电科技 租用小电充电宝已经及时归还却被收费99元。2月14日晚6点30分左右在南京市碑亭巷俺村活鱼使用支付宝租用小电充",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "신화망 세계",
+   "lang": "zh",
+   "url": "http://www.xinhuanet.com/world/news_world.xml",
+   "http": 200,
+   "entries": 300,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "TASS 영문",
+   "lang": "en",
+   "url": "https://tass.com/rss/v2.xml",
+   "http": 200,
+   "entries": 69,
+   "nk": 2,
+   "h24": 2,
+   "d7": 2,
+   "newest_h": 9.3,
+   "g1": [
+    {
+     "len": 797,
+     "status": "ok",
+     "head": "PYONGYANG, September 14. /TASS/. The Korean People’s Army in",
+     "kcna": true
+    },
+    {
+     "len": 829,
+     "status": "ok",
+     "head": "PYONGYANG, September 14. /TASS/. The Korean People’s Army co",
+     "kcna": true
+    }
+   ],
+   "novelty": [
+    {
+     "title": "North Korea stepping up readiness for swift retaliatory strike against enemy — n",
+     "covered": true,
+     "matched": "北, 포·미사일 합동타격훈련 지각 확인…\"통합화력 지휘 숙달\"",
+     "topic": "북한의 포병 및 미사일 부대 합동 타격 훈련과 신속 대응 능력 향상"
+    },
+    {
+     "title": "North Korea conducts drills involving cruise and ballistic missiles — news agenc",
+     "covered": true,
+     "matched": "北, 포·미사일 합동타격훈련 지각 확인…\"통합화력 지휘 숙달\"",
+     "topic": "북한의 미사일 및 포병 합동 타격 훈련"
+    }
+   ]
+  },
+  {
+   "group": "종합 국제면",
+   "name": "TASS 러시아어",
+   "lang": "ru",
+   "url": "https://tass.ru/rss/v2.xml",
+   "http": 200,
+   "entries": 100,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "인테르팍스",
+   "lang": "ru",
+   "url": "https://www.interfax.ru/rss.asp",
+   "http": 200,
+   "entries": 25,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "RIA 노보스티",
+   "lang": "ru",
+   "url": "https://ria.ru/export/rss2/index.xml",
+   "http": 200,
+   "entries": 20,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "레그눔",
+   "lang": "ru",
+   "url": "https://regnum.ru/rss",
+   "http": 200,
+   "entries": 195,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "로시스카야가제타",
+   "lang": "ru",
+   "url": "https://rg.ru/xml/index.xml",
+   "http": 200,
+   "entries": 100,
+   "nk": 2,
+   "h24": 2,
+   "d7": 2,
+   "newest_h": 0.5,
+   "g1": [
+    {
+     "len": 0,
+     "status": "http 401",
+     "head": "",
+     "kcna": false
+    },
+    {
+     "len": 0,
+     "status": "http 401",
+     "head": "",
+     "kcna": false
+    }
+   ],
+   "novelty": [
+    {
+     "title": "Не только КНДР: В Южной Корее вступил в силу новый закон о шпионаже",
+     "covered": false,
+     "matched": "",
+     "topic": "법률 및 정책 변화"
+    },
+    {
+     "title": "Уроки новой войны: КНДР раскрыла содержание недавних ракетных запусков",
+     "covered": true,
+     "matched": "우크라전 학습한 北, 미사일·드론·방사포 등 4종 '섞어쏘기'(종합)",
+     "topic": "북한의 미사일 발사 및 군사 훈련"
+    }
+   ]
+  },
+  {
+   "group": "종합 국제면",
+   "name": "이스트러시아",
+   "lang": "ru",
+   "url": "https://www.eastrussia.ru/rss/",
+   "http": 200,
+   "entries": 31,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "보스토크투데이",
+   "lang": "ru",
+   "url": "https://vostok.today/rss.xml",
+   "http": 200,
+   "entries": 66,
+   "nk": 1,
+   "h24": 0,
+   "d7": 1,
+   "newest_h": 148.7,
+   "g1": [
+    {
+     "len": 4622,
+     "status": "ok",
+     "head": "Автомобильный мост через реку Туманная (Туманган) между Прим",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "VOA 영문",
+   "lang": "en",
+   "url": "https://www.voanews.com/api/zq$omekvi_",
+   "http": 200,
+   "entries": 20,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "종합 국제면",
+   "name": "RFA 영문",
+   "lang": "en",
+   "url": "https://www.rfa.org/english/rss2.xml",
+   "http": 200,
+   "entries": 30,
+   "nk": 4,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": 230.0,
+   "g1": [
+    {
+     "len": 7264,
+     "status": "ok",
+     "head": "Satellite imagery analyzed by Radio Free Asia shows rapid pr",
+     "kcna": false
+    },
+    {
+     "len": 4115,
+     "status": "ok",
+     "head": "Read a version of this story in Korean. A knockoff version o",
+     "kcna": false
+    },
+    {
+     "len": 7565,
+     "status": "ok",
+     "head": "North Korea is close to completing a long-delayed new bridge",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "북한 전문",
+   "name": "데일리NK재팬",
+   "lang": "ja",
+   "url": "https://dailynk.jp/feed",
+   "http": 200,
+   "entries": 77,
+   "nk": 75,
+   "h24": 2,
+   "d7": 18,
+   "newest_h": 10.3,
+   "g1": [
+    {
+     "len": 704,
+     "status": "ok",
+     "head": "ロシア、IAEAに「北朝鮮核報告やめろ」…国際監視網の弱体化狙う？ ロシアが、国際原子力機関（IAEA）に対し、北朝鮮の",
+     "kcna": false
+    },
+    {
+     "len": 516,
+     "status": "ok",
+     "head": "「あごが消えた？」金正恩氏、さらに激太り説 体を繰り返し揺らす様子も 北朝鮮の金正恩総書記の顔つきが昨年より丸みを増し、",
+     "kcna": true
+    },
+    {
+     "len": 900,
+     "status": "ok",
+     "head": "北朝鮮部隊を襲う「クラスター弾の雨」 ウクライナがATACMSなど大量入手へ ロシアに派兵される北朝鮮軍にとって、新たな",
+     "kcna": false
+    }
+   ],
+   "novelty": [
+    {
+     "title": "ロシア、IAEAに「北朝鮮核報告やめろ」…国際監視網の弱体化狙う？",
+     "covered": false,
+     "matched": "",
+     "topic": "국제 감시 및 핵 문제 관련"
+    },
+    {
+     "title": "「あごが消えた？」金正恩氏、さらに激太り説　体を繰り返し揺らす様子も",
+     "covered": true,
+     "matched": "김정은, 北9·9절 시진핑 축전에 답전 \"양국 친선협조 강화발전\"",
+     "topic": "김정은의 9·9절 행사 및 관련 모습"
+    },
+    {
+     "title": "北朝鮮部隊を襲う「クラスター弾の雨」　ウクライナがATACMSなど大量入手へ",
+     "covered": false,
+     "matched": "",
+     "topic": "군사 및 무기 관련 뉴스"
+    },
+    {
+     "title": "かつて日本→韓国の中古タンカー、今度は北朝鮮船に…「制裁違反、爆発的に増加」",
+     "covered": false,
+     "matched": "",
+     "topic": "북한의 선박 관련 제재 위반 가능성"
+    }
+   ]
+  },
+  {
+   "group": "북한 전문",
+   "name": "아시아프레스",
+   "lang": "ja",
+   "url": "https://www.asiapress.org/apn/feed/index.xml",
+   "http": 200,
+   "entries": 16,
+   "nk": 11,
+   "h24": 0,
+   "d7": 3,
+   "newest_h": 73.3,
+   "g1": [
+    {
+     "len": 1258,
+     "status": "ok",
+     "head": "この3年間、北朝鮮の対中輸出額の1位は、カツラなどの「人毛製品」である。中国企業から材料を受け取って北朝鮮国内で製造し、",
+     "kcna": false
+    },
+    {
+     "len": 1521,
+     "status": "ok",
+     "head": "アジアプレスは5～6月に両江道（リャンガンド）と咸鏡北道（ハムギョンブクト）の4都市で大規模価格調査を実施した。連載8回",
+     "kcna": false
+    },
+    {
+     "len": 1179,
+     "status": "ok",
+     "head": "連載5回目では、金正恩政権が進めて来た工業製品の国産化の実際について報告した。だが、そもそも工場はきちんと稼働しているの",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "북한 전문",
+   "name": "NK News",
+   "lang": "en",
+   "url": "https://www.nknews.org/feed/",
+   "http": 200,
+   "entries": 300,
+   "nk": 294,
+   "h24": 3,
+   "d7": 21,
+   "newest_h": 0.2,
+   "g1": [
+    {
+     "len": 1279,
+     "status": "ok",
+     "head": "About the Author Jooheon Kim Jooheon Kim is a Correspondent ",
+     "kcna": false
+    },
+    {
+     "len": 1188,
+     "status": "ok",
+     "head": "About the Author Anton Sokolin Anton Sokolin is the data cor",
+     "kcna": false
+    },
+    {
+     "len": 1008,
+     "status": "ok",
+     "head": "| News North Korea launched several missiles and drones in ‘",
+     "kcna": false
+    }
+   ],
+   "novelty": [
+    {
+     "title": "Seoul plans to donate medical equipment to one of North Korea’s major hospitals",
+     "covered": true,
+     "matched": "정부, 北평양 강동군병원에 의료장비 166종 지원 추진(종합)",
+     "topic": "정부, 北평양 강동군병원에 의료장비 166종 지원 추진"
+    },
+    {
+     "title": "North Korea still closed to private car travel after bridge opening with Russia",
+     "covered": false,
+     "matched": "",
+     "topic": "북한과 러시아 간 도로 연결 및 여행 제한"
+    },
+    {
+     "title": "North Korea launched several missiles and drones in ‘concentrated’ attack drill",
+     "covered": true,
+     "matched": "北, 포·미사일 합동타격훈련 지각 확인…\"통합화력 지휘 숙달\"",
+     "topic": "북한의 포·미사일 합동타격훈련"
+    },
+    {
+     "title": "North Korea fires multiple ballistic missiles towards East Sea: ROK military",
+     "covered": true,
+     "matched": "軍 \"北, 동해상으로 미상 발사체 발사\"…탄도미사일이면 23일만",
+     "topic": "북한의 동해상 탄도미사일 발사"
+    },
+    {
+     "title": "Korean language becoming increasingly different between North, South Korea",
+     "covered": false,
+     "matched": "",
+     "topic": "언어 및 문화 차이"
+    }
+   ]
+  },
+  {
+   "group": "연구소",
+   "name": "38North",
+   "lang": "en",
+   "url": "https://www.38north.org/feed/",
+   "http": 200,
+   "entries": 8,
+   "nk": 8,
+   "h24": 0,
+   "d7": 1,
+   "newest_h": 91.7,
+   "g1": [
+    {
+     "len": 2940,
+     "status": "ok",
+     "head": "New North Korea-China Link Appears Close to Opening North Ko",
+     "kcna": false
+    },
+    {
+     "len": 18801,
+     "status": "ok",
+     "head": "North Korea’s Recent Economic Recovery and the Sustainabilit",
+     "kcna": false
+    },
+    {
+     "len": 19989,
+     "status": "ok",
+     "head": "Successes and Challenges of North Korea’s Five-Year Plan for",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "연구소",
+   "name": "CSIS 비욘드 패럴렐",
+   "lang": "en",
+   "url": "https://beyondparallel.csis.org/feed/",
+   "http": 200,
+   "entries": 10,
+   "nk": 7,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": 616.9,
+   "g1": [
+    {
+     "len": 2306,
+     "status": "ok",
+     "head": "Iran can’t have nuclear weapons but North Korea can? There’s",
+     "kcna": false
+    },
+    {
+     "len": 10149,
+     "status": "ok",
+     "head": "After Iran: A Scenario for Renewed Trump-Kim Summitry This o",
+     "kcna": false
+    },
+    {
+     "len": 6363,
+     "status": "ok",
+     "head": "North Korea As It Is: The Case for a Cold Peace This was pub",
+     "kcna": false
+    }
+   ],
+   "novelty": []
+  },
+  {
+   "group": "연구소",
+   "name": "발다이클럽",
+   "lang": "ru",
+   "url": "https://ru.valdaiclub.com/rss/feed.txt",
+   "http": 200,
+   "entries": 11,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  },
+  {
+   "group": "연구소",
+   "name": "IDE-JETRO",
+   "lang": "ja",
+   "url": "https://www.ide.go.jp/rss/japanese.xml",
+   "http": 200,
+   "entries": 27,
+   "nk": 0,
+   "h24": 0,
+   "d7": 0,
+   "newest_h": -1,
+   "g1": [],
+   "novelty": []
+  }
+ ],
+ "elapsed_s": 93.3
+}

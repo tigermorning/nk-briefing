@@ -133,4 +133,24 @@ assert "DailyNK" in out["meta"]["silent"], out["meta"]["silent"]
 assert "Yonhap-NK" not in out["meta"]["silent"]
 print("DailyNK SILENT over 24h while its items sit inside 168h")
 
+print("\n== 8. twenty cards (course step 10) ==")
+os.environ["DRY_RUN"] = "0"
+os.environ["DISCORD_WEBHOOK_URL"] = "https://example.invalid/hook"
+posted.clear(); WROTE.clear()
+many = [{**item("Yonhap-NK", i, 1), "url": f"https://ex.com/Yonhap-NK/{i}", "slot": "breaking",
+         "headline": f"헤드라인 {i}", "summary": "가" * 700, "why": "나" * 100, "topic": "군사·핵"}
+        for i in range(20)]
+res = graph.publish({"verified": many, "picked": many, "drafted": many, "meta": {"window_h": 24}})
+os.environ["DRY_RUN"] = "1"
+del os.environ["DISCORD_WEBHOOK_URL"]
+embeds = posted[-1]["embeds"]
+size = sum(len(e.get("title", "")) + len(e.get("description", "")) + len(e.get("footer", {}).get("text", ""))
+           for e in embeds)
+for line in res["log"]:
+    print(line)
+print(f"embeds {len(embeds)} · text {size} chars · ledger +{len(WROTE[-1])}")
+assert len(embeds) <= graph.EMBED_MAX and size <= graph.TOTAL_MAX
+assert any("[한도]" in l for l in res["log"]), "drop not logged"
+assert WROTE[-1] == [a["link"] for a in many[:len(embeds) - 1]], "ledger must hold only the cards that went out"
+
 print("\nALL OK")

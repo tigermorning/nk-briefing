@@ -16,7 +16,22 @@ SOURCES = [
     ("DailyNK", "https://www.dailynk.com/feed", True),
     ("38North", "https://www.38north.org/feed/", False),
     ("RFA-KO", "https://www.rfa.org/korean/rss2.xml", False),
+    # added 2026-09-14 from probe_sources.py: of 21 foreign candidates these
+    # two brought events the Korean feeds did not carry (DailyNK Japan: 3 of
+    # 4 in 72h) or reporting nobody else does (AsiaPress price surveys).
+    # DailyNK Japan runs ~2 a day, so a 0 day is not an alarm.
+    ("DailyNK-JP", "https://dailynk.jp/feed", False),
+    ("AsiaPress", "https://www.asiapress.org/apn/feed/index.xml", False),
 ]
+
+# Feeds that are not North Korea only. An entry is kept only if its title or
+# summary names the North in the feed's language -- AsiaPress also runs
+# Japanese domestic pieces (5 of 16 when measured). /apn/feed/ without
+# index.xml answers 200 with a one-line meta-refresh page and 0 entries.
+NK_KEYWORDS = {
+    "DailyNK-JP": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
+    "AsiaPress": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
+}
 
 def link_key(link):
     """Identity of an article link. Strip only tracking tags: the query is
@@ -48,7 +63,7 @@ def collect(state):
     skips = {}
 
     for name, url, _expect in SOURCES:
-        s = skips.setdefault(name, {"nodate": 0, "old": 0, "dup": 0, "kept": 0})
+        s = skips.setdefault(name, {"nodate": 0, "old": 0, "dup": 0, "offtopic": 0, "kept": 0})
         try:
             r = requests.get(url, headers=UA, timeout=20)
             if r.status_code != 200:
@@ -83,6 +98,10 @@ def collect(state):
             if at < cutoff:
                 s["old"] += 1
                 continue
+            kws = NK_KEYWORDS.get(name)
+            if kws and not any(k in e.get("title", "") + e.get("summary", "") for k in kws):
+                s["offtopic"] += 1
+                continue
             key = link_key(e.get("link", ""))
             if key in seen:
                 s["dup"] += 1
@@ -113,9 +132,9 @@ if __name__ == "__main__":
         by_src[it["source"]] = by_src.get(it["source"], 0) + 1
 
     print(f"hours={res['hours']}  total={len(res['items'])}  by_src={by_src}")
-    print(f"{'source':<10}{'kept':>6}{'old':>6}{'dup':>6}{'nodate':>8}")
+    print(f"{'source':<11}{'kept':>6}{'old':>6}{'dup':>6}{'off':>6}{'nodate':>8}")
     for name, s in res["skips"].items():
-        print(f"{name:<10}{s['kept']:>6}{s['old']:>6}{s['dup']:>6}{s['nodate']:>8}")
+        print(f"{name:<11}{s['kept']:>6}{s['old']:>6}{s['dup']:>6}{s['offtopic']:>6}{s['nodate']:>8}")
     for d in res["dead"]:
         print(f"!! DEAD   {d['source']}: {d['reason']}")
     for n in res["silent"]:

@@ -57,3 +57,51 @@ for r in crashed:
     alerts[f"CRASH {r['error'][:40]}"] += 1
 if alerts:
     print("\n경보 누적:", dict(alerts))
+
+
+def plot(path):
+    """Stage pass rates per run (course step 12). The text table above is the
+    table view; the chart only shows the trend. Labels are English because
+    matplotlib's default fonts have no Hangul glyphs."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    rate = lambda a, b: (a / b) if b else None
+    stages = [  # validated order (dataviz validate_palette.js, light): blue, orange, aqua
+        ("select  picked / candidates", "#2a78d6", lambda r: rate(r["picked"], r["collected"] + r["deep"])),
+        ("report  drafted / picked", "#eb6834", lambda r: rate(r["drafted"], r["picked"])),
+        ("verify  passed / drafted", "#1baf7a", lambda r: rate(r["published"], r["drafted"])),
+    ]
+    xs = list(range(len(runs)))
+    fig, ax = plt.subplots(figsize=(9, 4), facecolor="#fcfcfb")
+    ax.set_facecolor("#fcfcfb")
+    ends = {}
+    # lines often sit on top of each other at 100%; dash/marker keep each one
+    # visible, and end labels that land on the same value are merged
+    styles = [("-", "o"), ("--", "s"), (":", "D")]
+    for (label, color, f), (ls, mk) in zip(stages, styles):
+        ys = [f(r) for r in runs]
+        ax.plot(xs, ys, color=color, linewidth=2, linestyle=ls, marker=mk, markersize=5, label=label)
+        last = next(((x, y) for x, y in zip(reversed(xs), reversed(ys)) if y is not None), None)
+        if last:
+            ends.setdefault((last[0], round(last[1], 2)), []).append(label.split()[0])
+    for (x, y), names in ends.items():            # direct labels: aqua is under 3:1 on the surface
+        ax.annotate(" · ".join(names), (x, y), xytext=(8, 0), textcoords="offset points",
+                    va="center", fontsize=9, color="#52514e")
+    ax.set_ylim(0, 1.05)
+    ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0))
+    ax.set_xticks(xs, [r["run_id"][5:] for r in runs], rotation=45, ha="right", fontsize=8, color="#52514e")
+    ax.tick_params(axis="y", colors="#52514e", labelsize=8)
+    ax.grid(axis="y", color="#e6e5e0", linewidth=0.8)
+    for side in ("top", "right", "left"):
+        ax.spines[side].set_visible(False)
+    ax.spines["bottom"].set_color("#c3c2b7")
+    ax.set_title("Stage pass rate per run", loc="left", fontsize=11, color="#0b0b0b")
+    ax.legend(frameon=False, fontsize=8, loc="lower left", labelcolor="#52514e")
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    print(f"\n-> {path}")
+
+if "--plot" in sys.argv:
+    plot(sys.argv[sys.argv.index("--plot") + 1] if len(sys.argv) > sys.argv.index("--plot") + 1 else "funnel.png")

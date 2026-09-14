@@ -14,15 +14,32 @@
 | `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
 | `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠) |
 
-브리핑은 세 칸이다. **속보**(연합·DailyNK·RFA, 24h 창, 모자라면 48h·72h, 최대 5건, 소스당 3건),
-**심층**(38North, 7일 창, 최대 1건), **1차**(통일부 북한동향, 요약 300자 이상인 날만, 최대 1건).
+```mermaid
+graph TD;
+	__start__([start]) --> collect;
+	collect --> select;
+	select -.-> report;
+	select -.-> verify;
+	report --> verify;
+	verify --> publish;
+	publish --> __end__([end]);
+```
+
+`python -c "import graph; print(graph.build().compile().get_graph().draw_mermaid())"`로 다시 뽑는다.
+점선은 조건부 엣지다. 고른 기사가 있으면 기사마다 `report` 워커가 펼쳐지고, 0건이면 `verify`로 바로 가서 발행까지 간다.
+
+브리핑은 세 칸이다. **속보**(연합·DailyNK·RFA 한국어·데일리NK재팬, 24h 창, 모자라면 48h·72h, 최대 5건, 소스당 3건),
+**심층**(38North·아시아프레스, 7일 창, 최대 1건), **1차**(통일부 북한동향, 요약 300자 이상인 날만, 최대 1건).
 
 ## 실행
 
 ```
 python test_graph_fake.py    # 키·네트워크 없이 그래프 모양 확인
 python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
-python scorecard.py          # 성적표
+python scorecard.py          # 성적표 (--plot out.png 로 단계별 통과율 그래프)
+python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
+python test_number_check.py  # 숫자 대조 검수를 북한 원문에 대 본 결과
+python probe_sources.py      # 외국 후보 21곳 + 핵심 3곳 측정 (키 필요: 새 사건 판정)
 python collect_nk.py 72      # 수집만, 72시간 창
 python test_g1.py            # G1 원문추출 게이트
 python test_g23.py           # G2 14일 집계 + G3 robots.txt

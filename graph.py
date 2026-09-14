@@ -38,7 +38,7 @@ MODEL = os.environ.get("NK_MODEL", "gpt-4.1-mini")
 BATCH, PRELIM, TARGET = 40, 8, 5     # prelim chunk size, kept per chunk, breaking slot size
 MAX_PER_SOURCE = 3                   # Yonhap alone fills the feed 9:1 otherwise
 BODY_MIN = 600                       # G1
-WEEKLY = {"38North"}                 # deep slot sources
+WEEKLY = {"38North", "AsiaPress"}    # deep slot sources
 DEEP_WINDOW_H = 168
 TIER1_LOOKBACK_D = 4                 # MOU publishes weekdays with a 1 business day lag
 
@@ -59,25 +59,42 @@ def load_env():
 
 
 # ---------------------------------------------------------------- config
+from pydantic import ConfigDict, ValidationError, constr
+
+Text = constr(strip_whitespace=True, min_length=1)
+
+class ReaderCfg(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    누구: Text
+    이미_아는_것: Text
+
+class TopicCfg(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    이름: Text
+    데스크지침: Text
+    색: constr(pattern=r"^#[0-9A-Fa-f]{6}$") = "#5F7476"
+
+class AudienceCfg(BaseModel):
+    # extra="forbid": a misspelled key ("버릴것") would otherwise be ignored and
+    # the run would go on with no discard rules at all
+    model_config = ConfigDict(extra="forbid")
+    독자: ReaderCfg
+    중요도_기준: list[Text] = Field(min_length=1)
+    버릴_것: list[Text]
+    토픽: list[TopicCfg] = Field(min_length=1)
+
 def load_cfg(path=HERE / "audience.yaml"):
-    cfg = yaml.safe_load(path.read_text(encoding="utf-8"))
     # check the shape at start-up: a typo should stop the run here, not at
     # 07:30 halfway through the graph after the model has already been paid
-    problems = []
-    for key, kind in (("독자", dict), ("중요도_기준", list), ("버릴_것", list), ("토픽", list)):
-        if not isinstance(cfg.get(key), kind):
-            problems.append(f"{key}: {kind.__name__} 이어야 함")
-    for key in ("누구", "이미_아는_것"):
-        if not (cfg.get("독자") or {}).get(key):
-            problems.append(f"독자.{key}: 비어 있음")
-    for t in cfg.get("토픽") or []:
-        if not (isinstance(t, dict) and t.get("이름") and t.get("데스크지침")):
-            problems.append(f"토픽 항목에 이름·데스크지침이 없음: {t}")
-        elif not re.fullmatch(r"#[0-9A-Fa-f]{6}", str(t.get("색", "#5F7476"))):
-            problems.append(f"토픽 {t['이름']}: 색은 #RRGGBB")
-    if problems:
-        raise SystemExit("audience.yaml 오류\n  " + "\n  ".join(problems))
-    return cfg
+    try:
+        cfg = AudienceCfg.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")) or {})
+    except ValidationError as exc:
+        lines = [f"{'.'.join(map(str, e['loc']))}: {e['msg']}" for e in exc.errors()]
+        raise SystemExit("audience.yaml 오류\n  " + "\n  ".join(lines)) from None
+    names = [t.이름 for t in cfg.토픽]
+    if len(names) != len(set(names)):
+        raise SystemExit("audience.yaml 오류\n  토픽: 이름이 겹침")
+    return cfg.model_dump()
 
 CFG = load_cfg()
 TOPICS = {t["이름"]: t for t in CFG["토픽"]}
