@@ -1,0 +1,12 @@
+{"ts": "2026-09-14T05:46:40.970679+00:00", "g2_14d": {"Yonhap-NK": 90, "DailyNK": 10, "38North": 6}, "g2_nodate": {"Yonhap-NK": 0, "DailyNK": 0, "38North": 0}, "g3": {"Yonhap-NK": [true, true, true], "DailyNK": [true, true, true], "38North": [false, false, false]}, "elapsed_s": 2.1, "g1_pass_rate_prior": 0.778}
+{"ts": "2026-09-14T05:47:01.683198+00:00", "g2_14d": {"Yonhap-NK": 90, "DailyNK": 10, "38North": 6}, "g2_nodate": {"Yonhap-NK": 0, "DailyNK": 0, "38North": 0}, "g3": {"Yonhap-NK": [true, true, true], "DailyNK": [true, true, true], "38North": [true, true, true]}, "elapsed_s": 2.2, "g1_pass_rate_prior": 0.778}
+{"ts": "2026-09-14T05:55:04.580565+00:00", "collect_24h": {"Yonhap-NK": 9, "DailyNK": 3}, "dead": [], "elapsed_s": 1.3}
+{"ts": "2026-09-14T05:55:43.883279+00:00", "collect_24h": {"Yonhap-NK": 9, "DailyNK": 4}, "dead": [], "elapsed_s": 2.7}
+{"ts": "2026-09-14T05:56:32.953037+00:00", "collect_24h": {"Yonhap-NK": 4, "DailyNK": 3}, "dead": [], "elapsed_s": 1.6}
+{"ts": "2026-09-14T05:56:34.705767+00:00", "collect_24h": {"Yonhap-NK": 33, "DailyNK": 6, "RFA-KO": 2}, "dead": [], "elapsed_s": 1.6}
+{"ts": "2026-09-14T05:57:16.812282+00:00", "collect_24h": {"Yonhap-NK": 33, "DailyNK": 6}, "dead": ["RFA-KO"], "elapsed_s": 1.5}
+{"ts": "2026-09-14T05:57:24.256982+00:00", "collect_24h": {"Yonhap-NK": 33, "DailyNK": 6}, "dead": [], "elapsed_s": 1.4}
+{"ts": "2026-09-14T05:57:35.609310+00:00", "collect_24h": {"Yonhap-NK": 33, "DailyNK": 6, "RFA-KO": 2}, "dead": [], "elapsed_s": 1.8}
+{"ts": "2026-09-14T06:18:32.324121+00:00", "g1_base": 600, "g1_tally": {"Yonhap-NK": {"PASS": 3}, "DailyNK": {"PASS": 3}, "38North": {"PASS": 3}, "RFA-KO": {"PASS": 3}}, "g1_pass_rate": 1.0, "g1_extractor_suspect": [], "elapsed_s": 10.9}
+{"ts": "2026-09-14T06:19:08.865603+00:00", "hours": 72, "collect": {"Yonhap-NK": 30, "DailyNK": 6, "RFA-KO": 2}, "total": 38, "dead": [], "silent": [], "skips": {"Yonhap-NK": {"nodate": 0, "old": 59, "dup": 0, "kept": 30}, "DailyNK": {"nodate": 0, "old": 4, "dup": 0, "kept": 6}, "38North": {"nodate": 0, "old": 8, "dup": 0, "kept": 0}, "RFA-KO": {"nodate": 0, "old": 28, "dup": 0, "kept": 2}}, "elapsed_s": 2.1}
+{"ts": "2026-09-14T06:24:27.912231+00:00", "hours": 72, "collect": {"Yonhap-NK": 30, "DailyNK": 6, "RFA-KO": 2}, "total": 38, "dead": [], "silent": [], "skips": {"Yonhap-NK": {"nodate": 0, "old": 59, "dup": 0, "kept": 30}, "DailyNK": {"nodate": 0, "old": 4, "dup": 0, "kept": 6}, "38North": {"nodate": 0, "old": 8, "dup": 0, "kept": 0}, "RFA-KO": {"nodate": 0, "old": 28, "dup": 0, "kept": 2}}, "elapsed_s": 2.6}

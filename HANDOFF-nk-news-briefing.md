@@ -1,0 +1,66 @@
+# HANDOFF — 북한 뉴스 브리핑 파이프라인
+
+최종 갱신 2026-09-14. 다른 에이전트가 이어받기 위한 백로그. 로컬 실행 기준, API 키는 파일에만 존재(채팅에 없음).
+
+## 목표
+수업(모두의연구소 캠프 136, 뉴스레터 에이전트 과정) 노트 순서대로 북한 뉴스 수집→선별 파이프라인 구축.
+최종: 양질의 최신 북한 뉴스 브리핑 (속보枠 + 심층枠 + 1차枠).
+
+## 소스 편성
+| tier | 소스 | 피드 | 상태 |
+|---|---|---|---|
+| tier1 (1차) | 통일부 북한동향 API | data.go.kr | 승인완료, **403 SERVICE_KEY_IS_NOT_REGISTERED_ERROR 지속** — 활성화 대기 |
+| tier2 속보 | 연합뉴스 북한 | `https://www.yna.co.kr/rss/northkorea.xml` | 90건/7일, 요약 70~88자, G1·G2·G3 통과 |
+| tier2 전문 | DailyNK | `https://www.dailynk.com/feed` | 최신 10건창, 본문 1400자+, G1·G2·G3 통과 |
+| tier3 주간 | 38North | `https://www.38north.org/feed/` | 8건/2주, 영문 장문, G1 3/3 (2,940~19,989자). 일간 기여 0 정상 |
+| 후보 | RFA 한국어 | `https://www.rfa.org/korean/rss2.xml` | 30건, G1 3/3. 24h 기여 0 / 72h 기여 2 |
+| 후보 | NK News | `https://www.nknews.org/feed/` | 300건 아카이브, 당일 신선, 요약 346자. **유료벽 — G1 미검사** |
+| 조건부 | 중국신문망 국제 | `https://www.chinanews.com.cn/rss/world.xml` | 30건 종합국제, 당일 신선. 북한특화 아님 → `朝鮮` 키워드 필터 필요 |
+
+탈락: DailyNK 영문(`/english/rss-feed/`, 200이나 0건) · 연합뉴스 일문 북한(`https://jp.yna.co.kr/RSS/nk.xml`, 동사 번역이라 신규신호 없음)
+미확보: VOA 한국어 — voakorea.com/rssfeeds 목록이 JS 구동, 직접 피드 URL 못 찾음
+
+## 완료
+1. RSS 상태표 3열 해석(건수/요약길이/최신글) — `test_rss.py`
+2. 1차/2차 구분 + tier 면제·상한 설계
+3. **G1** 원문추출 게이트 — 12/12 PASS (4소스x3건, 기준 600자). 판정이 PASS/FAIL 2값이 아니라 `FETCH_ERR`/`FETCH_HTTP`/`EXTRACT_EMPTY`/`SHORT`/`PASS` 5값. `rss_len`은 긴데 `EXTRACT_EMPTY`면 "추출기 문제" 자동 경고
+4. **G2** 14일 집계 + 임계값안: 일간枠 14d≥7, 주간枠 14d≥1 — `test_g23.py`
+5. **G3** robots.txt — 9/9 허용
+6. 수집노드 `collect(state)`: 시간창 + utm 꼬리표 제거 중복제거 + dead 격리. 조용한 실패 가드 4종:
+   (a) `200 + 빈 피드`를 예외로 승격 (b) `dead`에 `reason` 동봉 (c) 소스별 `kept/old/dup/nodate` 합계 (건별 로그 아님) (d) `expect_daily` 소스가 응답 정상인데 기여 0이면 `SILENT` 경고
+7. 실측: 시간창 6h:7 / 24h:13 / 72h:41건. 소스 추가(RFA)해도 창 밖이면 기여 0
+8. `store/metrics.jsonl` 매 실행 append — 게이트 결과·소스별 기여·skips·elapsed
+
+## 남은 일
+1. **통일부 API 첫 호출** — 키 활성화 후 `.env`의 `DATA_GO_KR_KEY`로 `pageNo=1, numOfRows=3`. 변수명 미확정이라 첫 응답 보고 맞출 것. 기대 필드: 동향기간분류/제목/내용. 확인 2가지 — 갱신속도(매일아침 가능?), RSS에 없는 추가신호 유무
+2. **NK News G1 추출검사 3건** — 유료벽이라 `EXTRACT_EMPTY`/`SHORT` 나올 가능성 높음. 나오면 tier 배치 불가
+3. **중국신문망 `朝鮮` 키워드 필터 시험** — 필터 후 14일 건수가 G2 임계값(≥7 또는 ≥1) 넘는지
+4. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
+5. **DailyNK 수집주기 2~3회/일** — 10건창이라 1회/일이면 넘침 손실. 최소발행 규칙(3건 미만이면 72h 확장)도 같이
+6. VOA 한국어 피드 URL 수동 확인
+
+## 파일 (`C:\Users\user\Documents` 기준)
+| 파일 | 용도 |
+|---|---|
+| `test_rss.py` | RSS 상태표 |
+| `test_g1.py` | G1 원문추출 게이트 (5값 판정) |
+| `test_g23.py` | G2 14일 집계 + G3 robotparser |
+| `collect_nk.py` | 수집노드. `python Documents\collect_nk.py [hours]` |
+| `test_guards.py` | 조용한 실패 가드 3종 발화 재현 |
+| `test_silent.py` | 기록 유/무 대비 데모 |
+| `test_g1_sweep.py` | G1 임계값 200/600/1500/4000 비교 |
+| `test_g1_ua.py` | `fetch_url` vs `requests+UA` 비교 |
+| `check_idx.py`, `check_cand.py` | 후보 피드 검증 |
+| `store/metrics.jsonl` | 실행 메트릭 append. 1~2행은 38North 오판 포함 — 감사추적용 보존, 분석은 최신행 |
+| `openai_key.env` | 별개 파일, 건드리지 말 것 |
+
+키 위치: `C:\Users\user\Documents\tigermorning.github.io\ko\.env` 의 `DATA_GO_KR_KEY` (디코딩키). **절대 채팅/셀에 출력 금지, 길이만 확인.**
+
+## 주의 (gotcha)
+- PowerShell에 파이썬 코드 붙여넣기 금지. 파일 만들고 `python Documents\xxx.py` 실행. `C:\Users\user`에서 실행 시 `Documents\` 접두사 필요
+- `>` 로 `.env` 덮어쓰기 금지. `>>` 또는 에디터로 1행 추가
+- 한글 콘솔 출력 깨짐(cp949)은 무시. 내용은 정상
+- data.go.kr 키: `requests` `params=` 로 넘길 땐 **디코딩키**. 인코딩키를 그대로 넘기면 이중인코딩
+- **`RobotFileParser`** 는 UA 없는 urllib 사용 → 403 사이트에서 "전체차단" 오판. `requests`+UA로 본문 받아 `parse()` 할 것
+- **`trafilatura.fetch_url()`** 도 같은 함정. 기본 UA가 차단당하면 `None` 반환 → 추출 0자 → "본문 없는 소스"로 오판. `requests`+UA로 받아 `extract(r.text)` 할 것
+- 위 둘의 공통형: **라이브러리가 조용히 빈 값/False를 돌려줌.** 빈 결과를 사실로 읽지 말고 HTTP code를 같이 찍을 것

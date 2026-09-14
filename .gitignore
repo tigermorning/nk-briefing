@@ -1,0 +1,9 @@
+# secrets never enter this repo -- the API key lives outside it, in a .env
+# that this project reads but does not own
+.env
+*.env
+*.key
+
+__pycache__/
+*.pyc
+.venv/
