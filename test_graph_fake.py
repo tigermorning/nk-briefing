@@ -12,7 +12,7 @@ No key, no network. Checks the shape, not the judgement:
   7. a daily feed whose newest item is older than 24h is SILENT even though
      it still has items inside the 168h fetch
 """
-import os, sys
+import os, re, sys
 from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace as NS
 
@@ -152,5 +152,39 @@ print(f"embeds {len(embeds)} · text {size} chars · ledger +{len(WROTE[-1])}")
 assert len(embeds) <= graph.EMBED_MAX and size <= graph.TOTAL_MAX
 assert any("[한도]" in l for l in res["log"]), "drop not logged"
 assert WROTE[-1] == [a["link"] for a in many[:len(embeds) - 1]], "ledger must hold only the cards that went out"
+
+print("\n== 9. 44 candidates: equal prelim batches ==")
+CALL_SIZES = []
+real_parse = graph.parse
+def sizing_parse(system, user, schema):
+    if schema is graph.Shortlist:
+        CALL_SIZES.append((len(user.splitlines()), int(re.search(r"최대 (\d+)건", system).group(1))))
+    return real_parse(system, user, schema)
+graph.parse = sizing_parse
+big = [item("Yonhap-NK" if k % 3 else "DailyNK", k, 1 + k % 20) for k in range(44)]
+out = run_with(big, tier1={"status": "NO_PUBLICATION"})
+graph.parse = real_parse
+prelim = CALL_SIZES[:2]
+print("prelim calls (lines, keep):", prelim, "· log:", [l for l in out["log"] if "예선" in l])
+assert prelim == [(22, 4), (22, 4)], prelim     # not 40 + 4 with the tail batch keeping everything
+
+print("\n== 10. draft still not Korean after the retry ==")
+real_draft = graph.draft
+graph.draft = lambda body, source="": (graph.Draft(headline="北朝鮮", summary="要約", why="重要", topic="군사·핵"), 1)
+out = run_with(FEED[:6], tier1={"status": "NO_PUBLICATION"})
+graph.draft = real_draft
+assert not out["drafted"] and any("한글 없는 칸" in l for l in out["log"]), out["log"]
+print("excluded:", [l.strip() for l in out["log"] if "한글 없는 칸" in l][0])
+
+print("\n== 11. forward/reversed merge ==")
+items12 = [item("DailyNK", k, 1) for k in range(6)]
+def order_biased(system, user, schema):
+    lines = user.splitlines()                   # a model that always prefers whatever is listed first
+    return schema(picks=[graph.Pick(index=i, reason="", event=f"e{lines[i]}") for i in range(3)])
+graph.parse = order_biased
+merged = [p.index for p in graph.ranked_both_ways(items12, 3)]
+graph.parse = real_parse
+print("forward picks 0,1,2 · reversed picks 5,4,3 → merged", merged)
+assert merged == [0, 5, 1, 4, 2, 3], merged      # neither end of the list wins outright
 
 print("\nALL OK")

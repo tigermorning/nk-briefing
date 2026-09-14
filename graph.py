@@ -14,7 +14,7 @@ Three slots, each with its own entry rule:
 Every run appends one row to store/metrics.jsonl. Nothing is sent unless
 DRY_RUN=0, and the published ledger is written only after a real send.
 """
-import json, operator, os, pathlib, re, sys, time
+import json, math, operator, os, pathlib, re, sys, time
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, TypedDict
 
@@ -274,6 +274,24 @@ def ask_picks(items, n):
             picks.append(p)
     return picks
 
+def ranked_both_ways(items, n):
+    """One-screen ranking depends on list order: measured 2026-09-14
+    (exp/step6.log), the same 12 titles listed forward and reversed shared 3
+    of 5 picks and 0 of 5 ranks. Ask both orders and merge by rank points
+    (n for 1st ... 1 for nth, 0 if not picked). An item both lists agree on
+    beats one that a single order happened to favour."""
+    fwd = ask_picks(items, n)
+    order = list(range(len(items)))[::-1]
+    rev = [Pick(index=order[p.index], reason=p.reason, event=p.event)
+           for p in ask_picks([items[i] for i in order], n)]
+    points, first = {}, {}
+    for ranked in (fwd, rev):
+        for rank, p in enumerate(ranked[:n]):       # the model may return more than asked
+            points[p.index] = points.get(p.index, 0) + (n - rank)
+            first.setdefault(p.index, p)            # keep the forward call's label when both have it
+    merged = sorted(points, key=lambda i: (-points[i], i))
+    return [first[i] for i in merged]
+
 def enforce(items, picks, target, banned=None):
     """The prompt asks for distinct events; the code makes sure of it.
     banned: {item index: twin link} already judged duplicates by find_dupes.
@@ -325,17 +343,23 @@ def find_dupes(kept):
 def select(s: dict) -> dict:
     items, log = s["collected"], []
     if len(items) > BATCH:                      # prelim only when one screen is too long
+        # equal batches, each keeping the same share. Slicing by BATCH left a
+        # tail batch (44 -> 40 + 4) that kept all 4 of "top 8" without any
+        # comparison: the smallest batch was the easiest way into the final.
+        n_batches = math.ceil(len(items) / BATCH)
+        size = math.ceil(len(items) / n_batches)
         survivors = []
-        for i in range(0, len(items), BATCH):
-            chunk = items[i:i + BATCH]
-            survivors += [chunk[p.index] for p in ask_picks(chunk, PRELIM)]
-        log.append(f"② 선별   예선 {len(items)} → {len(survivors)}건")
+        for i in range(0, len(items), size):
+            chunk = items[i:i + size]
+            keep = max(1, round(PRELIM * len(chunk) / BATCH))
+            survivors += [chunk[p.index] for p in ask_picks(chunk, keep)[:keep]]
+        log.append(f"② 선별   예선 {len(items)} → {len(survivors)}건 (묶음 {n_batches}개 × 약 {size}건)")
     else:
         survivors = items
     breaking, dropped = [], []
     if survivors:
         # ask for spares so a code-level drop does not leave the slot short
-        picks = ask_picks(survivors, TARGET + 3)
+        picks = ranked_both_ways(survivors, TARGET + 3)
         banned = {}
         for _ in range(3):                      # a refill can bring in a new duplicate
             breaking, dropped = enforce(survivors, picks, TARGET, banned)
@@ -378,11 +402,24 @@ def extract_body(it):
     r.raise_for_status()
     return trafilatura.extract(r.content) or ""
 
-def draft(body):
-    d = parse(SYS_DRAFT, body[:6000], Draft)
-    if d is None or all(KO.search(getattr(d, k)) for k in ("headline", "summary", "why")):
+SOURCE_LANG = {"DailyNK-JP": "일본어", "AsiaPress": "일본어", "38North": "영어"}
+FIELDS = ("headline", "summary", "why")
+
+def korean_ok(d):
+    return d is not None and all(KO.search(getattr(d, k)) for k in FIELDS)
+
+def draft(body, source=""):
+    """Measured 2026-09-14 (exp/step8_retry_rate.log): one DailyNK Japan body
+    came back Japanese on 9 of 10 first tries with SYS_DRAFT alone, and 0 of
+    10 once the user message opened by naming the source language. The
+    instruction in the system prompt was already there; next to 900 chars of
+    Japanese it lost. So name the language right above the text."""
+    lang = SOURCE_LANG.get(source) or ("" if KO.search(body[:500]) else "외국어")
+    head = f"[아래는 {lang} 기사 본문입니다. 헤드라인·요약·왜 중요한지를 모두 한국어로만 쓰세요.]\n\n" if lang else ""
+    d = parse(SYS_DRAFT, head + body[:6000], Draft)
+    if d is None or korean_ok(d):
         return d, 0
-    return parse(SYS_DRAFT + "\n반드시 한국어로 다시 쓰세요.", body[:6000], Draft), 1
+    return parse(SYS_DRAFT + "\n반드시 한국어로 다시 쓰세요.", head + body[:6000], Draft), 1
 
 def fan_report(s: dict):
     return [Send("report", {"item": it}) for it in s["picked"]] or "verify"
@@ -398,11 +435,14 @@ def report(s: ReportIn) -> dict:
         return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 본문 {len(body)}자 < {floor} "
                                        f"· 앞부분 {body[:40]!r}"]}
     try:
-        d, retried = draft(body)
+        d, retried = draft(body, it["source"])
         if d is None:                           # parse() gives None on a refusal
             raise ValueError("model returned no draft")
     except Exception as exc:
         return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 초안 실패 {type(exc).__name__}"]}
+    if not korean_ok(d):                        # the retry is a second draw, not a guarantee
+        bad = [k for k in FIELDS if not KO.search(getattr(d, k))]
+        return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 재요청 후에도 한글 없는 칸 {bad}"]}
     topic = d.topic if d.topic in TOPICS else ""
     return {"drafted": [{**it, "body": body[:6000], **d.model_dump(), "topic": topic}],
             "log": [f"③ 취재   {it['source']} · 본문 {len(body)}자"
@@ -510,7 +550,7 @@ def publish(s: dict) -> dict:
     if meta.get("all_dead"):
         failure = "모든 뉴스 피드 수집에 실패해"
     elif s["picked"] and not s["drafted"]:
-        failure = f"고른 기사 {len(s['picked'])}건의 원문을 하나도 읽지 못해"
+        failure = f"고른 기사 {len(s['picked'])}건 가운데 초안까지 만든 기사가 없어"
     today = datetime.now(KST).strftime("%Y-%m-%d")
     embeds, dropped = build_embeds(today, make_lead(arts, meta), arts, failure)
     payload = {"username": "북한 브리핑", "embeds": embeds}
