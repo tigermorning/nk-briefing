@@ -1,6 +1,6 @@
 # HANDOFF — 북한 뉴스 브리핑 파이프라인
 
-최종 갱신 2026-09-14. 다른 에이전트가 이어받기 위한 백로그. 로컬 실행 기준, API 키는 파일에만 존재(채팅에 없음).
+최종 갱신 2026-09-14 (강의 6~13강 그래프 추가). 다른 에이전트가 이어받기 위한 백로그. 로컬 실행 기준, API 키는 파일에만 존재(채팅에 없음).
 
 ## 목표
 수업(모두의연구소 캠프 136, 뉴스레터 에이전트 과정) 노트 순서대로 북한 뉴스 수집→선별 파이프라인 구축.
@@ -63,8 +63,38 @@
     - 72h에도 미달이면 `BELOW_MIN` 으로 **적게 낸다.** 숫자를 채우려 오래된 걸 끼우는 건 이 파이프라인이 막으려는 실패 그 자체다
     - 세 경로 모두 발화 확인 (정상 24h / 확장 48h / 미달 72h)
 14. `store/metrics.jsonl` 매 실행 append — 게이트 결과·소스별 기여·skips·elapsed
+15. **강의 6~13강 북한판** (`graph.py`, `audience.yaml`, `run.py`, `scorecard.py`, `.github/workflows/daily.yml`) — 2026-09-14
+    - 뼈대: collect → select → report(Send 팬아웃, 0건이면 verify로) → verify → publish. `verified`는 리듀서 없는 칸
+    - 수집: 피드는 168h로 한 번만 받고 사다리(24/48/72h)는 메모리에서 적용. 원장에 오른 링크 제외. 38North는 속보와 경쟁시키지 않고 심층枠(7일, 1건). 통일부는 오늘부터 4일 거슬러 첫 영업일의 `tier1_for` 판정(OPEN만 1건)
+    - 선별: 후보 40건 넘을 때만 예선(묶음당 8), 본선은 TARGET+3 예비까지 받고 코드로 소스당 3건·같은 사건 제거
+    - 취재: `requests`+UA로 받아 `trafilatura.extract(r.content)` (fetch_url·charset 함정 회피). 본문 600자 미만 제외(1차는 300). 한글 없는 칸이면 1회 재요청. 토픽은 yaml 목록 밖이면 빈칸
+    - 검수: 원문 대조 LLM 판정. "북한 매체 주장을 사실처럼 단정"도 문제로 봄
+    - 발행: 디스코드 embed, 칸 순서 1차→속보→심층, 창을 넓힌 날은 리드에 밝힘. `DRY_RUN` 기본 1. **원장은 실제로 보낸 카드만** 기록(한도로 뺀 카드·dry-run은 내일 후보로 남음)
+    - 설정: 시작할 때 yaml 모양 검사(빠진 칸·색 형식) → 새벽 실행 중간이 아니라 시작 전에 멈춘다
+    - 실측 dry-run 5회(속보 후보 16~17건, 1차 BELOW_BAR):
+      - **event 라벨이 분야 이름으로 나왔다.** "짧은 라벨"이라고만 하니 DailyNK 서로 다른 3건이 전부 `북한 내부 생활 상황` → 코드 중복제거가 3건을 잘라 속보 5칸 중 3칸만 참. "누가 무엇을 했다" 모양·분야 이름 금지로 고치니 5칸
+      - **반대로 같은 사건이 라벨만 달라 둘 다 실렸다.** 9/12 합동타격훈련이 `4종 섞어쏘기 전술 사용` / `합동타격훈련 실시`. 프롬프트에 "종합·분석·후속도 같은 사건"을 더해도 그대로 → 뽑힌 목록을 한 번 더 나란히 놓고 묶게 하는 `find_dupes` 추가, 걸리면 예비로 채움(최대 3회). 다음 실행에서 섞어쏘기(종합)가 빠지고 다른 사건으로 채워짐
+      - 요약 문체: 필드 설명의 "~합니다체"는 무시됐고 시스템 지시로 올리니 지켜짐
+    - **원장 키 버그 수정**: `link.split("?")[0]`은 통일부 `view.do?...&trendMngNo=134739`를 전부 한 키로 뭉친다. `collect_nk.link_key()`가 `utm_*`만 뗀다 (기존 원장 파일이 없어서 이전 데이터 영향 없음)
+    - `store/published.json`·`last_seen.json`은 이제 추적한다 — Actions가 커밋해야 다음 실행이 원장을 본다. 로컬 dry-run은 `metrics.jsonl`에만 한 줄 더한다(`last_seen.json`은 실발행 때만 갱신)
+16. **코드 리뷰 8건 반영** (별도 리뷰어, 같은 날)
+    - SILENT가 168h 수집 창 기준이라 멈춘 일간 피드가 일주일간 안 들킴 → graph에서 24h 기준으로 다시 판정
+    - Actions push가 non-fast-forward로 거절되면 원장 유실 → 재시도 반복 문장(`pull --rebase` + push 3회), 실패 시 빨간불. `metrics.jsonl`은 `merge=union`
+    - 전부 DEAD거나 고른 기사 원문을 하나도 못 읽은 날 "기사 없음" 카드 + 초록불 → 실패 공지 카드, `run.py` exit 1, 성적표 `FAILED`
+    - `DRY_RUN=="1"`일 때만 dry라 `true`/오타가 실발송 → `is_dry()`: `"0"`일 때만 보냄
+    - 같은 사건으로 뺀 기사가 내일 48h 창에서 새 기사로 부활 → 짝(`twin`)이 실제로 나간 경우에만 같이 원장에 기록
+    - 통일부 응답 모양이 바뀌면 `get("items", [])`가 영원히 "발행 없음" → `items` 없으면 오류. **실측: 0건 응답은 `items` 키가 아예 없고 `totalCount: '0'`만 온다.** 그 한 쌍만 정상 빈 응답으로 인정. 영업일 4일 연속 없음은 `STALE`로 따로 경보
+    - 빈 `url`: embed에서 뺌, 원장에 `""` 키 안 씀
+    - 워커 하나의 예외(원문·모델 거부·429)가 그래프 전체를 죽임 → report/verify에서 잡고 로그. 그래프 자체가 죽어도 metrics에 `error` 행
+    - `test_graph_fake.py` 7개 시나리오로 위 경로 전부 발화 확인. 실데이터 dry-run 회귀 없음
 
 ## 남은 일
+0. **Actions 켜기 (사용자 몫)** — 디스코드 웹훅 만들기, 저장소 Secrets에 `OPENAI_API_KEY`·`DATA_GO_KR_KEY`·`DISCORD_WEBHOOK_URL` 등록, 그다음 push. Secrets 없이 push하면 매일 07:30 실행이 `DRY_RUN=0` + 웹훅 없음으로 실패한다. 첫 실행은 Actions 탭에서 `dry_run` 체크로 손으로 돌려 볼 것. data.go.kr가 해외(GitHub 러너) IP를 받는지 미확인 — 막히면 1차가 `DEAD`로 찍힌다
+0. **1차枠 OPEN 경로는 실데이터로 아직 못 봤다** (9/14 월요일 BELOW_BAR). 가짜 테스트로만 확인
+0. RFA 한국어 검수 통과 기여 0 (dry-run 6회). 몇 주 쌓아 성적표로 뺄지 결정
+0. 로컬 `store/last_seen.json`은 커밋하지 않았다 — `test_guards.py`가 넣은 가짜 시각(DailyNK 2026-09-01)이 섞여 있어 첫 실발행에 가짜 GAP을 낸다. Actions 첫 실행이 새로 만든다. 봇 커밋을 pull하기 전에 로컬 파일을 지울 것
+0. 같은 사건 거르기는 **하루 안에서만** 한다. 어제 낸 사건의 후속 기사는 링크가 달라 원장에 안 걸린다 — 최근 발행 제목을 `find_dupes`에 같이 넘길지 검토
+0. 모델이 토픽을 목록 밖 이름(`대내 정치`)으로 붙이는 경우가 있다 — 지금은 빈칸 처리 + 로그
 1. **`cl` 주간·월간 코드 확인** — 포털이 문서화한 건 `ARGUMENT_DAIL` 하나뿐. `ARGUMENT_WEEK`/`ARGUMENT_MONT` 는 추측이고 둘 다 0건인데, **`NO_SUCH_CODE_XYZ` 도 똑같이 `resultCode 0 / totalCount 0 / normal_code`** 다. 0건이 "발행 없음"인지 "코드 틀림"인지 이 API로는 못 가른다. 포털 상세문서나 nkinfo 사이트에서 실제 코드를 확인할 것. 확인 전까지 주간·월간은 "없다"고 적지 말 것
 2. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
 3. VOA 한국어 피드 URL 수동 확인
@@ -73,7 +103,13 @@
 ## 파일 (저장소 루트 `C:\Users\user\Documents\nk-briefing` 기준)
 | 파일 | 용도 |
 |---|---|
-| `mou_api.py` | 통일부 API 클라이언트. `get_trend(period, days)` |
+| `graph.py` | 브리핑 그래프 전체 + 실행 기록. `run()` |
+| `audience.yaml` | 독자·기준·버릴 것·토픽 데스크지침 |
+| `run.py` | 1회 실행 (Actions 진입점) |
+| `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
+| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장) |
+| `.github/workflows/daily.yml` | 매일 KST 07:30, store/ 커밋 |
+| `mou_api.py` | 통일부 API 클라이언트. `get_trend(period, days)`. 키는 환경변수 먼저, 없으면 `.env` |
 | `mou_probe.py` | 갱신속도·신호종류 측정. 보고서는 `mou_report.txt` (UTF-8) |
 | `tier1_mou.py` | 1차枠 규칙 + 30일 시뮬레이션 |
 | `test_g1_mou.py` | 통일부 상세페이지 G1/G3 + `NO_GAIN` 판정 |

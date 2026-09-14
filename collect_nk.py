@@ -1,5 +1,6 @@
 import feedparser, requests, json, os, time
 from datetime import datetime, timezone, timedelta
+from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
 # metrics live next to this script, not next to whatever directory you happen
 # to run from -- a cwd-relative path silently starts a second, empty store
@@ -16,6 +17,15 @@ SOURCES = [
     ("38North", "https://www.38north.org/feed/", False),
     ("RFA-KO", "https://www.rfa.org/korean/rss2.xml", False),
 ]
+
+def link_key(link):
+    """Identity of an article link. Strip only tracking tags: the query is
+    often the article id itself (nkinfo view.do?...&trendMngNo=134739), and
+    cutting at '?' makes every article of such a site the same key."""
+    parts = urlsplit(link or "")
+    query = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True)
+             if not k.lower().startswith("utm_")]
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), ""))
 
 def load_seen():
     try:
@@ -69,17 +79,21 @@ def collect(state):
             if not t:
                 s["nodate"] += 1
                 continue
-            if datetime(*t[:6], tzinfo=timezone.utc) < cutoff:
+            at = datetime(*t[:6], tzinfo=timezone.utc)
+            if at < cutoff:
                 s["old"] += 1
                 continue
-            key = (e.get("link", "") or "").split("?")[0]
+            key = link_key(e.get("link", ""))
             if key in seen:
                 s["dup"] += 1
                 continue
             seen.add(key)
             s["kept"] += 1
+            # at/summary feed the later stages: publish prints the time, and
+            # report compares extracted length against what the feed already gave
             items.append({"source": name, "title": e.get("title", ""),
-                          "link": e.get("link", "")})
+                          "link": e.get("link", ""), "at": at.isoformat(),
+                          "summary": e.get("summary", "") or ""})
 
     # a source that answered fine and still gave nothing: not an error, but the
     # one shape of trouble that leaves no other trace at all

@@ -13,7 +13,7 @@ avoid.
 """
 import io, json, os, sys
 from datetime import datetime, timezone
-from collect_nk import collect, STORE
+from collect_nk import collect, link_key, STORE
 
 sys.stdout.reconfigure(errors="replace")
 
@@ -34,7 +34,9 @@ def mark_published(items):
     led = load_ledger()
     stamp = datetime.now(timezone.utc).isoformat()
     for it in items:
-        led.setdefault(it["link"].split("?")[0], stamp)
+        key = link_key(it.get("link") or "")
+        if key:                                 # "" would mark every link-less item as published
+            led.setdefault(key, stamp)
     os.makedirs(STORE, exist_ok=True)
     with io.open(LEDGER, "w", encoding="utf-8") as fh:
         json.dump(led, fh, ensure_ascii=False, indent=1)
@@ -46,7 +48,7 @@ def gather(min_items=MIN_ITEMS, ladder=LADDER):
     for hours in ladder:
         res = collect({"hours": hours})
         fresh = [i for i in res["items"]
-                 if i["link"].split("?")[0] not in led]
+                 if link_key(i["link"]) not in led]
         steps.append({"hours": hours, "collected": len(res["items"]),
                       "unpublished": len(fresh)})
         if len(fresh) >= min_items:

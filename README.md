@@ -1,17 +1,37 @@
 # nk-briefing
 
-북한 뉴스 수집→선별 파이프라인. 모두의연구소 캠프 136 뉴스레터 에이전트 과정 노트를 북한 뉴스 소스에 적용한 것.
+북한 뉴스 브리핑 에이전트. 모두의연구소 캠프 136 뉴스레터 에이전트 과정(수집→선별→취재→검수→발행)을 북한 뉴스 소스에 적용한 것.
 
 진행 상황·소스 편성·남은 일은 [HANDOFF-nk-news-briefing.md](HANDOFF-nk-news-briefing.md) 참고.
+
+## 구조
+
+| 파일 | 하는 일 |
+|---|---|
+| `graph.py` | LangGraph 한 판. 수집 → 선별 → 취재(기사마다 워커) → 검수 → 발행, 끝나면 `store/metrics.jsonl`에 한 줄 |
+| `audience.yaml` | 독자·중요도 기준·버릴 것·토픽별 데스크지침. 편집 방향은 여기만 고친다 |
+| `run.py` | 한 번 실행. GitHub Actions가 매일 07:30(KST)에 부른다 |
+| `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
+| `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠) |
+
+브리핑은 세 칸이다. **속보**(연합·DailyNK·RFA, 24h 창, 모자라면 48h·72h, 최대 5건, 소스당 3건),
+**심층**(38North, 7일 창, 최대 1건), **1차**(통일부 북한동향, 요약 300자 이상인 날만, 최대 1건).
 
 ## 실행
 
 ```
-python collect_nk.py 72      # 72시간 창으로 수집
+python test_graph_fake.py    # 키·네트워크 없이 그래프 모양 확인
+python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
+python scorecard.py          # 성적표
+python collect_nk.py 72      # 수집만, 72시간 창
 python test_g1.py            # G1 원문추출 게이트
 python test_g23.py           # G2 14일 집계 + G3 robots.txt
 python test_guards.py        # 조용한 실패 가드 3종 발화 재현
 ```
+
+로컬 키는 `graph.ENV`가 가리키는 `.env`(`OPENAI_API_KEY`, `DATA_GO_KR_KEY`)에서 읽는다.
+Actions에서는 저장소 Secrets `OPENAI_API_KEY` · `DATA_GO_KR_KEY` · `DISCORD_WEBHOOK_URL`을 쓴다.
+실제 발행은 `DRY_RUN=0`일 때만 하고, 발행 원장 `store/published.json`은 실제로 보낸 뒤에만 쓴다.
 
 어느 폴더에서 실행해도 메트릭은 이 저장소의 `store/metrics.jsonl` 한 곳에 쌓인다.
 
@@ -25,5 +45,7 @@ python test_guards.py        # 조용한 실패 가드 3종 발화 재현
   전부 적으면 진짜 신호가 노이즈에 묻힌다.
 - **`store/metrics.jsonl`은 고치지 않는다.** 앞쪽 두 행에는 나중에 오판으로
   밝혀진 값이 들어 있다. 그대로 두는 게 "언제 무엇을 잘못 알았는지"의 기록이다.
+- **프롬프트 부탁은 코드로 확인한다.** 같은 사건 거르기는 모델이 붙인 라벨만 믿지 않고,
+  뽑힌 짧은 목록을 한 번 더 나란히 놓고 묶게 한 뒤 예비 후보로 채운다.
 - **키는 저장소 밖에 둔다.** `DATA_GO_KR_KEY`는 별도 `.env`에서 읽고,
   값을 출력하지 않는다(길이만 확인).

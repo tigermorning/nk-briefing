@@ -6,7 +6,7 @@ Response fields: cl 기간분류, sj 제목, cn 내용, url, dwld_url, filenm.
 The key lives in a .env outside this repo and is never printed. requests puts
 it in the query string, so r.url must not be printed either.
 """
-import io, sys, json, urllib.parse, requests
+import io, os, sys, json, urllib.parse, requests
 from datetime import datetime, timedelta
 
 sys.stdout.reconfigure(errors="replace")
@@ -16,6 +16,13 @@ URL = "http://apis.data.go.kr/1250000/trend/getTrend"
 PERIODS = {"daily": "ARGUMENT_DAIL", "weekly": "ARGUMENT_WEEK", "monthly": "ARGUMENT_MONT"}
 
 def load_key(name="DATA_GO_KR_KEY"):
+    # GitHub Actions passes the key as an environment variable; locally it
+    # comes from the .env file. Both may hold the encoded form.
+    v = os.environ.get(name, "").strip()
+    if v:
+        return urllib.parse.unquote(v) if "%" in v else v
+    if not os.path.exists(ENV):
+        raise SystemExit(f"{name} is not set and {ENV} does not exist")
     for line in io.open(ENV, encoding="utf-8"):
         if line.startswith(name + "="):
             v = line.split("=", 1)[1].strip().strip('"').strip("'")
@@ -46,6 +53,15 @@ def get_trend(period="daily", days=7, page=1, rows=10):
     if code not in ("00", "0", ""):
         return {"error": f"resultCode {code}",
                 "msg": data.get("resultMsg", ""), "raw": data}
+    # callers read data["items"]. If the shape moves (data.go.kr's usual
+    # response.body.items.item) .get("items", []) would read as "nothing
+    # published" forever -- make a missing key an error instead. Measured
+    # 2026-09-14: a 0-result answer omits "items" and carries totalCount '0'
+    # (a string), so only that exact pair counts as a genuine empty answer.
+    if "items" not in data:
+        if str(data.get("totalCount")) == "0":
+            return {**data, "items": []}
+        return {"error": "unexpected response shape", "keys": sorted(data)[:10]}
     return data
 
 if __name__ == "__main__":

@@ -1,0 +1,3 @@
+# metrics rows are append-only and independent; when the bot's append and a
+# local append meet in a rebase, keep both instead of stopping on a conflict
+store/metrics.jsonl merge=union
