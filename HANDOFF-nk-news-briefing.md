@@ -14,7 +14,7 @@
 | tier2 전문 | DailyNK | `https://www.dailynk.com/feed` | 최신 10건창, 본문 1400자+, G1·G2·G3 통과 |
 | tier3 주간 | 38North | `https://www.38north.org/feed/` | 8건/2주, 영문 장문, G1 3/3 (2,940~19,989자). 일간 기여 0 정상 |
 | 후보 | RFA 한국어 | `https://www.rfa.org/korean/rss2.xml` | 30건, G1 3/3. 24h 기여 0 / 72h 기여 2 |
-| 후보 | NK News | `https://www.nknews.org/feed/` | 300건 아카이브, 당일 신선, 요약 346자. **유료벽 — G1 미검사** |
+| 탈락 | NK News | `https://www.nknews.org/feed/` | 300건/14일 46건으로 G2는 통과. **유료벽 티저** — G1 5/5 PASS지만 길이 1008~1224로 고르고 문장이 중간에 끊김 (`test_g1_paywall.py`) |
 | 탈락 | 중국신문망 국제 | `https://www.chinanews.com.cn/rss/world.xml` | 종합국제 30건 중 북한 키워드 1건. 일간 FAIL — `test_g2_filter.py` |
 
 탈락: DailyNK 영문(`/english/rss-feed/`, 200이나 0건) · 연합뉴스 일문 북한(`https://jp.yna.co.kr/RSS/nk.xml`, G2는 16/16 통과하지만 동사 번역이라 신규신호 없음)
@@ -25,28 +25,33 @@
 ## 완료
 1. RSS 상태표 3열 해석(건수/요약길이/최신글) — `test_rss.py`
 2. 1차/2차 구분 + tier 면제·상한 설계
-3. **G1** 원문추출 게이트 — 12/12 PASS (4소스x3건, 기준 600자). 판정이 PASS/FAIL 2값이 아니라 `FETCH_ERR`/`FETCH_HTTP`/`EXTRACT_EMPTY`/`SHORT`/`PASS` 5값. `rss_len`은 긴데 `EXTRACT_EMPTY`면 "추출기 문제" 자동 경고
+3. **G1** 원문추출 게이트 — 기존 4소스 12/12 PASS (4소스x3건, 기준 600자). 판정이 PASS/FAIL 2값이 아니라 `FETCH_ERR`/`FETCH_HTTP`/`EXTRACT_EMPTY`/`SHORT`/`PASS` 5값. `rss_len`은 긴데 `EXTRACT_EMPTY`면 "추출기 문제" 자동 경고
 4. **G2** 14일 집계 + 임계값 일간枠 14d≥7 / 주간枠 14d≥1 — `test_g2.py` (8소스). 날짜를 `published_parsed` 하나만 보지 않고 `updated_parsed`/`created_parsed` 까지 폴백 — "날짜가 없는 것"과 "내가 안 본 필드에 있는 것"을 가름
    실측 14d: Yonhap 89 / DailyNK 10 / RFA 27 / NKNews 46 / Chinanews 30 / Yonhap-JP 16 / **38North 6 (일간 FAIL, 주간 PASS)** / DailyNK-EN 빈 피드 DEAD
 5. **G3** robots.txt — 9/9 허용
-6. 수집노드 `collect(state)`: 시간창 + utm 꼬리표 제거 중복제거 + dead 격리. 조용한 실패 가드 4종:
+6. **G1 보강** — 길이 기준만으로는 유료벽 티저를 못 거른다. NK News가 600자 기준을 5/5로 통과했지만 본문이 아니라 티저였다. 신호 두 개를 같이 본다 (`test_g1_paywall.py`)
+   - `spread` = 최장/최단. 진짜 본문은 길이가 널뛴다 (38North 8.5x). 티저는 일정 (NK News 1.2x)
+   - `cut` = 꼬리 문구(이메일·바이라인·저작권)를 떼고 난 뒤 문장이 종결부호로 끝나는가
+   - **둘 다여야 티저.** 첫 판은 꼬리 문구를 안 떼서 연합·RFA를 5/5로 오판했다. 휴리스틱은 정상 소스에 먼저 돌려 봐야 한다
+7. 수집노드 `collect(state)`: 시간창 + utm 꼬리표 제거 중복제거 + dead 격리. 조용한 실패 가드 4종:
    (a) `200 + 빈 피드`를 예외로 승격 (b) `dead`에 `reason` 동봉 (c) 소스별 `kept/old/dup/nodate` 합계 (건별 로그 아님) (d) `expect_daily` 소스가 응답 정상인데 기여 0이면 `SILENT` 경고
-7. 실측: 시간창 6h:7 / 24h:13 / 72h:41건. 소스 추가(RFA)해도 창 밖이면 기여 0
-8. `store/metrics.jsonl` 매 실행 append — 게이트 결과·소스별 기여·skips·elapsed
+8. 실측: 시간창 6h:7 / 24h:13 / 72h:41건. 소스 추가(RFA)해도 창 밖이면 기여 0
+9. `store/metrics.jsonl` 매 실행 append — 게이트 결과·소스별 기여·skips·elapsed
 
 ## 남은 일
 1. **통일부 API 첫 호출** — 키 활성화 후 `.env`의 `DATA_GO_KR_KEY`로 `pageNo=1, numOfRows=3`. 변수명 미확정이라 첫 응답 보고 맞출 것. 기대 필드: 동향기간분류/제목/내용. 확인 2가지 — 갱신속도(매일아침 가능?), RSS에 없는 추가신호 유무
-2. **NK News G1 추출검사 3건** — 유료벽이라 `EXTRACT_EMPTY`/`SHORT` 나올 가능성 높음. 나오면 tier 배치 불가
-3. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
-4. **DailyNK 수집주기 2~3회/일** — 10건창이라 1회/일이면 넘침 손실. 최소발행 규칙(3건 미만이면 72h 확장)도 같이
-5. VOA 한국어 피드 URL 수동 확인
-6. **KCNA 인용을 직접 받는 경로 조사** — 1차枠 후보. 중국신문망 필터에서 조선중앙통신 인용 1건이 나온 게 단서
+2. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
+3. **DailyNK 수집주기 2~3회/일** — 10건창이라 1회/일이면 넘침 손실. 최소발행 규칙(3건 미만이면 72h 확장)도 같이
+4. VOA 한국어 피드 URL 수동 확인
+5. **KCNA 인용을 직접 받는 경로 조사** — 1차枠 후보. 중국신문망 필터에서 조선중앙통신 인용 1건이 나온 게 단서
 
 ## 파일 (저장소 루트 `C:\Users\user\Documents\nk-briefing` 기준)
 | 파일 | 용도 |
 |---|---|
 | `test_rss.py` | RSS 상태표 |
 | `test_g1.py` | G1 원문추출 게이트 (5값 판정) |
+| `test_g1_paywall.py` | 유료벽 티저 판별 (spread + cut) |
+| `test_g1_nknews.py` | NK News 단독 G1 |
 | `test_g2.py` | G2 14일 집계 (날짜 필드 폴백 포함) |
 | `test_g2_filter.py` | 종합 피드에 키워드 필터를 건 뒤 G2 재측정 |
 | `test_g23.py` | 옛 G2+G3 합본. G3 부분만 유효 |
@@ -68,4 +73,5 @@
 - data.go.kr 키: `requests` `params=` 로 넘길 땐 **디코딩키**. 인코딩키를 그대로 넘기면 이중인코딩
 - **`RobotFileParser`** 는 UA 없는 urllib 사용 → 403 사이트에서 "전체차단" 오판. `requests`+UA로 본문 받아 `parse()` 할 것
 - **`trafilatura.fetch_url()`** 도 같은 함정. 기본 UA가 차단당하면 `None` 반환 → 추출 0자 → "본문 없는 소스"로 오판. `requests`+UA로 받아 `extract(r.text)` 할 것
+- **게이트 통과가 쓸 수 있다는 뜻은 아니다.** 길이 기준은 유료벽 티저를, G2는 번역 중복을 못 본다. 기준을 올려 막을 수도 없다 — 1500자로 올리면 연합(943자)이 같이 떨어진다
 - 위 둘의 공통형: **라이브러리가 조용히 빈 값/False를 돌려줌.** 빈 결과를 사실로 읽지 말고 HTTP code를 같이 찍을 것

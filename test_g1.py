@@ -41,50 +41,51 @@ def rss_body(e):
     body = e.get("content", [{}])[0].get("value") if e.get("content") else e.get("summary", "")
     return re.sub(r"<[^>]+>", "", body or "").strip()
 
-t0 = time.time()
-rows, tally = [], {}
-hdr = f"{'source':<10}{'rss_len':>8}{'ext_len':>9}{'code':>6}  {'verdict':<22}title"
-print(hdr)
-print("-" * 95)
-for name, url in SOURCES:
-    try:
-        f = feedparser.parse(requests.get(url, headers=UA, timeout=20).content)
-    except Exception as exc:
-        print(f"{name:<10}{'-':>8}{'-':>9}{'-':>6}  {'FEED_ERR':<22}{type(exc).__name__}")
-        tally.setdefault(name, {})["FEED_ERR"] = 1
-        continue
-    if not f.entries:
-        # a 200 with an empty feed is a failure that looks like success
-        print(f"{name:<10}{'-':>8}{'-':>9}{'-':>6}  {'FEED_EMPTY':<22}")
-        tally.setdefault(name, {})["FEED_EMPTY"] = 1
-        continue
-    for e in f.entries[:3]:
-        verdict, ext_len, code = judge(e.get("link", ""))
-        rl = len(rss_body(e))
-        print(f"{name:<10}{rl:>8}{ext_len:>9}{code:>6}  {verdict:<22}{e.get('title','')[:35]}")
-        rows.append((name, rl, ext_len, verdict))
-        d = tally.setdefault(name, {})
-        d[verdict] = d.get(verdict, 0) + 1
+if __name__ == "__main__":
+    t0 = time.time()
+    rows, tally = [], {}
+    hdr = f"{'source':<10}{'rss_len':>8}{'ext_len':>9}{'code':>6}  {'verdict':<22}title"
+    print(hdr)
+    print("-" * 95)
+    for name, url in SOURCES:
+        try:
+            f = feedparser.parse(requests.get(url, headers=UA, timeout=20).content)
+        except Exception as exc:
+            print(f"{name:<10}{'-':>8}{'-':>9}{'-':>6}  {'FEED_ERR':<22}{type(exc).__name__}")
+            tally.setdefault(name, {})["FEED_ERR"] = 1
+            continue
+        if not f.entries:
+            # a 200 with an empty feed is a failure that looks like success
+            print(f"{name:<10}{'-':>8}{'-':>9}{'-':>6}  {'FEED_EMPTY':<22}")
+            tally.setdefault(name, {})["FEED_EMPTY"] = 1
+            continue
+        for e in f.entries[:3]:
+            verdict, ext_len, code = judge(e.get("link", ""))
+            rl = len(rss_body(e))
+            print(f"{name:<10}{rl:>8}{ext_len:>9}{code:>6}  {verdict:<22}{e.get('title','')[:35]}")
+            rows.append((name, rl, ext_len, verdict))
+            d = tally.setdefault(name, {})
+            d[verdict] = d.get(verdict, 0) + 1
 
-print()
-print("verdict tally by source:")
-for name, d in tally.items():
-    print(f"  {name:<10}{d}")
-
-# a source whose RSS is long but whose extraction is empty is OUR bug, not theirs
-suspect = [n for n, rl, el, v in rows if v == "EXTRACT_EMPTY" and rl >= BASE]
-if suspect:
     print()
-    print("!! EXTRACT_EMPTY while RSS carries full text -> our extractor, not the source:",
-          sorted(set(suspect)))
+    print("verdict tally by source:")
+    for name, d in tally.items():
+        print(f"  {name:<10}{d}")
 
-n_pass = sum(1 for *_, v in rows if v == "PASS")
-os.makedirs(STORE, exist_ok=True)
-with open(METRICS, "a", encoding="utf-8") as fh:
-    fh.write(json.dumps({"ts": datetime.now(timezone.utc).isoformat(),
-                         "g1_base": BASE, "g1_tally": tally,
-                         "g1_pass_rate": round(n_pass / len(rows), 3) if rows else None,
-                         "g1_extractor_suspect": sorted(set(suspect)),
-                         "elapsed_s": round(time.time() - t0, 1)},
-                        ensure_ascii=False) + "\n")
-print(f"\n{n_pass}/{len(rows)} PASS (>= {BASE}) -> store/metrics.jsonl append done")
+    # a source whose RSS is long but whose extraction is empty is OUR bug, not theirs
+    suspect = [n for n, rl, el, v in rows if v == "EXTRACT_EMPTY" and rl >= BASE]
+    if suspect:
+        print()
+        print("!! EXTRACT_EMPTY while RSS carries full text -> our extractor, not the source:",
+              sorted(set(suspect)))
+
+    n_pass = sum(1 for *_, v in rows if v == "PASS")
+    os.makedirs(STORE, exist_ok=True)
+    with open(METRICS, "a", encoding="utf-8") as fh:
+        fh.write(json.dumps({"ts": datetime.now(timezone.utc).isoformat(),
+                             "g1_base": BASE, "g1_tally": tally,
+                             "g1_pass_rate": round(n_pass / len(rows), 3) if rows else None,
+                             "g1_extractor_suspect": sorted(set(suspect)),
+                             "elapsed_s": round(time.time() - t0, 1)},
+                            ensure_ascii=False) + "\n")
+    print(f"\n{n_pass}/{len(rows)} PASS (>= {BASE}) -> store/metrics.jsonl append done")
