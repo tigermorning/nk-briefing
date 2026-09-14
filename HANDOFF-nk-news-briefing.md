@@ -15,16 +15,19 @@
 | tier3 주간 | 38North | `https://www.38north.org/feed/` | 8건/2주, 영문 장문, G1 3/3 (2,940~19,989자). 일간 기여 0 정상 |
 | 후보 | RFA 한국어 | `https://www.rfa.org/korean/rss2.xml` | 30건, G1 3/3. 24h 기여 0 / 72h 기여 2 |
 | 후보 | NK News | `https://www.nknews.org/feed/` | 300건 아카이브, 당일 신선, 요약 346자. **유료벽 — G1 미검사** |
-| 조건부 | 중국신문망 국제 | `https://www.chinanews.com.cn/rss/world.xml` | 30건 종합국제, 당일 신선. 북한특화 아님 → `朝鮮` 키워드 필터 필요 |
+| 탈락 | 중국신문망 국제 | `https://www.chinanews.com.cn/rss/world.xml` | 종합국제 30건 중 북한 키워드 1건. 일간 FAIL — `test_g2_filter.py` |
 
-탈락: DailyNK 영문(`/english/rss-feed/`, 200이나 0건) · 연합뉴스 일문 북한(`https://jp.yna.co.kr/RSS/nk.xml`, 동사 번역이라 신규신호 없음)
+탈락: DailyNK 영문(`/english/rss-feed/`, 200이나 0건) · 연합뉴스 일문 북한(`https://jp.yna.co.kr/RSS/nk.xml`, G2는 16/16 통과하지만 동사 번역이라 신규신호 없음)
 미확보: VOA 한국어 — voakorea.com/rssfeeds 목록이 JS 구동, 직접 피드 URL 못 찾음
+
+중국신문망에서 걸린 1건이 조선중앙통신(朝中社) 인용 기사였다. 종합 피드를 필터해 쓰기엔 양이 안 나오지만, **KCNA 인용을 직접 받는 경로**는 따로 찾아볼 값어치가 있다 (통일부 API와 함께 1차枠 후보).
 
 ## 완료
 1. RSS 상태표 3열 해석(건수/요약길이/최신글) — `test_rss.py`
 2. 1차/2차 구분 + tier 면제·상한 설계
 3. **G1** 원문추출 게이트 — 12/12 PASS (4소스x3건, 기준 600자). 판정이 PASS/FAIL 2값이 아니라 `FETCH_ERR`/`FETCH_HTTP`/`EXTRACT_EMPTY`/`SHORT`/`PASS` 5값. `rss_len`은 긴데 `EXTRACT_EMPTY`면 "추출기 문제" 자동 경고
-4. **G2** 14일 집계 + 임계값안: 일간枠 14d≥7, 주간枠 14d≥1 — `test_g23.py`
+4. **G2** 14일 집계 + 임계값 일간枠 14d≥7 / 주간枠 14d≥1 — `test_g2.py` (8소스). 날짜를 `published_parsed` 하나만 보지 않고 `updated_parsed`/`created_parsed` 까지 폴백 — "날짜가 없는 것"과 "내가 안 본 필드에 있는 것"을 가름
+   실측 14d: Yonhap 89 / DailyNK 10 / RFA 27 / NKNews 46 / Chinanews 30 / Yonhap-JP 16 / **38North 6 (일간 FAIL, 주간 PASS)** / DailyNK-EN 빈 피드 DEAD
 5. **G3** robots.txt — 9/9 허용
 6. 수집노드 `collect(state)`: 시간창 + utm 꼬리표 제거 중복제거 + dead 격리. 조용한 실패 가드 4종:
    (a) `200 + 빈 피드`를 예외로 승격 (b) `dead`에 `reason` 동봉 (c) 소스별 `kept/old/dup/nodate` 합계 (건별 로그 아님) (d) `expect_daily` 소스가 응답 정상인데 기여 0이면 `SILENT` 경고
@@ -34,18 +37,20 @@
 ## 남은 일
 1. **통일부 API 첫 호출** — 키 활성화 후 `.env`의 `DATA_GO_KR_KEY`로 `pageNo=1, numOfRows=3`. 변수명 미확정이라 첫 응답 보고 맞출 것. 기대 필드: 동향기간분류/제목/내용. 확인 2가지 — 갱신속도(매일아침 가능?), RSS에 없는 추가신호 유무
 2. **NK News G1 추출검사 3건** — 유료벽이라 `EXTRACT_EMPTY`/`SHORT` 나올 가능성 높음. 나오면 tier 배치 불가
-3. **중국신문망 `朝鮮` 키워드 필터 시험** — 필터 후 14일 건수가 G2 임계값(≥7 또는 ≥1) 넘는지
-4. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
-5. **DailyNK 수집주기 2~3회/일** — 10건창이라 1회/일이면 넘침 손실. 최소발행 규칙(3건 미만이면 72h 확장)도 같이
-6. VOA 한국어 피드 URL 수동 확인
+3. **브리핑 품질바 확정** — 속보枠=원문필수(요약만이면 탈락), 심층枠=38North형 주간, 1차枠=통일부 고정1枠(경쟁면제·검사유지·상한)
+4. **DailyNK 수집주기 2~3회/일** — 10건창이라 1회/일이면 넘침 손실. 최소발행 규칙(3건 미만이면 72h 확장)도 같이
+5. VOA 한국어 피드 URL 수동 확인
+6. **KCNA 인용을 직접 받는 경로 조사** — 1차枠 후보. 중국신문망 필터에서 조선중앙통신 인용 1건이 나온 게 단서
 
-## 파일 (`C:\Users\user\Documents` 기준)
+## 파일 (저장소 루트 `C:\Users\user\Documents\nk-briefing` 기준)
 | 파일 | 용도 |
 |---|---|
 | `test_rss.py` | RSS 상태표 |
 | `test_g1.py` | G1 원문추출 게이트 (5값 판정) |
-| `test_g23.py` | G2 14일 집계 + G3 robotparser |
-| `collect_nk.py` | 수집노드. `python Documents\collect_nk.py [hours]` |
+| `test_g2.py` | G2 14일 집계 (날짜 필드 폴백 포함) |
+| `test_g2_filter.py` | 종합 피드에 키워드 필터를 건 뒤 G2 재측정 |
+| `test_g23.py` | 옛 G2+G3 합본. G3 부분만 유효 |
+| `collect_nk.py` | 수집노드. `python collect_nk.py [hours]` |
 | `test_guards.py` | 조용한 실패 가드 3종 발화 재현 |
 | `test_silent.py` | 기록 유/무 대비 데모 |
 | `test_g1_sweep.py` | G1 임계값 200/600/1500/4000 비교 |
@@ -57,9 +62,9 @@
 키 위치: `C:\Users\user\Documents\tigermorning.github.io\ko\.env` 의 `DATA_GO_KR_KEY` (디코딩키). **절대 채팅/셀에 출력 금지, 길이만 확인.**
 
 ## 주의 (gotcha)
-- PowerShell에 파이썬 코드 붙여넣기 금지. 파일 만들고 `python Documents\xxx.py` 실행. `C:\Users\user`에서 실행 시 `Documents\` 접두사 필요
+- PowerShell에 파이썬 코드 붙여넣기 금지. 파일 만들고 `python xxx.py` 로 저장소 폴더에서 실행. 메트릭 경로는 스크립트 위치 기준이라 어느 cwd에서 돌려도 `store/` 한 곳에 쌓인다
 - `>` 로 `.env` 덮어쓰기 금지. `>>` 또는 에디터로 1행 추가
-- 한글 콘솔 출력 깨짐(cp949)은 무시. 내용은 정상
+- 한글 콘솔 출력 깨짐(cp949)은 무시. 내용은 정상. 다만 중국어는 깨지는 정도가 아니라 `UnicodeEncodeError` 로 죽으니 `sys.stdout.reconfigure(errors="replace")` 를 걸 것
 - data.go.kr 키: `requests` `params=` 로 넘길 땐 **디코딩키**. 인코딩키를 그대로 넘기면 이중인코딩
 - **`RobotFileParser`** 는 UA 없는 urllib 사용 → 403 사이트에서 "전체차단" 오판. `requests`+UA로 본문 받아 `parse()` 할 것
 - **`trafilatura.fetch_url()`** 도 같은 함정. 기본 UA가 차단당하면 `None` 반환 → 추출 0자 → "본문 없는 소스"로 오판. `requests`+UA로 받아 `extract(r.text)` 할 것
