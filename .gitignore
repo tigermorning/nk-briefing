@@ -12,3 +12,4 @@ __pycache__/
 mou_report.txt
 mou_g1_report.txt
 store/last_seen.json
+store/published.json
