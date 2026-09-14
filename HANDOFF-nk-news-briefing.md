@@ -129,11 +129,12 @@
       - 가짜 테스트 9~11(균등 예선, 한국어 가드, 정순·역순 병합) 추가. 반영 후 실제 dry-run: 데일리NK재팬 IAEA 기사가 속보 4위로 뽑혀 한국어 초안까지 정상
 
 ## 남은 일
-0. **강의 더 해보기 중 안 한 것**: 10강 실제 발행, 11강 전부(Secrets·수동 실행·cron 5분 시험·실패 알림), 14강 회고 퀴즈 — 모두 사용자 웹훅·Secrets 뒤
+0. **강의 더 해보기 중 안 한 것**: 11강 전부(Secrets·수동 실행·cron 5분 시험·실패 알림), 14강 회고 퀴즈 — Secrets 뒤
+   - 10강 실제 발행은 2026-09-14 19:14 KST 로컬에서 1회 완료. 속보 5 + 심층 1, 디스코드 표시 사용자 확인. 원장 10건(보낸 6 + 같은 사건 짝 4). 키는 저장소 `.env`(git 제외)에 있고 코드 기본 경로가 아니라서 `NK_ENV_FILE`로 지정해 돌렸다
 0. **Actions 켜기 (사용자 몫)** — 디스코드 웹훅 만들기, 저장소 Secrets에 `OPENAI_API_KEY`·`DATA_GO_KR_KEY`·`DISCORD_WEBHOOK_URL` 등록, 그다음 push. Secrets 없이 push하면 매일 07:30 실행이 `DRY_RUN=0` + 웹훅 없음으로 실패한다. 첫 실행은 Actions 탭에서 `dry_run` 체크로 손으로 돌려 볼 것. data.go.kr가 해외(GitHub 러너) IP를 받는지 미확인 — 막히면 1차가 `DEAD`로 찍힌다
 0. **1차枠 OPEN 경로는 실데이터로 아직 못 봤다** (9/14 월요일 BELOW_BAR). 가짜 테스트로만 확인
 0. RFA 한국어 검수 통과 기여 0 (dry-run 6회). 몇 주 쌓아 성적표로 뺄지 결정
-0. 로컬 `store/last_seen.json`은 커밋하지 않았다 — `test_guards.py`가 넣은 가짜 시각(DailyNK 2026-09-01)이 섞여 있어 첫 실발행에 가짜 GAP을 낸다. Actions 첫 실행이 새로 만든다. 봇 커밋을 pull하기 전에 로컬 파일을 지울 것
+0. `store/last_seen.json`·`published.json`은 첫 실발행(9/14 19:14) 값으로 커밋했다. 가짜 시각은 이 실행이 덮어써 없어졌다. **아직 push 안 함** — Secrets 없이 push하면 07:30 실행이 실패하므로 `gh secret list`로 3개 확인 후 push
 0. 같은 사건 거르기는 **하루 안에서만** 한다. 어제 낸 사건의 후속 기사는 링크가 달라 원장에 안 걸린다 — 최근 발행 제목을 `find_dupes`에 같이 넘길지 검토
 0. 모델이 토픽을 목록 밖 이름(`대내 정치`)으로 붙이는 경우가 있다 — 지금은 빈칸 처리 + 로그
 1. **`cl` 주간·월간 코드 확인** — 포털이 문서화한 건 `ARGUMENT_DAIL` 하나뿐. `ARGUMENT_WEEK`/`ARGUMENT_MONT` 는 추측이고 둘 다 0건인데, **`NO_SUCH_CODE_XYZ` 도 똑같이 `resultCode 0 / totalCount 0 / normal_code`** 다. 0건이 "발행 없음"인지 "코드 틀림"인지 이 API로는 못 가른다. 포털 상세문서나 nkinfo 사이트에서 실제 코드를 확인할 것. 확인 전까지 주간·월간은 "없다"고 적지 말 것
