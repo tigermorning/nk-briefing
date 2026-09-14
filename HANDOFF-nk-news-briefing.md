@@ -131,7 +131,7 @@
     - 10강 실발행: 19:14 KST 로컬 1회, 속보 5 + 심층 1, 디스코드 표시 사용자 확인. 원장 `store/published.json` 10건(보낸 6 + 같은 사건 짝 4). 키는 저장소 `.env`(git 제외, 키 3개)인데 `graph.ENV` 기본 경로가 아니라서 `NK_ENV_FILE`로 지정했다:
       `$env:NK_ENV_FILE="C:\Users\user\Documents\nk-briefing\.env"; $env:DRY_RUN="0"; python run.py`
     - 원장·`last_seen.json`을 커밋한 **뒤에** push(`16b86de`). 거꾸로 하면 Actions 첫 실행이 오늘 보낸 카드를 다시 보낸다. `last_seen.json`의 가짜 시각(DailyNK 09-01)은 이 실발행이 덮어써 없어졌다
-    - Secrets: `gh secret set -f <repo>\.env --repo tigermorning/nk-briefing` 로 3개 등록(10:17 UTC). 저장소는 PRIVATE
+    - Secrets: `gh secret set -f <repo>\.env --repo tigermorning/nk-briefing` 로 3개 등록(10:17 UTC). 저장소는 9/14 밤 사용자 요청으로 **PUBLIC** 전환(전환 전 전체 이력에서 키·웹훅 패턴 0건, 저작권 본문 `exp/bodies.json`은 추적 안 됨 확인). 노션 회고 "저장소" 줄도 링크로 바꿈
     - Actions 수동 dry-run 2회 모두 초록불. **data.go.kr은 러너 IP도 받는다**(1차 `BELOW_BAR`, DEAD 아님). 원장 제외 9건 → 로컬 발행분 재선별 없음
     - **데일리NK재팬은 러너에서 403**: 임시 브랜치(삭제함)에서 UA 5종(과정 UA·크롬·크롬+Accept/Accept-Language/Referer·Feedly·없음) × URL 4종(`/feed`·`/feed/`·`?feed=rss2`·기사 페이지) 20회 전부 403 + Cloudflare `Just a moment...`. 로컬은 20회 전부 200. 데이터센터 IP 차단으로 판단, 챌린지 우회는 안 함
     - 조치(`78fe38e`): `NK_SKIP_SOURCES` 환경변수. `daily.yml`만 `DailyNK-JP`, 로컬은 켜짐. 끈 소스는 `OFF` 로그 + metrics `off`, DEAD/SILENT로 안 셈, "전부 DEAD"는 켜진 소스 기준, 이름 오타는 시작 시 `ValueError`. `test_graph_fake.py` 12번. 별도 리뷰어 지적 없음
@@ -141,6 +141,8 @@
     - 구성: 1. 개요 / 2. 수행 내용 및 결과(6~9강 실험, 10~11강) / 3. 단계별 개선 방안 표 / 4. 시사점. 원고 md를 클립보드로 붙여 넣으면 노션이 제목·목록·표로 변환한다
     - **게시본 오류 1건(미수정)**: 표 수집 행 "RFA 11회 실행 중 기여 0건"은 틀렸다. 실제는 11회 중 1회 — Actions 1회차 dry-run에서 RFA 기사 1건(본문 1537자)이 뽑혔다. 로컬 `metrics.jsonl`만 세서 생긴 오류(아래 gotcha). 노션 수정은 사용자 확인 뒤
     - 5단계 개선 아이디어는 아래 **남은 일 2~6**으로 옮겼다. 전부 아이디어 단계, 구현 안 함
+    - **개정 원고 `RETRO-notion.md`** (같은 날 밤): 사용자가 다른 수강생 회고(정충원·김만정·조경호)에 비해 빈약하다고 해 개조식으로 다시 씀. 조경호형 한눈에 보기 + 단계별(한 것·실험 숫자·배운 점) + 버그 + 실행 결과 로그 + 개선 표(지표 열 추가) + 종합의견 + 다음 할 일. RFA 오류는 "12회 중 2회"(로컬 19:57 dry-run 1 + Actions 1회차 1)로 고침. 22번(카드 3장·기준 번호 관문) 반영. 사용자 확인 뒤 **노션 본문 교체 완료**(제목 유지, 표 4·코드 1·할 일 5 블록으로 변환 확인). 위 "게시본 오류 1건"은 이걸로 해소
+    - 노션 조작 요령: 본문 전체 선택은 Ctrl+A가 제목으로 새고, 빠른 드래그는 블록 3개만 잡힌다. 블록 없이 Delete를 누르면 **제목 글자가 지워진다**(한 번 겪고 복구). 빈 본문에 원고 붙여 넣기는 제목 끝 End → Enter → Ctrl+V
 22. **디스코드 피드백 반영 — 카드 수·스케치 기사** (2026-09-14 저녁)
     - 사용자 지적: 실발행 3번째 카드가 DailyNK "더위 꺾이자 공원으로 몰려드는 北 주민들"(날씨·여가 스케치), 6장은 많다
     - 카드 수 규칙(사용자 결정): **하루 3장.** 심층이나 1차가 있으면 3장 중 1장, 둘 다 있는 날만 4장. `BRIEF_SIZE, BRIEF_MAX = 3, 4`, 속보는 `TARGET = 4`건 취재(예비), `fit_brief()`가 검수 뒤 선별 순위(`rank`)대로 자름 — 심층·1차가 초안·검수에서 떨어지면 그 칸은 속보가 받는다. 안 실린 예비는 `[예비]` 로그, 원장 밖. metrics에 `shipped`·`spare` 추가(`published`는 여전히 검수 통과 수)
