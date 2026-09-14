@@ -4,6 +4,7 @@ from datetime import datetime, timezone, timedelta
 # metrics live next to this script, not next to whatever directory you happen
 # to run from -- a cwd-relative path silently starts a second, empty store
 STORE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "store")
+SEEN = os.path.join(STORE, "last_seen.json")
 METRICS = os.path.join(STORE, "metrics.jsonl")
 
 UA = {"User-Agent": "Mozilla/5.0 (newsletter-agent-course)"}
@@ -16,8 +17,20 @@ SOURCES = [
     ("RFA-KO", "https://www.rfa.org/korean/rss2.xml", False),
 ]
 
+def load_seen():
+    try:
+        with open(SEEN, encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception:
+        return {}
+
 def collect(state):
     hours = state.get("hours", 24)
+    # A short feed can drop articles between two runs and leave no trace: the
+    # count just looks like a slow day. If the oldest entry we can still see is
+    # NEWER than the newest we saw last time, everything in between fell out.
+    seen_before = load_seen()
+    seen_now, gaps = {}, []
     cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
     items, seen, dead = [], set(), []
     # skipped items are NOT logged one by one -- that would bury the real signal.
@@ -40,6 +53,16 @@ def collect(state):
             # reproducing the failure to find out what it even was
             dead.append({"source": name, "reason": f"{type(exc).__name__}: {exc}"})
             continue
+
+        times = sorted(datetime(*t[:6], tzinfo=timezone.utc) for t in
+                       (e.get("published_parsed") or e.get("updated_parsed")
+                        for e in f.entries) if t)
+        if times:
+            seen_now[name] = times[-1].isoformat()
+            prev = seen_before.get(name)
+            if prev and times[0] > datetime.fromisoformat(prev):
+                gaps.append({"source": name, "last_seen": prev,
+                             "oldest_now": times[0].isoformat()})
 
         for e in f.entries:
             t = e.get("published_parsed")
@@ -64,8 +87,8 @@ def collect(state):
     silent = [n for n, _u, expect in SOURCES
               if expect and n not in dead_names and skips[n]["kept"] == 0]
 
-    return {"items": items, "dead": dead, "silent": silent,
-            "skips": skips, "hours": hours}
+    return {"items": items, "dead": dead, "silent": silent, "gaps": gaps,
+            "skips": skips, "seen_now": seen_now, "hours": hours}
 
 if __name__ == "__main__":
     import sys
@@ -83,7 +106,10 @@ if __name__ == "__main__":
         print(f"!! DEAD   {d['source']}: {d['reason']}")
     for n in res["silent"]:
         print(f"!! SILENT {n}: responded OK but contributed 0 in a {res['hours']}h window")
-    if not res["dead"] and not res["silent"]:
+    for g in res["gaps"]:
+        print(f"!! GAP    {g['source']}: feed now starts at {g['oldest_now']}, "
+              f"past our last sighting {g['last_seen']} -- articles fell out unseen")
+    if not res["dead"] and not res["silent"] and not res["gaps"]:
         print("all sources accounted for")
 
     os.makedirs(STORE, exist_ok=True)
@@ -92,6 +118,12 @@ if __name__ == "__main__":
                              "hours": res["hours"], "collect": by_src,
                              "total": len(res["items"]),
                              "dead": res["dead"], "silent": res["silent"],
+                             "gaps": res["gaps"],
                              "skips": res["skips"],
                              "elapsed_s": round(time.time() - t0, 1)},
                             ensure_ascii=False) + "\n")
+    if res["seen_now"]:
+        merged = load_seen()
+        merged.update(res["seen_now"])
+        with open(SEEN, "w", encoding="utf-8") as fh:
+            json.dump(merged, fh, ensure_ascii=False, indent=1)
