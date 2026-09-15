@@ -80,7 +80,8 @@ def preflight(env=os.environ, dry=True):
         errors.append("OPENAI_API_KEY가 없습니다. .env.example을 .env로 복사해 키를 넣거나 NK_ENV_FILE로 경로를 지정하세요.")
     if not dry and not env.get("DISCORD_WEBHOOK_URL"):
         errors.append("DRY_RUN=0인데 DISCORD_WEBHOOK_URL이 없습니다.")
-    if not env.get("DATA_GO_KR_KEY"):
+    # only a briefing with a tier1 slot needs the MOU key
+    if graph.CFG["일차칸"] and not env.get("DATA_GO_KR_KEY"):
         warnings.append("DATA_GO_KR_KEY가 없어 통일부 1차 칸은 DEAD로 기록됩니다.")
     return errors, warnings
 

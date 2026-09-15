@@ -481,6 +481,32 @@
     - **확인**: `test_graph_fake.py`·`test_grounding.py`·`test_schedule.py`·`test_config.py` 통과. 실제 피드로 `collect` 1회: 38North 8건 모두 `feed_body_problem` 없음·꼬리 제거됨, 다른 소스는 `feed_body` 없음
     - **아직 못 본 것**: 러너에서 38North가 실제로 심층에 뽑혀 `body_via: feed`가 찍힌 실행 (남은 일 11)
 
+28. **이메일판 P1 — 브리핑 설정을 yaml로** (2026-09-15, 브랜치 `p1-config`)
+    - **목적**: `docs/PLAN-email-edition.md` P1. 코드에 박힌 북한 전용 설정을 yaml로 옮겨 다른 주제 브리핑이 같은 코드를 쓰게 함
+    - **먼저 고정**: 리팩터 전 main(`3aee646`)에서 `test_golden_nk.py`로 `golden/nk_p1.json` 작성 후 커밋(`046a270`)
+      - 담은 것: 모든 프롬프트·소스 설정, 가짜 RSS 수집 결과, 가짜 실행 3종(평일·전 피드 사망·빈 날)의 모델 호출 전부·디스코드 payload·로그·metrics 행·원장
+      - 날짜는 치환, 병렬 워커 순서는 정렬로 비교
+      - 발화 확인: `SYS_CHECK`에 공백 하나, 키워드 목록 하나를 바꾸면 실패
+    - **yaml로 옮긴 것** (`audience.yaml`)
+      - `소스`: 이름·주소·칸(속보/심층)·매일기대·언어·키워드·피드본문. 순서 = 수집 순서 = 선별 목록 순서
+      - `기자역할` → 초안 프롬프트 첫 문장, `주장_주의` → 검수 목록 한 줄, `제목` → 디스코드 이름·카드 제목, `1차칸: 통일부`
+      - 소스별 이유 주석도 `collect_nk.py`에서 yaml로 옮김
+    - **코드**
+      - `briefing_cfg.py`: 모양 검사. 소스·토픽 이름 중복, 속보 소스 0개도 시작 시점에 멈춤
+      - `graph.configure(cfg)`: `CFG`·`TOPICS`·`CRITERIA`·`SYS_DRAFT`·`SYS_CHECK`·`WEEKLY`·`SOURCE_LANG`·`SOURCES`를 설정하고 `collect_nk.configure(cfg)` 호출. `collect_nk`·`graph`가 import될 때 각각 `audience.yaml`을 읽음(그래서 `collect_nk`만 쓰는 스크립트도 yaml이 틀리면 멈춤)
+      - 모듈 전역을 유지한 이유: 한 프로세스에 브리핑 하나이고, 가짜 테스트가 전역을 바꿔 끼우는 구조라서
+      - `1차칸`이 없으면 통일부를 부르지 않고 1차 상태 `NOT_CONFIGURED` (죽은 1차 `DEAD`와 구분)
+      - `run.preflight`: `1차칸`이 있을 때만 `DATA_GO_KR_KEY` 경고
+      - `1차칸`은 반드시 적는 키(없으면 `null`): 줄을 지워서 통일부 칸이 경고 없이 꺼지는 일을 막음
+      - 모양 검사 추가: 제목 80자·`discord` 금지(디스코드가 발행 때 거절), 소스 이름 쉼표·`통일부` 금지, 주소 중복, 따옴표 친 불리언
+    - **리뷰 반영**: 별도 리뷰어(COMMENT, CRITICAL·HIGH 0). MEDIUM 1(1차칸 조용히 꺼짐)·LOW(제목·소스 검사, 21번 뒷정리, 문서) 반영
+      - 안 한 것: `collect_nk`가 import 때 yaml을 읽는 구조(MEDIUM 2)는 P2 `--briefing`에서 설정 읽는 곳을 하나로 모을 때 정리
+    - **확인**
+      - `test_golden_nk.py` 통과 = 북한 브리핑 출력 불변
+      - `test_graph_fake.py` 21개(21번: 다른 yaml의 소스·키워드·피드본문·프롬프트·제목이 쓰이고 1차는 안 불리고, 끝나면 북한으로 복귀) · `test_grounding.py` · `test_schedule.py` · `test_config.py`(새 칸 오타 13경우 추가) 통과
+      - 실제 피드·모델 dry-run 1회(metrics는 임시 파일로): 수집 17건·심층 2건 → 선별 5 → 검수 5 → 발행 3, `body_via {"page": 5}`, 저장소 `store/` 변경 없음
+    - **P2로 미룬 것**: 브리핑별 저장 경로(원장·last_seen·metrics), `run.py --briefing`, 디스코드 없이 카드 묶음만 남기는 끝
+
 ## 남은 일
 
 1. **11강 남은 것 + 9/16 아침 확인**
@@ -542,10 +568,12 @@
 |---|---|
 | `graph.py` | 브리핑 그래프 전체 + 실행 기록. `run()` |
 | `grounding.py` | 검수용 숫자 원문 대조 (`ungrounded`·`dropped_bounds`·`dropped_hedges`·`problems_fields`) |
-| `audience.yaml` | 독자·기준·버릴 것·토픽 데스크지침 |
+| `audience.yaml` | 북한 브리핑 설정 전부: 독자·기준·버릴 것·토픽 데스크지침·소스·기자역할·주장_주의·제목·1차칸 (28번) |
+| `briefing_cfg.py` | 브리핑 yaml 모양 검사 (pydantic, extra=forbid). `load(path)` |
+| `test_golden_nk.py` · `golden/nk_p1.json` | 리팩터 전 북한 브리핑 고정 출력과 글자 단위 비교 (28번) |
 | `run.py` | 1회 실행 (Actions 진입점). 예약 실행용 `NK_SEND_AT`·`NK_ONCE_A_DAY` |
 | `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
-| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과·연결 재시도·페이지 403 피드 본문 대체, 20개 시나리오) |
+| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과·연결 재시도·페이지 403 피드 본문 대체·다른 브리핑 yaml, 21개 시나리오) |
 | `test_grounding.py` | 숫자 원문 대조 97건 (리뷰어가 쓴 문장 포함) |
 | `test_schedule.py` | 07:30 대기 계산·하루 한 번 발송 판정·실행 전 키 점검 |
 | `.env.example` | 로컬 키 파일 틀 |
@@ -632,7 +660,7 @@
   - 방법: 임시 브랜치 + `on: push` 워크플로, 끝나면 브랜치 삭제
   - 로컬 200은 러너 200을 뜻하지 않는다
   - Cloudflare 챌린지(`Just a moment...`)는 우회하지 말고 `NK_SKIP_SOURCES`로 끌 것
-  - 기사 페이지만 막히고 피드가 200이면서 전문을 담고 있으면 `collect_nk.FULL_TEXT_FEEDS`에 넣어 피드 본문으로 대체 (38North, 27번)
+  - 기사 페이지만 막히고 피드가 200이면서 전문을 담고 있으면 yaml 소스에 `피드본문: true`를 켜 피드 본문으로 대체 (38North, 27·28번)
 - **원장(`store/published.json`)을 만든 로컬 실발행 뒤에는 원장 커밋 → push 순서.** push가 먼저면 Actions가 같은 카드를 다시 보낸다
 - **PowerShell 5.1 제약**
   - `gh ... -q '...("문자열")...'` 은 따옴표가 벗겨져 jq가 깨진다. `--json` 결과를 `ConvertFrom-Json`으로 받을 것

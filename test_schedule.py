@@ -99,5 +99,10 @@ assert len(errs) == 1 and "OPENAI_API_KEY" in errs[0] and len(warns) == 1, (errs
 errs, _ = run.preflight({"OPENAI_API_KEY": "x", "DATA_GO_KR_KEY": "y"}, dry=False)
 assert len(errs) == 1 and "DISCORD_WEBHOOK_URL" in errs[0], errs
 assert run.preflight({"OPENAI_API_KEY": "x", "DATA_GO_KR_KEY": "y", "DISCORD_WEBHOOK_URL": "z"}, dry=False) == ([], [])
+# a briefing without 1차칸 does not need the MOU key and must not warn about it
+nk_cfg = run.graph.CFG
+run.graph.CFG = {**nk_cfg, "일차칸": None}
+assert run.preflight({"OPENAI_API_KEY": "x"}, dry=True) == ([], []), "MOU key warning without a tier1 slot"
+run.graph.CFG = nk_cfg
 print("실행 전 점검 OK")
 print("ALL OK")

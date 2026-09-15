@@ -33,6 +33,9 @@ No key, no network. Checks the shape, not the judgement:
       error status is not retried
   20. a 38North article page answering a Cloudflare 403: the full-text feed
       body stands in, the log and metrics say so, a teaser feed body is refused
+  21. another briefing yaml: its sources, keywords, feed body, prompts and
+      title are used, tier1 is never fetched without 1차칸, and North Korea
+      comes back after
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -479,5 +482,78 @@ assert any("NOFEED 38North" in l for l in out["log"]), "excerpt-only full-text f
 assert ROWS[-1]["body_via"] == {"refused": 1}, ROWS[-1]["body_via"]
 print("403 -> feed body used and logged, metrics body_via {'feed': 1}; short page and connection error -> feed;"
       " 404 -> no feed; teaser and empty feed body refused and counted")
+
+print("\n== 21. another briefing yaml: its sources, prompts and title, no tier1 ==")
+import tempfile, pathlib, briefing_cfg
+OTHER = """제목: "시험 브리핑"
+기자역할: "시험 국제 브리핑 기자"
+주장_주의: "원문이 정부 발표로 전하는 내용을 사실처럼 단정"
+1차칸: null
+독자: {누구: "시험 독자", 이미_아는_것: "기본 구도"}
+중요도_기준: ["실제로 일어난 일인가"]
+버릴_것: []
+토픽: [{이름: "외교", 데스크지침: "주체를 밝힐 것"}]
+소스:
+  - {이름: "WireA", 주소: "https://a.example/feed", 칸: 속보, 매일기대: true}
+  - {이름: "WeeklyB", 주소: "https://b.example/feed", 칸: 심층, 매일기대: false, 언어: "영어", 키워드: ["China"], 피드본문: true}
+"""
+with tempfile.TemporaryDirectory() as d:
+    path = pathlib.Path(d) / "시험.yaml"
+    path.write_text(OTHER, encoding="utf-8")
+    other = graph.load_cfg(path)
+nk_sources = graph.SOURCES
+saved = {k: getattr(graph, k) for k in ("fetch_tier1", "extract_body", "collect_feeds")}
+saved_post, saved_seen = graph.requests.post, collect_nk.load_seen
+graph.configure(other)
+try:
+    assert graph.SOURCES == collect_nk.SOURCES == [("WireA", "https://a.example/feed", True),
+                                                   ("WeeklyB", "https://b.example/feed", False)], graph.SOURCES
+    assert graph.WEEKLY == {"WeeklyB"} and graph.SOURCE_LANG == {"WeeklyB": "영어"}
+    assert collect_nk.NK_KEYWORDS == {"WeeklyB": ["China"]} and collect_nk.FULL_TEXT_FEEDS == {"WeeklyB"}
+    assert graph.SYS_DRAFT.startswith("당신은 시험 국제 브리핑 기자입니다. 독자는 시험 독자입니다.")
+    assert "- 원문이 정부 발표로 전하는 내용을 사실처럼 단정\n" in graph.SYS_CHECK
+    assert "북한" not in graph.SYS_DRAFT + graph.SYS_CHECK + graph.CRITERIA, "North Korea left in another briefing's prompts"
+    assert "- 외교: 주체를 밝힐 것" in graph.SYS_DRAFT
+
+    # collect reads the new sources: keyword filter and feed body follow the yaml
+    B = RSS.replace(b"<title>North Korea X</title>", b"<title>China and US talks</title>")
+    OFF = RSS.replace(b"<title>North Korea X</title>", b"<title>Local weather</title>").replace(
+        b"38north.org/x/</link>", b"b.example/off/</link>").replace(b"Commercial satellite imagery shows ...", b"weather")
+    A = RSS.replace(b"38north.org/x/</link>", b"a.example/1/</link>")
+    feeds = {"https://a.example/feed": A, "https://b.example/feed": B.replace(b"</channel>", OFF[OFF.index(b"<item>"):OFF.index(b"</channel>")] + b"</channel>")}
+    collect_nk.requests.get = lambda url, **kw: NS(status_code=200, content=feeds[url])
+    collect_nk.load_seen = lambda: {}
+    got = collect_nk.collect({"hours": 24})
+    by = {i["source"]: i for i in got["items"]}
+    assert set(by) == {"WireA", "WeeklyB"} and got["skips"]["WeeklyB"]["offtopic"] == 1, got["skips"]
+    assert by["WeeklyB"]["feed_body"] and "feed_body" not in by["WireA"]
+
+    # the run: no tier1 call at all, the deep slot from 심층, the title from the yaml
+    def no_tier1(led):
+        raise AssertionError("tier1 fetched for a briefing without 1차칸")
+    os.environ["DRY_RUN"] = "0"
+    os.environ["DISCORD_WEBHOOK_URL"] = "https://example.invalid/hook"
+    posted = []
+    graph.requests.post = lambda url, json, timeout: posted.append(json) or NS(status_code=204, text="")
+    graph.collect_feeds = lambda state: {"items": [item("WireA", i, 2 + i) for i in range(3)] + [item("WeeklyB", 0, 30)],
+                                         "dead": [], "silent": [], "gaps": [], "skips": {}, "seen_now": {},
+                                         "hours": state["hours"]}
+    graph.fetch_tier1 = no_tier1
+    graph.extract_body = lambda it: "나" * 900
+    out = graph.build().compile().invoke(graph.INIT)
+    show(out)
+    assert out["tier1"] == {"status": "NOT_CONFIGURED"} and any("1차 NOT_CONFIGURED" in l for l in out["log"])
+    assert any(a["slot"] == "deep" and a["source"] == "WeeklyB" for a in out["picked"]), out["picked"]
+    assert posted and posted[-1]["username"] == "시험 브리핑" and posted[-1]["embeds"][0]["title"].endswith("· 시험 브리핑")
+finally:
+    # everything this scenario swapped, so a scenario after it starts clean
+    graph.configure(graph.load_cfg())
+    for k, v in saved.items():
+        setattr(graph, k, v)
+    graph.requests.post, collect_nk.load_seen, collect_nk.requests.get = saved_post, saved_seen, real_get
+    os.environ["DRY_RUN"] = "1"
+    os.environ.pop("DISCORD_WEBHOOK_URL", None)
+assert graph.SOURCES == nk_sources and "북한 뉴스 브리핑 기자" in graph.SYS_DRAFT, "North Korea not restored"
+print("another yaml: its sources, keywords, feed body, prompts and title; tier1 never called; North Korea restored")
 
 print("\nALL OK")

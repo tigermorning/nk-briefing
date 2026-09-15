@@ -3,6 +3,8 @@ from datetime import datetime, timezone, timedelta
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
+import briefing_cfg
+
 # metrics live next to this script, not next to whatever directory you happen
 # to run from -- a cwd-relative path silently starts a second, empty store
 STORE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "store")
@@ -10,41 +12,24 @@ SEEN = os.path.join(STORE, "last_seen.json")
 METRICS = os.path.join(STORE, "metrics.jsonl")
 
 UA = {"User-Agent": "Mozilla/5.0 (newsletter-agent-course)"}
-# expect_daily: sources that should produce something in a normal 24h window.
-# 38North publishes weekly, so a 0 from it is news; a 0 from Yonhap is alarm.
-SOURCES = [
-    ("Yonhap-NK", "https://www.yna.co.kr/rss/northkorea.xml", True),
-    ("DailyNK", "https://www.dailynk.com/feed", True),
-    ("38North", "https://www.38north.org/feed/", False),
-    ("RFA-KO", "https://www.rfa.org/korean/rss2.xml", False),
-    # added 2026-09-14 from probe_sources.py: of 21 foreign candidates these
-    # two brought events the Korean feeds did not carry (DailyNK Japan: 3 of
-    # 4 in 72h) or reporting nobody else does (AsiaPress price surveys).
-    # DailyNK Japan runs ~2 a day, so a 0 day is not an alarm.
-    ("DailyNK-JP", "https://dailynk.jp/feed", False),
-    ("AsiaPress", "https://www.asiapress.org/apn/feed/index.xml", False),
-]
+# Which feeds to read comes from the briefing yaml's 소스 (audience.yaml for
+# North Korea; the why of each source is written next to it there). One
+# process runs one briefing, so these module names are set once at start-up
+# and read at call time by collect, active_sources and graph:
+#   SOURCES          (name, feed url, expect_daily) in collection order.
+#                    expect_daily: a 0 in 24h is an alarm (Yonhap), not news (38North)
+#   NK_KEYWORDS      name -> words; an entry is kept only when its title or
+#                    summary contains one (feeds that are not about the briefing only)
+#   FULL_TEXT_FEEDS  names whose content:encoded is the whole article, kept as
+#                    plain text so report can fall back to it when the page is
+#                    blocked (38North on a runner, 2026-09-15)
+def configure(cfg):
+    global SOURCES, NK_KEYWORDS, FULL_TEXT_FEEDS
+    SOURCES = [(s["이름"], s["주소"], s["매일기대"]) for s in cfg["소스"]]
+    NK_KEYWORDS = {s["이름"]: list(s["키워드"]) for s in cfg["소스"] if s["키워드"]}
+    FULL_TEXT_FEEDS = {s["이름"] for s in cfg["소스"] if s["피드본문"]}
 
-# Feeds that are not North Korea only. An entry is kept only if its title or
-# summary names the North in the feed's language -- AsiaPress also runs
-# Japanese domestic pieces (5 of 16 when measured). /apn/feed/ without
-# index.xml answers 200 with a one-line meta-refresh page and 0 entries.
-NK_KEYWORDS = {
-    "DailyNK-JP": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
-    "AsiaPress": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
-}
-
-
-# Feeds whose content:encoded carries the whole article, kept as plain text so
-# report can fall back to it when the article page cannot be fetched. Measured
-# 2026-09-15: a GitHub runner gets a Cloudflare challenge (403, cf-mitigated:
-# challenge) on every 38North article page but 200 on the feed, and the feed
-# holds the full text (8 of 8 entries, 5,021~21,741 chars of HTML, 0.89~1.35x
-# the page extract as plain text; the summary is a ~90-char excerpt ending in
-# "...", and WordPress appends a "The post ... appeared first on" line to both).
-# Opt a source in only after checking its content is the article and not the
-# excerpt again.
-FULL_TEXT_FEEDS = {"38North"}
+configure(briefing_cfg.load())
 
 _BLOCK = {"p", "div", "br", "hr", "li", "ul", "ol", "dl", "dt", "dd", "pre",
           "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "figure", "figcaption",

@@ -10,10 +10,11 @@
 | 파일 | 하는 일 |
 |---|---|
 | `graph.py` | LangGraph 한 판. 수집 → 선별 → 취재(기사마다 워커) → 검수 → 발행, 끝나면 `store/metrics.jsonl`에 한 줄 |
-| `audience.yaml` | 독자·중요도 기준·버릴 것·토픽별 데스크지침. 편집 방향은 여기만 고친다 |
+| `audience.yaml` | 북한 브리핑의 내용 전부: 독자·중요도 기준·버릴 것·토픽별 데스크지침·소스·기자역할·발행 제목·1차칸. 편집 방향과 소스는 여기만 고친다 |
+| `briefing_cfg.py` | 브리핑 yaml의 모양 검사. 칸이 빠졌거나 오타면 실행 전에 멈춘다 |
 | `run.py` | 한 번 실행. GitHub Actions가 05:43(KST)에 깨워 07:30까지 기다린 뒤 돌린다. 08:13 예비 실행은 그날 이미 보냈으면 건너뛴다 |
 | `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
-| `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠). 전문 피드(`FULL_TEXT_FEEDS`)는 피드 본문도 챙긴다 |
+| `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠). 소스 목록은 yaml에서 읽고, `피드본문: true`인 소스는 피드 본문도 챙긴다 |
 | `grounding.py` | 검수 노드가 쓰는 숫자 원문 대조 (값 없음·한정어 빠짐·추정 표현 빠짐) |
 | `.env.example` | 로컬 키 파일 틀. `.env`로 복사해 채운다 |
 | `requirements.txt` · `requirements-dev.txt` | 버전을 고정한 실행 의존성 · 그래프용 matplotlib |
@@ -68,10 +69,11 @@ python run.py                       # 키가 있으면 끝까지 dry-run (DRY_RU
 **키·네트워크 없이 도는 테스트** (저장소 파일을 바꾸지 않는다)
 
 ```
-python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 20개 시나리오
+python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 21개 시나리오
+python test_golden_nk.py     # 같은 가짜 입력에서 프롬프트·수집·디스코드 payload·로그·원장이 golden/nk_p1.json과 같은지
 python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사
 python test_schedule.py      # 07:30 대기 계산, 하루 한 번 발송 판정, 실행 전 키 점검
-python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
+python test_config.py        # audience.yaml 오타(소스·칸·1차칸 포함)가 시작 시점에 잡히는지
 ```
 
 **파이프라인과 성적표**
@@ -135,7 +137,7 @@ python test_guards.py        # 조용한 실패 가드 3종 발화 재현
     - 취재 로그: `피드 본문 사용 (페이지 HTTPError 403 cf-challenge)` 또는 `원문 페이지`
     - `store/metrics.jsonl` 행: `body_via` (`page`·`feed`·`api`·`refused` 건수)
     - 수집 로그 `NOFEED`: 전문 피드가 발췌문으로 바뀌면 페이지가 막히기 전에 알린다
-  - 새 소스를 `collect_nk.FULL_TEXT_FEEDS`에 넣기 전에 피드 본문이 발췌문이 아닌지 재볼 것
+  - 새 소스에 `피드본문: true`를 켜기 전에 피드 본문이 발췌문이 아닌지 재볼 것
 - **프롬프트 부탁은 코드로 확인한다**
   - 같은 사건 거르기는 모델이 붙인 라벨만 믿지 않는다
   - 뽑힌 짧은 목록을 한 번 더 나란히 놓고 묶게 한 뒤 예비 후보로 채운다

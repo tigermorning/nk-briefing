@@ -1,6 +1,6 @@
 # 계획 — 이메일판 (북한 + 관심 주제 묶음)
 
-- **상태**: 초안 (2026-09-15). 확인 전 구현 착수 안 함
+- **상태**: P0·P1 끝 (2026-09-15). 다음은 P2
 - **한 줄 요약**: 디스코드는 지금 그대로 북한만. 같은 날 북한 카드 + 미국 경제·중국 경제·중미관계·국제정세 카드 + 영미권·중국 보도 비교를 메일 한 통으로 받는다
 
 ## 1. 목표와 범위
@@ -73,10 +73,10 @@
 
 ### 4.2 코드 구조
 
-- **`graph.py`**: 전역 `CFG`를 없애고 `build(cfg)`로 받음
+- **`graph.py`**: `graph.configure(cfg)`가 브리핑 하나로 모듈 전역을 설정 (P1에서 `build(cfg)` 대신 이 방식으로 함)
   - `SOURCES`·`WEEKLY`·`SOURCE_LANG`·`NK_KEYWORDS`는 cfg의 `소스`에서 만듦
   - `SYS_DRAFT`·`SYS_CHECK`·`CRITERIA`는 cfg로 조립
-  - 1차 칸은 `1차: 통일부`가 있는 브리핑만
+  - 1차 칸은 `1차칸: 통일부`가 있는 브리핑만
 - **그래프 끝을 둘로 나눔**
   - `verify` 뒤 `fit_brief`까지 = 공통 → **카드 묶음** 산출
   - 북한: 지금 `publish`(디스코드) 그대로 이어 붙임
@@ -206,11 +206,16 @@ graph TD;
 
 ### P1. 그래프를 설정 주입형으로 (북한 동작 불변)
 
+- **상태**: 끝 (2026-09-15, 브랜치 `p1-config`). HANDOFF 완료 28번
 - **할 일**: 4.2의 리팩터링. 북한 설정은 지금 값을 그대로 옮김
+- **실제로 한 방식**: `build(cfg)` 인자 대신 `graph.configure(cfg)`로 모듈 전역을 설정
+  - 이유: 한 프로세스에 브리핑 하나, 기존 가짜 테스트가 전역을 바꿔 끼우는 구조
+- **P2로 넘긴 것**: 브리핑별 저장 경로, `run.py --briefing`, 디스코드 없는 끝
 - **완료 기준**
-  - `test_graph_fake.py` 19개 · `test_grounding.py` · `test_schedule.py` · `test_config.py` 전부 통과
+  - `test_graph_fake.py` 전체(당시 19개, P1 끝에 21개) · `test_grounding.py` · `test_schedule.py` · `test_config.py` 전부 통과
   - 같은 가짜 입력에서 리팩터 전후 디스코드 payload가 글자 단위로 같음 (비교 테스트 신규)
   - `python run.py` 인자 없이 = 지금과 같은 로그 모양
+- **결과**: 위 셋 모두 충족. golden 비교는 `test_golden_nk.py`, 실제 dry-run 1회 정상
 
 ### P2. 새 주제 1개 끝까지 (dry-run)
 

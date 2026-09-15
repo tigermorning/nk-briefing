@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""North Korea briefing as one LangGraph run.
+"""One briefing as one LangGraph run. What it is about -- sources, rules,
+prompts, title, tier1 -- comes from its yaml (briefing_cfg.py); audience.yaml
+is the North Korea briefing, the one this module loads at import.
 
   collect -> select -> report (one worker per article) -> verify -> publish
 
@@ -19,13 +21,14 @@ import json, math, operator, os, pathlib, re, sys, time
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, TypedDict
 
-import requests, trafilatura, yaml
+import requests, trafilatura
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
 from pydantic import BaseModel, Field
 
+import briefing_cfg, collect_nk
 from collect_nk import (collect as collect_feeds, get_once_more, html_text, link_key, load_seen,
-                        SOURCES, STORE, METRICS, SEEN, UA)
+                        STORE, METRICS, SEEN, UA)
 from min_publish import load_ledger, mark_published, MIN_ITEMS, LADDER
 import grounding
 
@@ -43,7 +46,6 @@ BRIEF_SIZE, BRIEF_MAX = 3, 4
 TARGET = BRIEF_SIZE + 1              # breaking drafts: a spare for a draft or check that drops out
 MAX_PER_SOURCE = 3                   # Yonhap alone fills the feed 9:1 otherwise
 BODY_MIN = 600                       # G1
-WEEKLY = {"38North", "AsiaPress"}    # deep slot sources
 DEEP_WINDOW_H = 168
 TIER1_LOOKBACK_D = 4                 # MOU publishes weekdays with a 1 business day lag
 
@@ -64,45 +66,11 @@ def load_env():
 
 
 # ---------------------------------------------------------------- config
-from pydantic import ConfigDict, ValidationError, constr
-
-Text = constr(strip_whitespace=True, min_length=1)
-
-class ReaderCfg(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    누구: Text
-    이미_아는_것: Text
-
-class TopicCfg(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    이름: Text
-    데스크지침: Text
-    색: constr(pattern=r"^#[0-9A-Fa-f]{6}$") = "#5F7476"
-
-class AudienceCfg(BaseModel):
-    # extra="forbid": a misspelled key ("버릴것") would otherwise be ignored and
-    # the run would go on with no discard rules at all
-    model_config = ConfigDict(extra="forbid")
-    독자: ReaderCfg
-    중요도_기준: list[Text] = Field(min_length=1)
-    버릴_것: list[Text]
-    토픽: list[TopicCfg] = Field(min_length=1)
-
-def load_cfg(path=HERE / "audience.yaml"):
-    # check the shape at start-up: a typo should stop the run here, not at
+def load_cfg(path=briefing_cfg.DEFAULT):
+    # the shape is checked at start-up: a typo stops the run here, not at
     # 07:30 halfway through the graph after the model has already been paid
-    try:
-        cfg = AudienceCfg.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")) or {})
-    except ValidationError as exc:
-        lines = [f"{'.'.join(map(str, e['loc']))}: {e['msg']}" for e in exc.errors()]
-        raise SystemExit("audience.yaml 오류\n  " + "\n  ".join(lines)) from None
-    names = [t.이름 for t in cfg.토픽]
-    if len(names) != len(set(names)):
-        raise SystemExit("audience.yaml 오류\n  토픽: 이름이 겹침")
-    return cfg.model_dump()
+    return briefing_cfg.load(path)
 
-CFG = load_cfg()
-TOPICS = {t["이름"]: t for t in CFG["토픽"]}
 DEFAULT_COLOR = 0x5F7476
 
 def build_criteria(cfg):
@@ -114,29 +82,49 @@ def build_criteria(cfg):
     out += [f"- {x}" for x in cfg["버릴_것"]]
     return "\n".join(out)
 
-CRITERIA = build_criteria(CFG)
-SYS_DRAFT = (f"당신은 북한 뉴스 브리핑 기자입니다. 독자는 {CFG['독자']['누구']}입니다.\n"
-             "아래 기사 본문을 읽고 헤드라인·요약·왜 중요한지·토픽을 쓰세요.\n"
-             "원문에 없는 사실은 쓰지 마세요. 요약과 왜 중요한지는 '~합니다'체로 끝내세요. "
-             "숫자·금액·배율·날짜는 원문에 있는 값만 쓰고, 직접 계산하거나 다른 단위로 바꾸지 마세요. "
-             "'최대·약·이상·추정·가능성·~로 보인다·~라고 주장했다' 같은 한정어와 출처 표현은 "
-             "헤드라인에서도 빼거나 더 강한 말로 바꾸지 마세요. "
-             "반드시 한국어로 쓰고, "
-             "'주목된다·기대를 모은다' 같은 기자체 표현은 쓰지 마세요.\n\n"
-             "토픽은 아래 이름 중 하나를 그대로 고르고, 그 토픽의 지침을 따르세요.\n"
-             + "\n".join(f"- {n}: {t['데스크지침']}" for n, t in TOPICS.items()))
+def draft_prompt(cfg, topics):
+    return (f"당신은 {cfg['기자역할']}입니다. 독자는 {cfg['독자']['누구']}입니다.\n"
+            "아래 기사 본문을 읽고 헤드라인·요약·왜 중요한지·토픽을 쓰세요.\n"
+            "원문에 없는 사실은 쓰지 마세요. 요약과 왜 중요한지는 '~합니다'체로 끝내세요. "
+            "숫자·금액·배율·날짜는 원문에 있는 값만 쓰고, 직접 계산하거나 다른 단위로 바꾸지 마세요. "
+            "'최대·약·이상·추정·가능성·~로 보인다·~라고 주장했다' 같은 한정어와 출처 표현은 "
+            "헤드라인에서도 빼거나 더 강한 말로 바꾸지 마세요. "
+            "반드시 한국어로 쓰고, "
+            "'주목된다·기대를 모은다' 같은 기자체 표현은 쓰지 마세요.\n\n"
+            "토픽은 아래 이름 중 하나를 그대로 고르고, 그 토픽의 지침을 따르세요.\n"
+            + "\n".join(f"- {n}: {t['데스크지침']}" for n, t in topics.items()))
 # measured 2026-09-15 (exp/step12_exaggeration.log): told only that translation and
 # unit conversion are fine, the judge passed 100억 -> 1,000억 달러 6 of 6. The code
 # check in grounding.py now covers values; this list names what only a reader of
 # the whole sentence can see.
-SYS_CHECK = ("헤드라인·요약·왜 중요한지가 원문에서 뒷받침되는지 판정하세요.\n"
-             "번역과 표기 차이(1만3천 = 13,000)나 원문에 함께 적힌 환산(100억달러 = 약 13조원)은 문제가 아닙니다.\n"
-             "다음은 모두 문제입니다.\n"
-             "- 숫자·금액·배율·비율이 원문과 다른 값. 자릿수 하나만 달라도 문제입니다(예: 100억을 1,000억으로)\n"
-             "- 원문의 숫자를 다른 대상에 붙임(예: 쌀 6.5배와 옥수수 5.5배를 서로 바꿈)\n"
-             "- '최대·약·추정·가능성·~로 보인다' 같은 한정어를 빼거나 단정으로 바꿈\n"
-             "- 원문이 북한 매체의 주장으로 전하는 내용을 사실처럼 단정\n"
-             "- 왜 중요한지 문장에 원문에 없는 새 사실을 넣음. 원문 사실에 근거한 해석은 괜찮습니다")
+def check_prompt(cfg):
+    return ("헤드라인·요약·왜 중요한지가 원문에서 뒷받침되는지 판정하세요.\n"
+            "번역과 표기 차이(1만3천 = 13,000)나 원문에 함께 적힌 환산(100억달러 = 약 13조원)은 문제가 아닙니다.\n"
+            "다음은 모두 문제입니다.\n"
+            "- 숫자·금액·배율·비율이 원문과 다른 값. 자릿수 하나만 달라도 문제입니다(예: 100억을 1,000억으로)\n"
+            "- 원문의 숫자를 다른 대상에 붙임(예: 쌀 6.5배와 옥수수 5.5배를 서로 바꿈)\n"
+            "- '최대·약·추정·가능성·~로 보인다' 같은 한정어를 빼거나 단정으로 바꿈\n"
+            f"- {cfg['주장_주의']}\n"
+            "- 왜 중요한지 문장에 원문에 없는 새 사실을 넣음. 원문 사실에 근거한 해석은 괜찮습니다")
+
+def configure(cfg):
+    """Point the module at one briefing. One process runs one briefing: the
+    nodes read these names at call time, and the fake tests swap them the
+    same way, so the names stay module globals rather than graph arguments.
+      WEEKLY       sources in the deep slot (칸: 심층)
+      SOURCE_LANG  the language named to the model above a foreign body"""
+    global CFG, TOPICS, CRITERIA, SYS_DRAFT, SYS_CHECK, WEEKLY, SOURCE_LANG, SOURCES
+    collect_nk.configure(cfg)
+    CFG = cfg
+    TOPICS = {t["이름"]: t for t in cfg["토픽"]}
+    CRITERIA = build_criteria(cfg)
+    SYS_DRAFT = draft_prompt(cfg, TOPICS)
+    SYS_CHECK = check_prompt(cfg)
+    WEEKLY = {src["이름"] for src in cfg["소스"] if src["칸"] == "심층"}
+    SOURCE_LANG = {src["이름"]: src["언어"] for src in cfg["소스"] if src["언어"]}
+    SOURCES = collect_nk.SOURCES
+
+configure(load_cfg())
 
 
 # ---------------------------------------------------------------- model
@@ -250,7 +238,9 @@ def collect(s: dict) -> dict:
         if len(breaking) >= MIN_ITEMS:
             break
     deep = [dict(i, slot="deep") for i in fresh if i["source"] in WEEKLY]
-    t1 = fetch_tier1(led)
+    # a briefing without an official daily source has no tier1 slot at all;
+    # NOT_CONFIGURED keeps that apart from a tier1 source that went DEAD
+    t1 = fetch_tier1(led) if CFG["일차칸"] else {"status": "NOT_CONFIGURED"}
     # collect_feeds judged "silent" over the 168h fetch, where a frozen daily
     # feed keeps its old items for a week. Judge daily sources over 24h here,
     # on everything fetched (ledger included: a published item is still a sign of life).
@@ -509,7 +499,6 @@ def get_body(it, floor):
 class BodyUnavailable(Exception):
     pass
 
-SOURCE_LANG = {"DailyNK-JP": "일본어", "AsiaPress": "일본어", "38North": "영어"}
 FIELDS = ("headline", "summary", "why")
 
 def korean_ok(d):
@@ -663,9 +652,9 @@ def build_embeds(run_id, lead, arts, failure=""):
     if not arts:
         # a broken pipeline must not read as a quiet news day to the reader
         text = f"⚠️ {failure} 오늘 브리핑을 만들지 못했습니다." if failure else "오늘은 실을 기사가 없습니다."
-        return [{"title": f"🗞️ {run_id} · 북한 브리핑", "color": DEFAULT_COLOR,
+        return [{"title": f"🗞️ {run_id} · {CFG['제목']}", "color": DEFAULT_COLOR,
                  "description": text}], 0
-    embeds = [{"title": f"🗞️ {run_id} · 북한 브리핑", "description": lead, "color": DEFAULT_COLOR}]
+    embeds = [{"title": f"🗞️ {run_id} · {CFG['제목']}", "description": lead, "color": DEFAULT_COLOR}]
     for i, a in enumerate(arts, 1):
         desc = a["summary"] + (f"\n\n💡 **{a['why']}**" if a.get("why") else "")
         card = {"title": f"{i}. [{SLOT_LABEL[a['slot']]}] {a['headline']}"[:TITLE_MAX],
@@ -737,7 +726,7 @@ def publish(s: dict) -> dict:
         # every feed dead but tier1 open: the card still goes out, and says so
         lead += f"\n⚠️ {failure} 실을 수 있는 칸만 실었습니다."
     embeds, dropped = build_embeds(today, lead, arts, failure)
-    payload = {"username": "북한 브리핑", "embeds": embeds}
+    payload = {"username": CFG["제목"], "embeds": embeds}
     sent = send(payload, os.environ.get("DISCORD_WEBHOOK_URL"), dry_run=is_dry())
     # the ledger follows the send, not the run: dropped cards and dry runs stay eligible
     shipped = ver[:len(embeds) - 1] if arts else []
