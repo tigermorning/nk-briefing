@@ -33,6 +33,22 @@ NK_KEYWORDS = {
     "AsiaPress": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
 }
 
+
+RETRY_WAIT_S = 3
+
+def get_once_more(url, **kw):
+    """requests.get with one retry on a connection error or timeout.
+
+    Measured 2026-09-15 on an Actions dry run: Yonhap reset one connection and
+    data.go.kr timed out once, each marking its source DEAD for the day; the
+    same runner reached both at once on the next tries (3 of 3). An HTTP error
+    status is an answer, not a network blip, and is not retried."""
+    try:
+        return requests.get(url, **kw)
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        time.sleep(RETRY_WAIT_S)
+        return requests.get(url, **kw)
+
 def active_sources():
     """SOURCES minus the names in NK_SKIP_SOURCES (comma-separated).
 
@@ -80,7 +96,7 @@ def collect(state):
     for name, url, _expect in sources:
         s = skips.setdefault(name, {"nodate": 0, "old": 0, "dup": 0, "offtopic": 0, "kept": 0})
         try:
-            r = requests.get(url, headers=UA, timeout=20)
+            r = get_once_more(url, headers=UA, timeout=20)
             if r.status_code != 200:
                 raise ValueError(f"http {r.status_code}")
             f = feedparser.parse(r.content)

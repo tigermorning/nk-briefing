@@ -24,7 +24,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
 from pydantic import BaseModel, Field
 
-from collect_nk import (collect as collect_feeds, link_key, load_seen,
+from collect_nk import (collect as collect_feeds, get_once_more, link_key, load_seen,
                         SOURCES, STORE, METRICS, SEEN, UA)
 from min_publish import load_ledger, mark_published, MIN_ITEMS, LADDER
 import grounding
@@ -429,7 +429,7 @@ def extract_body(it):
     # the library's default agent and fetch_url turns that into a quiet None.
     # Bytes, not r.text: a missing charset header makes r.text mojibake that
     # still has a length.
-    r = requests.get(it["url"], headers=UA, timeout=20)
+    r = get_once_more(it["url"], headers=UA, timeout=20)
     r.raise_for_status()
     return trafilatura.extract(r.content) or ""
 

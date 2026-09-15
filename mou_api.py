@@ -6,7 +6,7 @@ Response fields: cl 기간분류, sj 제목, cn 내용, url, dwld_url, filenm.
 The key comes from the environment or this repo's git-ignored .env and is never printed. requests puts
 it in the query string, so r.url must not be printed either.
 """
-import io, os, sys, json, pathlib, urllib.parse, requests
+import io, os, sys, json, pathlib, time, urllib.parse, requests
 from datetime import datetime, timedelta
 
 sys.stdout.reconfigure(errors="replace")
@@ -42,7 +42,13 @@ def get_trend(period="daily", days=7, page=1, rows=10):
               "cl": PERIODS[period],
               "bgng_ymd": (end - timedelta(days=days)).strftime("%Y%m%d"),
               "end_ymd": end.strftime("%Y%m%d")}
-    r = requests.get(URL, params=params, timeout=30)
+    try:
+        r = requests.get(URL, params=params, timeout=30)
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        # one retry: a single ConnectTimeout marked the tier1 slot DEAD on an
+        # Actions run 2026-09-15 while the next three attempts connected in <1s
+        time.sleep(3)
+        r = requests.get(URL, params=params, timeout=30)
     if r.status_code != 200:
         return {"error": f"http {r.status_code}", "body": r.text[:300]}
     try:

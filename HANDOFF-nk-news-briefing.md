@@ -408,7 +408,7 @@
       - 부분 발송 리드에 `⚠️ {실패 사유} 실을 수 있는 칸만 실었습니다.`
     - **검수 장애 표시**: `drafted`는 있는데 `verified` 0이면 `failure = "초안 N건이 모두 검수를 통과하지 못해"` → 실패 공지·exit 1·예비 실행 재시도
       - 한계: 진짜로 전부 불합격인 날도 같은 경로라, 08:13에 실패 공지가 한 번 더 갈 수 있다
-    - `test_graph_fake.py` 16·17번 추가(아래 18번까지 총 18개), docstring 8~11번 누락도 채움
+    - `test_graph_fake.py` 16·17번 추가(아래 19번까지 총 19개), docstring 8~11번 누락도 채움
     - **`test_schedule.py` 시한폭탄 제거**: 실제 metrics로 `2026-09-16` 발송 없음을 확인하던 줄 → `2026-09-01`로. 새 판정 규칙 사례와 `preflight` 사례 추가
     - **`run.py` preflight**: `OPENAI_API_KEY` 없으면(또는 `DRY_RUN=0`인데 웹훅 없으면) 네트워크 전 exit 2, metrics 행 안 남김. `DATA_GO_KR_KEY` 없으면 경고만
     - **키 경로**
@@ -430,6 +430,11 @@
       - `NK_ONCE_A_DAY` 확인을 키 점검보다 먼저(이미 보낸 날은 비밀값이 빠져도 초록불)
       - `.gitignore` 주석을 새 키 위치로
       - 이미 있던 것: `.gitattributes`의 `store/metrics.jsonl merge=union`이 rebase 충돌을 막는다
+    - 확인용 Actions dry-run(`34944522045`, `86acef3`) 초록불, 고정 버전 설치 정상, 검수 `first_fail 1 · rewritten 1` 실경로 확인
+      - 같은 실행에서 `DEAD Yonhap-NK: ConnectionResetError`, `DEAD 통일부 API: ConnectTimeout`
+      - 임시 브랜치 `probe-https`(삭제함)에서 러너 curl 3회: data.go.kr https·http 모두 401(키 없음=도달) 0.3~0.8초, 연합 1회 TLS 오류(exit 35) 뒤 200 → https 탓 아님, 일시적 끊김
+      - `collect_nk.get_once_more`: `ConnectionError`/`Timeout`이면 3초 뒤 1회 재시도. 피드 수집·`graph.extract_body`에 적용, `mou_api.get_trend`도 같은 1회 재시도. HTTP 상태 오류는 재시도 안 함(`test_graph_fake.py` 19번)
+      - 임시 워크플로 두 개(`probe dailynk.jp`, `Probe data.go.kr https`)는 GitHub 목록에 남아 있어 `gh workflow disable`로 꺼 둠
     - 남긴 것(LOW): 루트의 일회성 점검 스크립트 정리, `test_*` 이름의 네트워크 측정 스크립트 개명, 공개 저장소의 기사 제목·캡처 노출 검토, 간접 의존성까지 고정하는 constraints 파일(윈도우에서 뽑은 freeze는 우분투 러너와 안 맞을 수 있어 보류), 진짜로 전부 불합격인 날의 실패 공지 중복
 
 ## 남은 일
@@ -492,7 +497,7 @@
 | `audience.yaml` | 독자·기준·버릴 것·토픽 데스크지침 |
 | `run.py` | 1회 실행 (Actions 진입점). 예약 실행용 `NK_SEND_AT`·`NK_ONCE_A_DAY` |
 | `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
-| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과, 18개 시나리오) |
+| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과·연결 재시도, 19개 시나리오) |
 | `test_grounding.py` | 숫자 원문 대조 97건 (리뷰어가 쓴 문장 포함) |
 | `test_schedule.py` | 07:30 대기 계산·하루 한 번 발송 판정·실행 전 키 점검 |
 | `.env.example` | 로컬 키 파일 틀 |

@@ -577,6 +577,10 @@ python -c "import graph; print(graph.build().compile().get_graph().draw_mermaid(
   - 디스코드 응답이 시간 초과로 끊겨도 보냈을 수 있으니 원장에 올려, 예비 실행이 다시 보내지 않는다(18번)
   - 발행 원장이 깨져 있으면 빈 원장으로 읽지 않고 멈춘다. 전에는 이미 보낸 기사를 모두 다시 실을 수 있었다
   - 원장은 임시 파일에 쓴 뒤 바꿔 끼워, 쓰는 도중 끊겨도 반쪽 파일이 남지 않는다
+- **확인용 GitHub 실행에서 드러난 것**
+  - 연합 피드 연결이 한 번 끊기고 통일부 API가 한 번 시간 초과돼, 두 소스가 그날 통째로 빠졌다
+  - 러너에서 다시 시험하니 https·http 모두 3번 다 1초 안에 연결됐다 → 일시적 끊김
+  - 수집·원문·통일부 요청은 연결 오류일 때 3초 뒤 한 번만 다시 시도하게 했다(19번). HTTP 오류 응답은 다시 시도하지 않는다
 
 ### 6.3 향후 개선점
 
@@ -597,7 +601,7 @@ python -c "import graph; print(graph.build().compile().get_graph().draw_mermaid(
 ```
 pip install -r requirements.txt
 copy .env.example .env       # macOS·Linux: cp. 키 값 채우기
-python test_graph_fake.py    # 키·네트워크 없이 18개 시나리오
+python test_graph_fake.py    # 키·네트워크 없이 19개 시나리오
 python test_grounding.py     # 숫자 원문 대조 97건
 python test_schedule.py      # 07:30 대기 계산, 하루 한 번 발송 판정, 실행 전 키 점검
 python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 보내지 않음

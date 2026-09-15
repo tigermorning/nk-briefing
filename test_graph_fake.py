@@ -29,6 +29,8 @@ No key, no network. Checks the shape, not the judgement:
       not "no articles today", and the fallback run retries
   18. the webhook times out after the request went out: counted as sent, so
       the ledger is written and the fallback run does not post it again
+  19. a feed request that hits one connection error is retried once; an HTTP
+      error status is not retried
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -338,5 +340,28 @@ row = {"kind": "graph", "run_id": "2026-09-16 07:30", "dry_run": False,
        "failed": meta["failed"], "shipped": meta["shipped"], "sent": meta["sent"]}
 assert runmod.sent_today([row], "2026-09-16") == "2026-09-16 07:30"
 print("read timeout recorded as maybe-sent, ledger written, fallback skips")
+
+print("\n== 19. one network blip is retried once, an HTTP error is not ==")
+import collect_nk
+calls = []
+def flaky_get(url, **kw):
+    calls.append(url)
+    if len(calls) == 1:
+        raise collect_nk.requests.exceptions.ConnectionError("connection reset by peer")
+    return NS(status_code=200, content=b"ok")
+real_get, real_wait = collect_nk.requests.get, collect_nk.RETRY_WAIT_S
+collect_nk.requests.get, collect_nk.RETRY_WAIT_S = flaky_get, 0
+assert collect_nk.get_once_more("https://ex.com/feed").status_code == 200 and len(calls) == 2
+calls.clear()
+collect_nk.requests.get = lambda url, **kw: calls.append(url) or NS(status_code=503, content=b"")
+assert collect_nk.get_once_more("https://ex.com/feed").status_code == 503 and len(calls) == 1
+collect_nk.requests.get = lambda url, **kw: (_ for _ in ()).throw(collect_nk.requests.exceptions.ConnectTimeout("x"))
+try:
+    collect_nk.get_once_more("https://ex.com/feed")
+    raise AssertionError("a second failure must still raise")
+except collect_nk.requests.exceptions.ConnectTimeout:
+    pass
+collect_nk.requests.get, collect_nk.RETRY_WAIT_S = real_get, real_wait
+print("retried once on a connection error, not on 503, raises after the second failure")
 
 print("\nALL OK")

@@ -68,7 +68,7 @@ python run.py                       # 키가 있으면 끝까지 dry-run (DRY_RU
 **키·네트워크 없이 도는 테스트** (저장소 파일을 바꾸지 않는다)
 
 ```
-python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 18개 시나리오
+python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 19개 시나리오
 python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사
 python test_schedule.py      # 07:30 대기 계산, 하루 한 번 발송 판정, 실행 전 키 점검
 python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
