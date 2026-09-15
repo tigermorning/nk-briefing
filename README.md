@@ -40,7 +40,9 @@ python test_graph_fake.py    # 키·네트워크 없이 그래프 모양 확인
 python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
 python scorecard.py          # 성적표 (--plot out.png 로 단계별 통과율 그래프)
 python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
-python test_number_check.py  # 숫자 대조 검수를 북한 원문에 대 본 결과
+python test_number_check.py  # 강의식 문자열 숫자 대조가 북한 원문에서 틀리는 사례 (1/5)
+python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사 (키 없음)
+python exp/step12_exaggeration.py  # 실제 카드에 과장을 심어 옛 검수와 새 검수 비교 (키 필요)
 python probe_sources.py      # 외국 후보 21곳 + 핵심 3곳 측정 (키 필요: 새 사건 판정)
 python collect_nk.py 72      # 수집만, 72시간 창
 python test_g1.py            # G1 원문추출 게이트
@@ -64,6 +66,9 @@ Actions에서는 저장소 Secrets `OPENAI_API_KEY` · `DATA_GO_KR_KEY` · `DISC
   전부 적으면 진짜 신호가 노이즈에 묻힌다.
 - **`store/metrics.jsonl`은 고치지 않는다.** 앞쪽 두 행에는 나중에 오판으로
   밝혀진 값이 들어 있다. 그대로 두는 게 "언제 무엇을 잘못 알았는지"의 기록이다.
+- **숫자는 값으로 원문과 맞춘다.** 헤드라인·요약·💡 문장의 숫자가 원문에 없거나, 원문의 `최대`·`추정`이
+  빠지면 검수에서 떨어진다(`grounding.py`). 모델 검수는 `100억 → 1,000억 달러`를 6번 모두 통과시켰다.
+  떨어진 카드는 지적 사항을 보여 주고 한 번 다시 쓰게 하고, 그래도 틀리면 빼고 예비 기사로 채운다.
 - **프롬프트 부탁은 코드로 확인한다.** 같은 사건 거르기는 모델이 붙인 라벨만 믿지 않고,
   뽑힌 짧은 목록을 한 번 더 나란히 놓고 묶게 한 뒤 예비 후보로 채운다.
 - **키는 저장소 밖에 둔다.** `DATA_GO_KR_KEY`는 별도 `.env`에서 읽고,
