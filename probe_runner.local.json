@@ -1,0 +1,2876 @@
+{
+ "measured_at": "2026-09-15T13:52:46.083932+00:00",
+ "where": "local",
+ "runner": null,
+ "problems": [],
+ "rows": [
+  {
+   "group": "대조",
+   "name": "Yonhap-NK",
+   "lang": "ko",
+   "url": "https://www.yna.co.kr/rss/northkorea.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 85,
+    "nodate": 0,
+    "h24": 11,
+    "d14": 85,
+    "oldest_h": 160.3,
+    "newest_h": 5.6,
+    "per_day": 13.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "SHORT",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "SHORT",
+      "len": 467,
+      "head": "(서울=연합뉴스) ▲ 북한 정권 수립 78주년을 기념해 중국인민대외우호협회와 중조(북중)우호협회가 공동으로 ",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1484,
+      "head": "정세현 \"트럼프 평양 가야 김정은 회담 응할 것\" 10월 중순 북미정상회담 성사 가능성 제기 \"李대통령, 유",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1316,
+      "head": "리광천 \"동포와 한마음으로 좋은 결과 노력\" 北 여자축구, 재일 조선인 응원 속 방글라 10-0 \"1차 목표",
+      "cut": true,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 655,
+      "head": "북한군, 최근 거의 매일 MDL 침범 파악 우리 경고사격 뒤 물러나…실수로 추정 북한, 전방에 신형무기 배치",
+      "cut": false,
+      "rss_len": 35
+     },
+     {
+      "verdict": "PASS",
+      "len": 915,
+      "head": "통일부, 17일 '평화공존 3대 청사진' 학술회의 李대통령 광복절 제시 청사진 이행방안 모색 정동영 기조연설",
+      "cut": false,
+      "rss_len": 83
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.18,
+    "near_median": 1,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "대조",
+   "name": "38North",
+   "lang": "en",
+   "url": "https://www.38north.org/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 8,
+    "nodate": 0,
+    "h24": 0,
+    "d14": 5,
+    "oldest_h": 429.0,
+    "newest_h": 119.9,
+    "per_day": 0.6,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 2940,
+      "head": "New North Korea-China Link Appears Close to Opening North Ko",
+      "cut": false,
+      "rss_len": 3486
+     },
+     {
+      "verdict": "PASS",
+      "len": 18801,
+      "head": "North Korea’s Recent Economic Recovery and the Sustainabilit",
+      "cut": false,
+      "rss_len": 17861
+     },
+     {
+      "verdict": "PASS",
+      "len": 19989,
+      "head": "Successes and Challenges of North Korea’s Five-Year Plan for",
+      "cut": false,
+      "rss_len": 17982
+     },
+     {
+      "verdict": "PASS",
+      "len": 7246,
+      "head": "Changes in the KPA High Command On August 29, Kim Jong Un pr",
+      "cut": false,
+      "rss_len": 7120
+     },
+     {
+      "verdict": "PASS",
+      "len": 2341,
+      "head": "North Korea Makes Significant Progress on New Trade Facility",
+      "cut": false,
+      "rss_len": 3267
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 8.54,
+    "near_median": 1,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "대조",
+   "name": "NK News",
+   "lang": "en",
+   "url": "https://www.nknews.org/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 300,
+    "nodate": 0,
+    "h24": 4,
+    "d14": 45,
+    "oldest_h": 2360.9,
+    "newest_h": 6.2,
+    "per_day": 3.1,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1236,
+      "head": "About the Author Jooheon Kim Jooheon Kim is a Correspondent ",
+      "cut": true,
+      "rss_len": 314
+     },
+     {
+      "verdict": "PASS",
+      "len": 1175,
+      "head": "About the Author Seung-Yeon Chung Seung-Yeon Chung is a stat",
+      "cut": true,
+      "rss_len": 338
+     },
+     {
+      "verdict": "PASS",
+      "len": 631,
+      "head": "Editor’s note: The following article is an opinion piece by ",
+      "cut": true,
+      "rss_len": 345
+     },
+     {
+      "verdict": "PASS",
+      "len": 1228,
+      "head": "About the Author Anton Sokolin Anton Sokolin is the data cor",
+      "cut": true,
+      "rss_len": 362
+     },
+     {
+      "verdict": "PASS",
+      "len": 1178,
+      "head": "North Korean leader Kim Jong Un inspects the Machine Plant M",
+      "cut": false,
+      "rss_len": 378
+     }
+    ],
+    "teaser": true,
+    "teaser_n": 5,
+    "spread": 1.96,
+    "near_median": 4,
+    "cut": 4,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "대조",
+   "name": "DailyNK-JP",
+   "lang": "ja",
+   "url": "https://dailynk.jp/feed",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 77,
+    "nodate": 0,
+    "h24": 1,
+    "d14": 33,
+    "oldest_h": 806.6,
+    "newest_h": 17.1,
+    "per_day": 2.3,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "SHORT",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 771,
+      "head": "「ここから出して」金正恩の“孤立リゾート”で響き渡る悲鳴 北朝鮮の金正恩総書記が、外貨獲得の「切り札」として執念を燃やす",
+      "cut": false,
+      "rss_len": 744
+     },
+     {
+      "verdict": "PASS",
+      "len": 704,
+      "head": "ロシア、IAEAに「北朝鮮核報告やめろ」…国際監視網の弱体化狙う？ ロシアが、国際原子力機関（IAEA）に対し、北朝鮮の",
+      "cut": false,
+      "rss_len": 672
+     },
+     {
+      "verdict": "SHORT",
+      "len": 516,
+      "head": "「あごが消えた？」金正恩氏、さらに激太り説 体を繰り返し揺らす様子も 北朝鮮の金正恩総書記の顔つきが昨年より丸みを増し、",
+      "cut": false,
+      "rss_len": 483
+     },
+     {
+      "verdict": "PASS",
+      "len": 900,
+      "head": "北朝鮮部隊を襲う「クラスター弾の雨」 ウクライナがATACMSなど大量入手へ ロシアに派兵される北朝鮮軍にとって、新たな",
+      "cut": false,
+      "rss_len": 863
+     },
+     {
+      "verdict": "PASS",
+      "len": 1136,
+      "head": "かつて日本→韓国の中古タンカー、今度は北朝鮮船に…「制裁違反、爆発的に増加」 北朝鮮が海外で運航されていた中古タンカーを",
+      "cut": false,
+      "rss_len": 1097
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.2,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "한국어",
+   "name": "연합 마켓",
+   "lang": "ko",
+   "url": "https://www.yna.co.kr/rss/market.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 120,
+    "nodate": 0,
+    "h24": 120,
+    "d14": 120,
+    "oldest_h": 23.2,
+    "newest_h": 2.4,
+    "per_day": 138.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "SHORT",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1789,
+      "head": "이찬진 \"금융지주 자회사 CEO 승계 미흡\" CEO 자격요건 미명시·검증절차 불투명 지적 23일 금융지주 회",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1091,
+      "head": "골드만삭스, 117억달러 사모펀드 자금 조성 바이아웃 펀드 96억달러 등 최종 클로징 미·유럽 우량 중견기업",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1276,
+      "head": "中 8월 알루미늄 생산량 400만t 육박 사상 최대 중동 전쟁發 공급 차질에 수출 채산성 높아져 연간 4천5",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "SHORT",
+      "len": 278,
+      "head": "(서울=연합뉴스) 코스닥 상장사 비케이홀딩스[050090]는 타법인증권취득자금 등 약 47억원을 조달하고자 ",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 2505,
+      "head": "KRX 애프터마켓 첫날 VI 1천637회 무더기 발동 유동성 부족에 소규모 주문에도 상한가 속출 거래소 \"전",
+      "cut": false,
+      "rss_len": 83
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 9.01,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "한국어",
+   "name": "뉴시스 국제",
+   "lang": "ko",
+   "url": "https://newsis.com/RSS/international.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 100,
+    "nodate": 0,
+    "h24": 100,
+    "d14": 100,
+    "oldest_h": 13.2,
+    "newest_h": 0.1,
+    "per_day": 183.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1088,
+      "head": "\"美조지아주서 구금됐던 한국인 300여명, 트럼프 정부 법적 대응\" 등록 2026.09.15 22:46:25",
+      "cut": false,
+      "rss_len": 714
+     },
+     {
+      "verdict": "PASS",
+      "len": 1277,
+      "head": "\"가라앉기 시작하자 헤엄쳐 탈출\"…美 공화당 후보 비행기 사고 등록 2026.09.15 22:34:25수정 ",
+      "cut": false,
+      "rss_len": 1071
+     },
+     {
+      "verdict": "PASS",
+      "len": 1852,
+      "head": "\"대충 때우는 음식은 옛말\"…중국 MZ 사로잡은 '프리미엄 라면' 등록 2026.09.15 22:33:37수",
+      "cut": false,
+      "rss_len": 1676
+     },
+     {
+      "verdict": "PASS",
+      "len": 1107,
+      "head": "카타르 \"호르무즈 이어 바브 엘-만데브 항해도 중단되면 '재앙적' 결과\" 경고 등록 2026.09.15 22",
+      "cut": false,
+      "rss_len": 946
+     },
+     {
+      "verdict": "PASS",
+      "len": 993,
+      "head": "52억 대박 터지자 \"당첨금 못 나눠\"…동료 뒤통수 친 홍콩 남성 체포 등록 2026.09.15 22:03:",
+      "cut": false,
+      "rss_len": 778
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.87,
+    "near_median": 4,
+    "cut": 0,
+    "full_in_feed": 3
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "한국어",
+   "name": "서울경제 국제",
+   "lang": "ko",
+   "url": "https://www.sedaily.com/rss/international",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 42,
+    "d14": 50,
+    "oldest_h": 28.4,
+    "newest_h": 0.2,
+    "per_day": 42.6,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1704,
+      "head": "“치명률 50% 육박” 4개월 만에 3500명 사망…DR콩고, 에볼라 ‘통제불능’ 우려 입력2026-09-1",
+      "cut": false,
+      "rss_len": 0
+     },
+     {
+      "verdict": "PASS",
+      "len": 1622,
+      "head": "영상“트럼프, 정말 너무 싫어”…‘아메리카노’도 싫다던 캐나다인들 결국 지갑 닫았다 입력2026-09-15 ",
+      "cut": true,
+      "rss_len": 0
+     },
+     {
+      "verdict": "PASS",
+      "len": 1045,
+      "head": "‘조지아 구금’ 한국인 300여명, 트럼프 정부 상대 소송 채비 현대차·LG 합작공장 단속 관련 9개 연방기",
+      "cut": false,
+      "rss_len": 0
+     },
+     {
+      "verdict": "PASS",
+      "len": 1453,
+      "head": "영상“일본 여행 가면 여기는 무조건이지”…무려 4조원 관광 산업 ‘잭팟’ 터트렸다 [지금 일본에선] 입력20",
+      "cut": false,
+      "rss_len": 0
+     },
+     {
+      "verdict": "PASS",
+      "len": 1534,
+      "head": "영상“하루 수억원 태웠다”…트럼프 장남 초호화 결혼식, 비용 부담은 러시아 재벌 입력2026-09-15 19",
+      "cut": true,
+      "rss_len": 0
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.63,
+    "near_median": 4,
+    "cut": 2,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "미국경제",
+   "name": "CNBC Economy",
+   "lang": "en",
+   "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 1,
+    "d14": 22,
+    "oldest_h": 452.4,
+    "newest_h": 18.1,
+    "per_day": 1.7,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 7264,
+      "head": "Federal Reserve Chairman Kevin Warsh faces a tricky head cou",
+      "cut": false,
+      "rss_len": 136
+     },
+     {
+      "verdict": "PASS",
+      "len": 3605,
+      "head": "Americans face a renewed squeeze on their paychecks as infla",
+      "cut": false,
+      "rss_len": 88
+     },
+     {
+      "verdict": "PASS",
+      "len": 1367,
+      "head": "Consumer sentiment plunged in September amid heightened infl",
+      "cut": false,
+      "rss_len": 113
+     },
+     {
+      "verdict": "PASS",
+      "len": 1359,
+      "head": "The largest-ever outbreak of cyclosporiasis in the U.S. has ",
+      "cut": false,
+      "rss_len": 109
+     },
+     {
+      "verdict": "PASS",
+      "len": 3610,
+      "head": "Prices for a wide swath of goods and services continued to c",
+      "cut": false,
+      "rss_len": 168
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 5.35,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "미국경제",
+   "name": "NPR Economy",
+   "lang": "en",
+   "url": "https://feeds.npr.org/1017/rss.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 10,
+    "nodate": 0,
+    "h24": 1,
+    "d14": 10,
+    "oldest_h": 101.1,
+    "newest_h": 5.1,
+    "per_day": 2.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 601,
+      "head": "What the 10-year Treasury yield hitting 5% means for inflati",
+      "cut": false,
+      "rss_len": 185
+     },
+     {
+      "verdict": "PASS",
+      "len": 24389,
+      "head": "The powerful millionaires hiding in plain sight This article",
+      "cut": false,
+      "rss_len": 207
+     },
+     {
+      "verdict": "PASS",
+      "len": 4718,
+      "head": "Chief economist discusses the effect of the Iran war on the ",
+      "cut": true,
+      "rss_len": 141
+     },
+     {
+      "verdict": "PASS",
+      "len": 4757,
+      "head": "Federal Reserve chairs historically over-communicate what's ",
+      "cut": false,
+      "rss_len": 193
+     },
+     {
+      "verdict": "PASS",
+      "len": 3257,
+      "head": "Cost of living has gone up 3.4% in the last year A new repor",
+      "cut": false,
+      "rss_len": 194
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 40.58,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "미국경제",
+   "name": "Guardian Economics",
+   "lang": "en",
+   "url": "https://www.theguardian.com/business/economics/rss",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 20,
+    "nodate": 0,
+    "h24": 5,
+    "d14": 20,
+    "oldest_h": 117.7,
+    "newest_h": 3.1,
+    "per_day": 4.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 4219,
+      "head": "Wage growth in the UK has slowed as workers come under press",
+      "cut": false,
+      "rss_len": 614
+     },
+     {
+      "verdict": "PASS",
+      "len": 4361,
+      "head": "Economists have urged the chancellor, John Healey, to press ",
+      "cut": false,
+      "rss_len": 568
+     },
+     {
+      "verdict": "PASS",
+      "len": 3054,
+      "head": "The Panama canal plans to again cut maritime traffic due to ",
+      "cut": false,
+      "rss_len": 528
+     },
+     {
+      "verdict": "PASS",
+      "len": 4817,
+      "head": "US government borrowing costs have risen to 5% for the first",
+      "cut": false,
+      "rss_len": 550
+     },
+     {
+      "verdict": "PASS",
+      "len": 12525,
+      "head": "UK government moves to acquire Speciality Steel UK Newsflash",
+      "cut": false,
+      "rss_len": 570
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 4.1,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "미국경제",
+   "name": "Fed 전체",
+   "lang": "en",
+   "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 20,
+    "nodate": 0,
+    "h24": 0,
+    "d14": 3,
+    "oldest_h": 1462.9,
+    "newest_h": 95.9,
+    "per_day": 0.4,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "SHORT",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 2014,
+      "head": "September 11, 2026 Agencies seek comment on proposed third-p",
+      "cut": false,
+      "rss_len": 147
+     },
+     {
+      "verdict": "PASS",
+      "len": 1573,
+      "head": "September 10, 2026 Agencies reduce regulatory burden for com",
+      "cut": false,
+      "rss_len": 99
+     },
+     {
+      "verdict": "PASS",
+      "len": 724,
+      "head": "September 04, 2026 Federal Reserve Board announces terminati",
+      "cut": false,
+      "rss_len": 154
+     },
+     {
+      "verdict": "SHORT",
+      "len": 554,
+      "head": "August 27, 2026 Federal Reserve Board issues enforcement act",
+      "cut": false,
+      "rss_len": 100
+     },
+     {
+      "verdict": "PASS",
+      "len": 646,
+      "head": "August 25, 2026 Minutes of the Board's discount rate meeting",
+      "cut": false,
+      "rss_len": 74
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.64,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중국경제",
+   "name": "SCMP Business",
+   "lang": "en",
+   "url": "https://www.scmp.com/rss/92/feed",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 9,
+    "d14": 50,
+    "oldest_h": 134.9,
+    "newest_h": 0.9,
+    "per_day": 9.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1110,
+      "head": "Advertisement Tighter scrutiny of Hong Kong IPOs could slow ",
+      "cut": false,
+      "rss_len": 503
+     },
+     {
+      "verdict": "PASS",
+      "len": 1089,
+      "head": "Wrise Prestige accelerates mainland China expansion with new",
+      "cut": false,
+      "rss_len": 503
+     },
+     {
+      "verdict": "PASS",
+      "len": 1292,
+      "head": "Advertisement Opinion As the American century ends, Asia’s r",
+      "cut": false,
+      "rss_len": 500
+     },
+     {
+      "verdict": "PASS",
+      "len": 1299,
+      "head": "Chinese firms’ export share to reach 31% by 2035 as global e",
+      "cut": false,
+      "rss_len": 498
+     },
+     {
+      "verdict": "PASS",
+      "len": 1211,
+      "head": "Advertisement Unitree’s US$30 billion stock wipe-off spurs r",
+      "cut": false,
+      "rss_len": 501
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.19,
+    "near_median": 5,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중국경제",
+   "name": "SCMP China Economy",
+   "lang": "en",
+   "url": "https://www.scmp.com/rss/318421/feed",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 7,
+    "d14": 50,
+    "oldest_h": 231.9,
+    "newest_h": 1.9,
+    "per_day": 5.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "EXTRACT_EMPTY",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1185,
+      "head": "China bets on chips and AI in new 5-year road map to challen",
+      "cut": false,
+      "rss_len": 502
+     },
+     {
+      "verdict": "PASS",
+      "len": 1388,
+      "head": "German industry wants tougher trade action on Beijing. So wh",
+      "cut": false,
+      "rss_len": 502
+     },
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 499
+     },
+     {
+      "verdict": "PASS",
+      "len": 1292,
+      "head": "Advertisement Opinion As the American century ends, Asia’s r",
+      "cut": false,
+      "rss_len": 500
+     },
+     {
+      "verdict": "PASS",
+      "len": 1051,
+      "head": "China cracks down on big firms delaying payments to cash-str",
+      "cut": false,
+      "rss_len": 496
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 4,
+    "spread": 1.32,
+    "near_median": 4,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "국제정세",
+   "name": "CNBC World",
+   "lang": "en",
+   "url": "https://www.cnbc.com/id/100727362/device/rss/rss.html",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 28,
+    "d14": 30,
+    "oldest_h": 34.4,
+    "newest_h": 0.0,
+    "per_day": 20.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1907,
+      "head": "President Donald Trump on Tuesday blasted the Supreme Court ",
+      "cut": false,
+      "rss_len": 158
+     },
+     {
+      "verdict": "PASS",
+      "len": 3512,
+      "head": "The benchmark 10-year Treasury yield climbed to its highest ",
+      "cut": false,
+      "rss_len": 117
+     },
+     {
+      "verdict": "PASS",
+      "len": 1516,
+      "head": "Crude oil prices were little changed Tuesday as traders awai",
+      "cut": false,
+      "rss_len": 133
+     },
+     {
+      "verdict": "PASS",
+      "len": 3407,
+      "head": "Treasury Secretary Scott Bessent will appear before the Hous",
+      "cut": false,
+      "rss_len": 154
+     },
+     {
+      "verdict": "PASS",
+      "len": 4382,
+      "head": "As researchers warn that AI could pose catastrophic risks, s",
+      "cut": false,
+      "rss_len": 141
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.89,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "중국경제",
+   "name": "중국신문망 재경",
+   "lang": "zh",
+   "url": "https://www.chinanews.com.cn/rss/finance.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 30,
+    "d14": 30,
+    "oldest_h": 3.3,
+    "newest_h": 0.1,
+    "per_day": 222.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1367,
+      "head": "华为发布全球首个3D数据中心，携手产业共建AIDC新范式 今日，2026 AIDC产业发展大会暨3D数据中心现场会在安徽",
+      "cut": false,
+      "rss_len": 112
+     },
+     {
+      "verdict": "PASS",
+      "len": 948,
+      "head": "天津前8个月对上合组织其他成员国进出口增长9.7% 中新网天津9月15日电 (记者 周亚强)记者15日从天津海关获悉，今",
+      "cut": true,
+      "rss_len": 121
+     },
+     {
+      "verdict": "PASS",
+      "len": 815,
+      "head": "吉林离境退税提质升级 入境消费持续升温 中新网长春9月15日电 (记者 郭佳)吉林省商务厅15日介绍，截至目前，全省离境",
+      "cut": true,
+      "rss_len": 82
+     },
+     {
+      "verdict": "PASS",
+      "len": 927,
+      "head": "南珠高铁岑溪东至桂粤省界段连续梁全部完成合龙 中新网广西岑溪9月15日电 (熊永华)9月15日，随着最后一方混凝土浇筑完",
+      "cut": true,
+      "rss_len": 147
+     },
+     {
+      "verdict": "PASS",
+      "len": 741,
+      "head": "8月中国城市轨道交通完成客运量29.4亿人次 中新社北京9月15日电 (记者 刘文文)中国交通运输部15日发布的城市轨道",
+      "cut": true,
+      "rss_len": 72
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.84,
+    "near_median": 3,
+    "cut": 4,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "중국경제",
+   "name": "CGTN Business",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/business.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 0,
+    "d14": 50,
+    "oldest_h": 289.7,
+    "newest_h": 25.1,
+    "per_day": 4.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1772,
+      "head": "Choose your language                                      By",
+      "cut": false,
+      "rss_len": 371
+     },
+     {
+      "verdict": "PASS",
+      "len": 15120,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 7159
+     },
+     {
+      "verdict": "PASS",
+      "len": 17051,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 7704
+     },
+     {
+      "verdict": "PASS",
+      "len": 1529,
+      "head": "Choose your language                                      By",
+      "cut": false,
+      "rss_len": 299
+     },
+     {
+      "verdict": "PASS",
+      "len": 1572,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 717
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 11.15,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중미관계",
+   "name": "SCMP China",
+   "lang": "en",
+   "url": "https://www.scmp.com/rss/4/feed",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 16,
+    "d14": 50,
+    "oldest_h": 75.6,
+    "newest_h": 0.5,
+    "per_day": 16.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1080,
+      "head": "Advertisement US-China ties haunted by lack of mutual trust,",
+      "cut": false,
+      "rss_len": 499
+     },
+     {
+      "verdict": "PASS",
+      "len": 1562,
+      "head": "Advertisement Opinion The world is not so much embracing Chi",
+      "cut": false,
+      "rss_len": 494
+     },
+     {
+      "verdict": "PASS",
+      "len": 1190,
+      "head": "Advertisement China mulls building nuclear-powered tank with",
+      "cut": false,
+      "rss_len": 494
+     },
+     {
+      "verdict": "PASS",
+      "len": 1348,
+      "head": "Advertisement Iran’s top diplomat heads to China for talks a",
+      "cut": false,
+      "rss_len": 500
+     },
+     {
+      "verdict": "PASS",
+      "len": 1154,
+      "head": "Advertisement Taiwan tests US-made MQ-9B drones to counter P",
+      "cut": false,
+      "rss_len": 503
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.45,
+    "near_median": 4,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "한국어",
+   "name": "동아 국제",
+   "lang": "ko",
+   "url": "https://rss.donga.com/international.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 50,
+    "d14": 50,
+    "oldest_h": 18.4,
+    "newest_h": 0.4,
+    "per_day": 66.8,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 774,
+      "head": "지난해 9월 미국 조지아주 엘라벨의 현대차그룹-LG에너지솔루션 합작 배터리 공장(HL-GA) 건설 현장에서 ",
+      "cut": false,
+      "rss_len": 500
+     },
+     {
+      "verdict": "PASS",
+      "len": 1851,
+      "head": "“모욕적 생활 환경서 서류 서명 강요” 일 못한 손실, 정신적 피해 등 명시 현지 변호사 “개별청구 모두 접",
+      "cut": false,
+      "rss_len": 498
+     },
+     {
+      "verdict": "PASS",
+      "len": 2005,
+      "head": "도널드 트럼프 미국 행정부가 올 2월 28일 발발한 이란 전쟁에 따른 중동 내 미군의 군사 및 외교 시설의 ",
+      "cut": false,
+      "rss_len": 497
+     },
+     {
+      "verdict": "PASS",
+      "len": 840,
+      "head": "안규백 국방부장관이 15일 오후 고이즈미 신지로 일본 방위대신과 한일 국방장관 화상통화를 가졌다. 국방부는 ",
+      "cut": false,
+      "rss_len": 496
+     },
+     {
+      "verdict": "PASS",
+      "len": 1500,
+      "head": "11월 3일 미국 중간선거가 50일도 남지 않은 가운데 도널드 트럼프 대통령이 16일 격전지 중 하나로 꼽히",
+      "cut": false,
+      "rss_len": 497
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.59,
+    "near_median": 1,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "중미관계",
+   "name": "The Diplomat",
+   "lang": "en",
+   "url": "https://thediplomat.com/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 96,
+    "nodate": 0,
+    "h24": 4,
+    "d14": 96,
+    "oldest_h": 289.1,
+    "newest_h": 15.6,
+    "per_day": 8.4,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 4466,
+      "head": "The world of digital banking is an odd place. A digital bank",
+      "cut": false,
+      "rss_len": 118
+     },
+     {
+      "verdict": "PASS",
+      "len": 7406,
+      "head": "China’s postponement of its Chang’e 7 lunar mission on Augus",
+      "cut": false,
+      "rss_len": 100
+     },
+     {
+      "verdict": "PASS",
+      "len": 4539,
+      "head": "North Korea’s state media confirmed Monday that a joint fire",
+      "cut": false,
+      "rss_len": 150
+     },
+     {
+      "verdict": "PASS",
+      "len": 7172,
+      "head": "Asia’s democratic trajectory is no longer defined by the bin",
+      "cut": false,
+      "rss_len": 162
+     },
+     {
+      "verdict": "PASS",
+      "len": 7703,
+      "head": "On September 16, 2025, South Korea’s Lee Jae-myung administr",
+      "cut": false,
+      "rss_len": 164
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.72,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중미관계",
+   "name": "Sinocism",
+   "lang": "en",
+   "url": "https://sinocism.com/feed",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 20,
+    "nodate": 0,
+    "h24": 2,
+    "d14": 9,
+    "oldest_h": 687.3,
+    "newest_h": 11.6,
+    "per_day": 0.7,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 29584,
+      "head": "The US and China should be talking about AI safety and gover",
+      "cut": false,
+      "rss_len": 29173
+     },
+     {
+      "verdict": "PASS",
+      "len": 9939,
+      "head": "Today has been a whirlwind of news about calls to pace AI de",
+      "cut": false,
+      "rss_len": 14156
+     },
+     {
+      "verdict": "PASS",
+      "len": 10768,
+      "head": "In this issue: - Xi going to India - 15th Five-Year Plan for",
+      "cut": false,
+      "rss_len": 13144
+     },
+     {
+      "verdict": "PASS",
+      "len": 8395,
+      "head": "In this issue: - Deflation over for now - MOFCOM responds to",
+      "cut": false,
+      "rss_len": 11171
+     },
+     {
+      "verdict": "PASS",
+      "len": 8295,
+      "head": "The PRC has still not confirmed that Xi Jinping will travel ",
+      "cut": false,
+      "rss_len": 8668
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.57,
+    "near_median": 4,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "영미권",
+   "name": "ABC International",
+   "lang": "en",
+   "url": "https://abcnews.go.com/abcnews/internationalheadlines",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 12,
+    "d14": 25,
+    "oldest_h": 28.2,
+    "newest_h": 0.4,
+    "per_day": 21.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 3101,
+      "head": "South African police issue alert after seventh woman's body ",
+      "cut": true,
+      "rss_len": 135
+     },
+     {
+      "verdict": "PASS",
+      "len": 3226,
+      "head": "Houthi official says Saudi airstrikes leave 3 dead, and othe",
+      "cut": false,
+      "rss_len": 96
+     },
+     {
+      "verdict": "PASS",
+      "len": 1691,
+      "head": "Japan loses contact with a surveillance drone off the countr",
+      "cut": false,
+      "rss_len": 113
+     },
+     {
+      "verdict": "PASS",
+      "len": 5080,
+      "head": "Inquiry into New Zealand man who hid his kids in forest for ",
+      "cut": false,
+      "rss_len": 200
+     },
+     {
+      "verdict": "PASS",
+      "len": 1988,
+      "head": "Indigenous leader Raoni receives palliative care in Brazil a",
+      "cut": false,
+      "rss_len": 169
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.0,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "영미권",
+   "name": "CBS World",
+   "lang": "en",
+   "url": "https://www.cbsnews.com/latest/rss/world",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 14,
+    "d14": 30,
+    "oldest_h": 216.4,
+    "newest_h": 0.2,
+    "per_day": 3.3,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 2946,
+      "head": "Why my interview with \"AI actor\" Tilly Norwood creeped me ou",
+      "cut": false,
+      "rss_len": 133
+     },
+     {
+      "verdict": "PASS",
+      "len": 1735,
+      "head": "2 U.S. government workers accidentally shot by soldiers duri",
+      "cut": false,
+      "rss_len": 142
+     },
+     {
+      "verdict": "PASS",
+      "len": 3109,
+      "head": "Some of nurse Lucy Letby's baby killings could have been pre",
+      "cut": false,
+      "rss_len": 178
+     },
+     {
+      "verdict": "PASS",
+      "len": 27848,
+      "head": "Latest Updates: Iran war costs well over $33.4 billion, Pent",
+      "cut": false,
+      "rss_len": 178
+     },
+     {
+      "verdict": "PASS",
+      "len": 6017,
+      "head": "Latin American migrants deported by ICE to West Africa descr",
+      "cut": false,
+      "rss_len": 143
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 16.05,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "영미권",
+   "name": "PBS NewsHour World",
+   "lang": "en",
+   "url": "https://www.pbs.org/newshour/feeds/rss/world",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 20,
+    "nodate": 0,
+    "h24": 13,
+    "d14": 20,
+    "oldest_h": 46.4,
+    "newest_h": 14.9,
+    "per_day": 15.3,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 9525,
+      "head": "President Trump rejected calls for greater oversight of arti",
+      "cut": false,
+      "rss_len": 394
+     },
+     {
+      "verdict": "PASS",
+      "len": 5796,
+      "head": "In our news wrap Monday, officials at the Kennedy Center are",
+      "cut": false,
+      "rss_len": 397
+     },
+     {
+      "verdict": "PASS",
+      "len": 9978,
+      "head": "Yemen's Houthi rebels seized more islands in the strategical",
+      "cut": false,
+      "rss_len": 345
+     },
+     {
+      "verdict": "PASS",
+      "len": 7091,
+      "head": "The EPA announced it is repealing rules limiting greenhouse ",
+      "cut": false,
+      "rss_len": 390
+     },
+     {
+      "verdict": "PASS",
+      "len": 2967,
+      "head": "By — Cinar Kiper, Associated Press Cinar Kiper, Associated P",
+      "cut": true,
+      "rss_len": 189
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.36,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "국제정세",
+   "name": "NPR World",
+   "lang": "en",
+   "url": "https://feeds.npr.org/1004/rss.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 10,
+    "nodate": 0,
+    "h24": 6,
+    "d14": 10,
+    "oldest_h": 29.2,
+    "newest_h": 2.3,
+    "per_day": 8.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "SHORT",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 7458,
+      "head": "SCOTUS rejects Trump's mail voting limits. And, the Kennedy ",
+      "cut": false,
+      "rss_len": 216
+     },
+     {
+      "verdict": "SHORT",
+      "len": 499,
+      "head": "Trump says Ukraine and Russia agreed to stop attacks on ener",
+      "cut": false,
+      "rss_len": 137
+     },
+     {
+      "verdict": "PASS",
+      "len": 5172,
+      "head": "Air pollution spiked after the Trump administration stopped ",
+      "cut": false,
+      "rss_len": 243
+     },
+     {
+      "verdict": "PASS",
+      "len": 6447,
+      "head": "NATO jets shoot down a drone in Lithuanian airspace VILNIUS,",
+      "cut": false,
+      "rss_len": 181
+     },
+     {
+      "verdict": "PASS",
+      "len": 3838,
+      "head": "Israel is 'dismantling Palestinian life' says Israeli human ",
+      "cut": false,
+      "rss_len": 275
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 14.95,
+    "near_median": 1,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "국제정세",
+   "name": "BBC World",
+   "lang": "en",
+   "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 32,
+    "nodate": 0,
+    "h24": 24,
+    "d14": 32,
+    "oldest_h": 64.5,
+    "newest_h": 0.2,
+    "per_day": 11.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 3551,
+      "head": "More than 100,000 people in Japan are now aged 100 or older ",
+      "cut": true,
+      "rss_len": 93
+     },
+     {
+      "verdict": "PASS",
+      "len": 3681,
+      "head": "Suspected sabotage causes major Netherlands rail disruption ",
+      "cut": false,
+      "rss_len": 101
+     },
+     {
+      "verdict": "PASS",
+      "len": 2364,
+      "head": "Two sailors missing after tanker attacked in Strait of Hormu",
+      "cut": false,
+      "rss_len": 123
+     },
+     {
+      "verdict": "PASS",
+      "len": 1938,
+      "head": "Colombian ex-foreign minister charged over nanny's lie detec",
+      "cut": false,
+      "rss_len": 117
+     },
+     {
+      "verdict": "PASS",
+      "len": 5740,
+      "head": "Supreme Court blocks Trump's plan to restrict mail-in ballot",
+      "cut": false,
+      "rss_len": 120
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.96,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "국제정세",
+   "name": "Guardian World",
+   "lang": "en",
+   "url": "https://www.theguardian.com/world/rss",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 45,
+    "nodate": 0,
+    "h24": 32,
+    "d14": 45,
+    "oldest_h": 175.4,
+    "newest_h": 0.2,
+    "per_day": 6.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 6604,
+      "head": "'These are not isolated incidents,' EU's von der Leyen warns",
+      "cut": false,
+      "rss_len": 644
+     },
+     {
+      "verdict": "PASS",
+      "len": 797,
+      "head": "The former England footballer Raheem Sterling has admitted d",
+      "cut": false,
+      "rss_len": 411
+     },
+     {
+      "verdict": "PASS",
+      "len": 14268,
+      "head": "Lawmakers have given their support to the supreme court’s re",
+      "cut": false,
+      "rss_len": 1095
+     },
+     {
+      "verdict": "PASS",
+      "len": 18714,
+      "head": "No 10 says government still committed to ensuring pensioners",
+      "cut": false,
+      "rss_len": 1248
+     },
+     {
+      "verdict": "PASS",
+      "len": 16787,
+      "head": "Here is a quick summary of the main findings of the report: ",
+      "cut": false,
+      "rss_len": 890
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 23.48,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "영미권",
+   "name": "Independent World",
+   "lang": "en",
+   "url": "https://www.independent.co.uk/news/world/rss",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 73,
+    "nodate": 0,
+    "h24": 73,
+    "d14": 73,
+    "oldest_h": 23.9,
+    "newest_h": 0.4,
+    "per_day": 74.6,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1551,
+      "head": "Two US government personnel accidentally shot by soldiers in",
+      "cut": false,
+      "rss_len": 104
+     },
+     {
+      "verdict": "PASS",
+      "len": 3417,
+      "head": "Video of ‘zombie’ Mitch McConnell returning to the Senate ca",
+      "cut": true,
+      "rss_len": 95
+     },
+     {
+      "verdict": "PASS",
+      "len": 2981,
+      "head": "President Donald Trump dismissed warnings Monday that the ri",
+      "cut": true,
+      "rss_len": 70
+     },
+     {
+      "verdict": "PASS",
+      "len": 2862,
+      "head": "Rob Reiner’s son in court today as prosecutors weigh death p",
+      "cut": false,
+      "rss_len": 218
+     },
+     {
+      "verdict": "PASS",
+      "len": 693,
+      "head": "Independent TV Showing now | News 00:30 Trump interrupts liv",
+      "cut": false,
+      "rss_len": 116
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 4.93,
+    "near_median": 3,
+    "cut": 2,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "영미권",
+   "name": "Fox News World",
+   "lang": "en",
+   "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 4,
+    "d14": 25,
+    "oldest_h": 170.7,
+    "newest_h": 0.9,
+    "per_day": 3.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 2561,
+      "head": "Two Italian Eurofighter Typhoons operating under NATO comman",
+      "cut": false,
+      "rss_len": 2522
+     },
+     {
+      "verdict": "PASS",
+      "len": 4370,
+      "head": "The leaders of Scotland, Wales and Northern Ireland called M",
+      "cut": false,
+      "rss_len": 4333
+     },
+     {
+      "verdict": "PASS",
+      "len": 5625,
+      "head": "Moscow is preparing for a final test of a new ballistic miss",
+      "cut": false,
+      "rss_len": 5589
+     },
+     {
+      "verdict": "PASS",
+      "len": 8721,
+      "head": "The Houthis’ rapid advance toward one of the world’s most im",
+      "cut": false,
+      "rss_len": 8790
+     },
+     {
+      "verdict": "PASS",
+      "len": 5947,
+      "head": "Iran-backed Houthi rebels captured Perim Island in the Bab e",
+      "cut": false,
+      "rss_len": 5911
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.41,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "국제정세",
+   "name": "Foreign Policy",
+   "lang": "en",
+   "url": "https://foreignpolicy.com/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 7,
+    "d14": 25,
+    "oldest_h": 126.9,
+    "newest_h": 3.9,
+    "per_day": 4.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 9423,
+      "head": "How Al-Shabab Beat the Peacekeepers Three missions and billi",
+      "cut": false,
+      "rss_len": 107
+     },
+     {
+      "verdict": "PASS",
+      "len": 10234,
+      "head": "Only China, India, and Russia Can End the Iran War Washingto",
+      "cut": false,
+      "rss_len": 58
+     },
+     {
+      "verdict": "PASS",
+      "len": 11677,
+      "head": "The United States Must Prepare for More Than One Russian Fut",
+      "cut": false,
+      "rss_len": 68
+     },
+     {
+      "verdict": "PASS",
+      "len": 10318,
+      "head": "Fresh Houthi Strikes Inject New Uncertainty Into Iran War As",
+      "cut": false,
+      "rss_len": 54
+     },
+     {
+      "verdict": "PASS",
+      "len": 9590,
+      "head": "Why My Kyiv Visit Worried Me So Much FP’s editor in chief on",
+      "cut": false,
+      "rss_len": 84
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.24,
+    "near_median": 5,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "국제정세",
+   "name": "War on the Rocks",
+   "lang": "en",
+   "url": "https://warontherocks.com/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 100,
+    "nodate": 0,
+    "h24": 2,
+    "d14": 28,
+    "oldest_h": 1205.9,
+    "newest_h": 6.4,
+    "per_day": 2.0,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 21038,
+      "head": "Join War on the Rocks and gain access to content trusted by ",
+      "cut": false,
+      "rss_len": 739
+     },
+     {
+      "verdict": "PASS",
+      "len": 3006,
+      "head": "Welcome to The Ukraine Compass, a weekly digest of Ukrainian",
+      "cut": true,
+      "rss_len": 835
+     },
+     {
+      "verdict": "PASS",
+      "len": 15373,
+      "head": "Join War on the Rocks and gain access to content trusted by ",
+      "cut": false,
+      "rss_len": 812
+     },
+     {
+      "verdict": "PASS",
+      "len": 743,
+      "head": "Join War on the Rocks and gain access to content trusted by ",
+      "cut": false,
+      "rss_len": 704
+     },
+     {
+      "verdict": "PASS",
+      "len": 19360,
+      "head": "Join War on the Rocks and gain access to content trusted by ",
+      "cut": true,
+      "rss_len": 798
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 28.31,
+    "near_median": 1,
+    "cut": 2,
+    "full_in_feed": 1
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN World",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 15,
+    "d14": 50,
+    "oldest_h": 88.7,
+    "newest_h": 11.5,
+    "per_day": 15.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 6769,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2822
+     },
+     {
+      "verdict": "PASS",
+      "len": 3717,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1594
+     },
+     {
+      "verdict": "PASS",
+      "len": 4514,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2053
+     },
+     {
+      "verdict": "PASS",
+      "len": 3212,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1319
+     },
+     {
+      "verdict": "PASS",
+      "len": 2534,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1184
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.67,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN China",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/china.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 9,
+    "d14": 50,
+    "oldest_h": 81.1,
+    "newest_h": 11.4,
+    "per_day": 17.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 5556,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 143
+     },
+     {
+      "verdict": "PASS",
+      "len": 2534,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1184
+     },
+     {
+      "verdict": "PASS",
+      "len": 1102,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 469
+     },
+     {
+      "verdict": "PASS",
+      "len": 11805,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5821
+     },
+     {
+      "verdict": "PASS",
+      "len": 5322,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2578
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 10.71,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN Politics",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/politics.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 6,
+    "d14": 50,
+    "oldest_h": 157.0,
+    "newest_h": 23.1,
+    "per_day": 9.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 5322,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 125
+     },
+     {
+      "verdict": "PASS",
+      "len": 6560,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 338
+     },
+     {
+      "verdict": "PASS",
+      "len": 12398,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5928
+     },
+     {
+      "verdict": "PASS",
+      "len": 11272,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5370
+     },
+     {
+      "verdict": "PASS",
+      "len": 6073,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2703
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.33,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "중국매체",
+   "name": "중국신문망 국제",
+   "lang": "zh",
+   "url": "https://www.chinanews.com.cn/rss/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 30,
+    "d14": 30,
+    "oldest_h": 14.7,
+    "newest_h": 0.5,
+    "per_day": 51.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "SHORT"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 775,
+      "head": "鸠山由纪夫：对日本防卫费急剧增加感到担忧 中新社北京9月15日电 (刘梦青 李纯)第十三届北京香山论坛15日至17日在北",
+      "cut": true,
+      "rss_len": 98
+     },
+     {
+      "verdict": "PASS",
+      "len": 756,
+      "head": "马来西亚2025年旅游业增加值占GDP15.9% 中新社吉隆坡9月15日电 (记者 刘育英)马来西亚统计局15日发布的2",
+      "cut": true,
+      "rss_len": 137
+     },
+     {
+      "verdict": "PASS",
+      "len": 798,
+      "head": "韩国总统李在明将召开记者会 韩媒：或与支持率下滑有关 中新网9月15日电 据韩联社等韩媒报道，韩国总统李在明将于当地时间",
+      "cut": false,
+      "rss_len": 69
+     },
+     {
+      "verdict": "PASS",
+      "len": 623,
+      "head": "日本自卫队推定：大型无人侦察机“全球鹰”已坠毁 中新网9月15日电 据日本广播协会(NHK)报道，当地时间15日，日本航",
+      "cut": false,
+      "rss_len": 64
+     },
+     {
+      "verdict": "SHORT",
+      "len": 515,
+      "head": "俄外长：俄罗斯希望结束俄乌冲突 中新网9月15日电 据俄罗斯卫星通讯社报道，当地时间15日，俄罗斯外长拉夫罗夫表示，俄罗",
+      "cut": false,
+      "rss_len": 71
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.55,
+    "near_median": 4,
+    "cut": 2,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "중국매체",
+   "name": "중국신문망 요문",
+   "lang": "zh",
+   "url": "http://www.chinanews.com.cn/rss/importnews.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 30,
+    "d14": 30,
+    "oldest_h": 12.8,
+    "newest_h": 0.5,
+    "per_day": 58.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "SHORT",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 775,
+      "head": "鸠山由纪夫：对日本防卫费急剧增加感到担忧 中新社北京9月15日电 (刘梦青 李纯)第十三届北京香山论坛15日至17日在北",
+      "cut": true,
+      "rss_len": 98
+     },
+     {
+      "verdict": "PASS",
+      "len": 798,
+      "head": "韩国总统李在明将召开记者会 韩媒：或与支持率下滑有关 中新网9月15日电 据韩联社等韩媒报道，韩国总统李在明将于当地时间",
+      "cut": false,
+      "rss_len": 69
+     },
+     {
+      "verdict": "PASS",
+      "len": 623,
+      "head": "日本自卫队推定：大型无人侦察机“全球鹰”已坠毁 中新网9月15日电 据日本广播协会(NHK)报道，当地时间15日，日本航",
+      "cut": false,
+      "rss_len": 64
+     },
+     {
+      "verdict": "SHORT",
+      "len": 515,
+      "head": "俄外长：俄罗斯希望结束俄乌冲突 中新网9月15日电 据俄罗斯卫星通讯社报道，当地时间15日，俄罗斯外长拉夫罗夫表示，俄罗",
+      "cut": false,
+      "rss_len": 71
+     },
+     {
+      "verdict": "PASS",
+      "len": 633,
+      "head": "江苏泰兴通报“百胜超市员工将地面冻品倒回冰柜” 中新网9月15日电 据“泰兴市场监管”微信公众号消息，9月15日，江苏泰",
+      "cut": false,
+      "rss_len": 124
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.55,
+    "near_median": 3,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "한국어",
+   "name": "조선비즈 국제",
+   "lang": "ko",
+   "url": "https://biz.chosun.com/arc/outboundfeeds/rss/category/international/?outputType=xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 24,
+    "d14": 50,
+    "oldest_h": 47.5,
+    "newest_h": 0.4,
+    "per_day": 25.4,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 0,
+    "n": 5,
+    "verdicts": [
+     "EXTRACT_EMPTY",
+     "EXTRACT_EMPTY",
+     "EXTRACT_EMPTY",
+     "EXTRACT_EMPTY",
+     "EXTRACT_EMPTY"
+    ],
+    "extractor_suspect": true,
+    "articles": [
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 524
+     },
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 429
+     },
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 535
+     },
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 809
+     },
+     {
+      "verdict": "EXTRACT_EMPTY",
+      "why": "200 but nothing extracted",
+      "len": 0,
+      "rss_len": 1578
+     }
+    ],
+    "teaser": null,
+    "teaser_n": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "미국경제",
+   "name": "Axios",
+   "lang": "en",
+   "url": "https://api.axios.com/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 100,
+    "nodate": 0,
+    "h24": 19,
+    "d14": 100,
+    "oldest_h": 212.8,
+    "newest_h": 0.2,
+    "per_day": 11.3,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 0,
+    "n": 5,
+    "verdicts": [
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 3677
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 3481
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 2522
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 2673
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 4064
+     }
+    ],
+    "teaser": null,
+    "teaser_n": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  }
+ ],
+ "elapsed_s": 24.4
+}

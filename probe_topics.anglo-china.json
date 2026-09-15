@@ -1,0 +1,2961 @@
+{
+ "measured_at": "2026-09-15T11:36:53.896752+00:00",
+ "ua": "Mozilla/5.0 (newsletter-agent-course)",
+ "body_min": 600,
+ "n_g1": 5,
+ "n_fit": 12,
+ "fit_max_age_d": 7,
+ "topics": {
+  "미국경제": [
+   "연준이 금리·양적긴축 같은 통화정책을 결정했거나 의장·이사가 공식 발언을 했나",
+   "미국 정부 기관이 고용·물가·GDP·소매판매 같은 공식 경제지표를 발표했나",
+   "미국 정부·의회가 재정·세제·관세·산업정책 조치를 발표하거나 시행했나",
+   "미국 국채금리·주가지수·달러가 크게 움직였고 그 원인이 보도됐나"
+  ],
+  "중국경제": [
+   "인민은행·국무원이 금리·지준율·부양책 같은 정책을 발표했나",
+   "중국 정부가 GDP·물가·PMI·수출입 같은 공식 경제지표를 발표했나",
+   "중국 부동산·지방정부 부채·대기업의 위기나 구조조정에 새로 확인된 사실이 있나",
+   "중국이 산업·수출통제·외국기업 규제 조치를 발표하거나 시행했나"
+  ],
+  "중미관계": [
+   "미국과 중국 정부 사이에 회담·통화·협상이 실제로 있었나",
+   "미국 또는 중국이 상대국을 겨냥한 관세·수출통제·제재·투자제한을 발표했나",
+   "대만·남중국해를 둘러싸고 미국 또는 중국의 군사·외교 행동이 있었나",
+   "한쪽의 조치에 다른 쪽 정부가 공식적으로 대응했나"
+  ],
+  "국제정세": [
+   "전쟁·무력충돌에서 공격·휴전·점령 같은 실제 전개가 있었나",
+   "정상회담·국제기구 결의·조약 체결이 실제로 있었나",
+   "주요국에서 선거 결과·정권 교체·쿠데타가 확인됐나",
+   "대규모 재해·테러·난민 사태가 일어나 국제적 대응이 있었나"
+  ]
+ },
+ "discard": [
+  "새로 일어난 일 없이 전망·가능성 분석만 있는 기사",
+  "개별 종목·기업 실적·일일 시황만 다루고 거시경제나 정책과 무관한 기사",
+  "해마다 같은 날 반복되는 의례·기념 행사 보도",
+  "칼럼·사설·인터뷰처럼 사실 보도가 아닌 글"
+ ],
+ "problems": [],
+ "judge_errors": 0,
+ "rows": [
+  {
+   "group": "대조",
+   "name": "Yonhap-NK",
+   "lang": "ko",
+   "url": "https://www.yna.co.kr/rss/northkorea.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 85,
+    "nodate": 0,
+    "h24": 12,
+    "d14": 85,
+    "oldest_h": 158.1,
+    "newest_h": 3.3,
+    "per_day": 13.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "SHORT",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "SHORT",
+      "len": 467,
+      "head": "(서울=연합뉴스) ▲ 북한 정권 수립 78주년을 기념해 중국인민대외우호협회와 중조(북중)우호협회가 공동으로 ",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1484,
+      "head": "정세현 \"트럼프 평양 가야 김정은 회담 응할 것\" 10월 중순 북미정상회담 성사 가능성 제기 \"李대통령, 유",
+      "cut": false,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 1316,
+      "head": "리광천 \"동포와 한마음으로 좋은 결과 노력\" 北 여자축구, 재일 조선인 응원 속 방글라 10-0 \"1차 목표",
+      "cut": true,
+      "rss_len": 83
+     },
+     {
+      "verdict": "PASS",
+      "len": 655,
+      "head": "북한군, 최근 거의 매일 MDL 침범 파악 우리 경고사격 뒤 물러나…실수로 추정 북한, 전방에 신형무기 배치",
+      "cut": false,
+      "rss_len": 35
+     },
+     {
+      "verdict": "PASS",
+      "len": 915,
+      "head": "통일부, 17일 '평화공존 3대 청사진' 학술회의 李대통령 광복절 제시 청사진 이행방안 모색 정동영 기조연설",
+      "cut": false,
+      "rss_len": 83
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.18,
+    "near_median": 1,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24
+  },
+  {
+   "group": "대조",
+   "name": "38North",
+   "lang": "en",
+   "url": "https://www.38north.org/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 8,
+    "nodate": 0,
+    "h24": 0,
+    "d14": 5,
+    "oldest_h": 426.8,
+    "newest_h": 117.7,
+    "per_day": 0.6,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 2940,
+      "head": "New North Korea-China Link Appears Close to Opening North Ko",
+      "cut": false,
+      "rss_len": 3486
+     },
+     {
+      "verdict": "PASS",
+      "len": 18801,
+      "head": "North Korea’s Recent Economic Recovery and the Sustainabilit",
+      "cut": false,
+      "rss_len": 17861
+     },
+     {
+      "verdict": "PASS",
+      "len": 19989,
+      "head": "Successes and Challenges of North Korea’s Five-Year Plan for",
+      "cut": false,
+      "rss_len": 17982
+     },
+     {
+      "verdict": "PASS",
+      "len": 7246,
+      "head": "Changes in the KPA High Command On August 29, Kim Jong Un pr",
+      "cut": false,
+      "rss_len": 7120
+     },
+     {
+      "verdict": "PASS",
+      "len": 2341,
+      "head": "North Korea Makes Significant Progress on New Trade Facility",
+      "cut": false,
+      "rss_len": 3267
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 8.54,
+    "near_median": 1,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "대조",
+   "name": "NK News",
+   "lang": "en",
+   "url": "https://www.nknews.org/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 300,
+    "nodate": 0,
+    "h24": 4,
+    "d14": 45,
+    "oldest_h": 2358.7,
+    "newest_h": 4.0,
+    "per_day": 3.1,
+    "window_short": false
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 1236,
+      "head": "About the Author Jooheon Kim Jooheon Kim is a Correspondent ",
+      "cut": true,
+      "rss_len": 314
+     },
+     {
+      "verdict": "PASS",
+      "len": 1175,
+      "head": "About the Author Seung-Yeon Chung Seung-Yeon Chung is a stat",
+      "cut": true,
+      "rss_len": 338
+     },
+     {
+      "verdict": "PASS",
+      "len": 631,
+      "head": "Editor’s note: The following article is an opinion piece by ",
+      "cut": true,
+      "rss_len": 345
+     },
+     {
+      "verdict": "PASS",
+      "len": 1228,
+      "head": "About the Author Anton Sokolin Anton Sokolin is the data cor",
+      "cut": true,
+      "rss_len": 362
+     },
+     {
+      "verdict": "PASS",
+      "len": 1178,
+      "head": "North Korean leader Kim Jong Un inspects the Machine Plant M",
+      "cut": false,
+      "rss_len": 378
+     }
+    ],
+    "teaser": true,
+    "teaser_n": 5,
+    "spread": 1.96,
+    "near_median": 4,
+    "cut": 4,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168
+  },
+  {
+   "group": "영미권",
+   "name": "CBS World",
+   "lang": "en",
+   "url": "https://www.cbsnews.com/latest/rss/world",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 9,
+    "d14": 30,
+    "oldest_h": 214.1,
+    "newest_h": 0.3,
+    "per_day": 3.4,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 24194,
+      "head": "Latest Updates: Iran war costs well over $33.4 billion, Pent",
+      "cut": false,
+      "rss_len": 178
+     },
+     {
+      "verdict": "PASS",
+      "len": 3582,
+      "head": "Pentagon inspector general says $22.3B spent on Iran war mun",
+      "cut": false,
+      "rss_len": 164
+     },
+     {
+      "verdict": "PASS",
+      "len": 3486,
+      "head": "Trump nominates Lee Greenwood's wife to serve as ambassador ",
+      "cut": false,
+      "rss_len": 183
+     },
+     {
+      "verdict": "PASS",
+      "len": 1086,
+      "head": "Latest U.S. Iran War Iran Rescue World Politics Entertainmen",
+      "cut": false,
+      "rss_len": 124
+     },
+     {
+      "verdict": "PASS",
+      "len": 1105,
+      "head": "Latest U.S. Iran War Iran Rescue World Politics Entertainmen",
+      "cut": false,
+      "rss_len": 121
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 22.28,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168,
+   "fit_items": [
+    {
+     "title": "Iran war has cost well over $33.4 billion, Pentagon report says",
+     "event": "이 기사는 미국과 이란 간의 전쟁 비용에 관한 미국 국방부 보고서 내용을 다루고 있습니다. 전쟁과 관련된 실제 비용이 보고되었으므로 국제정세 브리핑에 해당할 수 ",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Trump nominates Lee Greenwood's wife to serve as ambassador to Barbados",
+     "event": "트럼프 대통령이 바베이도스 대사로 Kimberly Greenwood를 지명했다는 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "9/14: The Takeout with Major Garrett",
+     "event": "Anthropic CEO가 AI 속도 조절을 요구하는 목소리에 동참했고, 트럼프 대통령이 우크라이나에 러시아 석유 정제소 공격 중단을 요구했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "CBS News gets exclusive access to a U.S. aircraft carrier in Middle East",
+     "event": "미국 항공모함이 중동에서 이란에 대한 작전의 핵심 역할을 하고 있다는 내용의 보도입니다. 이는 군사적 움직임과 관련된 내용으로, 중미관계의 대만·남중국해를 둘러싼",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Shark attacks, injures surfer at popular beach in Australia",
+     "event": "호주 해변에서 상어 공격으로 서퍼 부상. 과학자들은 해수 온도 상승과 인구 밀집이 상어 이동 경로 변화에 영향을 미쳐 공격 증가에 기여할 수 있다고 봄.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Iranian vessel in Hormuz hit, while Houthis expand control of shipping lane",
+     "event": "이란이 지원하는 후티가 바브엘만데브 해협에서 영향력을 확대했고, 호르무즈 해협에서는 공격이 계속되었다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "U.S. military on high alert as Iran, allies target energy supply",
+     "event": "미국 군대가 중동에서 고도의 경계 태세를 유지하며 이란과 동맹국들이 에너지 공급을 겨냥한 상황에 대비하고 있다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Celine Dion overcomes rare neurological disorder to perform first concert in 6 years",
+     "event": "Celine Dion이 희귀 신경 장애를 극복하고 6년 만에 첫 콘서트를 개최했다는 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "9/13: CBS Weekend News",
+     "event": "트럼프 대통령이 새로운 AI 경고에 반박하고, 급등하는 에너지 가격 속에서 아일랜드를 방문했다는 내용입니다. AI 경고에 대한 반박과 에너지 가격 문제는 미국 경",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump says Ukraine needs to stop targeting Russian refineries",
+     "event": "러시아와 우크라이나 간의 무력충돌에서 공격이 있었음",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Uncovering a Holocaust survival story",
+     "event": "제2차 세계대전 중 미국군이 1945년 4월에 2,500명의 홀로코스트 생존자를 해방시킨 사실이 구술 역사 프로젝트를 통해 밝혀졌다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "9/13: Face The Nation",
+     "event": "중간선거를 앞두고 CBS 뉴스의 선거 및 여론조사 책임자가 출연하는 방송 내용입니다. 선거 결과나 정권 교체가 실제로 확인된 것은 아니며, 전망과 분석 중심입니다",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 7,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 5
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "ABC International",
+   "lang": "en",
+   "url": "https://abcnews.go.com/abcnews/internationalheadlines",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 21,
+    "d14": 25,
+    "oldest_h": 27.4,
+    "newest_h": 0.8,
+    "per_day": 22.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 3226,
+      "head": "Houthi official says Saudi airstrikes leave 3 dead, and othe",
+      "cut": false,
+      "rss_len": 96
+     },
+     {
+      "verdict": "PASS",
+      "len": 1691,
+      "head": "Japan loses contact with a surveillance drone off the countr",
+      "cut": false,
+      "rss_len": 113
+     },
+     {
+      "verdict": "PASS",
+      "len": 5080,
+      "head": "Inquiry into New Zealand man who hid his kids in forest for ",
+      "cut": false,
+      "rss_len": 200
+     },
+     {
+      "verdict": "PASS",
+      "len": 1988,
+      "head": "Indigenous leader Raoni receives palliative care in Brazil a",
+      "cut": false,
+      "rss_len": 169
+     },
+     {
+      "verdict": "PASS",
+      "len": 3096,
+      "head": "Questions grow after Vanuatu ferry sinking as rescuers searc",
+      "cut": false,
+      "rss_len": 116
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.0,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "Houthi official says Saudi airstrikes leave 3 dead, and other Mideast developments",
+     "event": "후티 대변인이 예멘 남서부에서 사우디 공습으로 3명이 사망했다고 발표했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Japan loses contact with a surveillance drone off the country's northwestern coast",
+     "event": "일본 공군이 북서부 해안에서 감시 드론과의 연락을 잃음",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Indigenous leader Raoni receives palliative care in Brazil after cancer diagnosis",
+     "event": "브라질 원주민 지도자 라오니가 94세에 암 진단을 받고 자택에서 완화 치료를 받고 있다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Thailand and Cambodia begin UN conciliation process over disputed maritime claims",
+     "event": "태국과 캄보디아가 유엔 해양법 협약에 따라 해상 경계 분쟁 해결을 위한 협상에 착수했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "As the last US troops pack up in Iraq, militias signal their weapons will stay",
+     "event": "이라크에서 미군이 철수하는 상황과 무장단체들이 무기를 유지할 것임을 시사하는 내용입니다. 이는 중동 지역의 군사적 긴장과 관련된 국제정세 사안으로 볼 수 있습니다",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "A crisis is shaking Brazil’s Supreme Court. Here’s what to know",
+     "event": "브라질 대법원이 전례 없는 위기에 처해 있다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "UK's unity threatened by pact between Wales, Scotland and Northern Ireland",
+     "event": "영국 내 웨일스, 스코틀랜드, 북아일랜드 지도자들이 영국의 분열을 위협하는 협약을 체결했다는 내용입니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Pope celebrates his 71st birthday but it's Vatican employees who get the gift",
+     "event": "교황이 71번째 생일을 맞이했으나 바티칸 직원들이 선물을 받았다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Houthis seize 2 strategic Red Sea islands, and other Mideast developments",
+     "event": "예멘 후티 반군이 홍해의 전략적 섬 두 곳을 점령했다는 내용으로, 이는 무력충돌에서의 실제 공격 전개에 해당한다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Carney pitches Canada to global investors as Trump tries to pull investment south",
+     "event": "캐나다 총리 마크 카니가 트럼프 대통령과의 무역 전쟁이 심화되는 가운데 캐나다의 경제적 미국 의존도를 줄이기 위해 세계 최대 투자자들을 유치하려고 노력하고 있다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Iran denounces Austria for blocking its nuclear chief from a meeting in Vienna",
+     "event": "이란이 오스트리아가 자국 원자력 기구 수장을 빈에서 열린 유엔 핵기구 회의에서 배제한 것에 대해 비난했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Thick haze disrupts flights on Indonesia's Borneo island",
+     "event": "인도네시아 보르네오 섬의 숲 화재로 인한 짙은 연기가 인도네시아 서칼리만탄 주의 항공편에 지장을 주었다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 6,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 6
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "PBS NewsHour World",
+   "lang": "en",
+   "url": "https://www.pbs.org/newshour/feeds/rss/world",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 20,
+    "nodate": 0,
+    "h24": 15,
+    "d14": 20,
+    "oldest_h": 44.1,
+    "newest_h": 12.7,
+    "per_day": 15.3,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 9525,
+      "head": "President Trump rejected calls for greater oversight of arti",
+      "cut": false,
+      "rss_len": 394
+     },
+     {
+      "verdict": "PASS",
+      "len": 5796,
+      "head": "In our news wrap Monday, officials at the Kennedy Center are",
+      "cut": false,
+      "rss_len": 397
+     },
+     {
+      "verdict": "PASS",
+      "len": 9978,
+      "head": "Yemen's Houthi rebels seized more islands in the strategical",
+      "cut": false,
+      "rss_len": 345
+     },
+     {
+      "verdict": "PASS",
+      "len": 7091,
+      "head": "The EPA announced it is repealing rules limiting greenhouse ",
+      "cut": false,
+      "rss_len": 390
+     },
+     {
+      "verdict": "PASS",
+      "len": 2967,
+      "head": "By — Cinar Kiper, Associated Press Cinar Kiper, Associated P",
+      "cut": true,
+      "rss_len": 189
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.36,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "Trump pushes back as AI leaders fuel calls to rein in rapidly advancing technology",
+     "event": "트럼프 대통령이 인공지능 기술의 급속한 발전에 대한 규제 요구에 반대했다는 내용입니다. AI 산업 내 경고에도 불구하고 규제에 반대하는 입장을 보인 점이 보도되었",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "News Wrap: Kennedy Center warns of 'fiscal collapse' without Trump's name on building",
+     "event": "케네디 센터가 건물 외부에 트럼프 대통령의 이름이 없으면 '재정 붕괴'가 확실하다고 경고하고 있다. 여러 주 선거 관리들이 중간선거를 앞두고 우편 투표에 대한 불",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Houthi gains in Yemen, attack on Saudi pipeline compound pressure on oil markets",
+     "event": "예멘 후티 반군이 전략적으로 중요한 바브 알만답 해협의 섬들을 점령하고 사우디아라비아의 주요 송유관이 몇 주간 가동 중단될 예정이라는 내용으로, 국제 석유 시장에",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "EPA repeals limits on greenhouse gas emissions from power plants",
+     "event": "EPA가 석탄 및 가스 발전소의 온실가스 배출 제한 규정을 철회했다는 내용입니다. 이는 미국 정부 기관이 환경 관련 정책 조치를 발표한 것으로 볼 수 있습니다.",
+     "matches": [
+      "미국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Zelenskyy says Ukraine will pause strikes on Russia if Kremlin spares critical infrastruct",
+     "event": "우크라이나 대통령 젤렌스키가 러시아에 대한 공격을 중단할 것이라고 밝힘. 이는 러시아와 우크라이나 간의 에너지 인프라를 상호 공격하지 않기로 한 합의와 관련된 발",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Pope celebrates his 71st birthday but it's Vatican employees who get the gift",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Houthis seize 2 strategic Red Sea islands, and other Mideast developments",
+     "event": "예멘 후티 반군이 홍해의 전략적 섬 두 곳을 점령했다는 사실은 전쟁·무력충돌에서 공격이 있었음을 의미한다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "After decades of insurgency, Muslim region in Philippines votes in its first parliamentary",
+     "event": "필리핀 무슬림 지역에서 수십 년간의 반란 끝에 첫 의회 선거가 치러졌다. 이는 자치권 확보를 위한 중요한 단계이다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump doubled down on backing a united Ireland, reigniting a divisive political issue. Her",
+     "event": "북아일랜드의 지위가 논란이 되고 있다는 내용으로, 미국이나 중국의 정책, 경제지표, 중미관계, 국제정세의 구체적 사건이나 조치가 보도된 것은 아님.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Carney pitches Canada to global investors amid trade war with Trump",
+     "event": "캐니가 캐나다의 에너지, 중요 광물, 교육받은 노동력, 글로벌 무역 접근성, 정치적 안정성을 투자 이유로 제시함",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Alexander Zverev beats Ben Shelton to win the U.S. Open title and extend Grand Slam drough",
+     "event": "Alexander Zverev가 Ben Shelton을 이기고 US 오픈 테니스 대회 우승을 차지했다는 스포츠 경기 결과 보도입니다. 미국 남성 선수들의 그랜드 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Saudi oil pipeline hit in strikes will be mostly out of service for several weeks",
+     "event": "사우디 석유 파이프라인이 공격을 받아 몇 주간 대부분 가동 중단될 예정이라는 내용입니다. 이는 중동 지역의 군사적 긴장과 관련된 사안으로, 호르무즈 해협을 둘러싼",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 6,
+    "no_summary": 0,
+    "미국경제": 1,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 5
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "Sky News World",
+   "lang": "en",
+   "url": "https://feeds.skynews.com/feeds/rss/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 8,
+    "nodate": 0,
+    "h24": 3,
+    "d14": 8,
+    "oldest_h": 79.8,
+    "newest_h": 14.4,
+    "per_day": 2.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 0,
+    "n": 5,
+    "verdicts": [
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 36
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 61
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 77
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 132
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 37
+     }
+    ],
+    "teaser": null,
+    "teaser_n": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168,
+   "fit_items": [
+    {
+     "title": "Macklemore 'removed' from Ed Sheeran tour over 'Free Palestine' comment",
+     "event": "래퍼 Macklemore가 'Free Palestine' 발언으로 인해 Ed Sheeran 투어에서 제외되었다는 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Putin ally paid for Trump Jr's wedding celebrations as 'extraordinarily generous gift'",
+     "event": "도널드 트럼프 주니어의 결혼식 축하 비용을 푸틴 동맹이 지불했다는 내용으로, 미국 경제, 중국 경제, 중미관계, 국제정세 어느 분야의 중요도 기준에도 해당하지 않",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Uganda back in Invictus Games after withdrawing over 'Harry-Meghan nonsense'",
+     "event": "우간다가 '해리-메건 소동' 때문에 철수했다가 인빅터스 게임에 다시 참가한다는 내용입니다. 해리와 메건이 2024년 캐나다에서 인빅터스 게임 선수들을 만난다는 내",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Early results in Swedish election show one-seat advantage for left bloc",
+     "event": "스웨덴 선거에서 좌파 블록이 한 석 우위를 보인 초기 결과에 관한 기사입니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Drone alert over Lithuania turns out to be flock of birds - as NATO jet scrambled",
+     "event": "리투아니아 상공에서 드론 경보가 발생했으나 실제로는 새 떼였고, 이에 NATO 전투기가 긴급 출격했다는 내용입니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Six dead and search under way for 129 missing from Indonesian passenger ship",
+     "event": "인도네시아 여객선에서 6명이 사망하고 129명이 실종되어 수색 작업이 진행 중임.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Trump calls for Irish reunification - and claims 'it will happen eventually'",
+     "event": "도널드 트럼프가 아일랜드 통일을 촉구하며 '결국 일어날 것'이라고 주장했다. 그는 마이클 마틴과 만남을 가졌다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Woman, 54, gives birth after using embryo frozen for 22 years",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 8,
+    "discard": 5,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 3
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "Independent World",
+   "lang": "en",
+   "url": "https://www.independent.co.uk/news/world/rss",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 67,
+    "nodate": 0,
+    "h24": 67,
+    "d14": 67,
+    "oldest_h": 24.0,
+    "newest_h": 0.0,
+    "per_day": 67.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 4958,
+      "head": "Paris artist reveals heatwave’s devastating impact on homele",
+      "cut": false,
+      "rss_len": 135
+     },
+     {
+      "verdict": "PASS",
+      "len": 3627,
+      "head": "California woman shot dead in street by man who had stalked ",
+      "cut": false,
+      "rss_len": 120
+     },
+     {
+      "verdict": "PASS",
+      "len": 5787,
+      "head": "Ukraine-Russia war latest: Denmark accuses Moscow warship of",
+      "cut": true,
+      "rss_len": 63
+     },
+     {
+      "verdict": "PASS",
+      "len": 3924,
+      "head": "Barack Obama weighs in on AI dangers after Trump said he sho",
+      "cut": true,
+      "rss_len": 104
+     },
+     {
+      "verdict": "PASS",
+      "len": 3593,
+      "head": "Massive legal battle erupts as 22 states fight Trump plan to",
+      "cut": true,
+      "rss_len": 175
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 1.61,
+    "near_median": 3,
+    "cut": 3,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "Paris artist reveals heatwave’s devastating impact on homeless in stark drawings",
+     "event": "파리의 예술가가 폭염이 노숙자에게 미치는 파괴적인 영향을 그림으로 표현했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Who is Umar Kremlev? The Russian oligarch who helped bankroll Donald Trump Jr’s wedding",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Vermont shooter claims NPR radio station commanded him to open fire on Palestinian student",
+     "event": "미국 버몬트에서 발생한 총격 사건에서 범인이 NPR 라디오 방송국이 팔레스타인 학생들에게 총격을 가하라고 명령했다고 주장함. 범인은 CIA와 모사드의 지시를 받았",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Suspect pleads not guilty in horrific tree-hanging death of young Black woman",
+     "event": "미시시피에서 29세 흑인 여성의 나무 매달림 사망 사건과 관련하여 용의자가 살인 혐의에 대해 무죄를 주장함",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Gavin Newsom reveals he won’t run for president in 2028 if a certain other Democrat does",
+     "event": "캘리포니아 주지사 Gavin Newsom이 2028년 대통령 선거에 출마하지 않을 것이라고 밝힘. 이는 특정 민주당 인사가 출마할 경우에 해당됨.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Mitch McConnell back in Senate to cast first vote since disappearing from public life in J",
+     "event": "미치 매코넬 상원의원이 6월 이후 처음으로 상원 투표에 참여했다는 내용으로, 이는 개인 건강 문제와 관련된 소식이다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump wants to be the only guardrail against AI. Ask yourself why",
+     "event": "트럼프가 AI에 대한 유일한 안전장치가 되길 원한다는 내용으로, AI와 중국과의 경쟁에 대한 전망과 우려를 다루고 있음. 그러나 구체적인 정책 발표나 공식 경제지",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Ranting Trump blames ‘Dumocrats’ for not choosing $5,000 ‘bribe’ over winning midterms",
+     "event": "트럼프가 중간선거 승리를 위해 유권자들에게 5,000달러 지급 계획을 제안했으나 일부 공화당원들이 반대하고 있음",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Sony will pay out PlayStation users $7.85 million in store credit. Here’s how to claim par",
+     "event": "Sony가 PlayStation 사용자들에게 785만 달러 상당의 스토어 크레딧을 지급하는 합의에 관한 기사입니다. 이는 개별 기업의 소송 및 합의 내용으로, 거",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Uganda reverses withdrawal from Invictus Games after King Charles intervenes",
+     "event": "우간다가 찰스 왕의 개입으로 인빅터스 게임 참가 철회를 번복했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Elon Musk’s mother claims he was a genius by the age of three in bizarre interview",
+     "event": "Elon Musk의 어린 시절 천재성 주장과 인종차별 혐의 방어에 관한 인터뷰 내용",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Don Jr’s Bahamas wedding that Trump skipped was bankrolled by Putin-tied Russian oligarch",
+     "event": "러시아 올리가르히가 돈을 대어 도널드 트럼프 주니어의 바하마 결혼식을 지원했다는 내용입니다. 이는 미국과 러시아 또는 미국과 중국 간의 직접적인 정부 간 회담, ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 10,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 2
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "Washington Post World",
+   "lang": "en",
+   "url": "https://feeds.washingtonpost.com/rss/world",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 11,
+    "nodate": 0,
+    "h24": 7,
+    "d14": 11,
+    "oldest_h": 46.9,
+    "newest_h": 2.7,
+    "per_day": 6.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 0,
+    "n": 5,
+    "verdicts": [
+     "FETCH_ERR",
+     "FETCH_ERR",
+     "FETCH_ERR",
+     "FETCH_ERR",
+     "FETCH_ERR"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "FETCH_ERR",
+      "why": "ReadTimeout",
+      "len": 0,
+      "rss_len": 149
+     },
+     {
+      "verdict": "FETCH_ERR",
+      "why": "ReadTimeout",
+      "len": 0,
+      "rss_len": 166
+     },
+     {
+      "verdict": "FETCH_ERR",
+      "why": "ReadTimeout",
+      "len": 0,
+      "rss_len": 80
+     },
+     {
+      "verdict": "FETCH_ERR",
+      "why": "ReadTimeout",
+      "len": 0,
+      "rss_len": 114
+     },
+     {
+      "verdict": "FETCH_ERR",
+      "why": "ReadTimeout",
+      "len": 0,
+      "rss_len": 84
+     }
+    ],
+    "teaser": null,
+    "teaser_n": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168,
+   "fit_items": [
+    {
+     "title": "Why Houthi control of the ‘Gate of Tears’ may be Iran’s biggest victory yet",
+     "event": "후티가 '눈물의 문'을 장악한 것이 이란의 가장 큰 승리일 수 있다는 내용으로, 주요 해상 교통로의 통제와 관련된 국제정세 사안임.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "What I saw when drones targeted a train in Ukraine, with ex-CIA director aboard",
+     "event": "우크라이나에서 드론이 기차를 공격한 사건을 목격한 내용으로, 전 CIA 국장이 탑승해 있었다는 기사입니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Scotland, Wales and Northern Ireland join in Celtic independence push",
+     "event": "스코틀랜드, 웨일스, 북아일랜드가 켈트 독립 운동에 동참했다는 내용과 도널드 트럼프 대통령이 아일랜드 통일을 보고 싶다고 발언한 내용입니다. 이는 미국 대통령의 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Macklemore dropped from Ed Sheeran tour after pro-Palestine comments",
+     "event": "Macklemore가 Ed Sheeran 투어에서 친팔레스타인 발언으로 제외되었다는 내용입니다. 이는 문화·연예 분야의 사건으로, 미국경제, 중국경제, 중미관계,",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Putin warns Europe of war if peacekeeping troops are deployed to Ukraine",
+     "event": "러시아 대통령이 우크라이나에 평화유지군이 배치될 경우 전쟁이 일어날 수 있다고 경고함",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "With Saudi Arabia under pressure, talks on how to end Iran war face delay",
+     "event": "이란과 사우디아라비아 간의 고위급 회담이 오만에서 예정되었으나, 사우디아라비아가 이란 지원 후티 반군과 이라크 민병대의 위협으로 인해 회담을 취소했다는 내용입니다",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "King Charles to host AI leaders as disaster warnings mount",
+     "event": "King Charles가 AI 리더들을 만나는 회담이 예정되어 있으며, 이는 업계 내에서 재난 경고가 증가하는 상황에서 새로운 긴급성을 띠고 있다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Ukraine’s war outlook worsens as Kyiv confronts budget and weapons shortfalls",
+     "event": "우크라이나 전쟁 상황에서 예산 부족과 무기 부족 문제가 심각해지고 있다는 내용입니다. 이는 전쟁·무력충돌에서 실제 전개가 있었는지에 대한 보도와 관련이 있습니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Trump calls on Zelensky to stop attacking Russian energy targets",
+     "event": "미국 평균 디젤 가격이 갤런당 6달러로 사상 최고치를 기록하며 글로벌 인플레이션 우려가 커졌다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump pokes the U.K., and Ireland’s unity debate catches fire",
+     "event": "트럼프가 영국과 아일랜드의 통일 논쟁에 대해 언급했다. 백악관의 수십 년간 중립 입장과 달리, 그의 발언은 분쟁 양측이 그가 아일랜드를 지지하는지, 영국을 조롱하",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Oman, a mediator with Iran, is baffled by Trump’s bombing threat",
+     "event": "오만이 이란과 중재자로서 미국과 이란 간 협상을 진행 중인 상황에서 트럼프 대통령이 오만에 대한 폭격 위협을 한 사건이 보도됨",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 11,
+    "discard": 6,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 1,
+    "국제정세": 4
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "The Hill International",
+   "lang": "en",
+   "url": "https://thehill.com/policy/international/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 15,
+    "nodate": 0,
+    "h24": 12,
+    "d14": 15,
+    "oldest_h": 38.5,
+    "newest_h": 1.6,
+    "per_day": 9.8,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 0,
+    "n": 5,
+    "verdicts": [
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP",
+     "FETCH_HTTP"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 343
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 371
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 327
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 336
+     },
+     {
+      "verdict": "FETCH_HTTP",
+      "why": "403",
+      "len": 0,
+      "rss_len": 382
+     }
+    ],
+    "teaser": null,
+    "teaser_n": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "Omar Hossino: Chief counsel and national security adviser, House Republican Policy Committ",
+     "event": "미국 의회의 국가안보 고문이 적대국가들로부터 제재를 받는 사례에 대한 내용으로, 정책 결정이나 공식 경제지표 발표, 중미관계의 공식 협상이나 조치, 국제정세의 전",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Russia sanctions bill passes House Rules Committee",
+     "event": "미국 하원 규칙위원회가 러시아에 대한 제재 법안을 승인했다는 내용으로, 미국 정부가 러시아에 대해 제재 조치를 발표한 것으로 볼 수 있다.",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Trump nominates Wesley Hunt to Saudi Arabia ambassador post",
+     "event": "트럼프 대통령이 웨슬리 헌트를 사우디아라비아 대사로 지명했다는 내용입니다. 이는 미국 정부의 외교 인사 임명에 관한 소식으로, 중미관계에서 미국과 중국 정부 사이",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Macklemore says Robert Kraft, stadium owners fueled his ouster from Ed Sheeran's tour over",
+     "event": "래퍼 Macklemore가 Ed Sheeran 투어에서 자신이 퇴출된 이유가 로버트 크래프트 등 경기장 소유주들의 압력 때문이라고 주장하며 팔레스타인 지지 발언과",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump adds extra sanctions to Russian bank for ties to Iran",
+     "event": "트럼프 행정부가 러시아 은행 VTB에 대해 이란과의 연계로 추가 제재를 가했다는 내용입니다. 이는 미국 정부가 상대국을 겨냥한 제재 조치를 발표한 사례로 중미관계",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Vance confirms calls to generals, admirals on US foreign policy",
+     "event": "미국 부통령이 중동, 아시아, 유럽의 미군 사령관들과 이란 전쟁에 관한 평가를 위해 통화한 사실을 확인했다는 내용입니다. 이는 미국과 관련된 군사 및 외교적 움직",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "10-year Treasury yield hits 5 percent",
+     "event": "미국 10년 만기 국채 수익률이 5%를 돌파한 사건입니다.",
+     "matches": [
+      "미국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Donald Trump Jr.'s wife defends wedding gift from Russian oligarch",
+     "event": "도널드 트럼프 주니어의 아내가 러시아 과두 정치인으로부터 받은 결혼 선물을 변호했다는 내용으로, 경제 정책, 공식 경제지표 발표, 미중 관계, 국제정세와 관련된 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Russian drone almost hit former CIA director, may have targeted Boris Johnson",
+     "event": "러시아 드론이 전 CIA 국장을 거의 타격했고, 보리스 존슨을 목표로 했을 가능성이 있음",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "China bristles at Anthropic CEO’s 'fearmongering' about its AI development",
+     "event": "중국 정부가 AI 개발과 관련해 미국 CEO의 발언에 공식적으로 반응함",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Top Oversight Democrat wants answers on Russian oligarch's role in Trump Jr.'s wedding",
+     "event": "러시아 올리가르히가 트럼프 주니어의 결혼식에 관여한 사실에 대해 미국 하원 감독위원회의 민주당 간부가 답변을 요구함",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump says Russia, Ukraine agree to avoid energy targets as fuel prices rise",
+     "event": "러시아와 우크라이나가 에너지 목표물을 공격하지 않기로 합의했다는 트럼프 대통령의 발언과 관련된 기사입니다. 이는 전쟁 중 실제 전개와 관련된 내용으로 국제정세 브",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 6,
+    "no_summary": 0,
+    "미국경제": 1,
+    "중국경제": 0,
+    "중미관계": 3,
+    "국제정세": 2
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "Fox News World",
+   "lang": "en",
+   "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 3,
+    "d14": 25,
+    "oldest_h": 169.3,
+    "newest_h": 10.9,
+    "per_day": 3.8,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 4370,
+      "head": "The leaders of Scotland, Wales and Northern Ireland called M",
+      "cut": false,
+      "rss_len": 4333
+     },
+     {
+      "verdict": "PASS",
+      "len": 5625,
+      "head": "Moscow is preparing for a final test of a new ballistic miss",
+      "cut": false,
+      "rss_len": 5589
+     },
+     {
+      "verdict": "PASS",
+      "len": 8721,
+      "head": "The Houthis’ rapid advance toward one of the world’s most im",
+      "cut": false,
+      "rss_len": 8790
+     },
+     {
+      "verdict": "PASS",
+      "len": 5947,
+      "head": "Iran-backed Houthi rebels captured Perim Island in the Bab e",
+      "cut": false,
+      "rss_len": 5911
+     },
+     {
+      "verdict": "PASS",
+      "len": 6557,
+      "head": "FIRST ON FOX: Africa could become the next major frontier fo",
+      "cut": false,
+      "rss_len": 6526
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.0,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 5
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 168,
+   "fit_items": [
+    {
+     "title": "UK breakup push escalates amid historic pact after Trump backs reunification of Ireland",
+     "event": "영국 분열 추진이 역사적 협약 이후 격화되었으며, 트럼프가 아일랜드 통일을 지지했다는 내용입니다. 이는 영국 내 정치적 변화와 관련된 국제정세 사안으로 볼 수 있",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Russia readies new 500-mile missile as weapon expert warns of 'terminal end game surprises",
+     "event": "러시아가 수백 마일 떨어진 목표물을 타격할 수 있는 새로운 탄도미사일의 최종 시험을 준비하고 있다는 내용으로, 이는 우크라이나의 방공망에 도전이 될 수 있다는 국",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Houthis enter US 'kill box' after seizing Red Sea 'cork,' former Pentagon official warns",
+     "event": "이란이 지원하는 후티 반군이 예멘 서해안에서 페림 섬을 점령하여 중요한 해상 운송로를 장악하고, 전직 펜타곤 관리가 이들이 '킬 박스'에 진입했다고 경고함. 이로",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Sweden votes as migration, crime and economy dominate high-stakes election",
+     "event": "스웨덴 총선에서 이민, 범죄, 경제가 주요 이슈로 부각되며 유권자들이 투표에 참여했다는 내용입니다. 이는 스웨덴 국내 정치 상황에 관한 보도로, 미국경제, 중국경",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Saudi Arabia tells Trump now is the time for military action as Iran-backed Houthis advanc",
+     "event": "사우디아라비아가 이란 지원 후티 반군의 진격에 대응하여 미국에 군사 행동을 촉구함. 후티 반군이 예멘의 전략적 해협인 Bab al-Mandab을 장악함.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Putin, Xi and Iran's Pezeshkian descend on India for high-stakes BRICS summit amid escalat",
+     "event": "러시아, 중국, 이란 대통령이 인도에서 BRICS 정상회의에 참석함. 중동과 유럽의 갈등이 고조되는 가운데 개최되어 국제적 긴장이 고조된 상황임.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Fire aboard cargo ship undergoing repairs at busy Chinese port leaves 25 people dead, five",
+     "event": "중국 동부 해안의 주요 항구인 칭다오에서 수리 중이던 화물선에서 화재가 발생해 25명이 사망하고 5명이 부상당했다는 보도입니다. 이는 대규모 재해에 해당하며 국제",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Drone nearly strikes Zelenskyy’s plane before takeoff for Norwegian king’s funeral, PM say",
+     "event": "우크라이나 대통령 젤렌스키의 비행기가 노르웨이 국왕의 장례식 참석을 위해 출발하기 전 드론에 거의 충돌할 뻔한 사건이 발생했다. 노르웨이 총리가 이 사건을 공개했",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Ukraine strikes deep into Russia’s Arctic gas heartland as Trump pushes Putin toward peace",
+     "event": "우크라이나가 러시아 북극 가스 생산 지역을 드론으로 공격하여 산업 시설에 화재가 발생했다는 내용입니다. 이는 전쟁·무력충돌에서 실제 공격이 있었던 사건으로 국제정",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "US sinks another 'floating refueling station' linked to 'narco-terrorist' group",
+     "event": "미국 남부사령부가 마약 밀매와 연계된 '떠다니는 급유소' 선박을 침몰시킨 사건",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Philippines defense chief calls out China after note interrupts remarks at Seoul forum: 'C",
+     "event": "필리핀 국방장관이 서울 포럼에서 중국의 남중국해 입장을 담은 쪽지를 받으며 중국을 공개 비판함",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Video captures grocery store manager's daring rescue of toddler who ran into oncoming traf",
+     "event": "멕시코 슈퍼마켓 매니저가 도로로 뛰어든 3세 아이를 구하는 영상이 공개됨",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 2,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 1,
+    "국제정세": 9
+   }
+  },
+  {
+   "group": "영미권",
+   "name": "TIME",
+   "lang": "en",
+   "url": "https://time.com/feed/",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 25,
+    "nodate": 0,
+    "h24": 15,
+    "d14": 25,
+    "oldest_h": 64.1,
+    "newest_h": 0.6,
+    "per_day": 9.4,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 25536,
+      "head": "Jacob Coxon published the viral post from a park bench in Sa",
+      "cut": true,
+      "rss_len": 26267
+     },
+     {
+      "verdict": "PASS",
+      "len": 3468,
+      "head": "At a dinner event celebrating the 2026 TIME Trailblazers at ",
+      "cut": false,
+      "rss_len": 56
+     },
+     {
+      "verdict": "PASS",
+      "len": 3194,
+      "head": "While much talk about what the future could look like focuse",
+      "cut": false,
+      "rss_len": 32
+     },
+     {
+      "verdict": "PASS",
+      "len": 5330,
+      "head": "Like most Americans, I arrived at the election watch party o",
+      "cut": false,
+      "rss_len": 5357
+     },
+     {
+      "verdict": "PASS",
+      "len": 7846,
+      "head": "The floods in Nepal and Tibet have been terrifying: some 1,3",
+      "cut": false,
+      "rss_len": 119
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 7.99,
+    "near_median": 1,
+    "cut": 1,
+    "full_in_feed": 2
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "The AI Tipping Point",
+     "event": "AI 연구자 Jacob Coxon이 Anthropic에서 사임하며 두 회사(OpenAI와 Anthropic)가 책임감 없이 초지능 개발 경쟁을 벌이고 있다고 비판",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "TIME Trailblazers Toast to What Gives Them Hope for the Future",
+     "event": "해당 기사는 제목과 요약만으로는 구체적인 사실 보도 내용이 없으며, 전망이나 가능성 분석, 또는 단순 행사 보도일 가능성이 높아 보입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "TIME Trailblazers Put People First in Designing a Better World",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "How the 1980s Permanently Shaped America",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "‘The Law Should Be Shutting Them Down’: Joseph Gordon-Levitt and Others Speak at TIME100 A",
+     "event": "미국의 배우 Joseph Gordon-Levitt가 AI 기업에 대한 규제를 촉구하는 발언을 했다는 내용입니다. 이는 미국 정부의 정책 결정이나 공식 경제지표 발",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "TIME100 AI Panelists Discuss AI’s Potential Impacts, for Better or Worse, on the Economy",
+     "event": "인공지능이 경제에 미칠 잠재적 영향에 대한 토론 내용으로, 구체적인 정책 발표나 공식 경제지표 발표, 정부 간 협상, 군사적 행동, 전쟁, 선거 결과 등 구체적 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "The Emmys Squandered Beloved First-Time Host Mariska Hargitay",
+     "event": "에미상 시상식에서 첫 호스트인 Mariska Hargitay가 공연을 했다는 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Who Is Umar Kremlev? The Russian Businessman With Ties to Putin Who Partly Funded Trump Jr",
+     "event": "러시아 사업가 우마르 크렘레프가 푸틴과 연관되어 있으며 트럼프 주니어의 결혼식 자금을 일부 지원했다는 내용입니다. 이는 미국과 러시아 또는 국제 정치와 관련된 인",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Canada Seeks 'Unique Alliance' With E.U. Amid U.S. Trade War. Here's What It Could Look Li",
+     "event": "캐나다가 미국과의 무역 전쟁 속에서 유럽연합과 '독특한 동맹'을 모색하고 있다는 내용으로, 미국과 중국 간의 직접적인 정책 조치나 경제지표 발표, 중미 간 협상이",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "In Gen Z Romance Shows Like Crew Girl, Sports Are the New Sex",
+     "event": "이 기사는 젊은 세대의 연애와 스포츠를 다루는 TV 프로그램에 관한 내용으로, 경제, 중미관계, 국제정세와 관련된 새 정책, 공식 발표, 군사 행동, 국제 회담,",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "How The Early Spring Ends—And Sets the Stage for More Chinese Dramas on Netflix",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Why You Should Never Wear Shoes in Your House",
+     "event": "신발을 집 안에서 신지 말아야 하는 이유에 대한 건강 및 위생 관련 기사로, 경제, 중미관계, 국제정세와 관련된 내용이 아님",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 12,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 0
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN World",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 16,
+    "d14": 50,
+    "oldest_h": 86.5,
+    "newest_h": 9.2,
+    "per_day": 15.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 6769,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2822
+     },
+     {
+      "verdict": "PASS",
+      "len": 3717,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1594
+     },
+     {
+      "verdict": "PASS",
+      "len": 4514,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2053
+     },
+     {
+      "verdict": "PASS",
+      "len": 3212,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1319
+     },
+     {
+      "verdict": "PASS",
+      "len": 2534,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1184
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.67,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "21 Palestinians injured as Israeli strikes continue in Gaza",
+     "event": "이스라엘의 가자지구 공습으로 팔레스타인인 21명이 부상당함. 휴전에도 불구하고 공습이 계속되고 있으며, 가자의 교육 시스템이 추가로 붕괴 위기에 처함.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "US judge blocks new stay limits for foreign students, journalists",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "US, Iran give conflicting signals on talks as Hormuz traffic stays low",
+     "event": "미국과 이란 간 협상에 대해 상반된 신호가 있으며, 호르무즈 해협의 통행량이 여전히 낮음",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese defense minister talks with visiting Lao defense minister",
+     "event": "중국 국방부 장관이 라오스 국방부 장관과 회담을 가졌다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Why do Panda birthdays matter?",
+     "event": "판다 생일을 기념하는 행사와 그 배경에 있는 보존 노력에 관한 내용입니다. 이는 전망·가능성 분석과 행사 보도에 가깝고, 정책 발표나 공식 경제지표, 중미관계, ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Climate forecasts alone won't protect Africa's poorest farmers",
+     "event": "",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Guinea, Cote d'Ivoire agree to strengthen security and economic ties",
+     "event": "기니와 코트디부아르 대통령 간 회담에서 안보, 무역, 정치 협력 강화 합의가 있었다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "China vows to continue search for missing Latvians in deadly mudslides",
+     "event": "중국 외교부 장관과 라트비아 외교부 장관이 양자 관계에 대해 전화 통화를 했다.",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese FM speaks with French counterpart on ties, global issues",
+     "event": "중국 외교부 장관이 프랑스 외교부 장관과 양자 관계 및 국제 문제에 대해 통화했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "China unites Global South for new chapter of BRICS cooperation",
+     "event": "중국 시진핑 주석이 인도 뉴델리에서 열린 제18차 BRICS 정상회의에 참석하여 BRICS 국가들이 더 공정하고 공평한 국제 질서를 촉진하는 선도적 역할을 할 것",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+     "event": "중국 시진핑 주석과 인도 나렌드라 모디 총리가 파트너십을 강조하며 회담을 가졌다는 내용입니다.",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "AI safety: Silicon Valley's fear narrative meets its governance gap",
+     "event": "이 기사는 인공지능 안전 문제와 실리콘밸리의 거버넌스 공백에 관한 내용으로, 미국 경제, 중국 경제, 중미관계, 국제정세 어느 분야의 중요도 기준에도 부합하지 않",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 5,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 3,
+    "국제정세": 4
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN China",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/china.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 12,
+    "d14": 50,
+    "oldest_h": 78.8,
+    "newest_h": 9.2,
+    "per_day": 17.2,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 5556,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 143
+     },
+     {
+      "verdict": "PASS",
+      "len": 2534,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 1184
+     },
+     {
+      "verdict": "PASS",
+      "len": 1102,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 469
+     },
+     {
+      "verdict": "PASS",
+      "len": 11805,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5821
+     },
+     {
+      "verdict": "PASS",
+      "len": 5322,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2578
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 10.71,
+    "near_median": 2,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "China's industrial output up 5.3% in first 8 months",
+     "event": "중국 정부가 GDP·물가·PMI·수출입 같은 공식 경제지표를 발표했나",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese defense minister talks with visiting Lao defense minister",
+     "event": "중국 국방부 장관이 라오스 국방부 장관과 회담을 가졌다는 내용으로, 이는 군사·외교 행동에 해당할 수 있으나, 중미관계 관련 기준 질문에 해당하지 않음. 다른 브",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Why do Panda birthdays matter?",
+     "event": "판다 생일 기념 행사와 그 배경에 있는 50년 이상의 보존 노력 이야기입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "How China's 15th Five-Year Plan offers the world opportunities",
+     "event": "중국의 15차 5개년 계획이 세계에 기회를 제공한다는 내용의 의견 기사로, 구체적인 정책 발표나 공식 경제지표 발표가 포함되어 있지 않음.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "China vows to continue search for missing Latvians in deadly mudslides",
+     "event": "중국 외교장관과 라트비아 외교장관 간의 전화 통화가 있었음",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese FM speaks with French counterpart on ties, global issues",
+     "event": "중국 외교부 장관이 프랑스 외교부 장관과 양자 관계 및 국제 문제에 대해 통화했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Analysis: Three questions to know ahead of China's security forum",
+     "event": "중국 시안산 포럼이 20주년을 맞아 아시아 태평양 지역의 평화와 안보를 논의하는 중요한 국제 안보 포럼으로 성장했다는 내용입니다. 그러나 기사 내용만으로는 실제 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "China unites Global South for new chapter of BRICS cooperation",
+     "event": "중국 시진핑 주석이 인도 뉴델리에서 열린 제18차 BRICS 정상회의에 참석하여 BRICS 국가들이 더 공정하고 공평한 국제 질서를 촉진하는 데 선도적 역할을 할",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+     "event": "중국과 인도의 정상회담에서 시진핑과 모디가 파트너십을 강조한 합의를 발표했다.",
+     "matches": [
+      "중미관계",
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Nurturing a healthier future for China's next generation",
+     "event": "중국 정부가 아동 건강과 관련된 정책을 강조하는 내용이지만, 구체적인 정책 발표나 공식 경제지표 발표, 위기나 구조조정, 산업·수출통제·외국기업 규제 조치 발표가",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "A trade fair, a cultural exchange that carries on",
+     "event": "무역 박람회에서 문화 교류가 이루어졌다는 내용으로, 구체적인 정책 발표나 경제지표, 중미 간 협상, 군사 행동, 국제적 사건 등이 언급되지 않음.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Robot chefs, 80+ dishes: Inside a high-tech restaurant in China",
+     "event": "중국 산시성 타이위안에 있는 로봇이 요리하는 식당에 관한 기사입니다. 로봇이 재료를 가져오고 볶고 서빙하며 배달과 식기 세척까지 담당하는 첨단 기술 식당을 소개합",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 9,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 1,
+    "중미관계": 1,
+    "국제정세": 2
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "CGTN Politics",
+   "lang": "en",
+   "url": "https://www.cgtn.com/subscribe/rss/section/politics.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 50,
+    "nodate": 0,
+    "h24": 7,
+    "d14": 50,
+    "oldest_h": 154.7,
+    "newest_h": 20.8,
+    "per_day": 9.0,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 5322,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 125
+     },
+     {
+      "verdict": "PASS",
+      "len": 6560,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 338
+     },
+     {
+      "verdict": "PASS",
+      "len": 12398,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5928
+     },
+     {
+      "verdict": "PASS",
+      "len": 11272,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 5370
+     },
+     {
+      "verdict": "PASS",
+      "len": 6073,
+      "head": "By continuing to browse our site you agree to our use of coo",
+      "cut": false,
+      "rss_len": 2703
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.33,
+    "near_median": 3,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "NO_ROBOTS",
+    "why": "404"
+   },
+   "fit_window_h": 168,
+   "fit_items": [
+    {
+     "title": "Chinese FM holds phone talks with Latvian counterpart on ties",
+     "event": "중국 외교부 장관이 라트비아 외교부 장관과 양자 관계에 대해 전화 통화를 했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+     "event": "중국 시진핑 주석과 인도 나렌드라 모디 총리가 파트너십을 강조하며 회담을 가졌다는 내용입니다.",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Mongolian president vows to deepen energy cooperation with China",
+     "event": "몽골 대통령이 중국과의 에너지 협력 심화를 약속했다는 내용으로, 양국 간의 구체적인 협력 사업이 진행 중임을 알 수 있다.",
+     "matches": [
+      "중미관계"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Xi summarizes BRICS development achievements over the past 20 years",
+     "event": "중국 시진핑 주석이 BRICS 20주년을 맞아 BRICS의 발전 성과를 요약하며 BRICS가 신흥시장과 개발도상국을 위한 가장 영향력 있는 협력 플랫폼이 되었다고",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "DPP's intensified control over travel to the mainland draws criticism",
+     "event": "대만과 관련된 미국 또는 중국의 군사·외교 행동이 있었나에 대한 내용은 없고, 미국과 중국 정부 사이의 회담·통화·협상, 관세·수출통제·제재·투자제한 발표, 공식",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "President Xi Jinping arrives in India for 18th BRICS Summit",
+     "event": "중국 시진핑 주석이 인도에서 열린 제18차 BRICS 정상회의에 참석하기 위해 도착했다는 내용입니다. 정상회담이 실제로 있었으므로 국제정세 브리핑에 해당합니다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Houthis seize Perim Island, tightening grip on Bab al-Mandab Strait",
+     "event": "예멘 후티 세력이 바브 알만답 해협의 전략적 페림 섬을 점령하여 분쟁이 격화되고 미국과 걸프 산유국에 압박을 가하고 있다. 사우디아라비아가 미국에 군사 지원을 요",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "New York marks 25th anniversary of 9/11 attacks",
+     "event": "뉴욕에서 9/11 테러 25주년 추모식이 열림. 희생자 가족과 미국 부통령, 전직 대통령들이 참석하여 추모 행사를 진행함.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "China-led alliance launched to boost public security cooperation",
+     "event": "중국이 주도하는 국제 동맹이 출범하여 공공 보안 협력을 강화한다는 내용으로, 이는 중국 정부가 주도하는 다국적 협력체 출범에 관한 사실 보도임.",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "The world needs BRICS to be the adult in the room",
+     "event": "BRICS가 세계 경제나 국제정세에서 중요한 역할을 해야 한다는 전망과 분석을 담은 사설 또는 칼럼으로 보임. 구체적인 정책 발표, 경제지표 발표, 정부 간 회담",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Trump: Iran war will end right after US midterm elections",
+     "event": "미국 대통령 트럼프가 이란과의 전쟁이 미국 중간선거 직후에 끝날 것이라고 발언함. 호르무즈 해협 인근에서의 전투가 격화되고 있으며, 이로 인해 유가가 상승하는 상",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese vice premier calls for greater openness in services sector",
+     "event": "중국 부총리가 서비스업 개방과 협력 촉진을 강조하는 연설을 했다.",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 4,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 3,
+    "중미관계": 2,
+    "국제정세": 3
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "중국신문망 국제",
+   "lang": "zh",
+   "url": "https://www.chinanews.com.cn/rss/world.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 30,
+    "d14": 30,
+    "oldest_h": 13.9,
+    "newest_h": 0.2,
+    "per_day": 52.8,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 4,
+    "n": 5,
+    "verdicts": [
+     "SHORT",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "SHORT",
+      "len": 515,
+      "head": "俄外长：俄罗斯希望结束俄乌冲突 中新网9月15日电 据俄罗斯卫星通讯社报道，当地时间15日，俄罗斯外长拉夫罗夫表示，俄罗",
+      "cut": false,
+      "rss_len": 71
+     },
+     {
+      "verdict": "PASS",
+      "len": 756,
+      "head": "约旦前首相拉扎兹：中约能源合作潜力巨大 日前，约旦前首相奥马尔·拉扎兹接受了总台《高端访谈》栏目专访，在谈及中约两国间合",
+      "cut": false,
+      "rss_len": 87
+     },
+     {
+      "verdict": "PASS",
+      "len": 1102,
+      "head": "日媒：冲绳县知事选举暴露“日本本土对冲绳战后最严重歧视” 【环球网报道】据日本广播协会报道，受日本自民党等政党支持的古谢",
+      "cut": false,
+      "rss_len": 154
+     },
+     {
+      "verdict": "PASS",
+      "len": 1539,
+      "head": "用AI技术洗白侵略罪行，日本的危险尝试必须警惕 日本政府斥资44亿日元打造、拟向约18万名中央政府职员开放、接入美国闭源",
+      "cut": false,
+      "rss_len": 160
+     },
+     {
+      "verdict": "PASS",
+      "len": 1728,
+      "head": "为什么拉美需要研究学习中国？秘鲁前总理给出一个答案 “我这样说，并不是因为我个人对中国抱有某种特殊好感”，当地时间9月1",
+      "cut": false,
+      "rss_len": 125
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 3.36,
+    "near_median": 1,
+    "cut": 0,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "俄外长：俄罗斯希望结束俄乌冲突",
+     "event": "러시아 외교장관이 러시아-우크라이나 충돌 종료 희망과 협상 의사를 밝힘",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "日媒：冲绳县知事选举暴露“日本本土对冲绳战后最严重歧视”",
+     "event": "일본 오키나와 현 지사 선거에서 일본 본토가 오키나와에 대해 전후 가장 심각한 차별을 드러냈다는 보도",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "最新消息：日本海保飞机发现疑似失联侦察机残骸",
+     "event": "일본 해상보안청 항공기가 의심되는 실종 정찰기 잔해를 발견했다는 소식입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "跨越山海，为梦想铺路——中拉教育合作驶入快车道",
+     "event": "중국과 라틴아메리카 간 교육 협력에 관한 종합 보도입니다. 구체적인 정책 발표나 경제지표, 중미 관계, 국제정세와 관련된 실제 사건이 보도되지 않았습니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "美国对伊战损全景首曝光：损失重大、先进武器告急",
+     "event": "미국 국방부 감독 기관이 이란 전쟁 영향에 관한 첫 보고서를 발표했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "金正恩向普京致复谢电：“承诺始终不变地支持普京和俄罗斯人民”",
+     "event": "朝鲜最高领导人金正恩向俄罗斯总统普京致复谢电。",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "黄仁勋峰会现场接到特朗普电话，当场打开免提：“机器人不会接管世界”",
+     "event": "영웅준(黄仁勋) 엔비디아 CEO가 미국 대통령 트럼프와 인공지능 발전에 대해 통화한 사건",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "“东京审判不应被遗忘，正如侵略历史不容篡改”——访法国历史学者让—伊夫·勒纳乌尔",
+     "event": "도쿄 재판과 침략 역사를 잊지 말아야 한다는 내용의 인터뷰 기사로, 새로 일어난 사실이나 정책 발표가 없음",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "报告证实日本核电站地震评估造假 引发当地民众批评",
+     "event": "일본 핵발전소 지진 평가 조작 확인 및 지역 주민 비판",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "威尔士、苏格兰和北爱尔兰三地政党罕见“抱团”，向伦敦发出什么信号？",
+     "event": "영국의 웨일스, 스코틀랜드, 북아일랜드 지역 정당들이 만나서 자치권 인정과 헌법 개혁 준비를 촉구하는 양해각서를 체결했다는 내용입니다. 이는 영국 내 지역 정치 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "日本首相高市早苗将于17日改组内阁",
+     "event": "일본 총리 고이치 사나에가 17일 내각을 개편한다는 보도입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "武契奇宣布：将于9月27日辞去塞尔维亚总统职务",
+     "event": "세르비아 대통령 무치치가 9월 27일 대통령직을 사임한다고 발표했다.",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 9,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 0,
+    "중미관계": 0,
+    "국제정세": 3
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "중국신문망 요문",
+   "lang": "zh",
+   "url": "http://www.chinanews.com.cn/rss/importnews.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 30,
+    "nodate": 0,
+    "h24": 30,
+    "d14": 30,
+    "oldest_h": 11.9,
+    "newest_h": 0.2,
+    "per_day": 61.5,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 3,
+    "n": 5,
+    "verdicts": [
+     "SHORT",
+     "PASS",
+     "PASS",
+     "PASS",
+     "SHORT"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "SHORT",
+      "len": 515,
+      "head": "俄外长：俄罗斯希望结束俄乌冲突 中新网9月15日电 据俄罗斯卫星通讯社报道，当地时间15日，俄罗斯外长拉夫罗夫表示，俄罗",
+      "cut": false,
+      "rss_len": 71
+     },
+     {
+      "verdict": "PASS",
+      "len": 633,
+      "head": "江苏泰兴通报“百胜超市员工将地面冻品倒回冰柜” 中新网9月15日电 据“泰兴市场监管”微信公众号消息，9月15日，江苏泰",
+      "cut": false,
+      "rss_len": 124
+     },
+     {
+      "verdict": "PASS",
+      "len": 887,
+      "head": "受贿5742万 十四届全国政协原常委毕井泉一审获刑十四年 2026年9月15日，山东省济南市中级人民法院一审公开宣判十四",
+      "cut": false,
+      "rss_len": 115
+     },
+     {
+      "verdict": "PASS",
+      "len": 953,
+      "head": "中国内地高校全球冠军学科增至22个 中新社广州9月15日电 (记者 许青青)据高等教育评价专业机构软科15日发布的202",
+      "cut": true,
+      "rss_len": 138
+     },
+     {
+      "verdict": "SHORT",
+      "len": 458,
+      "head": "最新消息：日本海保飞机发现疑似失联侦察机残骸 中新网9月15日电 据日本共同社报道，当地时间15日，日本海上保安厅称，在",
+      "cut": false,
+      "rss_len": 68
+     }
+    ],
+    "teaser": false,
+    "teaser_n": 5,
+    "spread": 2.08,
+    "near_median": 2,
+    "cut": 1,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "俄外长：俄罗斯希望结束俄乌冲突",
+     "event": "러시아 외무장관이 러시아-우크라이나 충돌 종료 희망과 협상 의사를 밝힘",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "受贿5742万 十四届全国政协原常委毕井泉一审获刑十四年",
+     "event": "중국의 고위 공직자 비리 사건과 관련된 법원 판결 보도",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "雪豹、藏狐与旱獭 祁连山的“神奇动物”长啥样？",
+     "event": "중국에서 생태환경법전이 시행되었고, 이 법전은 생태 보호, 야생동물 보호 및 서식지 보호에 관한 체계적인 규정을 포함하고 있다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "伊朗外长阿拉格齐将访华",
+     "event": "이란 외교부 장관이 중국을 방문한다는 내용입니다. 그러나 방문의 목적이나 구체적인 회담, 협상, 정책 발표 등 구체적인 사실이 기사에 포함되어 있지 않습니다. 단",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "国家卫健委：加快托育综合服务中心建设",
+     "event": "중국 국가위생건강위원회가 보육 종합 서비스 센터 건설을 가속화하는 정책을 발표했다.",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "从事出境入境中介服务的机构和人员9月15日起备案管理",
+     "event": "중국 정부가 출입국 중개 서비스 기관과 인원의 등록 관리 방안을 발표했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "国家统计局：我国人形机器人出货量全球占比提升到97%",
+     "event": "중국 국가통계국이 2026년 8월 중국 국민경제 운영 상황에 대해 발표했으며, 산업 체인 공급 체인의 탄력성과 산업 경제의 안정적 성장 및 질적 향상에 대해 언급",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "中国向联合国捐赠嫦娥六号月壤样品",
+     "event": "중국이 유엔에 창어 6호 달 토양 샘플을 기증했다는 소식입니다. 이는 중국 정부의 우주 관련 활동이지만, 정책 발표나 경제지표, 중미관계, 국제정세의 주요 사건에",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "两部门针对海南启动国家自然灾害救助四级应急响应",
+     "event": "중국 정부가 자연재해에 대응하여 국가 차원의 재난 구호 비상 대응을 발동하고 현장 지원을 실시함",
+     "matches": [
+      "국제정세"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "北京检察机关依法对于泽涉嫌受贿案提起公诉",
+     "event": "중국 인민보험그룹 전 부총재 위저가 뇌물수수 혐의로 기소됨",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "共享单车服务规范新国标发布 对运营企业提出这些要求",
+     "event": "중국 정부가 인터넷 공유자전거 운영 서비스에 관한 국가 표준을 발표하여 운영 기업에 대한 요구사항을 제시했다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "屏幕里的“情感导师”，可能只是一个AI程序",
+     "event": "네트워크 감정 상담이 2차 심리적 상처가 되지 않도록 주의하라는 내용으로, 정책 발표나 공식 경제지표, 중미관계, 국제정세와 관련된 실제 사건이 보도된 것은 아님",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 6,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 4,
+    "중미관계": 0,
+    "국제정세": 2
+   }
+  },
+  {
+   "group": "중국매체",
+   "name": "ECNS",
+   "lang": "en",
+   "url": "https://www.ecns.cn/rss/rss.xml",
+   "http": 200,
+   "feed": "OK",
+   "g2": {
+    "entries": 100,
+    "nodate": 0,
+    "h24": 33,
+    "d14": 100,
+    "oldest_h": 144.4,
+    "newest_h": -7.0,
+    "per_day": 15.9,
+    "window_short": true
+   },
+   "g1": {
+    "pass": 5,
+    "n": 5,
+    "verdicts": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ],
+    "extractor_suspect": false,
+    "articles": [
+     {
+      "verdict": "PASS",
+      "len": 957,
+      "head": "(ECNS) -- A container freight train loaded with footwear, ho",
+      "cut": true,
+      "rss_len": 240
+     },
+     {
+      "verdict": "PASS",
+      "len": 788,
+      "head": "(ECNS) -- China’s highest-altitude 750-kV substation has tra",
+      "cut": true,
+      "rss_len": 186
+     },
+     {
+      "verdict": "PASS",
+      "len": 833,
+      "head": "(ECNS) -- Construction of a major offshore oil and gas engin",
+      "cut": true,
+      "rss_len": 212
+     },
+     {
+      "verdict": "PASS",
+      "len": 895,
+      "head": "(ECNS) -- China’s Ministry of Transport will host the 2026 G",
+      "cut": true,
+      "rss_len": 216
+     },
+     {
+      "verdict": "PASS",
+      "len": 729,
+      "head": "Are Tibetans able to practice their own religion? Are they a",
+      "cut": false,
+      "rss_len": 238
+     }
+    ],
+    "teaser": true,
+    "teaser_n": 5,
+    "spread": 1.31,
+    "near_median": 5,
+    "cut": 4,
+    "full_in_feed": 0
+   },
+   "g3": {
+    "verdict": "ALLOWED",
+    "allowed": "3/3"
+   },
+   "fit_window_h": 24,
+   "fit_items": [
+    {
+     "title": "Tianjin to launch scenario innovation platform at 2026 private enterprise investment fair",
+     "event": "2026년 중국 민간기업 투자 및 금융 박람회가 9월 22일부터 23일까지 톈진에서 개최된다는 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Xi urges Chinese police to remain committed to serving people with responsibility, dedicat",
+     "event": "중국 시진핑 주석이 경찰에게 국민을 위해 책임감과 헌신으로 봉사할 것을 촉구한 내용입니다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "China In Photos: Fear-mongering will only hamper efforts toward sound global AI governance",
+     "event": "중국 외교부 대변인이 글로벌 AI 거버넌스에 대한 공포 조장과 대립, 경쟁이 모두의 이익에 부합하지 않는다고 발언함",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Chinese AI short film wins two awards at Venice AI film festival",
+     "event": "중국 AI 단편영화가 베니스 AI 영화제에서 두 개의 상을 받았다.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Nation to advance fertility-friendly push",
+     "event": "중국이 인구 정책과 관련하여 출산 장려 사회 구축 노력을 추진한다는 내용으로, 중국 정부의 정책 발표에 해당할 수 있다.",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "BRICS cooperation creates new opportunities for Global South, says South African scholar",
+     "event": "BRICS 협력이 글로벌 사우스에 새로운 기회를 창출하고 있다는 남아프리카 학자의 발언",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "China accelerates efforts to bring earthquake alerts to iOS",
+     "event": "중국이 공식 지진 조기경보를 애플 iOS 시스템에 제공하기 위한 노력을 가속화하고 있다.",
+     "matches": [
+      "중국경제"
+     ],
+     "discard": false,
+     "no_summary": false
+    },
+    {
+     "title": "400,000+ Malaysian travelers make up largest foreign passenger group on Jakarta-Bandung hi",
+     "event": "2026년 인도네시아 자카르타-반둥 고속철도 이용 외국인 승객 중 말레이시아인이 가장 많았다는 보도입니다. 이는 특정 국가 간 교통 이용 현황에 관한 내용으로, ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Cyclists race through Guangxi's karst landscape",
+     "event": "중국 광시 좡족 자치구에서 자전거 경주가 열렸다는 내용으로, 경제 정책, 공식 경제지표 발표, 중미 관계, 국제정세와 관련된 새 사실이 없음.",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "Over 95% of China's township, community health centers to offer pediatric care by year-end",
+     "event": "중국의 보건 정책 관련 발표로 보이나, 구체적으로 인민은행·국무원의 금리·지준율·부양책 같은 정책 발표나 공식 경제지표 발표, 부동산·지방정부 부채·대기업 위기,",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "CIFTIS draws global participants, yields more than 1,200 outcomes",
+     "event": "2026년 중국 국제 서비스 무역 박람회(CIFTIS)가 베이징에서 개최되어 90여 개국과 지역, 국제기구가 참가하고 7개 분야에서 1,200여 개의 성과를 냈다",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    },
+    {
+     "title": "BRICS leaders adopt joint declaration at summit in New Delhi",
+     "event": "BRICS 정상들이 뉴델리에서 공동 선언문을 채택했다. 이 선언문은 포괄적 글로벌 거버넌스, 다자주의 강화, 국제 및 지역 평화와 안보, 지속 가능하고 포용적인 ",
+     "matches": [],
+     "discard": true,
+     "no_summary": false
+    }
+   ],
+   "fit": {
+    "judged": 12,
+    "discard": 10,
+    "no_summary": 0,
+    "미국경제": 0,
+    "중국경제": 2,
+    "중미관계": 0,
+    "국제정세": 0
+   }
+  }
+ ],
+ "elapsed_s": 177.6
+}

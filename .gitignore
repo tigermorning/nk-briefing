@@ -22,3 +22,5 @@ exp/bodies.json
 
 # a probe run with judgement errors keeps the last complete measurement
 probe_sources.partial.json
+probe_topics*.partial.json
+probe_compare.partial.json

@@ -1,0 +1,5392 @@
+{
+ "measured_at": "2026-09-15T11:42:39.386030+00:00",
+ "window_h": 48,
+ "summary": {
+  "anglo_items": 259,
+  "china_items": 162,
+  "pairs_proposed": 421,
+  "pairs_confirmed": 40,
+  "china_matched": 21,
+  "anglo_matched": 28,
+  "events": 15,
+  "matched_by_kind": {
+   "중국 국내": 19,
+   "국제정세": 2
+  },
+  "quotes_found": "20/24"
+ },
+ "problems": [],
+ "errors": 1,
+ "feeds": [
+  {
+   "name": "BBC World",
+   "status": 200,
+   "entries": 29,
+   "in_window": 24,
+   "span_h": 62.2
+  },
+  {
+   "name": "Guardian World",
+   "status": 200,
+   "entries": 45,
+   "in_window": 36,
+   "span_h": 172.9
+  },
+  {
+   "name": "NPR World",
+   "status": 200,
+   "entries": 10,
+   "in_window": 10,
+   "span_h": 26.9
+  },
+  {
+   "name": "CBS World",
+   "status": 200,
+   "entries": 30,
+   "in_window": 28,
+   "span_h": 213.8
+  },
+  {
+   "name": "ABC International",
+   "status": 200,
+   "entries": 25,
+   "in_window": 25,
+   "span_h": 30.4
+  },
+  {
+   "name": "PBS NewsHour World",
+   "status": 200,
+   "entries": 20,
+   "in_window": 20,
+   "span_h": 31.5
+  },
+  {
+   "name": "Independent World",
+   "status": 200,
+   "entries": 67,
+   "in_window": 67,
+   "span_h": 23.9
+  },
+  {
+   "name": "Fox News World",
+   "status": 200,
+   "entries": 25,
+   "in_window": 4,
+   "span_h": 158.4
+  },
+  {
+   "name": "The Hill International",
+   "status": 200,
+   "entries": 15,
+   "in_window": 15,
+   "span_h": 36.9
+  },
+  {
+   "name": "CNBC World",
+   "status": 200,
+   "entries": 30,
+   "in_window": 30,
+   "span_h": 32.2
+  },
+  {
+   "name": "CGTN World",
+   "status": 200,
+   "entries": 50,
+   "in_window": 25,
+   "span_h": 77.2
+  },
+  {
+   "name": "CGTN China",
+   "status": 200,
+   "entries": 50,
+   "in_window": 28,
+   "span_h": 69.7
+  },
+  {
+   "name": "CGTN Politics",
+   "status": 200,
+   "entries": 50,
+   "in_window": 11,
+   "span_h": 133.9
+  },
+  {
+   "name": "중국신문망 국제",
+   "status": 200,
+   "entries": 30,
+   "in_window": 30,
+   "span_h": 13.6
+  },
+  {
+   "name": "중국신문망 요문",
+   "status": 200,
+   "entries": 30,
+   "in_window": 30,
+   "span_h": 11.7
+  },
+  {
+   "name": "ECNS",
+   "status": 200,
+   "entries": 100,
+   "in_window": 38,
+   "span_h": 151.3
+  }
+ ],
+ "events": [
+  {
+   "anglo_idx": [
+    43,
+    130,
+    213
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "China voices concern over rising Yemen, Red Sea tensions",
+     "link": "https://news.cgtn.com/news/2026-09-14/China-voices-concern-over-rising-Yemen-Red-Sea-tensions-1QqRJgkcDRK/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 26.7,
+     "event": "중국이 예멘과 홍해 지역의 긴장 고조에 대해 우려를 표명함",
+     "kind": "중국 국내",
+     "candidates": [
+      43,
+      130,
+      213
+     ],
+     "matched": [
+      43,
+      130
+     ],
+     "pairs": [
+      {
+       "anglo": 43,
+       "same": true,
+       "fact": "예멘과 홍해 지역에서 긴장이 고조되고 있으며, 이로 인해 민간인 피해와 전략적 섬 점령이 발생했다는 점."
+      },
+      {
+       "anglo": 130,
+       "same": true,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 상황과 관련된 내용을 다루고 있습니다. 기사 1은 중국 외교부 대변인이 예멘과 홍해에서의 긴장 고조와 민간인 피해에 대해 우려를 표명한 "
+      },
+      {
+       "anglo": 213,
+       "same": false,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 고조와 관련된 사건을 다루고 있습니다. 기사 1은 중국 외교부 대변인이 예멘과 홍해에서의 긴장과 민간인 피해에 대해 우려를 표명한 내용을"
+      }
+     ]
+    },
+    {
+     "source": "CGTN China",
+     "title": "China voices concern over rising Yemen, Red Sea tensions",
+     "link": "https://news.cgtn.com/news/2026-09-14/China-voices-concern-over-rising-Yemen-Red-Sea-tensions-1QqRJgkcDRK/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+     "age_h": 26.7,
+     "event": "중국이 예멘과 홍해 지역의 긴장 고조에 대해 우려를 표명했다.",
+     "kind": "중국 국내",
+     "candidates": [
+      43,
+      130,
+      213
+     ],
+     "matched": [
+      43,
+      130,
+      213
+     ],
+     "pairs": [
+      {
+       "anglo": 43,
+       "same": true,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 고조와 관련된 사건을 다루고 있습니다. 기사 1은 중국 외교부 대변인이 예멘과 홍해에서의 긴장과 민간 시설에 대한 공격에 대해 우려를 표"
+      },
+      {
+       "anglo": 130,
+       "same": true,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장과 관련된 사건을 다루고 있습니다. 기사 1은 예멘과 홍해에서의 긴장 고조와 민간 시설에 대한 공격을 언급하며 중국의 우려를 전하고 있고,"
+      },
+      {
+       "anglo": 213,
+       "same": true,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 고조와 관련된 사건을 다루고 있습니다. 기사 1은 중국 외교부 대변인이 예멘과 홍해에서의 긴장과 민간인 피해에 대해 우려를 표명한 내용을"
+      }
+     ]
+    },
+    {
+     "source": "CGTN Politics",
+     "title": "China voices concern over rising Yemen, Red Sea tensions",
+     "link": "https://news.cgtn.com/news/2026-09-14/China-voices-concern-over-rising-Yemen-Red-Sea-tensions-1QqRJgkcDRK/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+     "age_h": 26.7,
+     "event": "중국이 예멘과 홍해 지역의 긴장 고조에 대해 우려를 표명함",
+     "kind": "중국 국내",
+     "candidates": [
+      43,
+      130,
+      213
+     ],
+     "matched": [
+      43,
+      213
+     ],
+     "pairs": [
+      {
+       "anglo": 43,
+       "same": true,
+       "fact": "예멘과 홍해 지역에서 긴장이 고조되고 있으며, 이로 인해 민간인 피해와 전략적 섬(그레이터와 레서 하니시 섬) 점령이 발생했다는 점."
+      },
+      {
+       "anglo": 130,
+       "same": false,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 상황에 대해 다루고 있습니다."
+      },
+      {
+       "anglo": 213,
+       "same": true,
+       "fact": "두 기사 모두 예멘과 홍해 지역에서의 긴장 고조와 관련된 사건을 다루고 있습니다. 기사 1은 중국 외교부 대변인이 예멘과 홍해에서의 긴장과 민간인 피해에 대해 우려를 표명한 내용을"
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "Guardian World",
+     "title": "Houthis seize strategic Red Sea islands as analysts warn of impending oil crunch",
+     "link": "https://www.theguardian.com/world/2026/sep/15/houthi-rebels-seize-red-sea-hanish-islands-saudi-oil-warning",
+     "age_h": 7.3
+    },
+    {
+     "source": "PBS NewsHour World",
+     "title": "Houthis seize 2 strategic Red Sea islands, and other Mideast developments",
+     "link": "https://www.pbs.org/newshour/world/houthis-seize-2-strategic-red-sea-islands-and-other-mideast-developments",
+     "age_h": 15.4
+    },
+    {
+     "source": "Fox News World",
+     "title": "Houthis enter US 'kill box' after seizing Red Sea 'cork,' former Pentagon official warns",
+     "link": "https://www.foxnews.com/world/houthis-enter-us-kill-box-after-seizing-red-sea-cork-former-pentagon-official-warns",
+     "age_h": 36.8
+    }
+   ],
+   "n_outlets": 6
+  },
+  {
+   "anglo_idx": [
+    90,
+    104,
+    139
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "Center-left bloc leads Swedish election, preliminary results show",
+     "link": "https://news.cgtn.com/news/2026-09-14/news-1Qqk2iyAsSY/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 35.1,
+     "event": "스웨덴 총선에서 중도좌파 연합이 근소한 차이로 선두를 유지하고 있다는 예비 결과가 나왔다.",
+     "kind": "중국 국내",
+     "candidates": [
+      90,
+      104,
+      139
+     ],
+     "matched": [
+      90,
+      104,
+      139
+     ],
+     "pairs": [
+      {
+       "anglo": 90,
+       "same": true,
+       "fact": "두 기사 모두 스웨덴 총선에서 중도좌파 연합이 중도우파 연합에 앞서고 있다는 사실을 언급하고 있습니다."
+      },
+      {
+       "anglo": 104,
+       "same": true,
+       "fact": "두 기사 모두 스웨덴 총선에서 중도좌파(또는 좌파) 야권이 근소한 차이로 선두를 달리고 있다는 사실을 보도하고 있습니다."
+      },
+      {
+       "anglo": 139,
+       "same": true,
+       "fact": "두 기사 모두 스웨덴 총선에서 중도좌파(또는 좌파) 진영이 초반 개표 결과에서 근소한 우위를 보이고 있다는 사실을 언급하고 있습니다."
+      }
+     ]
+    },
+    {
+     "source": "CGTN Politics",
+     "title": "Center-left bloc leads Swedish election, preliminary results show",
+     "link": "https://news.cgtn.com/news/2026-09-14/news-1Qqk2iyAsSY/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+     "age_h": 35.1,
+     "event": "스웨덴 총선에서 중도좌파 연합이 근소한 차이로 선두를 유지하고 있다는 예비 결과가 나왔다.",
+     "kind": "중국 국내",
+     "candidates": [
+      90,
+      104,
+      139
+     ],
+     "matched": [
+      90,
+      104,
+      139
+     ],
+     "pairs": [
+      {
+       "anglo": 90,
+       "same": true,
+       "fact": "두 기사 모두 스웨덴 총선에서 중도좌파 연합이 중도우파 연합에 앞서고 있다는 사실을 언급하고 있습니다."
+      },
+      {
+       "anglo": 104,
+       "same": true,
+       "fact": "스웨덴 총선에서 중도좌파(또는 좌파) 야당이 근소한 차이로 선두를 달리고 있다는 예비 결과가 나왔다."
+      },
+      {
+       "anglo": 139,
+       "same": true,
+       "fact": "두 기사 모두 스웨덴 총선에서 중도좌파(또는 좌파) 진영과 우파 진영 간의 근소한 접전을 다루고 있습니다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "CBS World",
+     "title": "Sweden's election exit polls show center-left opposition ahead of populist right",
+     "link": "https://www.cbsnews.com/news/sweden-democrats-election-populist-right-europe/",
+     "age_h": 39.9
+    },
+    {
+     "source": "ABC International",
+     "title": "Sweden's next government uncertain with thin lead for left-wing opposition",
+     "link": "https://abcnews.com/International/wireStory/swedens-government-uncertain-thin-lead-left-wing-opposition-136415510",
+     "age_h": 23.3
+    },
+    {
+     "source": "PBS NewsHour World",
+     "title": "Partial returns show close race between Sweden's conservative government and left-wing opposition",
+     "link": "https://www.pbs.org/newshour/world/swedish-voters-go-to-polls-to-choose-a-new-parliament-as-hard-right-bids-for-role-in-government",
+     "age_h": 41.0
+    }
+   ],
+   "n_outlets": 5
+  },
+  {
+   "anglo_idx": [
+    10,
+    67,
+    223
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "Chinese FM speaks with French counterpart on ties, global issues",
+     "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-speaks-with-French-counterpart-on-ties-global-issues-1Qrg7PakCgE/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 20.9,
+     "event": "중국 외교부장이 프랑스 외교부장과 양자 관계 및 국제 문제에 대해 통화함",
+     "kind": "중국 국내",
+     "candidates": [
+      10,
+      67,
+      223
+     ],
+     "matched": [
+      223
+     ],
+     "pairs": [
+      {
+       "anglo": 10,
+       "same": false,
+       "fact": ""
+      },
+      {
+       "anglo": 67,
+       "same": false,
+       "fact": "두 기사 모두 중국과 관련된 외교적 입장이나 발언을 다루고 있지만, 첫 번째 기사는 중국과 프랑스 외교장관 간의 전화 통화에 관한 내용이고, 두 번째 기사는 중국 외교부가 AI 개"
+      },
+      {
+       "anglo": 223,
+       "same": true,
+       "fact": "두 기사 모두 중국 외교부가 월요일에 입장을 발표했다."
+      }
+     ]
+    },
+    {
+     "source": "ECNS",
+     "title": "China In Photos: Fear-mongering will only hamper efforts toward sound global AI governance: spokesperson",
+     "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046783.shtml",
+     "age_h": 1.0,
+     "event": "중국 외교부 대변인이 AI에 대한 공포 조장과 대립, 악의적 경쟁이 건전한 글로벌 AI 거버넌스 노력을 방해할 뿐이라고 발언함",
+     "kind": "중국 국내",
+     "candidates": [
+      10,
+      67,
+      223
+     ],
+     "matched": [
+      10,
+      67,
+      223
+     ],
+     "pairs": [
+      {
+       "anglo": 10,
+       "same": true,
+       "fact": "두 기사 모두 중국이 AI 경쟁과 관련하여 부정적인 경쟁이나 공포 조장에 대해 비판하고 있다는 점을 공통적으로 언급하고 있습니다."
+      },
+      {
+       "anglo": 67,
+       "same": true,
+       "fact": "중국 외교부 대변인이 AI 개발과 관련된 두려움 조장(fear-mongering)을 비판했다."
+      },
+      {
+       "anglo": 223,
+       "same": true,
+       "fact": "중국 외교부 대변인이 AI 개발과 관련된 두려움 조장(fear-mongering)에 대해 언급했다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "BBC World",
+     "title": "China criticises idea it is in 'malicious competition' over AI",
+     "link": "https://www.bbc.co.uk/news/articles/cn8me133119o?at_medium=RSS&at_campaign=rss",
+     "age_h": 24.2
+    },
+    {
+     "source": "NPR World",
+     "title": "Beijing hits back at Anthropic CEO's call to curb China's AI development",
+     "link": "https://www.npr.org/2026/09/14/nx-s1-5968456/china-hits-back-ai-development",
+     "age_h": 25.6
+    },
+    {
+     "source": "The Hill International",
+     "title": "China bristles at Anthropic CEO’s 'fearmongering' about its AI development",
+     "link": "https://thehill.com/policy/technology/china-anthropic-ai-development/",
+     "age_h": 18.7
+    }
+   ],
+   "n_outlets": 5
+  },
+  {
+   "anglo_idx": [
+    7,
+    38,
+    63
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "北约战斗机击落一架飞入立陶宛领空的无人机",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696739.shtml",
+     "age_h": 5.5,
+     "event": "북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사건",
+     "kind": "중국 국내",
+     "candidates": [
+      7,
+      38,
+      63
+     ],
+     "matched": [
+      7,
+      38,
+      63
+     ],
+     "pairs": [
+      {
+       "anglo": 7,
+       "same": true,
+       "fact": "두 기사 모두 북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사실을 보도하고 있다."
+      },
+      {
+       "anglo": 38,
+       "same": true,
+       "fact": "두 기사 모두 9월 15일(현지시간) 리투아니아 영공에 무인기가 침입했고, 북대서양조약기구(NATO) 전투기가 이를 격추했다는 사실을 언급하고 있다."
+      },
+      {
+       "anglo": 63,
+       "same": true,
+       "fact": "두 기사 모두 북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사실을 보도하고 있다."
+      }
+     ]
+    },
+    {
+     "source": "중국신문망 요문",
+     "title": "北约战斗机击落一架飞入立陶宛领空的无人机",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696739.shtml",
+     "age_h": 5.5,
+     "event": "북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사건",
+     "kind": "중국 국내",
+     "candidates": [
+      7,
+      38,
+      63
+     ],
+     "matched": [
+      7,
+      38,
+      63
+     ],
+     "pairs": [
+      {
+       "anglo": 7,
+       "same": true,
+       "fact": "두 기사 모두 북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사실을 보도하고 있다."
+      },
+      {
+       "anglo": 38,
+       "same": true,
+       "fact": "두 기사 모두 9월 15일에 북대서양조약기구(NATO) 전투기가 리투아니아 영공에 침입한 무인기를 격추했다는 사실을 언급하고 있습니다."
+      },
+      {
+       "anglo": 63,
+       "same": true,
+       "fact": "두 기사 모두 북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사실을 보도하고 있다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "BBC World",
+     "title": "Nato jets down drone that entered Lithuanian airspace",
+     "link": "https://www.bbc.co.uk/news/articles/cjx2zgk7edlzo?at_medium=RSS&at_campaign=rss",
+     "age_h": 2.6
+    },
+    {
+     "source": "Guardian World",
+     "title": "Lithuania briefs EU allies after drone shot down by Nato jets overnight – Europe live",
+     "link": "https://www.theguardian.com/world/live/2026/sep/15/denmark-ukraine-russia-warship-frigate-security-lithuania-poland--sweden-election-eu-europe-latest-news-updates",
+     "age_h": 0.5
+    },
+    {
+     "source": "NPR World",
+     "title": "NATO jets down drone in Lithuanian airspace",
+     "link": "https://www.npr.org/2026/09/15/g-s1-143284/nato-jets-down-drone-in-lithuanian-airspace",
+     "age_h": 2.6
+    }
+   ],
+   "n_outlets": 5
+  },
+  {
+   "anglo_idx": [
+    100
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "Iran protests as US prevents its nuclear chief attending IAEA meeting",
+     "link": "https://news.cgtn.com/news/2026-09-14/Iran-protests-as-US-prevents-its-nuclear-chief-attending-IAEA-meeting-1QraBBpY0F2/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 22.6,
+     "event": "미국이 이란 핵 수석의 IAEA 회의 참석을 막아 이란이 항의함",
+     "kind": "국제정세",
+     "candidates": [
+      100,
+      140,
+      149
+     ],
+     "matched": [
+      100
+     ],
+     "pairs": [
+      {
+       "anglo": 100,
+       "same": true,
+       "fact": "이란의 핵 수장이 비엔나에서 열린 국제원자력기구(IAEA) 회의에 참석하지 못하게 된 사건을 다루고 있습니다."
+      },
+      {
+       "anglo": 140,
+       "same": false,
+       "fact": ""
+      },
+      {
+       "anglo": 149,
+       "same": false,
+       "fact": ""
+      }
+     ]
+    },
+    {
+     "source": "CGTN Politics",
+     "title": "Iran protests as US prevents its nuclear chief attending IAEA meeting",
+     "link": "https://news.cgtn.com/news/2026-09-14/Iran-protests-as-US-prevents-its-nuclear-chief-attending-IAEA-meeting-1QraBBpY0F2/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+     "age_h": 22.6,
+     "event": "미국이 이란 핵 수석의 IAEA 회의 참석을 막아 이란이 항의함",
+     "kind": "국제정세",
+     "candidates": [
+      100,
+      140,
+      149
+     ],
+     "matched": [
+      100
+     ],
+     "pairs": [
+      {
+       "anglo": 100,
+       "same": true,
+       "fact": "두 기사 모두 이란의 핵 수장이 비엔나에서 열린 국제원자력기구(IAEA) 회의에 참석하지 못하게 된 사실을 다루고 있습니다."
+      },
+      {
+       "anglo": 140,
+       "same": false,
+       "fact": ""
+      },
+      {
+       "anglo": 149,
+       "same": false,
+       "fact": ""
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "ABC International",
+     "title": "Iran denounces Austria for blocking its nuclear chief from a meeting in Vienna",
+     "link": "https://abcnews.com/International/wireStory/iran-denounces-austria-blocking-nuclear-chief-meeting-vienna-136418734",
+     "age_h": 23.4
+    }
+   ],
+   "n_outlets": 3
+  },
+  {
+   "anglo_idx": [
+    69,
+    140
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "Diplomacy falters as meeting on Strait of Hormuz proposal postponed",
+     "link": "https://news.cgtn.com/news/2026-09-14/Diplomacy-falters-as-meeting-on-Strait-of-Hormuz-proposal-postponed-1QqqLkhs6yY/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 31.6,
+     "event": "중동 외교가 호르무즈 해협 회의 연기로 난항을 겪고 있으며, 이란과 페르시아만 국가들 간의 회의가 연기되었고, 이 지역의 주요 석유 수송로 주변에서 새로운 공격이 발생해 글로벌 에너지 공급에 대한 우려가 커지고 있다.",
+     "kind": "중국 국내",
+     "candidates": [
+      69,
+      125,
+      140
+     ],
+     "matched": [
+      69,
+      140
+     ],
+     "pairs": [
+      {
+       "anglo": 69,
+       "same": true,
+       "fact": "이란과 페르시아만 국가들 간의 호르무즈 해협 회담이 연기되었다."
+      },
+      {
+       "anglo": 125,
+       "same": false,
+       "fact": "두 기사 모두 중동 지역의 전략적 해협과 관련된 군사적 긴장 상황을 다루고 있습니다. 기사 1은 호르무즈 해협에서의 회담 연기와 그 주변의 공격을 언급하며, 기사 2는 바브 알만답"
+      },
+      {
+       "anglo": 140,
+       "same": true,
+       "fact": "두 기사 모두 호르무즈 해협과 관련된 회담이 연기되었다고 보도하고 있습니다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "NPR World",
+     "title": "Talks between Iran and Gulf states to discuss Strait of Hormuz postponed",
+     "link": "https://www.npr.org/2026/09/14/nx-s1-5968072/talks-between-iran-and-gulf-states-to-discuss-strait-of-hormuz-postponed",
+     "age_h": 27.0
+    },
+    {
+     "source": "PBS NewsHour World",
+     "title": "Iranian cargo ship is struck, and talks between Tehran and its neighbors are postponed",
+     "link": "https://www.pbs.org/newshour/world/strike-on-iranian-cargo-ship-in-the-strait-of-hormuz-kills-1-iranian-media-say",
+     "age_h": 41.7
+    }
+   ],
+   "n_outlets": 3
+  },
+  {
+   "anglo_idx": [
+    70,
+    71,
+    149
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "美国对伊战损全景首曝光：损失重大、先进武器告急",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696781.shtml",
+     "age_h": 4.2,
+     "event": "미국 국방부 감독 기관이 이란 전쟁 관련 손실과 무기 부족 상황을 처음으로 공개한 사건",
+     "kind": "중국 국내",
+     "candidates": [
+      70,
+      71,
+      149,
+      151,
+      218,
+      219,
+      225,
+      231,
+      236,
+      249,
+      252
+     ],
+     "matched": [
+      70,
+      71,
+      149
+     ],
+     "pairs": [
+      {
+       "anglo": 70,
+       "same": true,
+       "fact": "두 기사 모두 미국 국방부(펜타곤) 보고서를 인용하여 이란 전쟁과 관련된 미국의 손실과 비용에 대해 다루고 있습니다."
+      },
+      {
+       "anglo": 71,
+       "same": true,
+       "fact": "두 기사 모두 미국 국방부 감독 기관이 이란 전쟁과 관련된 첫 보고서를 발표했으며, 이 보고서에서 미국의 군사 자산 손실과 무기 부족 문제를 다루고 있습니다."
+      },
+      {
+       "anglo": 149,
+       "same": true,
+       "fact": "두 기사 모두 미국과 이란 간 전쟁 상황과 미국의 군사적 손실 및 무기 부족 문제를 다루고 있습니다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "CBS World",
+     "title": "Iran war has cost well over $33.4 billion, Pentagon report says",
+     "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-oil-strait-of-hormuz/",
+     "age_h": 0.4
+    },
+    {
+     "source": "CBS World",
+     "title": "Pentagon inspector general says Iran war has caused weapons shortages",
+     "link": "https://www.cbsnews.com/news/us-iran-war-ammunition-munition-shortage-shortfall-spending/",
+     "age_h": 1.5
+    },
+    {
+     "source": "Independent World",
+     "title": "Iran-US war latest: US military facing weapons shortages after dozens of aircraft destroyed as cost of war hits $33bn",
+     "link": "https://www.independent.co.uk/news/world/middle-east/iran-us-war-live-trump-oil-tanker-hormuz-b3050243.html",
+     "age_h": 0.7
+    }
+   ],
+   "n_outlets": 3
+  },
+  {
+   "anglo_idx": [
+    42,
+    105
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "威尔士、苏格兰和北爱尔兰三地政党罕见“抱团”，向伦敦发出什么信号？",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696513.shtml",
+     "age_h": 11.4,
+     "event": "영국 웨일스, 스코틀랜드, 북아일랜드의 정당들이 카디프에서 만나 양해각서에 서명하고 자치권 인정과 헌법 개혁 준비를 촉구했다.",
+     "kind": "중국 국내",
+     "candidates": [
+      42,
+      105
+     ],
+     "matched": [
+      42,
+      105
+     ],
+     "pairs": [
+      {
+       "anglo": 42,
+       "same": true,
+       "fact": "영국의 웨일스, 스코틀랜드, 북아일랜드의 정당들이 모여서 자치권 인정과 헌법 개혁 준비를 촉구하는 합의문에 서명했다."
+      },
+      {
+       "anglo": 105,
+       "same": true,
+       "fact": "영국의 웨일스, 스코틀랜드, 북아일랜드의 지도자들이 만나서 협약을 체결했다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "Guardian World",
+     "title": "Tuesday briefing: How to understand Wales, Scotland and Northern Ireland’s joint call for change",
+     "link": "https://www.theguardian.com/world/2026/sep/15/tuesday-briefing-how-to-understand-wales-scotland-and-northern-irelands-joint-call-for-change",
+     "age_h": 5.9
+    },
+    {
+     "source": "ABC International",
+     "title": "UK's unity threatened by pact between Wales, Scotland and Northern Ireland",
+     "link": "https://abcnews.com/International/wireStory/united-kingdoms-unity-threatened-pact-wales-scotland-northern-136427910",
+     "age_h": 18.3
+    }
+   ],
+   "n_outlets": 3
+  },
+  {
+   "anglo_idx": [
+    12,
+    239
+   ],
+   "china": [
+    {
+     "source": "중국신문망 요문",
+     "title": "从事出境入境中介服务的机构和人员9月15日起备案管理",
+     "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696714.shtml",
+     "age_h": 5.1,
+     "event": "중국이 출입국 중개 서비스 기관과 인력에 대해 9월 15일부터 등록 관리 제도를 시행한다는 내용",
+     "kind": "중국 국내",
+     "candidates": [
+      12,
+      239
+     ],
+     "matched": [
+      12,
+      239
+     ],
+     "pairs": [
+      {
+       "anglo": 12,
+       "same": true,
+       "fact": "두 기사 모두 중국 정부가 출입국 관련 규제를 강화한다는 내용을 다루고 있습니다."
+      },
+      {
+       "anglo": 239,
+       "same": true,
+       "fact": "두 기사 모두 중국 정부가 출입국 관련 규제를 강화한다는 내용을 다루고 있습니다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "BBC World",
+     "title": "China tightens travel restrictions for citizens",
+     "link": "https://www.bbc.co.uk/news/articles/cqe8x6gkk250o?at_medium=RSS&at_campaign=rss",
+     "age_h": 5.0
+    },
+    {
+     "source": "CNBC World",
+     "title": "Wealthy Chinese, tech talent confront tighter borders as Beijing widens exit controls",
+     "link": "https://www.cnbc.com/2026/09/15/china-rich-talent-immigration-capital-outflows-border-control-.html",
+     "age_h": 2.4
+    }
+   ],
+   "n_outlets": 3
+  },
+  {
+   "anglo_idx": [
+    0
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "AI safety: Silicon Valley's fear narrative meets its governance gap",
+     "link": "https://news.cgtn.com/news/2026-09-14/AI-safety-Silicon-Valley-s-fear-narrative-meets-its-governance-gap-1QqW4qrrwty/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 21.6,
+     "event": "실리콘밸리 AI 안전 우려와 거버넌스 격차 문제",
+     "kind": "중국 국내",
+     "candidates": [
+      0,
+      1,
+      19,
+      22,
+      30,
+      66,
+      67,
+      123,
+      146,
+      150,
+      157,
+      160,
+      173,
+      175,
+      177,
+      187,
+      243,
+      247,
+      249,
+      255
+     ],
+     "matched": [
+      0
+     ],
+     "pairs": [
+      {
+       "anglo": 0,
+       "same": true,
+       "fact": "두 기사 모두 인공지능(AI) 안전 문제와 관련된 발언을 다루고 있습니다. 기사 1은 Anthropic의 Jacob Coxon이 AI가 인류 문명을 위협할 수 있다고 경고하며 회사"
+      },
+      {
+       "anglo": 1,
+       "same": false,
+       "fact": "두 기사 모두 인공지능(AI) 안전 문제와 관련된 우려와 규제 필요성을 다루고 있습니다."
+      },
+      {
+       "anglo": 19,
+       "same": false,
+       "fact": ""
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "BBC World",
+     "title": "Trump says AI safety fears a 'hoax' as he rejects calls for greater safeguards",
+     "link": "https://www.bbc.co.uk/news/articles/cw980n0nd0qjo?at_medium=RSS&at_campaign=rss",
+     "age_h": 2.9
+    }
+   ],
+   "n_outlets": 2
+  },
+  {
+   "anglo_idx": [
+    99
+   ],
+   "china": [
+    {
+     "source": "CGTN World",
+     "title": "DPRK military conducts joint firepower attack drill, KCNA reports",
+     "link": "https://news.cgtn.com/news/2026-09-14/DPRK-military-conducts-joint-firepower-attack-drill-KCNA-reports-1QqrVkx9W4o/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+     "age_h": 32.4,
+     "event": "조선민주주의인민공화국(북한) 군이 장거리 포병과 미사일 부대를 포함한 합동 화력 공격 훈련을 실시했다는 보도",
+     "kind": "중국 국내",
+     "candidates": [
+      99,
+      145,
+      211
+     ],
+     "matched": [
+      99
+     ],
+     "pairs": [
+      {
+       "anglo": 99,
+       "same": true,
+       "fact": "두 기사 모두 북한이 미사일과 포병 부대를 포함한 합동 화력 사격 훈련을 실시했다고 보도하고 있습니다."
+      },
+      {
+       "anglo": 145,
+       "same": false,
+       "fact": "두 기사 모두 군사 관련 내용을 다루고 있지만, 첫 번째 기사는 북한의 군사 훈련에 관한 것이고, 두 번째 기사는 우크라이나-러시아 전쟁과 관련된 덴마크와 모스크바 간의 사건을 다"
+      },
+      {
+       "anglo": 211,
+       "same": false,
+       "fact": "기사 1은 북한의 군사 훈련(장거리 포병 및 미사일 부대의 합동 화력 공격 훈련)을 다루고 있고, 기사 2는 러시아가 준비 중인 새로운 탄도 미사일 시험과 관련된 내용을 다루고 있"
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "ABC International",
+     "title": "North Korea says its recent live-fire drill demonstrated 'huge destructive power'",
+     "link": "https://abcnews.com/International/wireStory/north-korea-recent-live-fire-drill-demonstrated-huge-136412674",
+     "age_h": 31.3
+    }
+   ],
+   "n_outlets": 2
+  },
+  {
+   "anglo_idx": [
+    117
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "最新消息：日本海保飞机发现疑似失联侦察机残骸",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696892.shtml",
+     "age_h": 2.9,
+     "event": "일본 해상보안청 비행기가 의심되는 실종 정찰기 잔해를 발견했다는 소식",
+     "kind": "중국 국내",
+     "candidates": [
+      117
+     ],
+     "matched": [
+      117
+     ],
+     "pairs": [
+      {
+       "anglo": 117,
+       "same": true,
+       "fact": "두 기사 모두 일본의 감시 드론(또는 정찰기)이 일본 해안 근처에서 연락이 두절되었거나 잔해가 발견되었다고 보도하고 있습니다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "ABC International",
+     "title": "Japan loses contact with a surveillance drone off the country's northwestern coast",
+     "link": "https://abcnews.com/International/wireStory/japan-loses-contact-surveillance-drone-off-countrys-northwestern-136454707",
+     "age_h": 0.9
+    }
+   ],
+   "n_outlets": 2
+  },
+  {
+   "anglo_idx": [
+    5
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "美媒：美国首次承认已在太空部署“在轨”控制武器",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696496.shtml",
+     "age_h": 12.3,
+     "event": "미국이 처음으로 우주에 '궤도상' 통제 무기를 배치했다고 인정한 사건",
+     "kind": "중국 국내",
+     "candidates": [
+      5,
+      77,
+      84
+     ],
+     "matched": [
+      5
+     ],
+     "pairs": [
+      {
+       "anglo": 5,
+       "same": true,
+       "fact": "미국이 처음으로 우주에 '궤도상' 무기를 배치했다고 미국 공군 장관이 발표했다."
+      },
+      {
+       "anglo": 77,
+       "same": false,
+       "fact": "기사 1은 미국이 우주에 '궤도상' 무기를 배치했다고 발표한 내용이고, 기사 2는 미국 항공모함이 중동에 배치된 내용으로, 두 기사는 서로 다른 사건을 다루고 있습니다."
+      },
+      {
+       "anglo": 84,
+       "same": false,
+       "fact": ""
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "BBC World",
+     "title": "US confirms for first time it has deployed space weapons",
+     "link": "https://www.bbc.co.uk/news/articles/ck790xg41ygro?at_medium=RSS&at_campaign=rss",
+     "age_h": 2.9
+    }
+   ],
+   "n_outlets": 2
+  },
+  {
+   "anglo_idx": [
+    128
+   ],
+   "china": [
+    {
+     "source": "중국신문망 국제",
+     "title": "泽连斯基：若俄方停止袭击乌关键基础设施 乌方将对等停止",
+     "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696486.shtml",
+     "age_h": 13.9,
+     "event": "우크라이나 대통령 젤렌스키가 러시아가 우크라이나의 주요 기반 시설 공격을 중단하면 우크라이나도 대등하게 공격을 중단하겠다고 발표함",
+     "kind": "중국 국내",
+     "candidates": [
+      18,
+      128,
+      252
+     ],
+     "matched": [
+      128
+     ],
+     "pairs": [
+      {
+       "anglo": 18,
+       "same": false,
+       "fact": "두 기사 모두 우크라이나와 러시아 간의 전쟁 상황을 다루고 있습니다."
+      },
+      {
+       "anglo": 128,
+       "same": true,
+       "fact": "두 기사 모두 우크라이나 대통령 젤렌스키가 러시아가 중요한 기반 시설을 공격하지 않으면 우크라이나도 공격을 중단하겠다는 입장을 밝혔다고 보도함."
+      },
+      {
+       "anglo": 252,
+       "same": false,
+       "fact": "두 기사 모두 우크라이나와 러시아 간의 공격 중단 또는 군사적 조치에 대해 언급하고 있다."
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "PBS NewsHour World",
+     "title": "Zelenskyy says Ukraine will pause strikes on Russia if Kremlin spares critical infrastructure",
+     "link": "https://www.pbs.org/newshour/world/zelenskyy-says-ukraine-will-pause-strikes-on-russia-if-kremlin-spares-critical-infrastructure",
+     "age_h": 13.7
+    }
+   ],
+   "n_outlets": 2
+  },
+  {
+   "anglo_idx": [
+    231
+   ],
+   "china": [
+    {
+     "source": "중국신문망 요문",
+     "title": "伊朗外长阿拉格齐将访华",
+     "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696814.shtml",
+     "age_h": 3.6,
+     "event": "이란 외무장관 알라그치가 중국을 방문할 예정임을 외교부 대변인이 발표함",
+     "kind": "중국 국내",
+     "candidates": [
+      100,
+      140,
+      231
+     ],
+     "matched": [
+      231
+     ],
+     "pairs": [
+      {
+       "anglo": 100,
+       "same": false,
+       "fact": "기사 1은 이란 외교부 장관의 중국 방문에 대해 다루고 있고, 기사 2는 이란 원자력 기관장이 비엔나에서 열린 핵 회의에서 배제된 사건에 대해 다루고 있습니다. 두 기사는 서로 다"
+      },
+      {
+       "anglo": 140,
+       "same": false,
+       "fact": "기사 1은 이란 외교장관의 중국 방문에 대해 다루고 있고, 기사 2는 이란 화물선이 공격받았고 테헤란과 이웃 국가 간의 회담이 연기되었다는 내용으로, 두 기사에 공통된 구체적 사실"
+      },
+      {
+       "anglo": 231,
+       "same": true,
+       "fact": "이란 외무장관 아바스 아라그치가 중국을 방문하여 회담을 가질 예정이라는 사실"
+      }
+     ]
+    }
+   ],
+   "anglo": [
+    {
+     "source": "CNBC World",
+     "title": "Iranian foreign minister will head to China for talks, as Pentagon reveals financial cost of war",
+     "link": "https://www.cnbc.com/2026/09/15/us-iran-war-trump-hormuz-munitions-dod-costs-aircraft.html",
+     "age_h": 0.0
+    }
+   ],
+   "n_outlets": 2
+  }
+ ],
+ "unmatched_china": [
+  {
+   "source": "CGTN World",
+   "title": "Climate forecasts alone won't protect Africa's poorest farmers",
+   "link": "https://newsaf.cgtn.com/news/2026-09-14/Climate-forecasts-alone-won-t-protect-Africa-s-poorest-farmers-1Qr1AFC5nzi/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 19.9,
+   "event": "기후 예보가 아프리카의 가장 가난한 농민들을 보호하는 데 한계가 있다는 연구 결과",
+   "kind": "중미관계",
+   "candidates": [
+    9,
+    17,
+    27
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Why do Panda birthdays matter?",
+   "link": "https://newsus.cgtn.com/news/2026-09-15/Why-do-Panda-birthdays-matter--1QrUqHOlr8c/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 12.2,
+   "event": "워싱턴 D.C. 스미스소니언 국립동물원에서 판다의 다섯 번째 생일을 기념하며, 50년 이상 이어진 판다 보존과 연구 협력 이야기",
+   "kind": "중국 국내",
+   "candidates": [
+    9,
+    20,
+    143
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 143,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "How China's 15th Five-Year Plan offers the world opportunities",
+   "link": "https://news.cgtn.com/news/2026-09-14/How-China-s-15th-Five-Year-Plan-offers-the-world-opportunities-1QqY1uoGPza/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 20.0,
+   "event": "중국의 15차 5개년 계획이 세계에 기회를 제공하는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Yemen's Houthis claim major missile, drone attack on Saudi air base",
+   "link": "https://news.cgtn.com/news/2026-09-14/news-1QqPXUIu03S/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 27.7,
+   "event": "예멘 후티 반군이 사우디아라비아의 주요 군사 공군 기지에 수십 발의 탄도 미사일과 드론을 발사한 사건",
+   "kind": "중국 국내",
+   "candidates": [
+    43,
+    130,
+    213
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 43,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티(Houthi) 무장단체에 대해 다루고 있습니다."
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 반군에 대해 다루고 있지만, 첫 번째 기사는 후티가 사우디아라비아의 킹 칼리드 공군기지에 미사일과 드론 공격을 감행한 사건을, 두 번째 기사는 후티가 홍해"
+    },
+    {
+     "anglo": 213,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 반군과 관련되어 있으나, 첫 번째 기사는 후티가 사우디아라비아의 킹 칼리드 공군기지에 미사일과 드론 공격을 감행한 사건을 다루고 있고, 두 번째 기사는 후"
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Guinea, Cote d'Ivoire agree to strengthen security and economic ties",
+   "link": "https://newsaf.cgtn.com/news/2026-09-14/Guinea-Cote-d-Ivoire-agree-to-strengthen-security-and-economic-ties-1QqSYJHJJja/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 20.2,
+   "event": "기니와 코트디부아르가 안보와 경제 협력을 강화하기로 합의함",
+   "kind": "국제정세",
+   "candidates": [
+    17,
+    27,
+    43
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": "두 기사 모두 아프리카 대륙과 관련되어 있지만, 첫 번째 기사는 기니와 코트디부아르 간의 안보 및 경제 협력에 관한 내용이고, 두 번째 기사는 나이지리아의 억만장자 알리코 당고테가"
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 43,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "China vows to continue search for missing Latvians in deadly mudslides",
+   "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-holds-phone-talks-with-Latvian-counterpart-on-ties-1Qrie3fILo4/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 20.9,
+   "event": "중국에서 발생한 치명적인 산사태로 실종된 라트비아인들을 찾기 위한 중국의 계속된 수색 노력",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+   "link": "https://news.cgtn.com/news/2026-09-14/Beijing-highlights-Xi-Modi-agreement-China-India-should-be-partners-1QqUeFiEFl6/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 21.5,
+   "event": "중국 시진핑 주석과 인도 나렌드라 모디 총리가 파트너십을 강조하며 회담을 가졌다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Giant panda Qing Bao celebrates 5th birthday in Washington",
+   "link": "https://news.cgtn.com/news/2026-09-14/Giant-panda-Qing-Bao-celebrates-5th-birthday-in-Washington-1QqXyAiuIne/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 25.4,
+   "event": "워싱턴 스미스소니언 국립동물원에서 자이언트 판다 칭바오가 5번째 생일을 맞아 축하 행사가 열림",
+   "kind": "중국 국내",
+   "candidates": [
+    9,
+    20,
+    79
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 79,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "US judge blocks new stay limits for foreign students, journalists",
+   "link": "https://news.cgtn.com/news/2026-09-15/US-judge-blocks-new-stay-limits-for-foreign-students-journalists-1Qs3iwJkPoQ/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 9.7,
+   "event": "미국 연방 판사가 외국인 학생, 교환 방문자, 외국 언론 대표의 체류 기간 제한을 부과하는 트럼프 행정부의 규칙을 차단했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    11,
+    56,
+    58
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 11,
+     "same": false,
+     "fact": "두 기사 모두 트럼프 행정부의 정책에 대해 법원이 제동을 걸었다는 점을 다루고 있습니다."
+    },
+    {
+     "anglo": 56,
+     "same": false,
+     "fact": "기사 1은 미국 법원의 외국인 체류 제한 규칙에 관한 내용이고, 기사 2는 2026년 에미상 시상식 수상자 목록에 관한 내용으로, 두 기사에 공통된 구체적 사실이 없습니다."
+    },
+    {
+     "anglo": 58,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "China advances technology cooperation across BRICS",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-advances-technology-cooperation-across-BRICS-1QqIhSzGOo8/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 26.9,
+   "event": "중국이 BRICS 국가들과 인공지능, 디지털 산업, 스마트 제조, 인재 개발 등 기술 협력을 구체적인 프로젝트로 추진하고 있다. 9월 13일 뉴델리에서 열린 제18차 BRICS 정상회의 세션 II에서 시진핑 주석은 BRICS 협력 심화를 위한 5가지 제안을 제시했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI) 관련 내용을 다루고 있지만, 첫 번째 기사는 BRICS 정상회의에서 중국의 기술 협력 제안에 관한 내용이고, 두 번째 기사는 중국 외교부가 미"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국의 인공지능(AI) 개발 및 기술 협력에 대해 언급하고 있습니다."
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "From paper to pavement: Global self-driving rules enter the real world",
+   "link": "https://news.cgtn.com/news/2026-09-14/From-paper-to-pavement-Global-self-driving-rules-enter-the-real-world-1QqSrzhRVzq/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 26.3,
+   "event": "글로벌 자율주행 규칙이 실제 적용 단계에 들어감",
+   "kind": "국제정세",
+   "candidates": [
+    0,
+    1,
+    19
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 1,
+     "same": false,
+     "fact": "두 기사 모두 AI 또는 자동화 기술과 관련된 규제 문제를 다루고 있지만, 첫 번째 기사는 국제적인 자율주행차 규제의 실제 적용에 관한 것이고, 두 번째 기사는 미국 내 AI 안전"
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Microsoft publishes AI code of conduct amid industry's safety concerns",
+   "link": "https://news.cgtn.com/news/2026-09-15/Microsoft-publishes-AI-code-of-conduct-amid-industry-s-safety-concerns-1QrVMEagWvS/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 10.5,
+   "event": "마이크로소프트가 AI 안전 우려 속에 AI 행동 강령을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    1,
+    19,
+    22,
+    30,
+    66,
+    123,
+    150,
+    157,
+    160,
+    173,
+    175,
+    177,
+    187,
+    243,
+    247,
+    249
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "두 기사 모두 인공지능(AI) 안전 문제에 대한 우려를 다루고 있습니다."
+    },
+    {
+     "anglo": 1,
+     "same": false,
+     "fact": "두 기사 모두 인공지능(AI) 안전 문제에 대해 다루고 있습니다."
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "US, Iran give conflicting signals on talks as Hormuz traffic stays low",
+   "link": "https://news.cgtn.com/news/2026-09-15/US-Iran-give-conflicting-signals-on-talks-as-Hormuz-traffic-stays-low-1QrVmmqUPm0/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 10.0,
+   "event": "미국과 이란이 협상에 대해 상반된 신호를 보내고 있으며, 호르무즈 해협의 교통량이 낮은 상태를 유지하고 있다.",
+   "kind": "중미관계",
+   "candidates": [
+    70,
+    84,
+    140,
+    149,
+    231
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 70,
+     "same": false,
+     "fact": "기사 1은 미국과 이란 간의 협상 가능성에 대한 내용이고, 기사 2는 이란 전쟁의 비용에 관한 내용으로, 구체적인 사실이 일치하지 않음."
+    },
+    {
+     "anglo": 84,
+     "same": false,
+     "fact": "두 기사 모두 미국과 이란 간의 긴장 상황을 다루고 있지만, 첫 번째 기사는 미국과 이란 간의 협상 가능성에 관한 내용이고, 두 번째 기사는 미국 군사 대비태세에 관한 내용으로 구"
+    },
+    {
+     "anglo": 140,
+     "same": false,
+     "fact": "두 기사 모두 이란과 관련된 해상 교통 문제를 다루고 있지만, 첫 번째 기사는 미국과 이란 간의 협상 신호와 호르무즈 해협의 교통 상황에 대해 다루고 있고, 두 번째 기사는 이란 "
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "2026 CIFTIS shows China's shift from products to tech-driven services",
+   "link": "https://news.cgtn.com/news/2026-09-14/2026-CIFTIS-shows-China-s-shift-from-products-to-tech-driven-services-1Qquo0u3chG/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 31.2,
+   "event": "2026 중국 국제 서비스 무역 박람회(CIFTIS)에서 중국이 제품 중심에서 기술 중심 서비스로 전환하는 모습을 보여줌",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련되어 있지만, 첫 번째 기사는 2026년 중국 국제 서비스 무역 박람회(CIFTIS)에 관한 내용이고, 두 번째 기사는 AI 경쟁과 관련된 중국의 입장에 "
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "기사 1은 2026년 중국 국제 서비스 무역 박람회(CIFTIS)에 대해 다루고 있으며, 기사 2는 중국 외교부가 Anthropic CEO의 AI 개발 관련 발언에 반응한 내용을 "
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "China unites Global South for new chapter of BRICS cooperation",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-unites-Global-South-for-new-chapter-of-BRICS-cooperation-1Qr3O4oWM1i/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 21.3,
+   "event": "중국이 BRICS 정상회의에서 글로벌 사우스 협력의 새로운 장을 열다",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    130
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Analysis: Three questions to know ahead of China's security forum",
+   "link": "https://news.cgtn.com/news/2026-09-14/Analysis-Three-questions-to-know-ahead-of-China-s-security-forum-1QrdA8C14ti/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 21.3,
+   "event": "중국 시안산 포럼 20주년 기념 및 아시아-태평양 지역 평화와 안보 논의 확대",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "Chinese defense minister talks with visiting Lao defense minister",
+   "link": "https://news.cgtn.com/news/2026-09-15/Chinese-defense-minister-talks-with-visiting-Lao-defense-minister--1QrVaY0Isik/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 10.6,
+   "event": "중국 국방부 장관이 라오스 국방부 장관과 회담을 가짐",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    63
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 63,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN World",
+   "title": "21 Palestinians injured as Israeli strikes continue in Gaza",
+   "link": "https://news.cgtn.com/news/2026-09-15/21-Palestinians-injured-as-Israeli-strikes-continue-in-Gaza-1Qs3nEy6VSo/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World",
+   "age_h": 9.3,
+   "event": "이스라엘의 가자지구 공습으로 최소 21명의 팔레스타인인이 부상당함",
+   "kind": "중미관계",
+   "candidates": [
+    13,
+    46,
+    64,
+    81,
+    146,
+    193
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 13,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 46,
+     "same": false,
+     "fact": "두 기사 모두 이스라엘과 가자 지구 관련 내용을 다루고 있지만, 첫 번째 기사는 이스라엘의 가자 지구 공습으로 팔레스타인인들이 부상당한 사건을 다루고 있고, 두 번째 기사는 이스라"
+    },
+    {
+     "anglo": 64,
+     "same": false,
+     "fact": "기사 1은 이스라엘의 가자지구 공습으로 팔레스타인인 21명이 부상당했다고 보도하고, 기사 2는 이스라엘이 팔레스타인인의 삶을 해체하고 있다고 인권단체의 주장을 전한다. 두 기사 모"
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "How China's 15th Five-Year Plan offers the world opportunities",
+   "link": "https://news.cgtn.com/news/2026-09-14/How-China-s-15th-Five-Year-Plan-offers-the-world-opportunities-1QqY1uoGPza/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 20.0,
+   "event": "중국의 15차 5개년 계획이 세계에 기회를 제공하는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련된 내용을 다루고 있지만, 첫 번째 기사는 중국의 15차 5개년 계획에 관한 내용이고, 두 번째 기사는 중국의 인공지능 개발에 대한 외교부의 반응을 다루고"
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China plans to expand affordable childcare, pediatric healthcare",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-plans-to-expand-affordable-childcare-pediatric-healthcare-1QqvoVEZljq/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 31.4,
+   "event": "중국이 저렴한 보육과 소아 의료 서비스를 확대하여 출산 친화적인 환경을 조성할 계획임을 발표함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Pinglu Canal showcases smart technologies in landmark waterway project",
+   "link": "https://news.cgtn.com/news/2026-09-14/Pinglu-Canal-showcases-smart-technologies-in-landmark-waterway-project-1QqFOaThEnC/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 28.5,
+   "event": "중국 광시 좡족 자치구의 핑루 운하가 9월 7일 개통되어, 134.2km 길이의 이 운하는 북쪽의 시지앙 강 운송로와 남쪽의 베이부 만을 연결하는 중국 최초의 주요 강-바다 운하 프로젝트이다.",
+   "kind": "중국 국내",
+   "candidates": [
+    4,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 4,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China unites Global South for new chapter of BRICS cooperation",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-unites-Global-South-for-new-chapter-of-BRICS-cooperation-1Qr3O4oWM1i/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 21.3,
+   "event": "중국이 인도 뉴델리에서 열린 제18차 BRICS 정상회의에 참석하여 BRICS 국가들이 더 공정하고 공평한 국제 질서를 촉진하는 선도적 역할을 하도록 촉구하며 글로벌 사우스 간 협력의 새로운 장을 열었다는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    130
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Giant panda Qing Bao celebrates 5th birthday in Washington",
+   "link": "https://news.cgtn.com/news/2026-09-14/Giant-panda-Qing-Bao-celebrates-5th-birthday-in-Washington-1QqXyAiuIne/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 25.4,
+   "event": "워싱턴 스미스소니언 국립동물원에서 자이언트 판다 칭바오가 5번째 생일을 맞아 축하 행사가 열림",
+   "kind": "중국 국내",
+   "candidates": [
+    8,
+    9,
+    20
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 8,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China Weekly News Quiz: September 7-13, 2026",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-Weekly-News-Quiz-September-7-13-2026-1QqF4L8a71m/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 27.4,
+   "event": "중국에서 지난주에 일어난 주요 사건과 뉴스를 퀴즈 형식으로 다룬 기사",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 2026년 9월 중순 중국과 관련된 소식을 다루고 있지만, 첫 번째 기사는 중국의 주간 뉴스 퀴즈 형식으로 다양한 사건을 다루고 있고, 두 번째 기사는 인공지능 개발"
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 2026년 9월 중순 중국과 관련된 최근 소식을 다루고 있지만, 첫 번째 기사는 중국의 주간 뉴스 퀴즈 형식으로 다양한 사건을 포괄적으로 다루고 있고, 두 번째 기사"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Why do Panda birthdays matter?",
+   "link": "https://newsus.cgtn.com/news/2026-09-15/Why-do-Panda-birthdays-matter--1QrUqHOlr8c/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 12.2,
+   "event": "워싱턴 D.C. 스미스소니언 국립동물원에서 판다 청바오의 5번째 생일을 기념하며, 50년 이상 이어진 중국과 미국의 판다 보존 협력 이야기",
+   "kind": "중국 국내",
+   "candidates": [
+    8,
+    9,
+    20
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 8,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Woolly rhino, bison fossils offer glimpse of Hulunbuir's Ice Age past",
+   "link": "https://news.cgtn.com/news/2026-09-14/Woolly-rhino-bison-fossils-offer-glimpse-of-Hulunbuir-s-Ice-Age-past-1QqMaznQaWs/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 28.2,
+   "event": "내몽골 후룬부이르에서 발견된 털코뿔소와 들소 화석이 빙하기 시대의 모습을 보여줌",
+   "kind": "중국 국내",
+   "candidates": [
+    9,
+    20,
+    143
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": "첫 번째 기사는 내몽골 후룬부이르 박물관에 전시된 매머드 코뿔소와 들소 화석에 대해 다루고 있고, 두 번째 기사는 멕시코 오악사카의 라 에스코비야 해변에 도착한 수천 마리의 거북이"
+    },
+    {
+     "anglo": 143,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China achieves integrated coordination, monitoring of computing power",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-achieves-integrated-coordination-monitoring-of-computing-power-1QqvaGDJFU4/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 31.5,
+   "event": "중국이 전국적으로 컴퓨팅 파워의 통합 조정 및 모니터링을 달성했다는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련된 인공지능 또는 컴퓨팅 파워에 대해 다루고 있지만, 첫 번째 기사는 중국 내 컴퓨팅 파워의 통합 조정 및 모니터링 달성에 관한 발표이고, 두 번째 기사는"
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "From the Long March to roses: A new journey in Jiajin Mountain",
+   "link": "https://news.cgtn.com/news/2026-09-14/From-the-Long-March-to-roses-A-new-journey-in-Jiajin-Mountain-1QqTEEXb0ic/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 26.0,
+   "event": "중국 쓰촨성 자진산에서 장정(長征) 당시 홍군이 겪었던 고난과 현재 장미 재배를 통한 새로운 여정이 펼쳐지고 있는 이야기",
+   "kind": "중국 국내",
+   "candidates": [
+    9,
+    20,
+    143
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 143,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Robot chefs, 80+ dishes: Inside a high-tech restaurant in China",
+   "link": "https://news.cgtn.com/news/2026-09-14/Robot-chefs-80-dishes-Inside-a-high-tech-restaurant-in-China-1Qr6rPv19PW/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 23.7,
+   "event": "중국 산시성 타이위안의 로봇 셰프가 운영하는 첨단 레스토랑에서 80가지 이상의 요리를 제공하는 사건",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    66,
+    67
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 66,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "A trade fair, a cultural exchange that carries on",
+   "link": "https://news.cgtn.com/news/2026-09-14/A-trade-fair-a-cultural-exchange-that-carries-on-1Qr8a2egd0I/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 22.9,
+   "event": "2026년 중국 국제 서비스 무역 박람회(CIFTIS)에서 다양한 문화 교류 행사와 무역 활동이 이루어짐",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China releases world's 1st standard for AI-powered BCI medical devices",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-releases-world-s-1st-standard-for-AI-powered-BCI-medical-devices-1QqKg5FIZDa/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 27.4,
+   "event": "중국이 인공지능(AI) 기술을 활용한 뇌-컴퓨터 인터페이스(BCI) 의료기기에 대한 세계 최초의 제품 표준을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 중국이 AI 기술을 활용한 뇌-컴퓨터 인터페이스(BCI) 의료기기에 대한 세계 최초의 제품 표준을 승인·발표한 내용을 다루고 있습니다. 기사 2는 중국이 AI 개발 경쟁"
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI)에 관련되어 있지만, 첫 번째 기사는 중국의 AI 기반 뇌-컴퓨터 인터페이스 의료기기 표준 발표에 관한 내용이고, 두 번째 기사는 중국 외교부가"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "기사 1은 중국이 AI 기술을 활용한 뇌-컴퓨터 인터페이스(BCI) 의료기기 표준을 발표한 내용이고, 기사 2는 중국 외교부가 미국 AI 기업 CEO의 중국 AI 개발에 대한 비판"
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China's Mid-Autumn Festival and the legends we put in the moon",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-s-Mid-Autumn-Festival-and-the-legends-we-put-in-the-moon-1QqQsRAySVa/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 26.8,
+   "event": "중국의 중추절과 달에 얽힌 전설에 관한 기사",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "CGTN China",
+   "title": "Analysis: Three questions to know ahead of China's security forum",
+   "link": "https://news.cgtn.com/news/2026-09-14/Analysis-Three-questions-to-know-ahead-of-China-s-security-forum-1QrdA8C14ti/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 21.3,
+   "event": "중국 시안산 포럼 20주년 기념 및 아시아-태평양 지역 평화와 안보 논의 확대",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "AI economy takes the spotlight at Inclusion Conference on the Bund",
+   "link": "https://news.cgtn.com/news/2026-09-14/AI-economy-takes-the-spotlight-at-Inclusion-Conference-on-the-Bund--1QoRkLyIDVS/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 31.1,
+   "event": "상하이에서 열린 Inclusion Conference에서 AI 경제와 관련된 신기술들이 주목받음",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    1,
+    10,
+    19,
+    22,
+    30,
+    66,
+    67,
+    123,
+    150,
+    157,
+    160,
+    173,
+    175,
+    177,
+    187,
+    243,
+    247,
+    249
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 1,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI) 관련 내용을 다루고 있다."
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China unveils AI security governance framework 3.0",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-unveils-AI-security-governance-framework-3-0-1QqPoBY8oKs/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 27.1,
+   "event": "중국이 AI 보안 거버넌스 프레임워크 3.0을 공개했다. 2026년 중국 사이버보안 주간이 산둥성 지난에서 열렸으며, AI 기술 기반 사이버보안 애플리케이션 테스트 결과와 소비자용 네트워크 카메라 제품 목록도 발표되었다.",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    19,
+    22,
+    30,
+    66,
+    67,
+    123,
+    146,
+    150,
+    157,
+    160,
+    173,
+    177,
+    187,
+    243,
+    247,
+    249
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI) 관련 내용을 다루고 있지만, 첫 번째 기사는 중국에서 AI 보안 거버넌스 프레임워크 3.0을 발표한 행사에 관한 내용이고, 두 번째 기사는 중"
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+   "link": "https://news.cgtn.com/news/2026-09-14/Beijing-highlights-Xi-Modi-agreement-China-India-should-be-partners-1QqUeFiEFl6/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 21.5,
+   "event": "중국 시진핑 주석과 인도 나렌드라 모디 총리가 파트너십을 강조하며 회담을 가졌다는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China vows to continue search for missing Latvians in deadly mudslides",
+   "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-holds-phone-talks-with-Latvian-counterpart-on-ties-1Qrie3fILo4/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 20.9,
+   "event": "중국에서 발생한 치명적인 산사태로 실종된 라트비아인들을 찾기 위한 중국의 계속된 수색 노력",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "China advances technology cooperation across BRICS",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-advances-technology-cooperation-across-BRICS-1QqIhSzGOo8/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 26.9,
+   "event": "중국이 BRICS 국가들과 인공지능, 디지털 산업, 스마트 제조, 인재 개발 등 기술 협력을 구체적인 프로젝트로 추진하고 있다. 9월 13일 뉴델리에서 열린 제18차 BRICS 정상회의에서 시진핑 주석은 BRICS 협력 심화를 위한 5가지 제안을 제시했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI) 관련 내용을 다루고 있지만, 첫 번째 기사는 BRICS 국가들과의 기술 협력에 관한 구체적인 제안과 프로젝트를 다루고 있고, 두 번째 기사는 "
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 인공지능(AI) 관련 내용을 다루고 있지만, 첫 번째 기사는 BRICS 국가들과의 기술 협력에 관한 것이고, 두 번째 기사는 중국 외교부가 미국 인공지능 기업"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국의 인공지능(AI) 기술과 관련된 내용을 다루고 있습니다."
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Chinese defense minister talks with visiting Lao defense minister",
+   "link": "https://news.cgtn.com/news/2026-09-15/Chinese-defense-minister-talks-with-visiting-Lao-defense-minister--1QrVaY0Isik/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 10.6,
+   "event": "중국 국방부 장관이 라오스 국방부 장관과 회담을 가짐",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    63
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 63,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "2026 CIFTIS shows China's shift from products to tech-driven services",
+   "link": "https://news.cgtn.com/news/2026-09-14/2026-CIFTIS-shows-China-s-shift-from-products-to-tech-driven-services-1Qquo0u3chG/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 31.2,
+   "error": "LengthFinishReasonError: Could not parse response content as the length limit was reached - CompletionUsage(completion_t"
+  },
+  {
+   "source": "CGTN China",
+   "title": "China's industrial output up 5.3% in first 8 months",
+   "link": "https://news.cgtn.com/news/2026-09-15/China-s-industrial-output-up-5-3-in-first-8-months-1Qs6LlSXfGM/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 9.3,
+   "event": "중국의 2026년 첫 8개월간 산업 생산량이 5.3% 증가했다는 공식 데이터 발표",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "기사 1은 2026년 중국의 산업 생산 증가율에 관한 공식 데이터 발표를 다루고 있고, 기사 2는 중국 외교부가 미국 AI 기업 CEO의 발언에 대해 반박한 내용을 다루고 있습니다"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Will AI replace teachers?",
+   "link": "https://news.cgtn.com/news/2026-09-14/Will-AI-replace-teachers--1QqJeNwHj1K/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 26.1,
+   "event": "중국 충칭시 위중구에서 AI가 교실 수업을 재구성하는 사례. AI가 수업 계획, 숙제 채점, 학생 개별 학습 지원을 수행하지만 교사의 관찰과 지도, 돌봄을 대체할 수 있는지에 대한 논의.",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    19
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN China",
+   "title": "Nurturing a healthier future for China's next generation",
+   "link": "https://news.cgtn.com/news/2026-09-14/Nurturing-a-healthier-future-for-China-s-next-generation--1Qr9NVCcII8/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 22.2,
+   "event": "중국의 차세대 건강 증진 및 의료 서비스 개선에 관한 내용",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "CGTN China",
+   "title": "China's Gansu-Zhejiang UHV project reaches key milestone",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-s-Gansu-Zhejiang-UHV-project-reaches-key-milestone-1QqRd8YapDW/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 26.7,
+   "event": "중국 간쑤-저장 초고압 직류 송전 프로젝트가 황하를 가로지르는 케이블 설치를 완료하며 간쑤 구간 전체 완공을 달성했다.",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "CGTN China",
+   "title": "Chinese FM speaks with French counterpart on ties, global issues",
+   "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-speaks-with-French-counterpart-on-ties-global-issues-1Qrg7PakCgE/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=China",
+   "age_h": 20.9,
+   "event": "중국 외교부장 왕이와 프랑스 외교부장 장-노엘 바로가 양자 관계 및 국제 문제에 대해 전화 통화를 가졌다. 왕이는 중국과 유럽이 현재의 경제 및 무역 마찰을 건설적인 대화를 통해 적절히 해결하고 대립을 심화시키지 말아야 한다고 말했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Chinese FM speaks with French counterpart on ties, global issues",
+   "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-speaks-with-French-counterpart-on-ties-global-issues-1Qrg7PakCgE/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 20.9,
+   "event": "중국 외교부 장관이 프랑스 외교부 장관과 양자 관계 및 국제 문제에 대해 통화함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련된 외교적 입장이나 발언을 다루고 있지만, 첫 번째 기사는 중국과 프랑스 외교장관 간의 전화 통화에 관한 내용이고, 두 번째 기사는 중국 외교부가 AI 개"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국 외교부가 월요일에 입장을 발표했다."
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Chinese FM holds phone talks with Latvian counterpart on ties",
+   "link": "https://news.cgtn.com/news/2026-09-14/Chinese-FM-holds-phone-talks-with-Latvian-counterpart-on-ties-1Qrie3fILo4/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 20.9,
+   "event": "중국 외교부장 왕이가 라트비아 외교부장 바이바 브라제와 양국 관계에 대해 전화 통화를 했다.",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Ramaphosa calls for BRICS framework on AI governance",
+   "link": "https://newsaf.cgtn.com/news/2026-09-14/Ramaphosa-calls-for-BRICS-framework-on-AI-governance-1QqMaowg3mw/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 21.7,
+   "event": "남아프리카 공화국 대통령 시릴 라마포사, BRICS 국가들이 인공지능 안전 사용을 위한 협력적이고 포용적인 거버넌스 체계 수립 촉구",
+   "kind": "국제정세",
+   "candidates": [
+    0,
+    1,
+    19
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "기사 1은 남아프리카공화국 대통령 라마포사가 BRICS 정상회의에서 AI 거버넌스에 관한 협력적 틀을 제안한 내용을 다루고 있고, 기사 2는 미국 대통령 트럼프가 AI 안전 우려를"
+    },
+    {
+     "anglo": 1,
+     "same": false,
+     "fact": "두 기사 모두 인공지능(AI)과 관련된 규제나 거버넌스 문제를 다루고 있다."
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Xi charts course for greater BRICS cooperation: Chinese FM",
+   "link": "https://news.cgtn.com/news/2026-09-14/FM-Xi-s-BRICS-trip-boosts-cooperation-empowers-Global-South-1QpGkRL5ELm/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 43.2,
+   "event": "중국 시진핑 주석이 인도에서 열린 BRICS 정상회의에 참석하여 BRICS 협력 강화와 글로벌 남반구 국가들의 단결을 촉진하는 전략적 행보를 보임",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    130
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "China unites Global South for new chapter of BRICS cooperation",
+   "link": "https://news.cgtn.com/news/2026-09-14/China-unites-Global-South-for-new-chapter-of-BRICS-cooperation-1Qr3O4oWM1i/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 21.3,
+   "event": "중국이 BRICS 협력의 새로운 장을 열기 위해 글로벌 사우스 국가들을 결집하다",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    130
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Beijing highlights Xi, Modi agreement: China, India should be partners",
+   "link": "https://news.cgtn.com/news/2026-09-14/Beijing-highlights-Xi-Modi-agreement-China-India-should-be-partners-1QqUeFiEFl6/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 21.5,
+   "event": "중국 시진핑 주석과 인도 나렌드라 모디 총리가 파트너십을 강조하며 회담을 가졌다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련된 내용을 다루고 있지만, 첫 번째 기사는 시진핑과 모디의 회담에 관한 것이고, 두 번째 기사는 중국 외교부가 AI 개발에 대한 경고에 반응한 내용으로, "
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Mongolian president vows to deepen energy cooperation with China",
+   "link": "https://news.cgtn.com/news/2026-09-14/Mongolian-president-vows-to-deepen-energy-cooperation-with-China-1QqgW08LX7q/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 34.8,
+   "event": "몽골 대통령이 중국과의 에너지 협력 심화를 약속하다",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "첫 번째 기사는 몽골 대통령이 중국과의 에너지 협력에 대해 이야기하고, 두 번째 기사는 중국 외교부가 AI 개발에 대한 경고에 반응한 내용으로, 두 기사 모두 다른 주제와 사건을 "
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "CGTN Politics",
+   "title": "Analysis: Three questions to know ahead of China's security forum",
+   "link": "https://news.cgtn.com/news/2026-09-14/Analysis-Three-questions-to-know-ahead-of-China-s-security-forum-1QrdA8C14ti/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=Politics",
+   "age_h": 21.3,
+   "event": "중국 시안산 포럼 20주년 기념 및 아시아-태평양 지역 평화와 안보 논의 확대",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "俄外长：俄罗斯希望结束俄乌冲突",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10697038.shtml",
+   "age_h": 0.3,
+   "event": "러시아 외무장관 라브로프가 러시아가 우크라이나와의 분쟁을 끝내길 희망하며 우크라이나 문제에 대해 협상할 의사가 있음을 밝혔다.",
+   "kind": "중국 국내",
+   "candidates": [
+    18,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 18,
+     "same": false,
+     "fact": "기사 1은 러시아 외무장관이 러시아-우크라이나 충돌의 종식을 희망한다고 말한 내용이고, 기사 2는 우크라이나 우편 노동자들이 러시아의 공격 속에서도 우편 서비스를 제공한다는 내용으"
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": "두 기사 모두 러시아와 관련된 군사적 긴장 상황을 다루고 있지만, 첫 번째 기사는 러시아 외교부 장관이 러시아-우크라이나 분쟁의 종식을 희망하며 협상을 원한다는 내용이고, 두 번째"
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": "두 기사 모두 러시아와 우크라이나 간의 갈등 상황을 다루고 있습니다."
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "约旦前首相拉扎兹：中约能源合作潜力巨大",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696921.shtml",
+   "age_h": 2.7,
+   "event": "중국과 요르단 전 총리 라자즈가 중-요르단 에너지 협력의 잠재력이 크다고 언급함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "日媒：冲绳县知事选举暴露“日本本土对冲绳战后最严重歧视”",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696911.shtml",
+   "age_h": 2.7,
+   "event": "일본 오키나와 현 지사 선거에서 자민당 지지 후보가 현직 지사를 꺾고 당선되었으며, 선거 기간 중 오키나와 주민들의 군사기지 반대와 자치 요구에 대해 일본 본토에서 심각한 차별과 비판이 드러났다.",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    6,
+    174
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 6,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 174,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "用AI技术洗白侵略罪行，日本的危险尝试必须警惕",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696909.shtml",
+   "age_h": 2.8,
+   "event": "일본 정부가 AI 기술을 이용해 침략 범죄를 세탁하려는 시도와 이에 대한 국제 사회의 경계",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "为什么拉美需要研究学习中国？秘鲁前总理给出一个答案",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696903.shtml",
+   "age_h": 2.8,
+   "event": "중국의 빈곤 퇴치 성과와 경험을 연구할 필요성에 대해 페루 전 총리가 언급함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "今年前8个月逾31万名中国游客赴乌兹别克斯坦旅游",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696862.shtml",
+   "age_h": 2.9,
+   "event": "올해 1월부터 8월까지 31만 8천 5백 명 이상의 중국 관광객이 우즈베키스탄을 방문했다는 소식",
+   "kind": "중국 국내",
+   "candidates": [
+    239
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "跨越山海，为梦想铺路——中拉教育合作驶入快车道",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696900.shtml",
+   "age_h": 2.9,
+   "event": "중국과 라틴 아메리카 간 교육 협력 가속화에 관한 기사",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    103
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "外专眼中的“大金砖”丨俄学者：扩容提质 赋能增长 金砖合作夯实全球经济韧性",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696887.shtml",
+   "age_h": 3.0,
+   "event": "중국이 2027년에 금브릭스(BRICs) 의장국을 맡고, 제19차 금브릭스 정상회의를 주최할 예정이라는 내용과 관련된 기사",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    67
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "支持科研出版负责任和透明使用AI 施普林格·自然更新AI政策指引",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696825.shtml",
+   "age_h": 3.4,
+   "event": "국제적으로 유명한 과학 출판 기관인 Springer Nature가 AI 편집 정책을 업데이트하고 책임 있고 투명한 AI 사용을 지원하는 지침을 발표했다.",
+   "kind": "국제정세",
+   "candidates": [
+    0,
+    1,
+    19
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 1,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "日本一架大型无人侦察机失联 防卫相指示迅速展开搜寻",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696755.shtml",
+   "age_h": 4.7,
+   "event": "일본에서 대형 무인 정찰기 실종, 방위상이 신속한 수색 지시",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "金正恩向普京致复谢电：“承诺始终不变地支持普京和俄罗斯人民”",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696746.shtml",
+   "age_h": 5.3,
+   "event": "금정은이 푸틴에게 감사 전보를 보내며 변함없이 푸틴과 러시아 국민을 지지할 것을 약속했다",
+   "kind": "중국 국내",
+   "candidates": [
+    6,
+    174,
+    221
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 6,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 174,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 221,
+     "same": false,
+     "fact": "두 기사 모두 러시아와 관련된 내용을 다루고 있지만, 첫 번째 기사는 김정은이 푸틴에게 감사 전보를 보낸 사건을, 두 번째 기사는 도널드 트럼프 주니어의 아내가 러시아 올리가르히로"
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "也门胡塞武装称打击沙特空军基地 三座沙特城市同日遇袭",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696726.shtml",
+   "age_h": 5.7,
+   "event": "예멘 후티 무장세력이 사우디 공군기지를 공격하고, 같은 날 세 개의 사우디 도시가 공격받음",
+   "kind": "중국 국내",
+   "candidates": [
+    43,
+    130,
+    213
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 43,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 무장세력과 관련된 내용을 다루고 있습니다."
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 무장 세력과 관련된 내용을 다루고 있습니다."
+    },
+    {
+     "anglo": 213,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 무장 세력이 최근 군사 행동을 벌였다는 사실을 언급하고 있습니다."
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "黄仁勋峰会现场接到特朗普电话，当场打开免提：“机器人不会接管世界”",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696681.shtml",
+   "age_h": 7.6,
+   "event": "英伟达首席执行官黄仁勋在All-in Summit峰会上接到美国总统特朗普电话，双方讨论人工智能发展。",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    66,
+    243
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "기사 1과 기사 2 모두 미국 대통령 트럼프가 인공지능(AI)에 대해 언급한 사실을 다루고 있습니다."
+    },
+    {
+     "anglo": 66,
+     "same": false,
+     "fact": "기사 1은 9월 14일 미국 로스앤젤레스에서 열린 All-in Summit에서 황인훈이 트럼프 대통령과 AI에 대해 통화한 사실을 다루고 있다. 기사 2는 AI 개발에 대한 주요 "
+    },
+    {
+     "anglo": 243,
+     "same": false,
+     "fact": "기사 1과 기사 2는 모두 트럼프 대통령과 인공지능(AI) 관련 내용을 다루고 있지만, 기사 1은 트럼프가 엔비디아 CEO 황인훈과 직접 통화한 구체적인 사건을 보도하는 반면, 기"
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "美法官阻止特朗普政府收紧国际学生逗留期限新规生效",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696591.shtml",
+   "age_h": 9.2,
+   "event": "미국 법원이 트럼프 정부의 국제 학생 체류 기간 단축 규정 시행을 막음",
+   "kind": "중국 국내",
+   "candidates": [
+    11,
+    56,
+    58
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 11,
+     "same": false,
+     "fact": "두 기사 모두 트럼프 행정부의 정책에 대해 법원이 제동을 걸었다는 점을 언급하지만, 첫 번째 기사는 국제 학생 체류 기간 제한 규정에 대한 연방 법원의 중지 명령을 다루고 있고, "
+    },
+    {
+     "anglo": 56,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 58,
+     "same": false,
+     "fact": "기사 1은 미국 법원이 트럼프 정부의 국제 학생 체류 기간 제한 규정을 막은 사건을 다루고 있고, 기사 2는 미국 대법원이 트럼프의 우편 투표 제한을 거부한 사건을 다루고 있습니다"
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "“东京审判不应被遗忘，正如侵略历史不容篡改”——访法国历史学者让—伊夫·勒纳乌尔",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696620.shtml",
+   "age_h": 9.3,
+   "event": "도쿄 재판과 침략 역사를 잊지 말아야 한다는 프랑스 역사학자 인터뷰",
+   "kind": "중국 국내",
+   "candidates": [
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "零时差丨让东京审判走出“遗忘黑洞”",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696616.shtml",
+   "age_h": 9.3,
+   "event": "도쿄 재판(도쿄 전범 재판)의 역사적 의미와 국제 전쟁 범죄 사법 실천의 선례로서의 중요성을 다룬 프랑스 학자의 저서 및 다큐멘터리 방송 소식",
+   "kind": "중국 국내",
+   "candidates": [
+    13,
+    46,
+    81
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 13,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 46,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 81,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "日本冲绳新任知事支持美军基地搬迁 地区军事风险加剧",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696611.shtml",
+   "age_h": 9.4,
+   "event": "일본 오키나와 신임 지사가 미군 기지 이전을 지지하며 지역 군사 위험이 증가함",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "报告证实日本核电站地震评估造假 引发当地民众批评",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696552.shtml",
+   "age_h": 9.7,
+   "event": "일본 핵발전소 지진 평가 조작 확인, 지역 주민 비판 촉발",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "一艘俄罗斯渔船在韩国港口发生氟利昂泄漏事故，2人心脏骤停",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696557.shtml",
+   "age_h": 9.7,
+   "event": "러시아 어선이 한국 부산 항구에서 프레온 가스 누출 사고 발생, 2명 심장마비",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "特朗普说伊朗“急着谈判”，伊朗却与阿曼敲定了海峡航线共识！带来这些连锁反应",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696504.shtml",
+   "age_h": 11.8,
+   "event": "트럼프가 이란이 협상에 급하다고 말했으나, 이란은 오만과 해협 항로 합의를 체결했다는 내용과 이로 인한 유가 및 무인기 관련 연쇄 반응",
+   "kind": "중국 국내",
+   "candidates": [
+    70,
+    76,
+    140
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 70,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 76,
+     "same": false,
+     "fact": "기사 1은 이란과 아만이 해협 항로에 대한 합의를 했다는 내용이고, 기사 2는 예멘에서 이란의 대리 세력이 사우디 아라비아의 파이프라인을 공격해 유가가 상승하고 있다는 내용으로, "
+    },
+    {
+     "anglo": 140,
+     "same": false,
+     "fact": "기사 1은 이란과 오만이 해협 항로에 관한 합의를 맺은 사실을 다루고 있고, 기사 2는 이란 화물선이 공격받았고, 테헤란과 이웃국가 간 회담이 연기된 사실을 다루고 있다. 두 기사"
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "日本首相高市早苗将于17日改组内阁",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696492.shtml",
+   "age_h": 12.5,
+   "event": "일본 총리 고이치 사나에가 17일 내각 개편을 할 예정임",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "特朗普连发多帖为对伊朗政策辩护：称伊朗“迫切”希望达成协议",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696491.shtml",
+   "age_h": 12.7,
+   "event": "트럼프가 이란 정책을 옹호하며 이란이 '절박하게' 협정을 원한다고 주장함",
+   "kind": "중국 국내",
+   "candidates": [
+    61,
+    141,
+    225
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 61,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 141,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 225,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "武契奇宣布：将于9月27日辞去塞尔维亚总统职务",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696489.shtml",
+   "age_h": 13.2,
+   "event": "세르비아 대통령 무치치가 9월 27일 대통령직 사임을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 국제",
+   "title": "武契奇：将于9月27日辞去塞尔维亚总统职务",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696485.shtml",
+   "age_h": 13.9,
+   "event": "세르비아 대통령 무치치가 9월 27일 대통령직 사임을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "俄外长：俄罗斯希望结束俄乌冲突",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10697038.shtml",
+   "age_h": 0.3,
+   "event": "러시아 외무장관 라브로프가 러시아가 우크라이나와의 분쟁을 끝내길 희망하며 우크라이나 문제에 대해 협상할 의사가 있음을 밝혔다.",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": "기사 1은 러시아 외무장관이 러시아-우크라이나 충돌 종식을 희망한다고 보도하고 있으며, 기사 2는 러시아 군함이 덴마크 헬리콥터에 긴급 신호탄을 발사하고 나토 전투기가 리투아니아 "
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": "기사 1은 러시아 외교부 장관이 러시아-우크라이나 충돌의 종식을 희망한다고 보도하고 있으며, 기사 2는 덴마크가 모스크바 군함이 군용 헬리콥터 근처에서 신호탄을 발사했다고 비난하는"
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "江苏泰兴通报“百胜超市员工将地面冻品倒回冰柜”",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10697005.shtml",
+   "age_h": 1.2,
+   "event": "중국 장쑤성 타이싱시에서 백승 슈퍼마켓 직원이 바닥에 떨어진 냉동 식품을 다시 냉동고에 넣는 영상이 온라인에 퍼져 시장감독국이 즉시 현장 조사에 나섰다.",
+   "kind": "중국 국내",
+   "candidates": [
+    16,
+    181
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 16,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 181,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "受贿5742万 十四届全国政协原常委毕井泉一审获刑十四年",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696922.shtml",
+   "age_h": 2.7,
+   "event": "중국 전국정협 전 상무위원 비정천이 뇌물수수 혐의로 1심에서 징역 14년 선고",
+   "kind": "중국 국내",
+   "candidates": [
+    6,
+    174,
+    221
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 6,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 174,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 221,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "中国内地高校全球冠军学科增至22个",
+   "link": "https://www.chinanews.com.cn/edu/2026/09-15/10696904.shtml",
+   "age_h": 2.8,
+   "event": "중국 내지 대학들이 화학과 해양과학 분야에서 세계 1위를 차지하며, 내지 대학의 글로벌 챔피언 학과 수가 22개로 증가했다는 소식",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "最新消息：日本海保飞机发现疑似失联侦察机残骸",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696892.shtml",
+   "age_h": 2.9,
+   "event": "일본 해상보안청 비행기가 의심되는 실종 정찰기 잔해를 발견한 사건",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "雪豹、藏狐与旱獭 祁连山的“神奇动物”长啥样？",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696841.shtml",
+   "age_h": 3.3,
+   "event": "중국에서 생태환경법전이 올해 8월 15일에 공식 시행되었으며, 이 법전은 생태 보호, 종 보호, 야생동물 보호 및 서식지 보호에 관한 체계적인 규정을 포함하고 있다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "民政部公布6起打击整治非法社会组织典型案例",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696822.shtml",
+   "age_h": 3.5,
+   "event": "중국 민정부가 불법 사회조직 단속 및 정비 관련 6건의 대표 사례를 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    16,
+    181
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 16,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 181,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "两部门对在线酒店预订平台服务行业开展行政指导",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696811.shtml",
+   "age_h": 3.7,
+   "event": "중국에서 온라인 호텔 예약 플랫폼 서비스 산업에 대해 행정 지도가 이루어짐",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    12,
+    67
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 12,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "日本一架大型无人侦察机失联 防卫相指示迅速展开搜寻",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696755.shtml",
+   "age_h": 4.7,
+   "event": "일본에서 대형 무인 정찰기 실종, 방위상이 신속한 수색 지시",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "国家卫健委：加快托育综合服务中心建设",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696729.shtml",
+   "age_h": 4.8,
+   "event": "중국 국가위생건강위원회가 보육 종합 서비스 센터 건설 및 운영을 가속화하는 내용의 통지를 발표함",
+   "kind": "중국 국내",
+   "candidates": [
+    26,
+    35,
+    54
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 26,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 35,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 54,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "低保户女孩赴香港追星 全家低保该被取消吗？",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696754.shtml",
+   "age_h": 4.9,
+   "event": "중국에서 저소득층 가정의 소녀가 홍콩에 스타를 만나러 가면서 저소득층 지원 정책의 경계에 대한 논란이 일어남. 또한 저소득층 가정에서 에어컨 설치가 가능한지에 대한 논쟁도 확산됨.",
+   "kind": "중국 국내",
+   "candidates": [
+    16,
+    181
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 16,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 181,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "也门胡塞武装称打击沙特空军基地 三座沙特城市同日遇袭",
+   "link": "https://www.chinanews.com.cn/gj/2026/09-15/10696726.shtml",
+   "age_h": 5.7,
+   "event": "예멘 후티 무장단체가 사우디 공군기지를 공격하고 같은 날 세 개의 사우디 도시가 공격받음",
+   "kind": "중국 국내",
+   "candidates": [
+    43,
+    130,
+    213
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 43,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 무장세력과 관련된 내용을 다루고 있습니다."
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": "두 기사 모두 후티 무장 세력과 관련된 내용을 다루고 있지만, 첫 번째 기사는 후티가 사우디아라비아 내 공군 기지와 도시들을 공격한 사건을, 두 번째 기사는 후티가 홍해의 전략적 "
+    },
+    {
+     "anglo": 213,
+     "same": false,
+     "fact": "두 기사 모두 예멘 후티 무장세력이 최근 군사 행동을 벌였다고 보도하고 있다."
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "国家统计局：我国人形机器人出货量全球占比提升到97%",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696699.shtml",
+   "age_h": 6.2,
+   "event": "중국 국가통계국이 2026년 8월 경제 상황을 발표하며, 중국의 산업 체인과 공급망의 회복력이 강화되고 인형 로봇 출하량이 전 세계의 97%를 차지한다고 밝힘",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "【石榴花开 籽籽同心】探访“西藏解放第一村”：红色传承中，见证藏乡七十余载幸福变迁",
+   "link": "https://www.chinanews.com.cn/txy/2026/09-15/10696649.shtml",
+   "age_h": 8.6,
+   "event": "중국 신문망 요문에서 '서장 해방 첫 마을'을 방문하여 70년 이상의 행복한 변천을 증언하는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "中国向联合国捐赠嫦娥六号月壤样品",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696644.shtml",
+   "age_h": 8.8,
+   "event": "중국이 유엔에 창어 6호 달 토양 샘플을 기증했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    8,
+    21,
+    56
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 8,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 21,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 56,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "“牌子还在，人早没了” 多个4A级旅游景区被清理",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696634.shtml",
+   "age_h": 9.1,
+   "event": "중국 안후이성에서 6개의 4A급 관광지 등급을 일괄 취소하고 1개 관광지 등급을 강등하는 대규모 4A급 관광지 정리 작업을 실시함. 일부 관광지는 자발적으로 4A급 자격을 포기함으로써 명목상의 관광지 문제와 질적 저하 문제를 해결하려 함.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    12,
+    239
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 12,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "央行公开市场开展5970亿元隔夜逆回购操作",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696554.shtml",
+   "age_h": 9.4,
+   "event": "중국 중앙은행이 공개 시장에서 5970억 위안 규모의 하룻밤 역환매조건부채권(역RP) 조작을 실시했다는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "기사 1은 중국 중앙은행의 공개시장 역환매조건부채권(역레포) 조작에 관한 내용이고, 기사 2는 중국 외교부가 미국 AI 기업 Anthropic CEO의 발언에 대해 반박한 내용으로"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "两部门针对海南启动国家自然灾害救助四级应急响应",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696599.shtml",
+   "age_h": 9.5,
+   "event": "중국 하이난 지역의 강우로 인한 심각한 자연재해에 대응하여 국가 자연재해 구호 4단계 비상 대응이 발동되었고, 관련 부서가 현장에 긴급 파견되어 재해 상황 점검 및 구호 활동을 지원하고 있음.",
+   "kind": "중국 국내",
+   "candidates": [
+    4,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 4,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "价格预立项制度试行 创新医疗技术落地提速",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696585.shtml",
+   "age_h": 9.6,
+   "event": "가격 사전 승인 제도 시범 시행, 혁신 의료 기술 도입 가속화",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 중국의 의료 기술 가격 제도에 관한 내용이고, 기사 2는 중국의 AI 경쟁에 관한 내용으로, 두 기사는 서로 다른 주제와 사건을 다루고 있습니다."
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "北京检察机关依法对于泽涉嫌受贿案提起公诉",
+   "link": "https://www.chinanews.com.cn/gn/2026/09-15/10696581.shtml",
+   "age_h": 9.7,
+   "event": "중국 인민보험그룹 전 부총재 유제가 뇌물수수 혐의로 기소됨",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "部分航司优化机上WiFi服务 网速咋样？收费吗？",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696564.shtml",
+   "age_h": 9.9,
+   "event": "국내 일부 항공사가 기내 WiFi 서비스를 최적화하여 무선 네트워크 서비스를 개선했다는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 중국 내 항공사의 기내 와이파이 서비스 최적화에 관한 내용이고, 기사 2는 중국이 AI 개발 경쟁에 관한 비판에 대응하는 내용으로, 두 기사는 서로 다른 주제와 사건을 "
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "两部门印发《电子信息制造业发展“十五五”规划》",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696548.shtml",
+   "age_h": 10.0,
+   "event": "중국 정부가 전자 정보 제조업의 고품질 발전을 촉진하기 위해 '15차 5개년 계획'을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "共享单车服务规范新国标发布 对运营企业提出这些要求",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696530.shtml",
+   "age_h": 10.3,
+   "event": "중국에서 공유 자전거 서비스에 대한 새로운 국가 표준이 발표되어 운영 기업에 대한 요구사항이 제시됨",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "上半年“算力金属”价格猛涨 带来哪些影响？",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696523.shtml",
+   "age_h": 10.6,
+   "event": "상반기 '산력 금속' 가격 급등과 그 영향에 관한 기사",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 상반기 금속 가격 상승에 대해 다루고 있고, 기사 2는 AI 개발 경쟁과 관련된 중국의 입장에 대해 다루고 있습니다. 두 기사 모두 구체적인 사실이 일치하지 않습니다."
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 금속 가격 상승과 중국의 AI 개발에 관한 내용을 다루고 있지 않습니다."
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "屏幕里的“情感导师”，可能只是一个AI程序",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696506.shtml",
+   "age_h": 11.7,
+   "event": "중국신문망 요문에서 '화면 속의 감정 멘토가 사실은 AI 프로그램일 수 있다'는 내용과 '온라인 감정 상담이 2차 심리적 상처가 되지 않도록 주의해야 한다'는 사건을 다룸",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    19
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "기사 1은 AI 프로그램이 감정 상담에 사용되는 문제를 다루고 있고, 기사 2는 AI 안전성에 대한 트럼프 대통령의 발언을 다루고 있습니다. 두 기사 모두 AI와 관련되어 있지만,"
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 AI 프로그램이 감정 상담에 사용되는 문제를 다루고 있고, 기사 2는 AI 개발 경쟁과 관련된 중국의 입장을 다루고 있습니다. 두 기사 모두 AI와 관련되어 있지만, 구"
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": "두 기사 모두 AI(인공지능)에 대해 다루고 있지만, 첫 번째 기사는 AI가 감정 상담에 미치는 영향에 대해 이야기하고 두 번째 기사는 AI 개발 속도 조절에 관한 논의를 다루고 "
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "背调频频亮起“黄灯” 维权记录为何成了入职“拦路虎”",
+   "link": "https://www.chinanews.com.cn/sh/2026/09-15/10696505.shtml",
+   "age_h": 11.8,
+   "event": "중국에서 취업 시 배경조사에서 권리 보호 기록이 입사에 장애가 되는 문제",
+   "kind": "중국 국내",
+   "candidates": [
+    16,
+    181
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 16,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 181,
+     "same": false,
+     "fact": "두 기사 모두 특정 인물이나 집단이 어려움이나 부정적인 상황에 처해 있다는 점을 다루고 있지만, 구체적인 사실이나 사건이 일치하지 않습니다."
+    }
+   ]
+  },
+  {
+   "source": "중국신문망 요문",
+   "title": "站在“十字路口”的摩天大楼何以“向上”生长",
+   "link": "https://www.chinanews.com.cn/cj/2026/09-15/10696503.shtml",
+   "age_h": 12.0,
+   "event": "중국신문망 요문 기사는 도시 고층 빌딩이 새로운 도시 발전 방향에서 어떻게 성장하고 있는지에 대해 다루고 있습니다. 이는 도시 공간 재구성과 운영 활성화, 생태계 정의를 통한 경쟁력 강화에 관한 내용입니다.",
+   "kind": "중국 국내",
+   "candidates": [
+    4,
+    12,
+    239
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 4,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 12,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Inaugural Mudanjiang-Moscow freight train service launched",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4048433.shtml",
+   "age_h": -6.9,
+   "event": "중국 흑룡강성 무단장에서 모스크바로 향하는 화물 열차 서비스 개시",
+   "kind": "중국 국내",
+   "candidates": [
+    6,
+    174,
+    221
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 6,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 174,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 221,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China's highest-altitude 750 kV substation transmits over 11.6 billion kWh of clean electricity in three years",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4048394.shtml",
+   "age_h": -6.8,
+   "event": "중국의 최고 고도 750kV 변전소가 3년간 116억 kWh 이상의 청정 전기를 송전했다",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "China begins construction of major offshore oil and gas project for Qatar",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4048309.shtml",
+   "age_h": -6.6,
+   "event": "중국이 카타르를 위한 대규모 해상 석유 및 가스 프로젝트 건설을 시작했다.",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "2026 Global Sustainable Transport Forum to be held in Beijing",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4048300.shtml",
+   "age_h": -6.5,
+   "event": "2026년 글로벌 지속 가능한 교통 포럼이 베이징에서 개최된다.",
+   "kind": "중국 국내",
+   "candidates": [
+    4,
+    28,
+    103
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 4,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 28,
+     "same": false,
+     "fact": "첫 번째 기사는 2026년 베이징에서 열리는 글로벌 지속 가능한 교통 포럼에 대해 다루고 있고, 두 번째 기사는 엘니뇨로 인한 가뭄으로 파나마 운하의 해상 교통이 줄어든다는 내용으"
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "U.S. blogger says Tibetans enjoy literacy gains, freedom of belief after Peaceful Liberation",
+   "link": "http://www.ecns.cn/video/2026-09-15/detail-ihfkhtke4047765.shtml",
+   "age_h": -4.3,
+   "event": "미국 블로거가 평화적 해방 이후 티베트인들이 문해력 향상과 신앙의 자유를 누리고 있다고 말함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 티베트인의 문화나 종교 자유에 관한 내용과 중국의 AI 개발에 관한 내용으로 서로 다른 주제를 다루고 있습니다."
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Tornado damages school in Hainan, no casualties reported",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047514.shtml",
+   "age_h": -3.5,
+   "event": "중국 하이난성 완닝에서 EF0 토네이도가 발생해 베이징사범대학 완닝 실험학교 시설이 피해를 입었으나 인명 피해는 없음",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "Henan porcelain expands its global reach",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047503.shtml",
+   "age_h": -3.5,
+   "event": "중국 후난성 리링 도자기가 독특한 유약 밑 다채로운 기법으로 전 세계 150개국 이상에 수출되고 있으며, 여러 차례 외교 선물로도 사용되었다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China donates Chang'e-6 lunar samples from Moon's far side to UN",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047292.shtml",
+   "age_h": -2.1,
+   "event": "중국이 창어-6호 달 탐사선이 달의 뒷면에서 수집한 달 샘플을 유엔에 기증했다는 사건",
+   "kind": "중국 국내",
+   "candidates": [
+    8,
+    129,
+    131
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 8,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 129,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 131,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China informs foreign embassies of DNA collection procedures: FM on rescue efforts following mudslide in Xizang region",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047284.shtml",
+   "age_h": -2.0,
+   "event": "중국이 시짱 지역 산사태 실종 외국인 유가족에게 DNA 수집 절차를 알림",
+   "kind": "중국 국내",
+   "candidates": [
+    12
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 12,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Zhejiang mooncakes gain overseas popularity ahead of Mid-Autumn Festival",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047249.shtml",
+   "age_h": -1.7,
+   "event": "중국 저장성 월병이 중추절을 앞두고 해외에서 인기를 얻고 있다.",
+   "kind": "중국 국내",
+   "candidates": [
+    27,
+    103,
+    239
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China's carbon market trades over 900 million metric tons in first eight months of 2026",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047073.shtml",
+   "age_h": -0.8,
+   "event": "중국 탄소 시장이 2026년 첫 8개월 동안 9억 톤 이상의 거래를 기록했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    14,
+    126,
+    250
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 14,
+     "same": false,
+     "fact": "기사 1은 중국의 탄소 시장 거래에 관한 내용이고, 기사 2는 미국의 석탄 및 가스 발전소 배출 제한 철폐에 관한 내용으로, 두 기사는 서로 다른 국가와 구체적인 조치를 다루고 있"
+    },
+    {
+     "anglo": 126,
+     "same": false,
+     "fact": "기사 1은 중국의 탄소 시장과 관련된 행사와 보고서 발표에 관한 내용이고, 기사 2는 미국 EPA의 온실가스 배출 규제 철회에 관한 내용으로, 두 기사는 서로 다른 국가와 구체적인"
+    },
+    {
+     "anglo": 250,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Shanghai dragon boat invitational draws teams from 14 countries and regions",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4047050.shtml",
+   "age_h": -0.4,
+   "event": "상하이 용선 초청 대회에 14개국 및 지역에서 팀 참가",
+   "kind": "중국 국내",
+   "candidates": [
+    3,
+    21,
+    56
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 3,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 21,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 56,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "18th Hunan Tea Expo concludes with $100 million in online, offline transactions",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046970.shtml",
+   "age_h": -0.0,
+   "event": "중국 후난성 창사에서 열린 제18회 후난 차 박람회가 4일간의 행사 동안 온라인과 오프라인에서 약 1억 달러의 거래를 기록하며 성공적으로 마무리되었다.",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    103
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Pinglu Canal launches first cross-border freight route",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046938.shtml",
+   "age_h": 0.0,
+   "event": "핑루 운하가 라오스와 베트남을 연결하는 최초의 국경 간 하천-해상 화물 노선을 개통했다. 첫 선적은 광시 구이강의 비료 회사 기지로 향하는 3,012.66톤의 염화칼륨을 운송한다.",
+   "kind": "중국 국내",
+   "candidates": [
+    4,
+    28,
+    109
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 4,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 28,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 109,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Tianjin to launch scenario innovation platform at 2026 private enterprise investment fair",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046868.shtml",
+   "age_h": 0.3,
+   "event": "2026년 중국 민간기업 투자 및 금융 박람회가 톈진에서 개최될 예정이며, 톈진은 시나리오 혁신 플랫폼을 출범할 계획이다.",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    103
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Xi urges Chinese police to remain committed to serving people with responsibility, dedication",
+   "link": "http://www.ecns.cn/china/2026-09-15/detail-ihfkhtke4046861.shtml",
+   "age_h": 0.3,
+   "event": "중국 시진핑 주석이 경찰들에게 국민을 위해 책임감과 헌신으로 봉사할 것을 촉구한 사건",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "Qinghai makes debut at Macao high-quality consumption expo to boost overseas trade",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046829.shtml",
+   "age_h": 0.7,
+   "event": "칭하이성이 마카오 고품질 소비 박람회에 처음 참가하여 해외 무역을 촉진함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    239,
+    245
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 245,
+     "same": false,
+     "fact": "기사 1은 칭하이성 상무부가 마카오 고품질 소비 전시회에 참가한 내용을 다루고 있고, 기사 2는 미중 기술 경쟁과 중국의 기술 인력 해외 파견 제한에 관한 내용으로, 두 기사에 공"
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Chinese AI short film wins two awards at Venice AI film festival",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046765.shtml",
+   "age_h": 1.1,
+   "event": "중국 AI 단편 영화가 베니스 AI 영화제에서 두 개의 상을 수상함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    66,
+    67
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 중국 AI 단편 영화가 베니스 AI 영화제에서 두 개의 상을 받았다는 내용이고, 기사 2는 중국이 AI 개발 경쟁에 대한 비판에 대해 반응했다는 내용으로, 두 기사는 구"
+    },
+    {
+     "anglo": 66,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "첫 번째 기사는 중국 AI 단편 영화가 베니스 AI 영화제에서 두 개의 상을 받았다는 내용이고, 두 번째 기사는 중국 외교부가 미국 AI 회사 Anthropic CEO의 중국 AI"
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "AI fuels rise of 'one-person crew' in micro-drama industry",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046620.shtml",
+   "age_h": 1.5,
+   "event": "AI 도구가 중국의 마이크로 드라마 산업에서 '1인 제작팀' 모델의 부상을 촉진하고 있다.",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    19,
+    22,
+    30,
+    66,
+    67,
+    73,
+    78,
+    123,
+    150,
+    157,
+    160,
+    173,
+    175,
+    177,
+    187,
+    243,
+    244,
+    247,
+    249,
+    255
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "두 기사 모두 AI에 대해 다루고 있지만, 첫 번째 기사는 중국의 마이크로 드라마 산업에서 AI가 개인 창작자에게 미치는 영향에 대해 다루고 있고, 두 번째 기사는 미국 대통령 트"
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "기사 1은 중국의 마이크로 드라마 산업에서 AI가 개인 창작자들의 작업을 가능하게 한다는 내용이고, 기사 2는 중국이 AI 개발 경쟁과 관련해 악의적인 경쟁에 관여하지 않는다는 입"
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": "두 기사 모두 AI에 대해 언급하지만, 첫 번째 기사는 중국의 마이크로 드라마 산업에서 AI가 '1인 제작팀' 모델을 가능하게 한다는 구체적인 사실을 다루고 있고, 두 번째 기사는"
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Nation to advance fertility-friendly push",
+   "link": "http://www.ecns.cn/china/2026-09-15/detail-ihfkanuz5383266.shtml",
+   "age_h": 2.9,
+   "event": "중국이 출산 친화 정책을 추진하여 노동력 유지와 출산 장려에 힘쓸 것이라는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "BRICS cooperation creates new opportunities for Global South, says South African scholar",
+   "link": "http://www.ecns.cn/china/2026-09-14/detail-ihfkanuz5382297.shtml",
+   "age_h": 18.3,
+   "event": "BRICS 협력이 글로벌 남반구에 새로운 기회를 창출한다는 남아프리카 학자의 발언",
+   "kind": "국제정세",
+   "candidates": [
+    17,
+    27
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": "첫 번째 기사는 BRICS 협력과 글로벌 사우스의 경제적 기회에 대해 다루고 있고, 두 번째 기사는 나이지리아의 억만장자 알리코 당고테가 아프리카 최대 주식 매각을 시작했다는 내용"
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Charting pathways to amplify Global South solidarity",
+   "link": "http://www.ecns.cn/china/2026-09-14/detail-ihfkanuz5382286.shtml",
+   "age_h": 18.3,
+   "event": "중국-아프리카 파트너십을 통한 글로벌 사우스 연대 강화 방안 모색",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China accelerates efforts to bring earthquake alerts to iOS",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5382267.shtml",
+   "age_h": 18.4,
+   "event": "중국이 아이폰 iOS 시스템에 공식 지진 조기 경보 알림을 제공하기 위해 노력을 가속화하고 있다.",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "China issues world's first AI-based brain-computer interface standard",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5382256.shtml",
+   "age_h": 18.5,
+   "event": "중국이 인공지능을 활용한 뇌-컴퓨터 인터페이스 제품에 대한 세계 최초의 표준을 발표했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": "두 기사 모두 중국의 인공지능(AI)과 관련된 내용을 다루고 있지만, 첫 번째 기사는 중국이 세계 최초로 AI 기반 뇌-컴퓨터 인터페이스 제품 표준을 승인한 사실을, 두 번째 기사"
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "400,000+ Malaysian travelers make up largest foreign passenger group on Jakarta-Bandung high-speed railway",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5382209.shtml",
+   "age_h": 18.9,
+   "event": "2026년 자카르타-반둥 고속철도에서 말레이시아 여행객이 가장 큰 외국인 승객 그룹을 형성함",
+   "kind": "중미관계",
+   "candidates": [
+    27,
+    103,
+    239
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 239,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Cyclists race through Guangxi's karst landscape",
+   "link": "http://www.ecns.cn/photo/2026-09-14/detail-ihfkanuz5382098.shtml",
+   "age_h": 19.1,
+   "event": "중국 광시 좡족 자치구에서 2026년 하오쿤 호수 사이클링 대회가 열려 자전거 선수들이 카르스트 지형을 달리는 모습",
+   "kind": "중국 국내",
+   "candidates": [
+    9,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 9,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "EconoScope | BRICS keeps getting bigger, more influential",
+   "link": "http://www.ecns.cn/china/2026-09-14/detail-ihfkanuz5381802.shtml",
+   "age_h": 20.5,
+   "event": "에티오피아가 중국 기업과 협력하여 수입 석유 의존도를 줄이고 전기 버스, 중장비 트럭, 석유-가스 프로젝트 및 기술 교육을 통해 수력 발전을 활용하여 친환경 산업 성장을 추진하는 내용",
+   "kind": "중국 국내",
+   "candidates": [
+    17,
+    27,
+    103
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 17,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": "기사 1은 에티오피아의 중국과의 협력을 통한 에너지 및 산업 발전에 대해 다루고 있고, 기사 2는 나이지리아의 알리코 당고테의 석유 정제 사업의 상장과 관련된 내용이다. 두 기사는"
+    },
+    {
+     "anglo": 103,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Over 95% of China's township, community health centers to offer pediatric care by year-end",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381559.shtml",
+   "age_h": 21.7,
+   "event": "중국의 95% 이상의 향진 및 지역사회 보건센터가 2026년 말까지 소아과 진료를 제공할 예정이라는 내용",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  },
+  {
+   "source": "ECNS",
+   "title": "CIFTIS draws global participants, yields more than 1,200 outcomes",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381488.shtml",
+   "age_h": 22.0,
+   "event": "2026 중국 국제 서비스 무역 박람회(CIFTIS)가 베이징에서 개최되어 90개국 이상 참가자들이 참여하고 1,200개 이상의 성과를 도출했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "기사 1은 2026년 중국 국제 서비스 무역 박람회(CIFTIS)에 관한 내용이고, 기사 2는 중국 외교부가 Anthropic CEO의 중국 AI 개발 경고에 대해 반박한 내용으로"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China ranks second in global space infrastructure assessment: report",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381426.shtml",
+   "age_h": 22.3,
+   "event": "중국이 48개 경제권을 대상으로 한 우주 인프라 평가에서 미국에 이어 2위를 차지했다는 보고서가 발표되었다.",
+   "kind": "중국 국내",
+   "candidates": [
+    5,
+    83,
+    113
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 5,
+     "same": false,
+     "fact": "기사 1은 중국이 우주 인프라 평가에서 2위를 차지했다는 내용이고, 기사 2는 미국이 우주 무기를 배치했다는 내용으로, 두 기사에 공통된 구체적 사실이 없습니다."
+    },
+    {
+     "anglo": 83,
+     "same": false,
+     "fact": "두 기사 모두에서 중국이 우주 인프라 평가에서 2위를 차지했다는 사실이나 리투아니아가 러시아 탱크에 대비해 국경을 강화한다는 사실이 공통적으로 언급되지 않음."
+    },
+    {
+     "anglo": 113,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "BRICS leaders adopt joint declaration at summit in New Delhi",
+   "link": "http://www.ecns.cn/china/2026-09-14/detail-ihfkanuz5381293.shtml",
+   "age_h": 23.9,
+   "event": "BRICS 정상들이 뉴델리 정상회의에서 공동 선언문을 채택하다",
+   "kind": "중국 국내",
+   "candidates": [
+    27,
+    43,
+    130
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 27,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 43,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 130,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "World's first pterosaur museum opens in Xinjiang's Hami",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381279.shtml",
+   "age_h": 24.1,
+   "event": "중국 신장 하미에 세계 최초의 익룡 박물관 개관",
+   "kind": "중국 국내",
+   "candidates": [
+    8,
+    20,
+    135
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 8,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 20,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 135,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "AI tennis robots take Chinese innovation to global courts",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381242.shtml",
+   "age_h": 24.2,
+   "event": "AI 테니스 로봇이 중국에서 인기를 얻으며 전 세계 코트로 확산되고 있음",
+   "kind": "중국 국내",
+   "candidates": [
+    0,
+    10,
+    19,
+    22,
+    30,
+    66,
+    67,
+    78,
+    123,
+    150,
+    157,
+    160,
+    173,
+    175,
+    177,
+    187,
+    243,
+    247,
+    249,
+    255
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 0,
+     "same": false,
+     "fact": "기사 1은 AI 테니스 로봇에 관한 내용이고, 기사 2는 AI 안전성에 대한 트럼프 대통령의 발언에 관한 내용으로, 두 기사 모두 AI를 다루지만 구체적인 사건이나 사실이 다릅니다"
+    },
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": "두 기사 모두 AI에 관한 내용을 다루고 있지만, 첫 번째 기사는 AI 테니스 로봇에 관한 내용이고, 두 번째 기사는 AI 개발 경쟁과 관련된 중국의 입장에 관한 내용으로 구체적인"
+    },
+    {
+     "anglo": 19,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "China, Serbia launch joint police patrols in S China's Hainan",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-14/detail-ihfkanuz5381064.shtml",
+   "age_h": 24.8,
+   "event": "중국과 세르비아가 중국 하이난성에서 합동 경찰 순찰을 시작했다.",
+   "kind": "중국 국내",
+   "candidates": [
+    12
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 12,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Comicomment | Behind the empty seats: Who's stirring up geopolitical tensions?",
+   "link": "http://www.ecns.cn/video/2026-09-14/detail-ihfkanuz5380974.shtml",
+   "age_h": 25.3,
+   "event": "태평양 도서국가들의 긴급한 도전과제에 집중해야 한다는 내용의 지정학적 긴장과 관련된 논의",
+   "kind": "중국 국내",
+   "candidates": [
+    2,
+    40,
+    145
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 2,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 40,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 145,
+     "same": false,
+     "fact": "첫 번째 기사는 태평양 도서국들의 지정학적 긴장과 관련된 내용이고, 두 번째 기사는 우크라이나-러시아 전쟁과 관련된 덴마크와 모스크바 간의 군사적 긴장 상황을 다루고 있습니다. 두"
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "Xi calls on BRICS to unite Global South, deepen cooperation",
+   "link": "http://www.ecns.cn/china/2026-09-14/detail-ihfkanuz5380752.shtml",
+   "age_h": 26.7,
+   "event": "시진핑 주석이 BRICS 국가들에게 글로벌 사우스의 단결을 촉구하고 협력을 심화할 것을 요청함",
+   "kind": "중국 국내",
+   "candidates": [
+    10,
+    67,
+    223
+   ],
+   "matched": [],
+   "pairs": [
+    {
+     "anglo": 10,
+     "same": false,
+     "fact": ""
+    },
+    {
+     "anglo": 67,
+     "same": false,
+     "fact": "두 기사 모두 중국과 관련된 내용을 다루고 있지만, 첫 번째 기사는 시진핑 주석이 BRICS 국가들의 단결과 협력을 촉구한 내용이고, 두 번째 기사는 중국 외교부가 AI 개발에 대"
+    },
+    {
+     "anglo": 223,
+     "same": false,
+     "fact": ""
+    }
+   ]
+  },
+  {
+   "source": "ECNS",
+   "title": "From 'polis' to 'citizen': Cypriot Ambassador to China finds common ground in urban governance",
+   "link": "http://www.ecns.cn/cns-wire/2026-09-13/detail-ihfkanuz5380400.shtml",
+   "age_h": 44.6,
+   "event": "키프로스 대사가 중국 방문 중 도시 거버넌스와 시민 중심 도시 개발에 대해 논의함",
+   "kind": "중국 국내",
+   "candidates": [],
+   "matched": [],
+   "pairs": []
+  }
+ ],
+ "pilots": [
+  {
+   "event": "후티 반군이 홍해의 전략적 섬을 점령하고, 이에 따른 국제적 긴장과 유가 영향에 대한 보도",
+   "same_event": true,
+   "anglo": {
+    "source": "Guardian World",
+    "title": "Houthis seize strategic Red Sea islands as analysts warn of impending oil crunch",
+    "link": "https://www.theguardian.com/world/2026/sep/15/houthi-rebels-seize-red-sea-hanish-islands-saudi-oil-warning"
+   },
+   "china": {
+    "source": "CGTN World",
+    "title": "China voices concern over rising Yemen, Red Sea tensions",
+    "link": "https://news.cgtn.com/news/2026-09-14/China-voices-concern-over-rising-Yemen-Red-Sea-tensions-1QqRJgkcDRK/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World"
+   },
+   "points": [
+    {
+     "aspect": "누구를 주체로 쓰는지",
+     "anglo_quote": "Yemen’s Houthi militants have seized two strategic islands in the Red Sea",
+     "china_quote": "China is deeply concerned about escalating tensions in Yemen and the Red Sea",
+     "explain_ko": "영미권 매체는 후티 반군을 주체로 하여 그들의 군사 행동을 중심으로 보도하는 반면, 중국 매체는 중국 정부 대변인을 주체로 하여 중국의 우려와 입장을 중심으로 보도한다.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "누구 말을 인용하는지",
+     "anglo_quote": "“The big question for traders right now is the duration of the east-west outage. Any prolonged disruption and the associated supply loss could easily push prices to the next level higher,” said Tim Waterer, chief market analyst at KCM Trade.",
+     "china_quote": "Chinese Foreign Ministry spokesperson Guo Jiakun said on Monday. \"Attacks targeting civilian facilities related to people's livelihoods are unacceptable,\" Guo said at a press conference.",
+     "explain_ko": "영미권 매체는 시장 전문가와 연구기관 인용을 통해 경제적 영향과 전망을 전달하는 반면, 중국 매체는 중국 외교부 대변인의 공식 발언을 인용하여 정치적 입장과 인도적 우려를 강조한다.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "어떤 사실을 넣거나 빼는지",
+     "anglo_quote": "The seizure of the islands of Greater and Lesser Hanish is the latest in the militant group’s swift advance across Yemen’s Red Sea coast, after the capture of the port of Mokha and Perim island in the Bab al-Mandab strait.",
+     "china_quote": "China is deeply concerned about escalating tensions in Yemen and the Red Sea that have caused civilian casualties and damage to energy and other civilian facilities.",
+     "explain_ko": "영미권 매체는 후티 반군의 군사적 진격과 지리적 세부사항, 난민 발생, 유가 영향 등 구체적 사건과 결과를 상세히 보도하는 반면, 중국 매체는 민간인 피해와 에너지 시설 피해에 대한 우려를 중심으로 간략하게 전한다.",
+     "anglo_found": true,
+     "china_found": false
+    },
+    {
+     "aspect": "어떤 단어를 고르는지",
+     "anglo_quote": "Yemen’s Houthi militants have seized two strategic islands",
+     "china_quote": "China is deeply concerned about escalating tensions",
+     "explain_ko": "영미권 매체는 'militants', 'seized' 등 군사적이고 공격적인 단어를 사용하여 후티 반군의 행동을 강조하는 반면, 중국 매체는 'concerned', 'escalating tensions' 등 긴장과 우려를 표현하는 단어를 사용하여 중립적이고 외교적인 어조를 유지한다.",
+     "anglo_found": true,
+     "china_found": true
+    }
+   ]
+  },
+  {
+   "event": "스웨덴 총선 출구조사 및 예비 결과에서 중도좌파 연합이 우세를 보임",
+   "same_event": true,
+   "anglo": {
+    "source": "CBS World",
+    "title": "Sweden's election exit polls show center-left opposition ahead of populist right",
+    "link": "https://www.cbsnews.com/news/sweden-democrats-election-populist-right-europe/"
+   },
+   "china": {
+    "source": "CGTN World",
+    "title": "Center-left bloc leads Swedish election, preliminary results show",
+    "link": "https://news.cgtn.com/news/2026-09-14/news-1Qqk2iyAsSY/p.html?UTM_Source=cgtn&UTM_Medium=rss&UTM_Campaign=World"
+   },
+   "points": [
+    {
+     "aspect": "누구를 주체로 쓰는지",
+     "anglo_quote": "Sweden's election exit polls show center-left opposition ahead of populist right",
+     "china_quote": "Sweden's center-left opposition bloc held a narrow lead in the country's parliamentary election on Sunday, according to preliminary results.",
+     "explain_ko": "영미권은 'center-left opposition'을 주체로, 중국 매체는 'center-left opposition bloc'을 주체로 표현하여 중국 매체가 연합체임을 명확히 함.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "누구 말을 인용하는지",
+     "anglo_quote": "\"There has been a shift of focus, which has gone from the true political challenges to who is going to sit in the government,\" Andreas Önnerfors, a professor of intellectual history at Linnaeus University, told CBS News.",
+     "china_quote": "At the Moderate Party's election-night gathering, Kristersson said he would contact other party leaders and explore whether a workable governing coalition could be formed. \"The election result could lead to a complicated government formation,\" he said. \"Where it ends remains to be seen.\"",
+     "explain_ko": "영미권은 학자 Andreas Önnerfors의 분석을 인용한 반면, 중국 매체는 현직 총리 Kristersson의 발언을 직접 인용함.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "어떤 사실을 넣거나 빼는지",
+     "anglo_quote": "The party, which traces its roots to Sweden's extreme-right fringe, has spent the past two decades moving steadily toward the center of political power. It first entered parliament in 2010. By 2022, it became the country's second-largest party and agreed to support Kristersson's minority government from outside the cabinet.",
+     "china_quote": "The opposition bloc, comprising the Social Democratic Party, the Left Party, the Green Party and the Center Party, had 49.5% of the vote, while the right-wing bloc of the Moderate Party, Sweden Democrats, Christian Democrats and Liberals had 49.1%.",
+     "explain_ko": "영미권은 스웨덴민주당의 역사와 정치적 변화 과정을 상세히 설명하는 반면, 중국 매체는 선거 결과와 의석수, 정당 구성에 집중하여 역사적 배경은 생략함.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "어떤 단어를 고르는지",
+     "anglo_quote": "right-wing populist parties have gained ground",
+     "china_quote": "right-wing bloc led by Prime Minister Ulf Kristersson",
+     "explain_ko": "영미권은 'right-wing populist parties'라는 표현으로 포퓰리즘 성격을 강조하는 반면, 중국 매체는 'right-wing bloc'으로 보다 중립적이고 연합체 중심의 표현을 사용함.",
+     "anglo_found": true,
+     "china_found": true
+    }
+   ]
+  },
+  {
+   "event": "중국이 AI 경쟁에서 '악의적 경쟁'에 있다는 비판을 부인하며 글로벌 AI 거버넌스 협력을 촉구함",
+   "same_event": true,
+   "anglo": {
+    "source": "BBC World",
+    "title": "China criticises idea it is in 'malicious competition' over AI",
+    "link": "https://www.bbc.co.uk/news/articles/cn8me133119o?at_medium=RSS&at_campaign=rss"
+   },
+   "china": {
+    "source": "ECNS",
+    "title": "China In Photos: Fear-mongering will only hamper efforts toward sound global AI governance: spokesperson",
+    "link": "http://www.ecns.cn/cns-wire/2026-09-15/detail-ihfkhtke4046783.shtml"
+   },
+   "points": [
+    {
+     "aspect": "누구를 주체로 쓰는지",
+     "anglo_quote": "China has hit out against what it has called \"threat narratives\" over AI governance and warned against \"engaging in confrontation and malicious competition\".",
+     "china_quote": "Fear-mongering, confrontation and vicious competition will only hamper efforts toward sound global AI governance, which serves no one's interest, a Chinese foreign ministry spokesperson said on Monday.",
+     "explain_ko": "영미권 매체는 'China has hit out'로 중국을 주체로 직접 표현한 반면, 중국 매체는 'a Chinese foreign ministry spokesperson said'로 중국 외교부 대변인을 주체로 삼아 간접적으로 전함.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "누구 말을 인용하는지",
+     "anglo_quote": "On Monday, China's foreign ministry spokesperson Guo Jiakun told reporters that \"narratives of threat, confrontation, and malicious competition serve only to disrupt the process of global AI governance and are not in anyone's interest\".",
+     "china_quote": "\"AI is a consequential technology for the well-being of all humanity. All parties should jointly promote the open and inclusive development of AI for good and for all,\" Guo told a regular press briefing.",
+     "explain_ko": "영미권 매체는 대변인의 'narratives of threat...' 발언을 인용하며 위협 서사와 악의적 경쟁을 비판하는 부분을 강조함. 중국 매체는 대변인의 AI가 인류 복지에 중요하다는 긍정적 메시지와 협력 촉구 발언을 인용함.",
+     "anglo_found": true,
+     "china_found": true
+    },
+    {
+     "aspect": "어떤 사실을 넣거나 빼는지",
+     "anglo_quote": "It follows Anthropic CEO Dario Amodei's calls for a slowdown in AI development - but in a way that prevents China from pulling ahead in the AI race.\n... US President Donald Trump has said that his priority is making sure the US develops the tech faster than China.\n... China must \"balance development and security\", and introduce and improve relevant laws and ethical guidelines, and strengthen prevention of risks, to \"safeguard the interests of the people and national security\", state security minister Chen Yixin wrote on Sunday.\n... China has \"technical reasons\" to work with the US, she argues, because its developers would be able to see how their models are deployed outside China, and detect and understand vulnerabilities.\n... In July, China set up the World AI Cooperation Organisation, which aims to shape global AI governance.\n... All this comes as calls for AI regulation grow louder in the US, especially after a former Anthropic researcher Jacob Coxon said last week that \"there is a strong chance that we could all die in the immediate future\" if the current pace of development continued.\n... US President Donald Trump downplayed the risks, saying that he wanted to keep the US's lead over China \"because whoever wins AI, wins\".\n... The competition is fierce.\n... As Trump prepares to host Xi at the White House next week, the two sides are trying to include AI on the agenda, the South China Morning Post reports.\n... Vice-Premier He runs the agency that oversees the country's economic planning, including AI development.\n... \"If China establishes a durable lead in frontier AI, this will not be viewed in Washington as losing a technology race,\" says Chasen Nevett, managing director at Hong Kong-based firm, Forani Investments.\n... \"It will be viewed as losing part of the strategic infrastructure of the next industrial era.\"",
+     "china_quote": "Spokesperson Guo Jiakun made the remarks after Anthropic CEO Dario Amodei, OpenAI CEO Sam Altman and Elon Musk, who runs xAI, all over the weekend called on AI companies to slow down frontier development, with Amodei arguing a Chinese advantage in AI would pose U.S. national security risks.\n\n\"AI is a consequential technology for the well-being of all humanity. All parties should jointly promote the open and inclusive development of AI for good and for all,\" Guo told a regular press briefing.",
+     "explain_ko": "영미권 매체는 AI 경쟁 상황, 미국과 중국의 입장, 주요 인물 발언, AI 규제 논의, 미중 정상회담 준비 등 다양한 사실과 배경을 상세히 다룸. 중국 매체는 대변인 발언과 일부 외부 인물(Amodei, Altman, Musk)의 발언만 간략히 언급하며, 경쟁과 긴장 상황에 대한 상세한 내용은 생략함.",
+     "anglo_found": false,
+     "china_found": true
+    },
+    {
+     "aspect": "어떤 단어를 고르는지",
+     "anglo_quote": "\"threat narratives\" over AI governance and warned against \"engaging in confrontation and malicious competition\".\n... \"narratives of threat, confrontation, and malicious competition serve only to disrupt the process of global AI governance and are not in anyone's interest\".\n... US President Donald Trump downplayed the risks, saying that he wanted to keep the US's lead over China \"because whoever wins AI, wins\".\n... The competition is fierce.",
+     "china_quote": "Fear-mongering, confrontation and vicious competition will only hamper efforts toward sound global AI governance, which serves no one's interest.\n... \"AI is a consequential technology for the well-being of all humanity. All parties should jointly promote the open and inclusive development of AI for good and for all,\"",
+     "explain_ko": "영미권 매체는 'threat narratives', 'malicious competition', 'downplayed the risks', 'competition is fierce' 등 긴장과 경쟁을 강조하는 단어를 사용함. 중국 매체는 'Fear-mongering', 'vicious competition' 등 부정적 행위를 비판하면서도, 'AI is a consequential technology for the well-being of all humanity', 'open and inclusive development' 등 긍정적이고 협력적인 어휘를 사용함.",
+     "anglo_found": false,
+     "china_found": false
+    }
+   ]
+  },
+  {
+   "event": "북대서양조약기구(NATO) 전투기가 리투아니아 영공에 진입한 무인기를 격추했다는 사건",
+   "skipped": "확인된 쌍 가운데 양쪽 본문을 다 받은 쌍이 없음"
+  }
+ ],
+ "elapsed_s": 339.2
+}
