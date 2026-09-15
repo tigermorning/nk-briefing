@@ -141,7 +141,7 @@ def collect(state):
 if __name__ == "__main__":
     import sys
     t0 = time.time()
-    res = collect({"hours": int(sys.argv[1]) if len(sys.argv) > 1 else 24})
+    res = collect({"hours": int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else 24})
     by_src = {}
     for it in res["items"]:
         by_src[it["source"]] = by_src.get(it["source"], 0) + 1
@@ -172,7 +172,10 @@ if __name__ == "__main__":
                              "skips": res["skips"],
                              "elapsed_s": round(time.time() - t0, 1)},
                             ensure_ascii=False) + "\n")
-    if res["seen_now"]:
+    # store/last_seen.json is the GAP baseline the scheduled run relies on. A
+    # hand-run collect moving it forward would hide a gap from tomorrow's run,
+    # so only an explicit --save-seen writes it (peer review 2026-09-15)
+    if res["seen_now"] and "--save-seen" in sys.argv:
         merged = load_seen()
         merged.update(res["seen_now"])
         with open(SEEN, "w", encoding="utf-8") as fh:

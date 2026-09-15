@@ -16,7 +16,7 @@ Per source:
 
 Writes probe_sources.json. Needs OPENAI_API_KEY (graph.load_env) for `novel`.
 """
-import json, re, sys, time
+import json, os, re, sys, time
 from datetime import datetime, timezone, timedelta
 
 import feedparser, requests, trafilatura
@@ -124,6 +124,10 @@ def judge(article, core_titles):
 
 if __name__ == "__main__":
     graph.load_env()
+    if not os.environ.get("OPENAI_API_KEY"):
+        # without a key every novelty verdict is an error row, and the file this
+        # writes is the evidence REPORT.md cites (peer review 2026-09-15)
+        raise SystemExit("OPENAI_API_KEY가 없어 새 사건 판정을 할 수 없습니다. .env.example을 .env로 복사해 키를 넣으세요.")
     t0 = time.time()
     rows = []
     for spec in CORE + CANDIDATES:
@@ -157,7 +161,12 @@ if __name__ == "__main__":
         new = sum(1 for v in verdicts if v.get("covered") is False)
         print(f"{row['name']:<14} 72h NK {len(verdicts)} · new {new}", flush=True)
 
-    with open("probe_sources.json", "w", encoding="utf-8") as fh:
+    errors = sum(1 for r in rows for v in r.get("novelty") or [] if "error" in v)
+    out = "probe_sources.json" if not errors else "probe_sources.partial.json"
+    with open(out, "w", encoding="utf-8") as fh:
         json.dump({"measured_at": NOW.isoformat(), "core_titles_96h": len(core_titles),
                    "rows": rows, "elapsed_s": round(time.time() - t0, 1)}, fh, ensure_ascii=False, indent=1)
-    print(f"-> probe_sources.json ({time.time() - t0:.0f}s)")
+    print(f"-> {out} ({time.time() - t0:.0f}s)")
+    if errors:
+        # keep the last complete measurement; a partial one goes to a side file
+        raise SystemExit(f"판정 오류 {errors}건: probe_sources.json은 그대로 두고 {out}에 저장했습니다")

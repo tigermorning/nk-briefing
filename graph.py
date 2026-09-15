@@ -33,8 +33,7 @@ sys.stdout.reconfigure(errors="replace")
 
 HERE = pathlib.Path(__file__).resolve().parent
 KST = timezone(timedelta(hours=9))
-ENV = os.environ.get("NK_ENV_FILE",
-                     r"C:\Users\user\Documents\tigermorning.github.io\ko\.env")
+ENV = os.environ.get("NK_ENV_FILE", str(HERE / ".env"))   # copy .env.example to .env
 
 MODEL = os.environ.get("NK_MODEL", "gpt-4.1-mini")
 BATCH, PRELIM = 40, 8                # prelim chunk size, kept per chunk
@@ -614,6 +613,11 @@ def send(payload, webhook, dry_run):
         raise RuntimeError("DRY_RUN이 0인데 DISCORD_WEBHOOK_URL이 비어 있어요")
     try:
         r = requests.post(webhook, json=payload, timeout=20)
+    except requests.exceptions.ReadTimeout:
+        # the request reached Discord and the answer did not come back in time:
+        # the brief may well be posted. Treat it as sent for the ledger and the
+        # fallback run -- a missed brief is better than a duplicate (review 2026-09-15)
+        return "unknown"
     except requests.RequestException as exc:    # the message would carry the webhook token
         raise RuntimeError(f"발행 요청 실패: {type(exc).__name__}") from None
     if r.status_code not in (200, 204):
@@ -641,8 +645,16 @@ def publish(s: dict) -> dict:
         failure = "모든 뉴스 피드 수집에 실패해"
     elif s["picked"] and not s["drafted"]:
         failure = f"고른 기사 {len(s['picked'])}건 가운데 초안까지 만든 기사가 없어"
+    elif s["drafted"] and not s["verified"]:
+        # peer review 2026-09-15: a model outage in verify dropped every card and
+        # the reader got "오늘은 실을 기사가 없습니다" as if it were a quiet day
+        failure = f"초안 {len(s['drafted'])}건이 모두 검수를 통과하지 못해"
     today = datetime.now(KST).strftime("%Y-%m-%d")
-    embeds, dropped = build_embeds(today, make_lead(arts, meta), arts, failure)
+    lead = make_lead(arts, meta)
+    if failure and arts:
+        # every feed dead but tier1 open: the card still goes out, and says so
+        lead += f"\n⚠️ {failure} 실을 수 있는 칸만 실었습니다."
+    embeds, dropped = build_embeds(today, lead, arts, failure)
     payload = {"username": "북한 브리핑", "embeds": embeds}
     sent = send(payload, os.environ.get("DISCORD_WEBHOOK_URL"), dry_run=is_dry())
     # the ledger follows the send, not the run: dropped cards and dry runs stay eligible
@@ -651,14 +663,16 @@ def publish(s: dict) -> dict:
         sent_keys = {link_key(a["link"]) for a in shipped}
         twins = [t["item"] for t in meta.get("twins", []) if link_key(t["twin"]) in sent_keys]
         mark_published(shipped + twins)
-    log = [f"⑤ 발행   {len(shipped)}건 · {'보냄' if sent else 'dry-run'}"]
+    state = {True: "보냄", False: "dry-run", "unknown": "보냈을 수 있음(응답 시간 초과, 원장에는 기록)"}[sent]
+    log = [f"⑤ 발행   {len(shipped)}건 · {state}"]
     for a in spare:
         log.append(f"   [예비] [{a['source']}] {a['headline'][:30]} — 칸이 차서 안 실음, 내일 후보로 남음")
     if dropped:
         log.append(f"   [한도] 카드 {dropped}장을 빼고 보냄 — 뺀 기사는 원장에 안 올라 내일 후보로 남음")
     if failure:
         log.append(f"   FAILED {failure}")
-    return {"meta": {**meta, "failed": failure, "shipped": len(shipped), "spare": len(spare)}, "log": log}
+    return {"meta": {**meta, "failed": failure, "shipped": len(shipped), "spare": len(spare), "sent": sent},
+            "log": log}
 
 
 # ---------------------------------------------------------------- graph
@@ -708,6 +722,7 @@ def run():
            "picked": len(out["picked"]), "drafted": len(out["drafted"]),
            "published": len(out["verified"]),   # passed verify; the brief carries "shipped" of them
            "shipped": meta.get("shipped"), "spare": meta.get("spare"),
+           "sent": meta.get("sent"),              # the webhook post succeeded; run.sent_today reads it
            "check": meta.get("check"),            # verify: first_fail / rewritten / dropped
            "window_h": meta.get("window_h"), "escalated": meta.get("escalated"),
            "below_min": meta.get("below_min"),

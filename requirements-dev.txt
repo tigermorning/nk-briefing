@@ -1,0 +1,3 @@
+# Local extras, not needed by the daily run.
+-r requirements.txt
+matplotlib==3.11.1      # scorecard.py --plot

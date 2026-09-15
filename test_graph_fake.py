@@ -11,6 +11,10 @@ No key, no network. Checks the shape, not the judgement:
   6. one worker raising does not sink the others
   7. a daily feed whose newest item is older than 24h is SILENT even though
      it still has items inside the 168h fetch
+  8. twenty cards: embeds trimmed to Discord's limits, ledger holds only what went out
+  9. 44 candidates: prelim splits into equal batches (no 40 + 4 tail)
+  10. a draft still not Korean after the retry is dropped
+  11. forward/reversed ranking merge
   12. a source switched off by NK_SKIP_SOURCES is logged, a typo stops the
       run, and every remaining feed dead still raises the failure notice
   13. 3 cards a day (4 only with both deep and tier1), breaking by select
@@ -19,6 +23,12 @@ No key, no network. Checks the shape, not the judgement:
       the rewrite sees the finding, and the fixed card ships
   15. a card still wrong after its one rewrite is dropped, the spare takes
       the slot, and the judge is shown the why line too
+  16. every feed dead but tier1 open: the card goes out with a warning, the
+      ledger is written, and the fallback run counts the day as sent
+  17. the judge call fails for every card: the reader gets a failure notice,
+      not "no articles today", and the fallback run retries
+  18. the webhook times out after the request went out: counted as sent, so
+      the ledger is written and the fallback run does not post it again
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -269,5 +279,64 @@ assert out["meta"]["check"]["dropped"] == 1, out["meta"]["check"]
 assert all(not a["link"].endswith("Yonhap-NK/0") for a in out["verified"]), "card wrong after rewrite was kept"
 assert any("재작성 후에도" in l for l in out["log"])
 assert out["meta"]["shipped"] == graph.BRIEF_SIZE, "spare did not take the dropped card's slot"
+
+print("\n== 16. every feed dead, tier1 open: card goes out once ==")
+import run as runmod
+os.environ["DRY_RUN"] = "0"
+os.environ["DISCORD_WEBHOOK_URL"] = "https://example.invalid/hook"
+posted = []
+graph.requests.post = lambda url, json, timeout: posted.append(json) or NS(status_code=204, text="")
+WROTE.clear()
+out = run_with([], dead=[n for n, _u, _e in graph.SOURCES], tier1=TIER1)
+os.environ["DRY_RUN"] = "1"
+del os.environ["DISCORD_WEBHOOK_URL"]
+show(out)
+meta = out["meta"]
+assert meta["failed"] and meta["shipped"] == 1 and meta["sent"] is True, meta
+lead = posted[-1]["embeds"][0]["description"]
+assert "⚠️" in lead and "모든 뉴스 피드 수집에 실패해" in lead, lead
+assert len(posted[-1]["embeds"]) == 2 and "[1차]" in posted[-1]["embeds"][1]["title"]
+assert WROTE and WROTE[-1] == [TIER1["item"]["link"]], WROTE
+row = {"kind": "graph", "run_id": "2026-09-16 07:30", "dry_run": False,
+       "failed": meta["failed"], "shipped": meta["shipped"], "sent": meta["sent"]}
+assert runmod.sent_today([row], "2026-09-16") == "2026-09-16 07:30", "fallback would send the tier1 card again"
+print("tier1 card sent with a warning, ledger written, fallback sees the day as sent")
+
+print("\n== 17. judge call fails for every card: failure notice, fallback retries ==")
+def judge_down(system, user, schema):
+    if schema is graph.Verdict:
+        raise RuntimeError("429 from the model")
+    return fake_parse(system, user, schema)
+graph.parse = judge_down
+out = run_with(FEED[:6], tier1={"status": "NO_PUBLICATION"})
+graph.parse = real_parse
+show(out)
+meta = out["meta"]
+assert out["drafted"] and not out["verified"], "fixture should draft and then lose every card in verify"
+assert "검수를 통과하지 못해" in meta["failed"], meta["failed"]
+assert meta["shipped"] == 0
+row = {"kind": "graph", "run_id": "2026-09-16 07:30", "dry_run": False,
+       "failed": meta["failed"], "shipped": meta["shipped"], "sent": True}
+assert runmod.sent_today([row], "2026-09-16") == "", "fallback must retry after a verify outage"
+print("failure notice instead of a quiet day, fallback retries")
+
+print("\n== 18. webhook read timeout: may have posted, ledger written, counts as sent ==")
+os.environ["DRY_RUN"] = "0"
+os.environ["DISCORD_WEBHOOK_URL"] = "https://example.invalid/hook"
+def slow_post(url, json, timeout):
+    raise graph.requests.exceptions.ReadTimeout("no answer in time")
+graph.requests.post = slow_post
+WROTE.clear()
+out = run_with(FEED, tier1={"status": "NO_PUBLICATION"})
+os.environ["DRY_RUN"] = "1"
+del os.environ["DISCORD_WEBHOOK_URL"]
+meta = out["meta"]
+assert meta["sent"] == "unknown" and meta["shipped"] >= 1, meta
+assert WROTE, "a possibly posted brief must reach the ledger"
+assert any("보냈을 수 있음" in l for l in out["log"])
+row = {"kind": "graph", "run_id": "2026-09-16 07:30", "dry_run": False,
+       "failed": meta["failed"], "shipped": meta["shipped"], "sent": meta["sent"]}
+assert runmod.sent_today([row], "2026-09-16") == "2026-09-16 07:30"
+print("read timeout recorded as maybe-sent, ledger written, fallback skips")
 
 print("\nALL OK")

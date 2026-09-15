@@ -3,16 +3,19 @@
 Required params (per the portal spec): pageNo, numOfRows, cl, bgng_ymd, end_ymd.
 Response fields: cl 기간분류, sj 제목, cn 내용, url, dwld_url, filenm.
 
-The key lives in a .env outside this repo and is never printed. requests puts
+The key comes from the environment or this repo's git-ignored .env and is never printed. requests puts
 it in the query string, so r.url must not be printed either.
 """
-import io, os, sys, json, urllib.parse, requests
+import io, os, sys, json, pathlib, urllib.parse, requests
 from datetime import datetime, timedelta
 
 sys.stdout.reconfigure(errors="replace")
 
-ENV = r"C:\Users\user\Documents\tigermorning.github.io\ko\.env"
-URL = "http://apis.data.go.kr/1250000/trend/getTrend"
+# same .env as graph.py: NK_ENV_FILE, else this repo's .env (peer review 2026-09-15)
+ENV = os.environ.get("NK_ENV_FILE", str(pathlib.Path(__file__).resolve().parent / ".env"))
+# https: the service key travels in the query string. Checked 2026-09-15 that
+# https returns the same resultCode, totalCount and items as http.
+URL = "https://apis.data.go.kr/1250000/trend/getTrend"
 PERIODS = {"daily": "ARGUMENT_DAIL", "weekly": "ARGUMENT_WEEK", "monthly": "ARGUMENT_MONT"}
 
 def load_key(name="DATA_GO_KR_KEY"):

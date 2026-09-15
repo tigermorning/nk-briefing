@@ -1,7 +1,10 @@
-feedparser
-requests
-trafilatura
-openai
-langgraph
-pydantic
-pyyaml
+# Pinned 2026-09-15 to the versions that passed the tests and a full dry run
+# in a fresh venv. Actions installs these every morning; an unpinned upgrade
+# could break the 05:43 run with no change here.
+feedparser==6.0.14
+langgraph==1.2.11
+openai==3.14.0
+pydantic==2.13.5
+PyYAML==6.0.3
+requests==2.34.2
+trafilatura==2.2.0

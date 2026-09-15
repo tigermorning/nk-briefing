@@ -22,11 +22,16 @@ MIN_ITEMS = 5
 LADDER = (24, 48, 72)
 
 def load_ledger():
-    try:
-        with io.open(LEDGER, encoding="utf-8") as fh:
-            return json.load(fh)
-    except Exception:
+    """A missing ledger is an empty one. A ledger that exists but does not
+    parse is an error: reading it as {} would make every link in the window
+    look unpublished and send yesterday's cards again (review 2026-09-15)."""
+    if not os.path.exists(LEDGER):
         return {}
+    with io.open(LEDGER, encoding="utf-8") as fh:
+        try:
+            return json.load(fh)
+        except ValueError as exc:
+            raise RuntimeError(f"발행 원장 {LEDGER}을 읽을 수 없습니다: {exc}") from None
 
 def mark_published(items):
     """Call this from the publish step, not from collection -- an item that was
@@ -38,8 +43,12 @@ def mark_published(items):
         if key:                                 # "" would mark every link-less item as published
             led.setdefault(key, stamp)
     os.makedirs(STORE, exist_ok=True)
-    with io.open(LEDGER, "w", encoding="utf-8") as fh:
+    # write then rename: a run killed mid-write must not leave half a ledger
+    # for the commit step to push (the commit now runs after failed runs too)
+    tmp = LEDGER + ".tmp"
+    with io.open(tmp, "w", encoding="utf-8") as fh:
         json.dump(led, fh, ensure_ascii=False, indent=1)
+    os.replace(tmp, LEDGER)
     return len(led)
 
 def gather(min_items=MIN_ITEMS, ladder=LADDER):

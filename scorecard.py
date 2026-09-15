@@ -63,7 +63,10 @@ def plot(path):
     """Stage pass rates per run (course step 12). The text table above is the
     table view; the chart only shows the trend. Labels are English because
     matplotlib's default fonts have no Hangul glyphs."""
-    import matplotlib
+    try:
+        import matplotlib
+    except ImportError:
+        raise SystemExit("--plot에는 matplotlib이 필요합니다: pip install -r requirements-dev.txt")
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
