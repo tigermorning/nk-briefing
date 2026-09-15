@@ -15,6 +15,10 @@ No key, no network. Checks the shape, not the judgement:
       run, and every remaining feed dead still raises the failure notice
   13. 3 cards a day (4 only with both deep and tier1), breaking by select
       rank, not the order the workers finished in
+  14. a tenfold figure the model judge passes is caught by the number check,
+      the rewrite sees the finding, and the fixed card ships
+  15. a card still wrong after its one rewrite is dropped, the spare takes
+      the slot, and the judge is shown the why line too
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -55,7 +59,7 @@ def fake_parse(system, user, schema):
         return graph.Draft(headline="헤드라인", summary="요약입니다.", why="중요합니다.", topic="군사·핵")
     if schema is graph.Verdict:
         # the check only sees body/headline/summary; DailyNK is the 1500-char body
-        return graph.Verdict(ok="나" * 1500 not in user, problems=["가짜 불합격"])
+        return graph.Verdict(claims=[], ok="나" * 1500 not in user, problems=["가짜 불합격"])
     raise AssertionError(schema)
 
 graph.parse = fake_parse
@@ -228,5 +232,42 @@ for extra, want in (([], ["breaking0", "breaking1", "breaking2"]),
     got = [a["headline"] for a in ver]
     print(f"{len(extra)} special -> {got} · spare {len(spare)}")
     assert got == want, got
+
+print("\n== 14. number check catches what the judge passes, rewrite fixes it ==")
+MONEY = "북한이 벌어들인 수입은 100억달러로 추정된다. " + "나" * 900
+JUDGE_SAW = []
+def lenient(system, user, schema):
+    if schema is graph.Verdict:                 # passes everything, like 100억 -> 1,000억 on 2026-09-15
+        JUDGE_SAW.append(user)
+        return graph.Verdict(claims=[], ok=True, problems=[])
+    if schema is graph.Draft:
+        fixed = "원문에 없는 숫자 '1,000억'" in user and "[BAD]" not in user
+        money = "100억" if fixed else "1,000억"
+        return graph.Draft(headline="북한 수입 추정", summary=f"수입은 약 {money} 달러로 추정됩니다.",
+                           why="대러 협력의 규모를 보여 주기 때문에 중요합니다.", topic="대외·외교")
+    return fake_parse(system, user, schema)
+graph.parse = lenient
+out = run_with(FEED[:3], tier1={"status": "NO_PUBLICATION"}, body=lambda it: MONEY)
+graph.parse = real_parse
+show(out)
+n = len(out["drafted"])
+assert n >= 2 and out["meta"]["check"] == {"first_fail": n, "rewritten": n, "dropped": 0}, out["meta"]["check"]
+assert all("100억" in a["summary"] and "1,000억" not in a["summary"] for a in out["verified"]), "inflated figure kept"
+assert any("원문에 없는 숫자 '1,000억'" in l for l in out["log"]) and any("재작성 후 통과" in l for l in out["log"])
+assert JUDGE_SAW and all("[왜 중요한지]" in u for u in JUDGE_SAW), "judge did not see the why line"
+
+print("\n== 15. still wrong after the rewrite: dropped, spare fills ==")
+def body15(it):
+    if it["source"] == "38North":
+        return "나" * 250
+    return MONEY + (" [BAD]" if it["link"].endswith("Yonhap-NK/0") else "")
+graph.parse = lenient
+out = run_with(FEED, tier1={"status": "NO_PUBLICATION"}, body=body15)
+graph.parse = real_parse
+show(out)
+assert out["meta"]["check"]["dropped"] == 1, out["meta"]["check"]
+assert all(not a["link"].endswith("Yonhap-NK/0") for a in out["verified"]), "card wrong after rewrite was kept"
+assert any("재작성 후에도" in l for l in out["log"])
+assert out["meta"]["shipped"] == graph.BRIEF_SIZE, "spare did not take the dropped card's slot"
 
 print("\nALL OK")

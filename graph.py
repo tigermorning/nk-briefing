@@ -27,6 +27,7 @@ from pydantic import BaseModel, Field
 from collect_nk import (collect as collect_feeds, link_key, load_seen,
                         SOURCES, STORE, METRICS, SEEN, UA)
 from min_publish import load_ledger, mark_published, MIN_ITEMS, LADDER
+import grounding
 
 sys.stdout.reconfigure(errors="replace")
 
@@ -118,13 +119,25 @@ CRITERIA = build_criteria(CFG)
 SYS_DRAFT = (f"당신은 북한 뉴스 브리핑 기자입니다. 독자는 {CFG['독자']['누구']}입니다.\n"
              "아래 기사 본문을 읽고 헤드라인·요약·왜 중요한지·토픽을 쓰세요.\n"
              "원문에 없는 사실은 쓰지 마세요. 요약과 왜 중요한지는 '~합니다'체로 끝내세요. "
+             "숫자·금액·배율·날짜는 원문에 있는 값만 쓰고, 직접 계산하거나 다른 단위로 바꾸지 마세요. "
+             "'최대·약·이상·추정·가능성·~로 보인다·~라고 주장했다' 같은 한정어와 출처 표현은 "
+             "헤드라인에서도 빼거나 더 강한 말로 바꾸지 마세요. "
              "반드시 한국어로 쓰고, "
              "'주목된다·기대를 모은다' 같은 기자체 표현은 쓰지 마세요.\n\n"
              "토픽은 아래 이름 중 하나를 그대로 고르고, 그 토픽의 지침을 따르세요.\n"
              + "\n".join(f"- {n}: {t['데스크지침']}" for n, t in TOPICS.items()))
-SYS_CHECK = ("요약이 원문에서 뒷받침되는지 판정하세요.\n"
-             "헤드라인과 요약만 보고 판단하고, 번역이나 단위 환산은 문제가 아닙니다.\n"
-             "원문이 북한 매체의 주장을 전하는데 요약이 그것을 사실처럼 단정했다면 문제입니다.")
+# measured 2026-09-15 (exp/step12_exaggeration.log): told only that translation and
+# unit conversion are fine, the judge passed 100억 -> 1,000억 달러 6 of 6. The code
+# check in grounding.py now covers values; this list names what only a reader of
+# the whole sentence can see.
+SYS_CHECK = ("헤드라인·요약·왜 중요한지가 원문에서 뒷받침되는지 판정하세요.\n"
+             "번역과 표기 차이(1만3천 = 13,000)나 원문에 함께 적힌 환산(100억달러 = 약 13조원)은 문제가 아닙니다.\n"
+             "다음은 모두 문제입니다.\n"
+             "- 숫자·금액·배율·비율이 원문과 다른 값. 자릿수 하나만 달라도 문제입니다(예: 100억을 1,000억으로)\n"
+             "- 원문의 숫자를 다른 대상에 붙임(예: 쌀 6.5배와 옥수수 5.5배를 서로 바꿈)\n"
+             "- '최대·약·추정·가능성·~로 보인다' 같은 한정어를 빼거나 단정으로 바꿈\n"
+             "- 원문이 북한 매체의 주장으로 전하는 내용을 사실처럼 단정\n"
+             "- 왜 중요한지 문장에 원문에 없는 새 사실을 넣음. 원문 사실에 근거한 해석은 괜찮습니다")
 
 
 # ---------------------------------------------------------------- model
@@ -163,7 +176,12 @@ class Draft(BaseModel):
     topic: str = Field(description="지시문에 적힌 토픽 이름 중 하나")
 
 class Verdict(BaseModel):
-    ok: bool = Field(description="요약이 원문에 근거하면 true")
+    # written before ok so the judgement follows the comparison, not the other
+    # way round: measured 2026-09-15, a judge asked for ok alone passed
+    # "최대 5만명 파병 가능성" rewritten as "5만명 파병" 3 of 3
+    claims: list[str] = Field(description="초안의 숫자·단정 표현마다 한 줄씩: 초안 표현 / 원문 근거 구절 / "
+                                          "원문의 한정어(최대·약·추정·가능성·~로 보인다·주장)가 초안에서 유지됐는지")
+    ok: bool = Field(description="헤드라인·요약·왜 중요한지가 모두 원문에 근거하면 true")
     problems: list[str] = Field(description="근거 없는 부분. 없으면 빈 목록")
 
 
@@ -391,7 +409,9 @@ def select(s: dict) -> dict:
     log.append(f"② 선별   속보 {len(items)} → {len(breaking)} · 심층 {len(s['deep'])} → {len(deep)}"
                f" · 1차 {len(tier1)}")
     for it in breaking:                         # a drop is only readable next to what it lost to
-        log.append(f"   + [{it['source']}] {it['title'][:40]} — {it['event']}")
+        log.append(f"   + [{it['source']}] {it['title'][:40]} — {it['event']} · 이유: {it['reason'][:80]}")
+    for it in deep:
+        log.append(f"   + [{it['source']}] {it['title'][:40]} — 심층 · 이유: {(it.get('reason') or '후보 1건')[:80]}")
     for it, why, _twin in dropped:
         log.append(f"   − [{it['source']}] {it['title'][:40]} — {why}")
     # same-event drops ride along with their twin into the ledger once the twin
@@ -420,14 +440,17 @@ FIELDS = ("headline", "summary", "why")
 def korean_ok(d):
     return d is not None and all(KO.search(getattr(d, k)) for k in FIELDS)
 
+def lang_head(body, source):
+    lang = SOURCE_LANG.get(source) or ("" if KO.search(body[:500]) else "외국어")
+    return f"[아래는 {lang} 기사 본문입니다. 헤드라인·요약·왜 중요한지를 모두 한국어로만 쓰세요.]\n\n" if lang else ""
+
 def draft(body, source=""):
     """Measured 2026-09-14 (exp/step8_retry_rate.log): one DailyNK Japan body
     came back Japanese on 9 of 10 first tries with SYS_DRAFT alone, and 0 of
     10 once the user message opened by naming the source language. The
     instruction in the system prompt was already there; next to 900 chars of
     Japanese it lost. So name the language right above the text."""
-    lang = SOURCE_LANG.get(source) or ("" if KO.search(body[:500]) else "외국어")
-    head = f"[아래는 {lang} 기사 본문입니다. 헤드라인·요약·왜 중요한지를 모두 한국어로만 쓰세요.]\n\n" if lang else ""
+    head = lang_head(body, source)
     d = parse(SYS_DRAFT, head + body[:6000], Draft)
     if d is None or korean_ok(d):
         return d, 0
@@ -465,25 +488,70 @@ def report(s: ReportIn) -> dict:
 # ---------------------------------------------------------------- ④ verify
 def check(d):
     user = (f"[원문]\n{d['body'][:5000]}\n\n"
-            f"[헤드라인]\n{d['headline']}\n\n[요약]\n{d['summary']}")
+            f"[헤드라인]\n{d['headline']}\n\n[요약]\n{d['summary']}\n\n[왜 중요한지]\n{d.get('why', '')}")
     return parse(SYS_CHECK, user, Verdict)
 
+def number_problems(d):
+    """Headline, summary and the why line: the insight sentence reaches the
+    reader too, so it answers to the same numbers. Field by field: a hedge in
+    the headline does not cover a bare figure in the summary."""
+    return grounding.problems_fields([d.get(k, "") for k in FIELDS], d["body"])
+
+def judge(d):
+    """Code first, then the model; a card has to pass both. The number check
+    is not skipped when the model says ok -- it exists for exactly those cases."""
+    problems = number_problems(d)
+    v = check(d)
+    if v is None:
+        raise ValueError("model returned no verdict")
+    if not v.ok:
+        problems += v.problems or ["원문에 근거 없음 (사유 없음)"]
+    return problems
+
+def redraft(d, problems):
+    """One rewrite that sees the findings, judged again by the same judge.
+    There is no second rewrite."""
+    note = (f"\n\n[이전 초안]\n헤드라인: {d['headline']}\n요약: {d['summary']}\n왜 중요한지: {d.get('why', '')}\n\n"
+            "[검수에서 지적된 문제]\n" + "\n".join(f"- {x}" for x in problems)
+            + "\n\n지적된 부분을 원문에 맞게 고쳐 처음부터 다시 쓰세요. 원문에서 확인되지 않는 숫자와 표현은 빼세요.")
+    new = parse(SYS_DRAFT, lang_head(d["body"], d["source"]) + d["body"][:6000] + note, Draft)
+    if new is None or not korean_ok(new):
+        return None
+    return {**d, **new.model_dump(), "topic": new.topic if new.topic in TOPICS else ""}
+
 def verify(s: dict) -> dict:
+    """A card that fails is rewritten once with the findings. If the rewrite
+    fails too, or anything in between raises, the card is dropped and
+    fit_brief gives its slot to the next spare. Unchecked never counts as passed."""
     kept, log = [], []
+    stats = {"first_fail": 0, "rewritten": 0, "dropped": 0}
     for d in s["drafted"]:
+        name = f"[{d['source']}] {d['headline'][:30]}"
         try:
-            v = check(d)
-            if v is None:
-                raise ValueError("model returned no verdict")
+            problems = judge(d)
+            if problems:
+                stats["first_fail"] += 1
+                log.append(f"   ! {name} — {'; '.join(problems)[:160]} · 재작성")
+                new = redraft(d, problems)
+                if new is None:
+                    raise ValueError("rewrite returned no Korean draft")
+                again = judge(new)
+                if again:
+                    stats["dropped"] += 1
+                    log.append(f"   − [{d['source']}] {new['headline'][:30]} — 재작성 후에도 {'; '.join(again)[:120]}")
+                    continue
+                stats["rewritten"] += 1
+                log.append(f"   ✓ [{d['source']}] {new['headline'][:30]} — 재작성 후 통과")
+                d = new
         except Exception as exc:                # unchecked is not passed: drop it, say why
-            log.append(f"   − [{d['source']}] {d['headline'][:30]} — 검수 실패 {type(exc).__name__}")
+            stats["dropped"] += 1
+            log.append(f"   − {name} — 검수 실패 {type(exc).__name__}")
             continue
-        if v.ok:
-            kept.append(d)
-        else:
-            log.append(f"   − [{d['source']}] {d['headline'][:30]} — {'; '.join(v.problems)[:80]}")
-    return {"verified": kept,
-            "log": [f"④ 검수   {len(s['drafted'])} → {len(kept)}건"] + log}
+        kept.append(d)
+    head = f"④ 검수   {len(s['drafted'])} → {len(kept)}건"
+    if stats["first_fail"]:
+        head += f" · 첫 판정 불합격 {stats['first_fail']} · 재작성 통과 {stats['rewritten']}"
+    return {"verified": kept, "meta": {**s["meta"], "check": stats}, "log": [head] + log}
 
 
 # ---------------------------------------------------------------- ⑤ publish
@@ -640,6 +708,7 @@ def run():
            "picked": len(out["picked"]), "drafted": len(out["drafted"]),
            "published": len(out["verified"]),   # passed verify; the brief carries "shipped" of them
            "shipped": meta.get("shipped"), "spare": meta.get("spare"),
+           "check": meta.get("check"),            # verify: first_fail / rewritten / dropped
            "window_h": meta.get("window_h"), "escalated": meta.get("escalated"),
            "below_min": meta.get("below_min"),
            "dead": meta.get("dead"), "silent": meta.get("silent"), "gaps": meta.get("gaps"),
