@@ -8,9 +8,10 @@ the same measure() as probe_topics.py, no model call, no key needed.
 Run it on the runner and on the PC close together and compare the two files.
 
 Controls with a known answer on both sides:
-  Yonhap-NK / 38North  G1 PASS (the daily run collects them from Actions)
-  NK News              teaser
-  DailyNK-JP           FEED_HTTP 403 on a runner, 200 from home
+  Yonhap-NK   G1 PASS (the daily run collects it from Actions)
+  38North     G1 PASS from home, article pages 403 on a runner (first run here)
+  NK News     teaser
+  DailyNK-JP  FEED_HTTP 403 on a runner, 200 from home
 
 Writes probe_runner.<where>.json, where = runner when GITHUB_ACTIONS is set,
 else local. Exits 1 when a control does not come out as known.
@@ -41,8 +42,17 @@ def expected(name, row):
     """None when the control came out as known, else what went wrong."""
     g1 = row.get("g1") or {}
     passed = g1.get("n") and g1["pass"] >= math.ceil(g1["n"] * 0.6)
-    if name in ("Yonhap-NK", "38North") and not passed:
+    if name == "Yonhap-NK" and not passed:
         return f"G1 {g1.get('pass')}/{g1.get('n')} (PASS 예상)"
+    # 2026-09-15 runner: the 38North feed answers, every article page is a
+    # Cloudflare challenge (cf-mitigated: challenge) with or without our UA.
+    # Scheduled runs never met it: the deep slot picked AsiaPress each time.
+    if name == "38North":
+        verdicts = set(g1.get("verdicts") or [])
+        if ON_RUNNER and verdicts != {"FETCH_HTTP"}:
+            return f"G1 {g1.get('verdicts')} (러너에서는 전부 FETCH_HTTP 403 예상)"
+        if not ON_RUNNER and not passed:
+            return f"G1 {g1.get('pass')}/{g1.get('n')} (PASS 예상)"
     if name == "NK News" and g1.get("teaser") is not True:
         return f"teaser={g1.get('teaser')} (True 예상)"
     if name == "DailyNK-JP":
