@@ -395,6 +395,43 @@
     - 수정 전후 숫자·코드 표기·코드 블록 자동 대조로 사실 보존 확인
     - 이어서 사용자 지시로 REPORT·README·HANDOFF를 개조식으로 전환(`2965f3d` 등). 저장소 문서는 요청 없어도 개조식으로 쓸 것(전역 `~/.claude/CLAUDE.md`에도 기록)
 
+26. **동료 검토(클론 재실행) 반영** (2026-09-15)
+    - 방법
+      - 새 클론 + 새 venv에서 README 명령을 키 없이·키 넣고 실행
+      - 별도 리뷰어가 코드 정적 검토
+    - **이중 발송 경로 수정**
+      - 상황: 모든 피드 DEAD + 1차 OPEN → 1차 카드는 발송, `failed` 설정 → run.py exit 1 → `기록 커밋` 스텝이 암묵적 `success()`로 건너뜀 → 원장 미푸시 → 08:13 예비 실행이 재발송 가능
+      - `daily.yml` 기록 커밋: `if: ${{ !cancelled() && !inputs.dry_run }}`. 실패·충돌 행도 이제 저장소에 올라감
+      - 푸시 재시도 사이 `git rebase --abort` (충돌 난 rebase가 남아 재시도가 무의미하던 것)
+      - metrics에 `sent`(웹훅 발송 성공) 추가
+      - `run.sent_today`: `sent is False`면 안 셈, `failed`인데 `shipped` 0이면 재시도, 카드가 나갔으면 실패여도 발송으로 셈. `sent` 없는 옛 행은 예전 규칙
+      - 부분 발송 리드에 `⚠️ {실패 사유} 실을 수 있는 칸만 실었습니다.`
+    - **검수 장애 표시**: `drafted`는 있는데 `verified` 0이면 `failure = "초안 N건이 모두 검수를 통과하지 못해"` → 실패 공지·exit 1·예비 실행 재시도
+      - 한계: 진짜로 전부 불합격인 날도 같은 경로라, 08:13에 실패 공지가 한 번 더 갈 수 있다
+    - `test_graph_fake.py` 16·17번 추가(아래 18번까지 총 18개), docstring 8~11번 누락도 채움
+    - **`test_schedule.py` 시한폭탄 제거**: 실제 metrics로 `2026-09-16` 발송 없음을 확인하던 줄 → `2026-09-01`로. 새 판정 규칙 사례와 `preflight` 사례 추가
+    - **`run.py` preflight**: `OPENAI_API_KEY` 없으면(또는 `DRY_RUN=0`인데 웹훅 없으면) 네트워크 전 exit 2, metrics 행 안 남김. `DATA_GO_KR_KEY` 없으면 경고만
+    - **키 경로**
+      - `graph.ENV` 기본값: 다른 프로젝트 `tigermorning.github.io\ko\.env` → 이 저장소 `.env`
+      - `mou_api.ENV`도 `NK_ENV_FILE`을 따르고 같은 기본값
+      - `.env.example` 추가
+    - **통일부 API https**: http와 resultCode·totalCount·items 동일 확인 후 전환
+    - **`probe_sources.py`**: 키 없으면 즉시 종료. 판정 오류가 한 건이라도 있으면 `probe_sources.json` 대신 `probe_sources.partial.json`(git 제외)에 쓰고 종료 코드 1
+      - 전에는 키 없이 돌리면 오류 행으로 근거 파일을 덮어썼다(실제 재현)
+    - **`collect_nk.py` 단독 실행**: `--save-seen` 없으면 `store/last_seen.json` 안 씀. 측정 행 append는 그대로
+    - **의존성**: `requirements.txt` 버전 고정(클론 venv에서 테스트·dry-run 통과한 조합), `requirements-dev.txt`에 `matplotlib==3.11.1`. `scorecard.py --plot`은 없으면 설치 안내
+    - 문서: README 시작하기·테스트/측정 스크립트 구분·손으로 돌리지 말 시간, REPORT 4.3 대안 표·5.3·6.2 동료 검토 반영·부록
+    - 확인: 테스트 4종 통과, 패치본 사본에서 키 없는 시나리오 재현(exit 2·덮어쓰기 없음·last_seen 불변), 기본 `.env`로 전체 dry-run 정상(1차는 https로 응답)
+    - 변경분 리뷰(APPROVE) 뒤 추가 반영
+      - 웹훅 `ReadTimeout`은 `sent: "unknown"`으로 기록하고 원장에 올림 → 예비 실행이 재발송 안 함(`test_graph_fake.py` 18번). `ConnectTimeout` 등은 기존대로 오류
+      - `min_publish.load_ledger`: 파일이 없으면 빈 원장, **있는데 깨졌으면 `RuntimeError`**(전에는 조용히 `{}` → 원장에 오른 기사를 전부 다시 실을 수 있었다)
+      - `mark_published`: 임시 파일에 쓴 뒤 `os.replace`
+      - `run.read_rows`: 깨진 줄은 경고 후 건너뜀
+      - `NK_ONCE_A_DAY` 확인을 키 점검보다 먼저(이미 보낸 날은 비밀값이 빠져도 초록불)
+      - `.gitignore` 주석을 새 키 위치로
+      - 이미 있던 것: `.gitattributes`의 `store/metrics.jsonl merge=union`이 rebase 충돌을 막는다
+    - 남긴 것(LOW): 루트의 일회성 점검 스크립트 정리, `test_*` 이름의 네트워크 측정 스크립트 개명, 공개 저장소의 기사 제목·캡처 노출 검토, 간접 의존성까지 고정하는 constraints 파일(윈도우에서 뽑은 freeze는 우분투 러너와 안 맞을 수 있어 보류), 진짜로 전부 불합격인 날의 실패 공지 중복
+
 ## 남은 일
 
 1. **11강 남은 것 + 9/16 아침 확인**
@@ -455,9 +492,11 @@
 | `audience.yaml` | 독자·기준·버릴 것·토픽 데스크지침 |
 | `run.py` | 1회 실행 (Actions 진입점). 예약 실행용 `NK_SEND_AT`·`NK_ONCE_A_DAY` |
 | `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
-| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성 경로, 15개 시나리오) |
+| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과, 18개 시나리오) |
 | `test_grounding.py` | 숫자 원문 대조 97건 (리뷰어가 쓴 문장 포함) |
-| `test_schedule.py` | 07:30 대기 계산·하루 한 번 발송 판정 |
+| `test_schedule.py` | 07:30 대기 계산·하루 한 번 발송 판정·실행 전 키 점검 |
+| `.env.example` | 로컬 키 파일 틀 |
+| `requirements-dev.txt` | 그래프용 matplotlib |
 | `exp/step12_exaggeration.py` | 실제 카드에 왜곡을 심어 이전·새 검수 비교 (키 필요, 결과 `.log`) |
 | `REPORT.md` | 과제 제출 보고서 (6항목) |
 | `RETRO-notion.md` | 노션 회고 원고 |
@@ -491,8 +530,9 @@
 - **`DATA_GO_KR_KEY` 원본**: `C:\Users\user\Documents\tigermorning.github.io\ko\.env`
   - 형태: **인코딩키**(길이 92, `%XX` 포함)
   - `mou_api.load_key()` 가 `unquote()` 해서 넘긴다
-- **이 저장소의 `.env`**: git 제외, 키 3개(`OPENAI_API_KEY`, `DATA_GO_KR_KEY`, `DISCORD_WEBHOOK_URL`)
-  - `graph.ENV` 기본 경로가 아니므로 `NK_ENV_FILE`로 지정해 쓴다(20번)
+- **이 저장소의 `.env`**: git 제외, 키 3개(`OPENAI_API_KEY`, `DATA_GO_KR_KEY`(인코딩키, 길이 92), `DISCORD_WEBHOOK_URL`)
+  - 26번부터 `graph.ENV`·`mou_api.ENV`의 기본 경로다. `NK_ENV_FILE`로 바꿀 수 있다
+  - 그 전(20번)에는 기본 경로가 위 원본 파일이라 `NK_ENV_FILE`로 지정해 썼다
 - **출력 금지**
   - **절대 채팅/셀에 출력 금지, 길이만 확인**
   - `requests` 가 키를 쿼리스트링에 넣으므로 `r.url` 도 출력 금지
@@ -543,4 +583,7 @@
 - **PowerShell 5.1 제약**
   - `gh ... -q '...("문자열")...'` 은 따옴표가 벗겨져 jq가 깨진다. `--json` 결과를 `ConvertFrom-Json`으로 받을 것
   - `git commit -F -` 에 here-string 파이프도 안 먹으니 메시지 파일을 `-F <path>`로
+- **05:40~08:30 KST에는 Actions를 손으로 돌리지 말 것.** 같은 concurrency 그룹의 대기 실행은 하나만 남아, 대기 중인 08:13 예비 실행이 밀려날 수 있다
+- **실행이 실패로 끝나도 원장은 커밋돼야 한다.** `daily.yml` 기록 커밋의 `!cancelled()`를 지우지 말 것 — 지우면 카드를 보낸 뒤 실패한 날 예비 실행이 재발송한다(26번)
+- **측정 스크립트는 추적 파일에 행을 덧붙인다.** `test_g1.py`·`test_g23.py`·`collect_nk.py` 등을 돌린 뒤 `store/metrics.jsonl` 변경은 의도한 기록일 때만 커밋할 것
 - **Git Bash `TZ=Asia/Seoul date` 는 KST를 안 준다.** KST 시각이 필요하면 파이썬 `datetime.now(timezone(timedelta(hours=9)))` 로 구할 것 (24번 대기 경로 시험에서 겪음)

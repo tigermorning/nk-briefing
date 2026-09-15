@@ -15,6 +15,8 @@
 | `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
 | `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠) |
 | `grounding.py` | 검수 노드가 쓰는 숫자 원문 대조 (값 없음·한정어 빠짐·추정 표현 빠짐) |
+| `.env.example` | 로컬 키 파일 틀. `.env`로 복사해 채운다 |
+| `requirements.txt` · `requirements-dev.txt` | 버전을 고정한 실행 의존성 · 그래프용 matplotlib |
 
 ```mermaid
 graph TD;
@@ -45,32 +47,65 @@ graph TD;
 - 속보는 예비까지 4건을 취재해 두고, 검수 뒤에 칸 수만큼 선별 순위대로 싣는다
 - 안 실린 예비는 원장에 안 올라 내일 후보로 남는다
 
-## 실행
+## 시작하기
 
 ```
-python test_graph_fake.py    # 키·네트워크 없이 그래프 모양 확인
-python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
-python scorecard.py          # 성적표 (--plot out.png 로 단계별 통과율 그래프)
+git clone https://github.com/tigermorning/nk-briefing.git
+cd nk-briefing
+python -m venv .venv
+.venv\Scripts\activate            # macOS·Linux: source .venv/bin/activate
+pip install -r requirements.txt     # 버전 고정. 그래프까지 보려면 requirements-dev.txt
+copy .env.example .env              # macOS·Linux: cp .env.example .env, 키 값 채우기
+python test_graph_fake.py           # 키 없이 먼저 확인
+python run.py                       # 키가 있으면 끝까지 dry-run (DRY_RUN 기본 1)
+```
+
+- 키가 없으면 `run.py`는 네트워크를 쓰기 전에 안내 문구와 함께 종료 코드 2로 멈춘다
+- Python 3.12에서 확인했다
+
+## 실행
+
+**키·네트워크 없이 도는 테스트** (저장소 파일을 바꾸지 않는다)
+
+```
+python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 18개 시나리오
+python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사
+python test_schedule.py      # 07:30 대기 계산, 하루 한 번 발송 판정, 실행 전 키 점검
 python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
-python test_schedule.py      # 07:30 대기 계산과 하루 한 번 발송 판정
-python test_number_check.py  # 강의식 문자열 숫자 대조가 북한 원문에서 틀리는 사례 (1/5)
-python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사 (키 없음)
+```
+
+**파이프라인과 성적표**
+
+```
+python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
+python scorecard.py          # 성적표 (--plot out.png 는 requirements-dev.txt 필요)
+```
+
+**측정 스크립트** (네트워크를 쓰고, 대부분 `store/metrics.jsonl`에 측정 행을 덧붙인다. 이름이 `test_`여도 단위 테스트가 아니다)
+
+```
+python probe_sources.py      # 외국 후보 21곳 + 핵심 3곳 측정 (키 필요. 판정 오류가 있으면 probe_sources.json 대신 .partial.json)
 python exp/step12_exaggeration.py  # 실제 카드에 과장을 심어 옛 검수와 새 검수 비교 (키 필요)
-python probe_sources.py      # 외국 후보 21곳 + 핵심 3곳 측정 (키 필요: 새 사건 판정)
-python collect_nk.py 72      # 수집만, 72시간 창
+python collect_nk.py 72      # 수집만, 72시간 창. --save-seen 을 붙일 때만 store/last_seen.json 갱신
+python test_number_check.py  # 강의식 문자열 숫자 대조가 북한 원문에서 틀리는 사례 (1/5, 원문이 바뀌면 assert로 멈춤)
 python test_g1.py            # G1 원문추출 게이트
 python test_g23.py           # G2 14일 집계 + G3 robots.txt
 python test_guards.py        # 조용한 실패 가드 3종 발화 재현
 ```
 
+- `exp/step6~9` 실험 입력 중 기사 본문(`exp/bodies.json`)은 저작권 때문에 저장소에서 뺐다
+  - `exp/inputs.py`가 그때그때 피드에서 다시 만들므로, 9/14와 같은 입력으로는 재현되지 않는다
+
 ### 키와 발행
 
-- **로컬 키**: `graph.ENV`가 가리키는 `.env`(`OPENAI_API_KEY`, `DATA_GO_KR_KEY`)에서 읽는다
-  - 다른 `.env`를 쓰려면 `NK_ENV_FILE`로 경로를 지정한다
+- **로컬 키**: 이 저장소의 `.env`에서 읽는다(`.env.example` 참고)
+  - 다른 `.env`를 쓰려면 `NK_ENV_FILE`로 경로를 지정한다. `graph.py`와 `mou_api.py` 둘 다 따른다
 - **Actions 키**: 저장소 Secrets `OPENAI_API_KEY` · `DATA_GO_KR_KEY` · `DISCORD_WEBHOOK_URL`을 쓴다
 - **실제 발행**: `DRY_RUN=0`일 때만 한다
 - **발행 원장**: `store/published.json`은 실제로 보낸 뒤에만 쓴다
 - **메트릭 위치**: 어느 폴더에서 실행해도 이 저장소의 `store/metrics.jsonl` 한 곳에 쌓인다
+- **Actions 기록 커밋**: 실패로 끝난 실행도 `store/`를 커밋한다. 카드를 보낸 뒤 실패로 끝나도 원장이 남아야 08:13 예비 실행이 같은 카드를 다시 보내지 않는다
+- **손으로 돌리지 말 시간**: 05:40~08:30 KST. 대기 중인 예약 실행과 겹치면 08:13 예비 실행이 대기열에서 밀려날 수 있다
 
 ## 이 저장소가 지키는 규칙
 
