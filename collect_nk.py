@@ -1,5 +1,6 @@
-import feedparser, requests, json, os, time
+import feedparser, requests, json, os, re, time
 from datetime import datetime, timezone, timedelta
+from html.parser import HTMLParser
 from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
 # metrics live next to this script, not next to whatever directory you happen
@@ -32,6 +33,66 @@ NK_KEYWORDS = {
     "DailyNK-JP": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
     "AsiaPress": ["北朝鮮", "金正恩", "平壌", "朝鮮民主主義"],
 }
+
+
+# Feeds whose content:encoded carries the whole article, kept as plain text so
+# report can fall back to it when the article page cannot be fetched. Measured
+# 2026-09-15: a GitHub runner gets a Cloudflare challenge (403, cf-mitigated:
+# challenge) on every 38North article page but 200 on the feed, and the feed
+# holds the full text (8 of 8 entries, 5,021~21,741 chars of HTML, 0.89~1.35x
+# the page extract as plain text; the summary is a ~90-char excerpt ending in
+# "...", and WordPress appends a "The post ... appeared first on" line to both).
+# Opt a source in only after checking its content is the article and not the
+# excerpt again.
+FULL_TEXT_FEEDS = {"38North"}
+
+_BLOCK = {"p", "div", "br", "hr", "li", "ul", "ol", "dl", "dt", "dd", "pre",
+          "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "figure", "figcaption",
+          "table", "caption", "tr", "section", "article", "aside"}
+_CELL = {"td", "th"}                            # 2024 | 5,000, not "20245,000"
+# the footer is its own paragraph, so its own line: anchored to a line start, an
+# article whose last sentence opens "The post of ambassador..." keeps it
+_FOOTER = re.compile(r"(?:^|\n)The post [^\n]{1,400} appeared first on [^\n]{1,80}\Z")
+
+class _Text(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.out, self.skip = [], 0
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style"):
+            self.skip += 1
+        elif tag in _BLOCK:
+            self.out.append("\n")
+        elif tag in _CELL:
+            self.out.append(" | ")
+    def handle_endtag(self, tag):
+        if tag in ("script", "style"):
+            self.skip = max(0, self.skip - 1)
+        elif tag in _BLOCK:
+            self.out.append("\n")
+    def handle_data(self, data):
+        if not self.skip:
+            self.out.append(data)
+
+def html_text(html):
+    """Plain text of an HTML fragment, one line per block, footer removed."""
+    p = _Text()
+    p.feed(html or "")
+    p.close()
+    lines = (re.sub(r"[ \t\r\f\v\xa0]+", " ", l).strip().strip(" |") for l in "".join(p.out).split("\n"))
+    return _FOOTER.sub("", "\n".join(l for l in lines if l)).strip()
+
+def feed_text(e):
+    """content:encoded as plain text, or "" when the entry has none or the
+    HTML cannot be read -- report then refuses it and collect logs NOFEED,
+    instead of one odd entry stopping every source's collection."""
+    try:
+        for c in e.get("content") or []:
+            if "html" in (c.get("type") or "html") and c.get("value"):
+                return html_text(c["value"])
+    except Exception:
+        return ""
+    return ""
 
 
 RETRY_WAIT_S = 3
@@ -141,9 +202,12 @@ def collect(state):
             s["kept"] += 1
             # at/summary feed the later stages: publish prints the time, and
             # report compares extracted length against what the feed already gave
-            items.append({"source": name, "title": e.get("title", ""),
-                          "link": e.get("link", ""), "at": at.isoformat(),
-                          "summary": e.get("summary", "") or ""})
+            it = {"source": name, "title": e.get("title", ""),
+                  "link": e.get("link", ""), "at": at.isoformat(),
+                  "summary": e.get("summary", "") or ""}
+            if name in FULL_TEXT_FEEDS:
+                it["feed_body"] = feed_text(e)
+            items.append(it)
 
     # a source that answered fine and still gave nothing: not an error, but the
     # one shape of trouble that leaves no other trace at all

@@ -24,7 +24,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
 from pydantic import BaseModel, Field
 
-from collect_nk import (collect as collect_feeds, get_once_more, link_key, load_seen,
+from collect_nk import (collect as collect_feeds, get_once_more, html_text, link_key, load_seen,
                         SOURCES, STORE, METRICS, SEEN, UA)
 from min_publish import load_ledger, mark_published, MIN_ITEMS, LADDER
 import grounding
@@ -193,6 +193,7 @@ class Brief(TypedDict):
     picked:    list
     drafted:   Annotated[list, operator.add]    # report workers write in parallel
     verified:  list                             # no reducer: verify replaces it
+    body_refused: Annotated[list, operator.add] # sources whose page and feed body both failed
     log:       Annotated[list, operator.add]
 
 class ReportIn(TypedDict):
@@ -281,6 +282,13 @@ def collect(s: dict) -> dict:
         log.append(f"   SILENT {n}: 응답은 정상인데 24h 안의 기사가 0")
     for g in res["gaps"]:
         log.append(f"   GAP    {g['source']} 마지막 확인 {g['last_seen']} 이후가 피드에서 빠짐")
+    # a full-text feed that turns into excerpts takes away the fallback for a
+    # blocked page long before a page is actually blocked: say so every run
+    for n in dict.fromkeys(i["source"] for i in res["items"] if "feed_body" in i):
+        mine = [i for i in res["items"] if i["source"] == n]
+        bad = sum(1 for i in mine if feed_body_problem(i["feed_body"], BODY_MIN, i.get("summary", "")))
+        if bad:
+            log.append(f"   NOFEED {n}: 전문 피드인데 쓸 본문 없는 항목 {bad}/{len(mine)} — 페이지 막히면 대체 불가")
     if t1["status"] in ("DEAD", "STALE"):
         log.append(f"   {t1['status']:<6} 통일부 API: {t1.get('reason', '')}")
     return {"collected": breaking, "deep": deep, "tier1": t1, "meta": meta, "log": log}
@@ -433,6 +441,74 @@ def extract_body(it):
     r.raise_for_status()
     return trafilatura.extract(r.content) or ""
 
+# WordPress excerpts end in [&#8230;] or "Continue reading <title>"; a quote that
+# closes on an ellipsis (…”) is an article, so only whitespace may follow
+TEASER_TAIL = re.compile(r"(\.\.\.|…|\[…\]|\[\.\.\.\]|Read more|Read the full (article|story)"
+                         r"|Continue reading[^\n]{0,200})\s*$", re.I)
+
+def page_failure(exc):
+    """What went wrong with the page, without the URL: status and, for a
+    Cloudflare challenge, its header -- a 403 challenge and a 404 call for
+    different fixes. Never raises: it runs inside the catch-all."""
+    resp = getattr(exc, "response", None)
+    status = getattr(resp, "status_code", None)
+    if status is None:
+        return type(exc).__name__
+    headers = getattr(resp, "headers", None) or {}
+    mitigated = str(headers.get("cf-mitigated", ""))[:20]
+    return f"{type(exc).__name__} {status}" + (f" cf-{mitigated}" if mitigated else "")
+
+def page_blocked(exc):
+    """A page we were kept from, not a page that is gone. 404/410 means the
+    article was pulled or moved: publishing the feed's copy would print what
+    the site took back, under a dead link."""
+    status = getattr(getattr(exc, "response", None), "status_code", None)
+    return status is None or status in (401, 403, 429) or status >= 500
+
+def feed_body_problem(text, floor, summary=""):
+    """Why a feed's full text must not stand in for the page, or "". A feed
+    that switches to excerpts would otherwise hand the model a teaser."""
+    if not text:
+        return "피드 본문 없음"
+    if len(text) < floor:
+        return f"피드 본문 {len(text)}자 < {floor}"
+    if TEASER_TAIL.search(text[-240:]):
+        return "피드 본문이 발췌문 끝맺음(...)"
+    # an excerpt with no marker: the summary is itself an excerpt and the
+    # "full text" is hardly longer than it (38North: 90 chars vs 3,000+)
+    short = html_text(summary)
+    if TEASER_TAIL.search(short[-240:]) and len(text) < 3 * len(short):
+        return f"피드 본문 {len(text)}자가 발췌 요약 {len(short)}자의 3배 미만"
+    return ""
+
+def get_body(it, floor):
+    """(body, via, note). The page first -- that is the path G1 measured and
+    the grounding checks were tuned on. Only a source in FULL_TEXT_FEEDS
+    carries feed_body, and it is used only when the page cannot be fetched
+    (a runner gets Cloudflare 403 on 38North, 2026-09-15) or extracts short.
+    Every switch says so: via goes to the log line and the metrics row.
+    Raises when neither gives a body; the message names both reasons."""
+    if it.get("body"):
+        return extract_body(it), "api", ""
+    feed = it.get("feed_body")
+    try:
+        page = extract_body(it)
+    except requests.RequestException as exc:
+        if feed is None or not page_blocked(exc):
+            raise
+        why = page_failure(exc)
+    else:
+        if feed is None or len(page) >= floor:
+            return page, "page", ""
+        why = f"추출 {len(page)}자 < {floor} 앞부분 {page[:40]!r}"
+    problem = feed_body_problem(feed, floor, it.get("summary", ""))
+    if problem:
+        raise BodyUnavailable(f"페이지 {why} · {problem}")
+    return feed, "feed", f"페이지 {why}"
+
+class BodyUnavailable(Exception):
+    pass
+
 SOURCE_LANG = {"DailyNK-JP": "일본어", "AsiaPress": "일본어", "38North": "영어"}
 FIELDS = ("headline", "summary", "why")
 
@@ -462,9 +538,12 @@ def report(s: ReportIn) -> dict:
     it = s["item"]
     floor = 300 if it["slot"] == "tier1" else BODY_MIN
     try:
-        body = extract_body(it)
+        body, via, note = get_body(it, floor)
+    except BodyUnavailable as exc:              # our own text: both reasons, no URL
+        return {"drafted": [], "body_refused": [it["source"]],
+                "log": [f"③ 취재   제외 {it['source']} · 원문 받기 실패 {exc}"]}
     except Exception as exc:                    # one bad page must not sink the other workers
-        return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 원문 받기 실패 {type(exc).__name__}"]}
+        return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 원문 받기 실패 {page_failure(exc)}"]}
     if len(body) < floor:
         return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 본문 {len(body)}자 < {floor} "
                                        f"· 앞부분 {body[:40]!r}"]}
@@ -478,8 +557,11 @@ def report(s: ReportIn) -> dict:
         bad = [k for k in FIELDS if not KO.search(getattr(d, k))]
         return {"drafted": [], "log": [f"③ 취재   제외 {it['source']} · 재요청 후에도 한글 없는 칸 {bad}"]}
     topic = d.topic if d.topic in TOPICS else ""
-    return {"drafted": [{**it, "body": body[:6000], **d.model_dump(), "topic": topic}],
-            "log": [f"③ 취재   {it['source']} · 본문 {len(body)}자"
+    it = {k: v for k, v in it.items() if k != "feed_body"}   # body now holds whichever text was used
+    via_note = {"feed": f" · 피드 본문 사용 ({note})",
+                "page": " · 원문 페이지" if "feed_body" in s["item"] else ""}.get(via, "")
+    return {"drafted": [{**it, "body": body[:6000], "body_via": via, **d.model_dump(), "topic": topic}],
+            "log": [f"③ 취재   {it['source']} · 본문 {len(body)}자" + via_note
                     + (" · 한국어 재요청 1회" if retried else "")
                     + ("" if topic else f" · 토픽 '{d.topic}' 목록에 없음")]}
 
@@ -689,7 +771,7 @@ def build():
     return g
 
 INIT = {"collected": [], "deep": [], "tier1": {}, "meta": {},
-        "picked": [], "drafted": [], "verified": [], "log": []}
+        "picked": [], "drafted": [], "verified": [], "body_refused": [], "log": []}
 
 def append_row(row):
     os.makedirs(STORE, exist_ok=True)
@@ -709,10 +791,14 @@ def run():
                     "elapsed_s": round(time.time() - t0, 1)})
         raise
     meta = out["meta"]
-    by_source, by_slot = {}, {}
+    by_source, by_slot, body_via = {}, {}, {}
     for a in out["verified"]:
         by_source[a["source"]] = by_source.get(a["source"], 0) + 1
         by_slot[a["slot"]] = by_slot.get(a["slot"], 0) + 1
+    for a in out["drafted"]:                    # drafted, not verified: a feed body that failed the check still counts
+        body_via[a.get("body_via", "")] = body_via.get(a.get("body_via", ""), 0) + 1
+    if out.get("body_refused"):                 # page blocked and feed body refused: not the same as no pick
+        body_via["refused"] = len(out["body_refused"])
     row = {"kind": "graph",
            "ts": datetime.now(timezone.utc).isoformat(),
            "run_id": datetime.now(KST).strftime("%Y-%m-%d %H:%M"),
@@ -729,6 +815,7 @@ def run():
            "dead": meta.get("dead"), "silent": meta.get("silent"), "gaps": meta.get("gaps"),
            "off": meta.get("off", []),
            "by_source": by_source, "by_slot": by_slot,
+           "body_via": body_via,                  # page / feed / api: a switch to feed text shows up here
            "elapsed_s": round(time.time() - t0, 1), "log": out["log"]}
     append_row(row)
     # GAP detection compares against the last *published* run's sighting; a

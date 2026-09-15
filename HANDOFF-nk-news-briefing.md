@@ -1,6 +1,6 @@
 # HANDOFF — 북한 뉴스 브리핑 파이프라인
 
-- **최종 갱신**: 2026-09-15 (과제 대조·REPORT.md·숫자 왜곡 검수·발송 시각 대책·문서 개조식 정리)
+- **최종 갱신**: 2026-09-15 (과제 대조·REPORT.md·숫자 왜곡 검수·발송 시각 대책·문서 개조식 정리·38North 피드 본문 대체)
 - **용도**: 다른 에이전트가 이어받기 위한 백로그
 - **실행 기준**: 로컬 실행
 - **API 키**: 파일에만 존재(채팅에 없음)
@@ -18,7 +18,7 @@
 | tier1 (1차) | 통일부 북한동향 API | `http://apis.data.go.kr/1250000/trend/getTrend` | **동작 확인. 단 요약 전용 소스.** 평일만 발행, 지연 1영업일. 30일 73건. `url` 상세페이지는 `cn` + 장식 319자뿐이라 원문이 없다 |
 | tier2 속보 | 연합뉴스 북한 | `https://www.yna.co.kr/rss/northkorea.xml` | 90건/7일, 요약 70~88자, G1·G2·G3 통과 |
 | tier2 전문 | DailyNK | `https://www.dailynk.com/feed` | 10건창이지만 하루 3건 발행이라 3.3일치를 담는다. 최대 버스트 6건/24h, 여유 4건 — **1회/일 수집으로 충분** |
-| tier3 주간 | 38North | `https://www.38north.org/feed/` | 8건/2주, 영문 장문, G1 3/3 (2,940~19,989자). 일간 기여 0 정상 |
+| tier3 주간 | 38North | `https://www.38north.org/feed/` | 8건/2주, 영문 장문, G1 3/3 (2,940~19,989자). 일간 기여 0 정상. **러너에서는 기사 페이지가 Cloudflare 403**(피드는 200) → 피드 본문으로 대체(27번) |
 | tier2 속보 | RFA 한국어 | `https://www.rfa.org/korean/rss2.xml` | 채택(속보, 처음엔 후보). 30건, G1 3/3. 24h 기여 0 / 72h 기여 2. 실행 17회 중 2회 선별 — 강등 여부 관찰 중(남은 일 6) |
 | tier2 속보 | 데일리NK재팬 | `https://dailynk.jp/feed` | 17번에서 추가. 72h 새 사건 3/4, 7일 18건. **Actions 러너에서는 Cloudflare 403이라 `NK_SKIP_SOURCES`로 끔**, 로컬에서만 켬(20번) |
 | tier3 주간 | 아시아프레스 | `https://www.asiapress.org/apn/feed/index.xml` | 17번에서 추가. `WEEKLY` 심층. 7일 3건(1건 offtopic). 주간 연재라 72h 0건 정상 |
@@ -437,6 +437,50 @@
       - 임시 워크플로 두 개(`probe dailynk.jp`, `Probe data.go.kr https`)는 GitHub 목록에 남아 있어 `gh workflow disable`로 꺼 둠
     - 남긴 것(LOW): 루트의 일회성 점검 스크립트 정리, `test_*` 이름의 네트워크 측정 스크립트 개명, 공개 저장소의 기사 제목·캡처 노출 검토, 간접 의존성까지 고정하는 constraints 파일(윈도우에서 뽑은 freeze는 우분투 러너와 안 맞을 수 있어 보류), 진짜로 전부 불합격인 날의 실패 공지 중복
 
+27. **38North 기사 페이지 러너 차단 → 피드 본문 대체** (2026-09-15)
+    - **발견**: `docs/P0-sources.md` 8.1, `probe_runner.runner.json`
+      - 러너에서 38North 기사 페이지 전부 403 + `cf-mitigated: challenge` + `Just a moment...`
+      - 파이프라인 UA·UA 없음 둘 다 같음. 피드 `/feed/`는 러너에서도 200. 집 PC에서는 기사 페이지 200
+      - Actions 실행 7회 모두 심층이 아시아프레스라 아직 안 터짐
+      - 터지면: `③ 취재 제외 38North · 원문 받기 실패 HTTPError`로 심층 카드가 빠짐
+    - **측정** (집 PC, 피드 8건 전부)
+      - `content:encoded`에 전문. HTML 5,021~21,741자
+      - 평문으로 바꾼 피드 본문 ÷ trafilatura 페이지 추출 = 0.89~1.35
+      - `summary`는 90자 안팎 발췌 + `...`
+      - 둘 다 끝에 `The post … appeared first on 38 North.` 꼬리가 붙음 → 떼어 냄
+      - 본문 숫자는 양쪽이 같음. 차이는 피드 쪽 그림 설명·`CC BY 4.0`, 페이지 쪽 각주 번호뿐
+    - **결정: 페이지 먼저, 피드 본문은 대체용**
+      - 이유: 페이지 경로가 G1 측정·검수 튜닝의 기준. 로컬 동작은 그대로
+      - 대체 조건: 페이지가 막힘(`graph.page_blocked`: 401·403·429·5xx·연결 오류·시간 초과) 또는 추출 600자 미만
+      - 404·410은 대체 안 함: 기사가 내려가거나 옮겨진 것이라 피드 사본을 죽은 링크로 실으면 안 됨
+      - 레이아웃 오류 같은 요청 밖 예외도 대체 안 함(원래대로 제외)
+      - 챌린지 우회 아님: 러너가 이미 200으로 받는 피드를 쓸 뿐
+    - **코드**
+      - `collect_nk.FULL_TEXT_FEEDS = {"38North"}`: 이 소스만 항목에 `feed_body`(평문, 꼬리 제거)를 담음
+      - `collect_nk.html_text`·`feed_text`: 표준 라이브러리 `HTMLParser`, 블록 태그마다 줄바꿈, 표 칸은 ` | `(숫자 붙음 방지), script·style 제외. 읽다 예외가 나면 `""`(소스 수집 전체를 멈추지 않음)
+      - 꼬리 정규식은 줄 머리에 고정: 마지막 문단이 `The post of ambassador…`로 시작해도 안 지움
+      - `graph.get_body(it, floor)` → `(본문, via, 사유)`. via는 `page`·`feed`·`api`(1차)
+      - `graph.feed_body_problem`: 피드 본문 없음 / 600자 미만 / `...`·`[…]`·`Read more`·`Continue reading 제목`으로 끝남 / 요약이 발췌문인데 본문이 그 3배 미만 → 쓰지 않음
+        - 인용이 `…”`로 끝나는 진짜 기사는 통과
+      - 둘 다 안 되면 `원문 받기 실패 페이지 HTTPError 403 cf-challenge · 피드 본문이 발췌문 끝맺음(...)`처럼 두 이유를 함께
+      - `graph.page_failure`: 예외 이름 + 상태코드 + `cf-mitigated`만. URL은 로그에 안 넣음 (전문 피드 아닌 소스의 실패 로그도 이제 `HTTPError 403`처럼 상태코드가 붙음)
+    - **조용한 실패 가드**
+      - 취재 로그: `피드 본문 사용 (페이지 HTTPError 403 cf-challenge)` / 전문 피드 소스가 페이지를 쓰면 `원문 페이지`
+      - metrics 행 `body_via`: 초안까지 간 카드의 경로별 건수 (예 `{"page": 3, "feed": 1}`) + 페이지·피드 둘 다 실패한 건수 `refused` (상태 `body_refused` 리듀서)
+      - 수집 로그 `NOFEED 38North: 전문 피드인데 쓸 본문 없는 항목 N/M`: 피드가 발췌문으로 바뀌면 페이지가 막히기 전에 알 수 있음
+      - 초안 카드에서는 `feed_body`를 빼서 본문이 두 벌 실려 다니지 않게 함
+    - **테스트**: `test_graph_fake.py` 20번
+      - 가짜 RSS로 `collect`가 38North에만 `feed_body`를 담고 꼬리·태그를 떼는지
+      - 403 challenge → 피드 본문으로 초안, 로그 문구, `graph.run()` metrics 행 `body_via == {"feed": 1}`
+      - 전문 피드 아닌 소스의 403은 예전처럼 제외
+      - 페이지 추출이 짧거나 연결 오류면 피드, 페이지가 충분하면 페이지(`원문 페이지` 로그), 404면 피드 안 씀
+      - 피드 본문이 비었거나 발췌문(`[…]`·`Continue reading`·요약 3배 미만)이면 초안까지 안 가고 두 이유 로그 + `NOFEED` + `body_via == {"refused": 1}`
+      - 정상 피드에서는 `NOFEED`가 안 뜨는지, 꼬리와 닮은 마지막 문단·표 칸이 살아 있는지
+    - **리뷰 반영**: 별도 리뷰어(COMMENT, CRITICAL·HIGH 0)의 MEDIUM 3건(꼬리 정규식 과잉 삭제·404 대체·발췌문 판별 빈틈)과 LOW 대부분 반영
+      - 안 한 것: feedparser 새니타이저가 닫히지 않은 `<style>` 뒤를 잘라 먹는 경우 감지(원본 HTML 길이 대비 경고). 지금 38North에선 안 보임
+    - **확인**: `test_graph_fake.py`·`test_grounding.py`·`test_schedule.py`·`test_config.py` 통과. 실제 피드로 `collect` 1회: 38North 8건 모두 `feed_body_problem` 없음·꼬리 제거됨, 다른 소스는 `feed_body` 없음
+    - **아직 못 본 것**: 러너에서 38North가 실제로 심층에 뽑혀 `body_via: feed`가 찍힌 실행 (남은 일 11)
+
 ## 남은 일
 
 1. **11강 남은 것 + 9/16 아침 확인**
@@ -485,6 +529,10 @@
 10. **KCNA 인용을 직접 받는 경로 조사**
     - 1차枠 후보
     - 중국신문망 필터에서 조선중앙통신 인용 1건이 나온 게 단서
+11. **러너에서 38North 피드 본문 경로 첫 확인** (27번)
+    - 38North가 심층에 뽑힌 Actions 실행에서 취재 로그 `피드 본문 사용 (페이지 HTTPError 403 cf-challenge)`와 metrics `body_via`의 `feed` 확인
+    - 검수 결과도 볼 것: 피드 본문의 그림 설명·이미지 출처 줄이 숫자 대조에서 문제를 만드는지
+    - 다른 전문 피드 opt-in 후보: 조선비즈 국제·Axios (`docs/P0-sources.md` 3장). 넣기 전에 피드 본문이 발췌문이 아닌지 재측정
 
 (옛 7번 "1차枠 OPEN 경로는 실데이터로 아직 못 봤다"는 9/15 예약 실행에서 확인돼 완료 11번으로 옮겼다. 번호가 하나씩 당겨졌다.)
 
@@ -497,7 +545,7 @@
 | `audience.yaml` | 독자·기준·버릴 것·토픽 데스크지침 |
 | `run.py` | 1회 실행 (Actions 진입점). 예약 실행용 `NK_SEND_AT`·`NK_ONCE_A_DAY` |
 | `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
-| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과·연결 재시도, 19개 시나리오) |
+| `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장·재작성·부분 발송·검수 장애·웹훅 시간 초과·연결 재시도·페이지 403 피드 본문 대체, 20개 시나리오) |
 | `test_grounding.py` | 숫자 원문 대조 97건 (리뷰어가 쓴 문장 포함) |
 | `test_schedule.py` | 07:30 대기 계산·하루 한 번 발송 판정·실행 전 키 점검 |
 | `.env.example` | 로컬 키 파일 틀 |
@@ -584,6 +632,7 @@
   - 방법: 임시 브랜치 + `on: push` 워크플로, 끝나면 브랜치 삭제
   - 로컬 200은 러너 200을 뜻하지 않는다
   - Cloudflare 챌린지(`Just a moment...`)는 우회하지 말고 `NK_SKIP_SOURCES`로 끌 것
+  - 기사 페이지만 막히고 피드가 200이면서 전문을 담고 있으면 `collect_nk.FULL_TEXT_FEEDS`에 넣어 피드 본문으로 대체 (38North, 27번)
 - **원장(`store/published.json`)을 만든 로컬 실발행 뒤에는 원장 커밋 → push 순서.** push가 먼저면 Actions가 같은 카드를 다시 보낸다
 - **PowerShell 5.1 제약**
   - `gh ... -q '...("문자열")...'` 은 따옴표가 벗겨져 jq가 깨진다. `--json` 결과를 `ConvertFrom-Json`으로 받을 것

@@ -13,7 +13,7 @@
 | `audience.yaml` | 독자·중요도 기준·버릴 것·토픽별 데스크지침. 편집 방향은 여기만 고친다 |
 | `run.py` | 한 번 실행. GitHub Actions가 05:43(KST)에 깨워 07:30까지 기다린 뒤 돌린다. 08:13 예비 실행은 그날 이미 보냈으면 건너뛴다 |
 | `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
-| `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠) |
+| `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠). 전문 피드(`FULL_TEXT_FEEDS`)는 피드 본문도 챙긴다 |
 | `grounding.py` | 검수 노드가 쓰는 숫자 원문 대조 (값 없음·한정어 빠짐·추정 표현 빠짐) |
 | `.env.example` | 로컬 키 파일 틀. `.env`로 복사해 채운다 |
 | `requirements.txt` · `requirements-dev.txt` | 버전을 고정한 실행 의존성 · 그래프용 matplotlib |
@@ -68,7 +68,7 @@ python run.py                       # 키가 있으면 끝까지 dry-run (DRY_RU
 **키·네트워크 없이 도는 테스트** (저장소 파일을 바꾸지 않는다)
 
 ```
-python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 19개 시나리오
+python test_graph_fake.py    # 모델·네트워크를 가짜로 바꿔 그래프 경로 20개 시나리오
 python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사
 python test_schedule.py      # 07:30 대기 계산, 하루 한 번 발송 판정, 실행 전 키 점검
 python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
@@ -125,6 +125,17 @@ python test_guards.py        # 조용한 실패 가드 3종 발화 재현
   - 모델 검수는 `100억 → 1,000억 달러`를 6번 모두 통과시켰다
   - 떨어진 카드는 지적 사항을 보여 주고 한 번 다시 쓰게 한다
   - 그래도 틀리면 빼고 예비 기사로 채운다
+- **Cloudflare 챌린지는 우회하지 않는다**
+  - 피드 전체가 막히면 `NK_SKIP_SOURCES`로 끈다 (데일리NK재팬)
+  - 기사 페이지만 막히고 피드에 전문이 있으면 피드 본문으로 대신한다 (38North)
+    - 순서: 원문 페이지 먼저 → 막혔을 때(401·403·429·5xx·연결 오류)나 추출 600자 미만일 때만 피드 본문
+    - 404·410은 대체하지 않는다: 기사가 내려간 것이라 피드 사본을 실으면 안 된다
+    - 피드 본문도 600자 미만이거나 발췌문 모양(`...`·`[…]`·`Continue reading` 끝, 발췌 요약의 3배 미만)이면 쓰지 않고 두 이유를 함께 로그에 남긴다
+  - 어느 쪽을 썼는지 남긴다
+    - 취재 로그: `피드 본문 사용 (페이지 HTTPError 403 cf-challenge)` 또는 `원문 페이지`
+    - `store/metrics.jsonl` 행: `body_via` (`page`·`feed`·`api`·`refused` 건수)
+    - 수집 로그 `NOFEED`: 전문 피드가 발췌문으로 바뀌면 페이지가 막히기 전에 알린다
+  - 새 소스를 `collect_nk.FULL_TEXT_FEEDS`에 넣기 전에 피드 본문이 발췌문이 아닌지 재볼 것
 - **프롬프트 부탁은 코드로 확인한다**
   - 같은 사건 거르기는 모델이 붙인 라벨만 믿지 않는다
   - 뽑힌 짧은 목록을 한 번 더 나란히 놓고 묶게 한 뒤 예비 후보로 채운다

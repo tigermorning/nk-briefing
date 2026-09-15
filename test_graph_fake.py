@@ -31,6 +31,8 @@ No key, no network. Checks the shape, not the judgement:
       the ledger is written and the fallback run does not post it again
   19. a feed request that hits one connection error is retried once; an HTTP
       error status is not retried
+  20. a 38North article page answering a Cloudflare 403: the full-text feed
+      body stands in, the log and metrics say so, a teaser feed body is refused
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -363,5 +365,119 @@ except collect_nk.requests.exceptions.ConnectTimeout:
     pass
 collect_nk.requests.get, collect_nk.RETRY_WAIT_S = real_get, real_wait
 print("retried once on a connection error, not on 503, raises after the second failure")
+
+print("\n== 20. article page 403 (Cloudflare challenge): full-text feed body stands in, and says so ==")
+# collect keeps content:encoded as plain text, only for FULL_TEXT_FEEDS
+pub = now.strftime("%a, %d %b %Y %H:%M:%S +0000")
+ARTICLE = ("<p>Commercial satellite imagery shows Sinuiju&#8217;s new customs area.</p>"
+           + "<p>" + "Trucks wait at the gate. " * 60 + "</p>"
+           + "<table><tr><td>2024</td><td>5,000</td></tr></table>"
+           # a last paragraph that opens like the WordPress footer must survive
+           + "<p>The post of ambassador in Pyongyang remains vacant.</p>")
+FOOTER = '<p>The post <a href="https://www.38north.org/x/">X</a> appeared first on <a href="https://www.38north.org">38 North</a>.</p>'
+RSS = f"""<?xml version="1.0"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>t</title>
+<item><title>North Korea X</title><link>https://www.38north.org/x/</link><pubDate>{pub}</pubDate>
+<description><![CDATA[<p>Commercial satellite imagery shows ...</p>{FOOTER}]]></description>
+<content:encoded><![CDATA[{ARTICLE}{FOOTER}]]></content:encoded></item></channel></rss>""".encode()
+os.environ["NK_SKIP_SOURCES"] = ",".join(n for n, _u, _e in collect_nk.SOURCES if n not in ("38North", "DailyNK"))
+collect_nk.requests.get = lambda url, **kw: NS(status_code=200, content=RSS if "38north" in url else
+                                               RSS.replace(b"38north.org/x/</link>", b"ex.com/dnk/</link>"))
+got = collect_nk.collect({"hours": 24})
+collect_nk.requests.get = real_get
+del os.environ["NK_SKIP_SOURCES"]
+by = {i["source"]: i for i in got["items"]}
+fb = by["38North"]["feed_body"]
+assert "feed_body" not in by["DailyNK"], "a feed not opted in must not carry feed_body"
+assert fb.startswith("Commercial satellite imagery shows Sinuiju’s"), fb[:60]
+assert fb.endswith("gate.\n2024 | 5,000\nThe post of ambassador in Pyongyang remains vacant."), fb[-80:]
+assert "appeared first on" not in fb and "<p>" not in fb, "footer or tags left in the feed body"
+assert collect_nk.html_text(by["38North"]["summary"]).endswith("..."), "excerpt fixture should end in ..."
+print(f"collect: 38North feed_body {len(fb)} chars, footer and tags gone; DailyNK carries none")
+
+def challenged(it):
+    resp = graph.requests.Response()
+    resp.status_code = 403
+    resp.headers["cf-mitigated"] = "challenge"
+    raise graph.requests.HTTPError("403 Client Error", response=resp)
+def http_error(status, **headers):
+    def fail(it):
+        resp = graph.requests.Response()
+        resp.status_code = status
+        resp.headers.update(headers)
+        raise graph.requests.HTTPError(f"{status} Client Error", response=resp)
+    return fail
+north = dict(item("38North", 0, 50), feed_body=fb, summary=by["38North"]["summary"])
+ROWS = []
+real_append = graph.append_row
+graph.append_row = ROWS.append
+run_with([], tier1={"status": "NO_PUBLICATION"}, body=challenged)   # sets the fakes; graph.run() below does the real pass
+graph.collect_feeds = lambda state: {"items": [item("DailyNK", 0, 3), north], "dead": [], "silent": [], "gaps": [],
+                                     "skips": {}, "seen_now": {}, "hours": state["hours"]}
+out = graph.run()
+graph.append_row = real_append
+show(out)
+deep = [a for a in out["drafted"] if a["source"] == "38North"]
+assert deep and deep[0]["body_via"] == "feed" and deep[0]["body"] == fb[:6000], "feed body not used after 403"
+assert "feed_body" not in deep[0], "the feed copy should not ride along after it became the body"
+assert any("38North" in l and "피드 본문 사용 (페이지 HTTPError 403 cf-challenge)" in l for l in out["log"]), out["log"]
+assert any("제외 DailyNK · 원문 받기 실패 HTTPError" in l for l in out["log"]), "a feed without full text still fails as before"
+assert ROWS[-1]["body_via"] == {"feed": 1}, ROWS[-1]["body_via"]
+assert not any("NOFEED" in l for l in out["log"]), "a good full-text feed must not raise NOFEED"
+
+# the page answers but extracts short: the feed stands in through report too, and says why
+graph.extract_body = lambda it: "short" * 20
+res = graph.report({"item": dict(north, slot="deep")})
+assert res["drafted"] and res["drafted"][0]["body_via"] == "feed", res
+assert f"피드 본문 사용 (페이지 추출 100자 < {graph.BODY_MIN} 앞부분 'shortshort" in res["log"][0], res["log"]
+# page fine: page wins, and the log names it for a full-text source
+graph.extract_body = lambda it: "p" * 900
+res = graph.report({"item": dict(north, slot="deep")})
+assert res["drafted"][0]["body_via"] == "page" and "· 원문 페이지" in res["log"][0], res["log"]
+# a connection error after the retry: the feed stands in, the log names the error type
+graph.extract_body = lambda it: (_ for _ in ()).throw(graph.requests.exceptions.ConnectionError("reset"))
+assert graph.get_body(north, graph.BODY_MIN)[1:] == ("feed", "페이지 ConnectionError")
+# 404: the article is gone, not blocked -- the feed's copy must not be published
+graph.extract_body = http_error(404)
+try:
+    graph.get_body(north, graph.BODY_MIN)
+    raise AssertionError("a 404 page was replaced by the feed body")
+except graph.requests.HTTPError:
+    pass
+res = graph.report({"item": dict(north, slot="deep")})
+assert not res["drafted"] and "원문 받기 실패 HTTPError 404" in res["log"][0], res["log"]
+# opted in but the entry had no content:encoded: refused, both reasons, counted
+graph.extract_body = challenged
+res = graph.report({"item": dict(north, slot="deep", feed_body="")})
+assert res["body_refused"] == ["38North"] and "페이지 HTTPError 403 cf-challenge · 피드 본문 없음" in res["log"][0], res
+# a response-like object that is not a requests Response must not crash the worker
+assert graph.page_failure(type("E", (Exception,), {"response": object()})()) == "E"
+
+# excerpt shapes: WordPress [...] and "Continue reading <title>", and a marker-less
+# excerpt barely longer than the summary; a quote ending in an ellipsis is an article
+body = "Trucks wait at the gate. " * 30
+for text, bad in ((body + "[…]", True), (body + "Continue reading North Korea X", True),
+                  (body + "... Read the full article", True), (body.strip(), False),
+                  (body + "“We will wait…”", False)):
+    got_problem = graph.feed_body_problem(text, graph.BODY_MIN)
+    assert bool(got_problem) == bad, (text[-40:], got_problem)
+excerpt = "<p>" + "Trucks wait at the gate. " * 20 + "...</p>"          # 500-char excerpt as the summary
+assert "3배 미만" in graph.feed_body_problem(body.strip(), graph.BODY_MIN, excerpt)
+assert graph.feed_body_problem(fb, graph.BODY_MIN, by["38North"]["summary"]) == ""
+
+# the feed turns into excerpts: no teaser reaches the model, both reasons are logged and counted
+teaser = dict(north, feed_body=collect_nk.html_text("<p>" + "Trucks wait at the gate. " * 30 + "[&#8230;]</p>" + FOOTER))
+graph.collect_feeds = lambda state: {"items": [teaser], "dead": [], "silent": [], "gaps": [],
+                                     "skips": {}, "seen_now": {}, "hours": state["hours"]}
+graph.extract_body = challenged
+graph.append_row = ROWS.append
+out = graph.run()
+graph.append_row = real_append
+show(out)
+assert not out["drafted"], "a teaser feed body was drafted"
+assert any("원문 받기 실패 페이지 HTTPError 403 cf-challenge · 피드 본문이 발췌문 끝맺음" in l for l in out["log"]), out["log"]
+assert any("NOFEED 38North" in l for l in out["log"]), "excerpt-only full-text feed not flagged at collect"
+assert ROWS[-1]["body_via"] == {"refused": 1}, ROWS[-1]["body_via"]
+print("403 -> feed body used and logged, metrics body_via {'feed': 1}; short page and connection error -> feed;"
+      " 404 -> no feed; teaser and empty feed body refused and counted")
 
 print("\nALL OK")
