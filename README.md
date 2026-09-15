@@ -10,7 +10,7 @@
 |---|---|
 | `graph.py` | LangGraph 한 판. 수집 → 선별 → 취재(기사마다 워커) → 검수 → 발행, 끝나면 `store/metrics.jsonl`에 한 줄 |
 | `audience.yaml` | 독자·중요도 기준·버릴 것·토픽별 데스크지침. 편집 방향은 여기만 고친다 |
-| `run.py` | 한 번 실행. GitHub Actions가 매일 07:30(KST)에 부른다 |
+| `run.py` | 한 번 실행. GitHub Actions가 05:43(KST)에 깨워 07:30까지 기다린 뒤 돌린다. 08:13 예비 실행은 그날 이미 보냈으면 건너뛴다 |
 | `scorecard.py` | 쌓인 기록으로 소스별 기여·깔때기·경보 누적을 본다 |
 | `collect_nk.py` · `min_publish.py` · `tier1_mou.py` | 수집 노드가 쓰는 부품 (피드 수집·원장·통일부 1차枠) |
 
@@ -40,6 +40,7 @@ python test_graph_fake.py    # 키·네트워크 없이 그래프 모양 확인
 python run.py                # 실제 수집·모델 호출. DRY_RUN 기본 1이라 디스코드로 안 보낸다
 python scorecard.py          # 성적표 (--plot out.png 로 단계별 통과율 그래프)
 python test_config.py        # audience.yaml 오타가 시작 시점에 잡히는지
+python test_schedule.py      # 07:30 대기 계산과 하루 한 번 발송 판정
 python test_number_check.py  # 강의식 문자열 숫자 대조가 북한 원문에서 틀리는 사례 (1/5)
 python test_grounding.py     # 값 기준 숫자 대조·한정어·추정 표현 검사 (키 없음)
 python exp/step12_exaggeration.py  # 실제 카드에 과장을 심어 옛 검수와 새 검수 비교 (키 필요)

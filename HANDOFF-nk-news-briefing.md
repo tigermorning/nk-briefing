@@ -166,7 +166,14 @@
     - 알려진 LOW: 영어 `$2m`을 2미터로 읽음 → 충실한 `200만 달러` 카드에 재작성 1회(통과 방향 오류 아님). 단위 바꿔치기(`원 → 달러`)는 LLM에만 맡김
     - 실데이터 dry-run 12:10(1차 코드판), 12:34(최종): 각 5장, `first_fail 0` — 정상 카드 오탈락 없음. 표본 작음
     - **gotcha**: Git Bash heredoc(`<<'PY'`)으로 넘긴 파이썬 패치에서 `\n`·`\s`가 한 단계 줄어 문자열이 안 맞거나 소스가 깨짐. 역슬래시가 든 패치는 Write로 파일을 만들어 실행할 것
-    - 커밋 안 함 (사용자 요청 대기)
+    - 커밋 `cb008fe`(검수)·`59a2ce3`(REPORT) push, Actions 수동 dry-run(`34925978081`) 초록불: 17 → 속보 4 + 심층 1, 검수 5→5, 3장
+24. **발송 지연 대책** (2026-09-15)
+    - 원인: 9/15 `30 22` cron이 GitHub에서 **09:49 KST에 생성**(run `created_at` = `run_started_at`), 실행은 49초. 지연은 전부 GitHub 대기열. 문서: 부하 시 지연, 정각 무렵 최악, 빠질 수도 있음
+    - 사용자 선택: 일찍 깨워 대기 + 예비 예약. cron `43 20`(05:43 KST) + `13 23`(08:13 KST), `timeout-minutes: 150`
+    - `run.py`: 예약 실행에만 `NK_SEND_AT=07:30`(그때까지 sleep, 지났으면 바로), `NK_ONCE_A_DAY=1`(metrics에 오늘 `dry_run: false`·`failed` 없음·`error` 없음 행이 있으면 건너뜀, metrics 행 안 남김). 수동 실행은 둘 다 꺼짐
+    - checkout `ref: ${{ github.ref_name }}`: 예비 실행이 첫 실행 뒤 대기열에서 시작할 때 첫 실행의 metrics 커밋을 봐야 함(기본 checkout은 트리거 시점 커밋)
+    - `test_schedule.py` 통과. 로컬: 오늘(9/15) 실발송 기록으로 건너뜀 확인, 3분 뒤 목표로 대기 메시지 확인, `7:30` 형식 오류로 멈춤 확인
+    - **9/16 아침 확인할 것**: 첫 실행 생성 시각(`gh api repos/tigermorning/nk-briefing/actions/runs?event=schedule`), 로그의 `N분 기다린 뒤`, 디스코드 도착 시각, 08:13 실행이 `오늘 이미 발송한 기록이 있어 건너뜀`인지. 05:43 cron도 2시간 넘게 밀리면 외부 스케줄러(workflow_dispatch API) 검토
 
 ## 남은 일
 1. **11강 남은 것**: cron 5분 시험, 실패 알림 확인. 14강 회고 퀴즈. 매일 07:30 KST 예약 실행은 이미 켜져 있고 실발송·원장 커밋한다 — 첫 예약 실행(9/15 07:30) 로그에서 `OFF DailyNK-JP`·경고·`기록 커밋` 성공을 볼 것: `gh run list --repo tigermorning/nk-briefing --limit 3`
@@ -189,7 +196,7 @@
 | `run.py` | 1회 실행 (Actions 진입점) |
 | `scorecard.py` | `kind: graph` 행으로 소스별 기여·깔때기·경보 |
 | `test_graph_fake.py` | 모델·네트워크 가짜로 그래프 모양 검사 (중복 재확인·상한·빈 날·dry-run 원장) |
-| `.github/workflows/daily.yml` | 매일 KST 07:30, store/ 커밋 |
+| `.github/workflows/daily.yml` | KST 05:43 깨워 07:30 발송 + 08:13 예비, store/ 커밋 |
 | `mou_api.py` | 통일부 API 클라이언트. `get_trend(period, days)`. 키는 환경변수 먼저, 없으면 `.env` |
 | `mou_probe.py` | 갱신속도·신호종류 측정. 보고서는 `mou_report.txt` (UTF-8) |
 | `tier1_mou.py` | 1차枠 규칙 + 30일 시뮬레이션 |

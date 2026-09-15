@@ -1,8 +1,13 @@
 name: 매일 북한 브리핑
 
 on:
+  # GitHub started the "30 22" (07:30 KST) cron at 09:49 KST on 2026-09-15; its
+  # docs say schedule runs are delayed under load, worst at the top of the hour,
+  # and may be dropped. So: fire early at an off-peak minute and let run.py wait
+  # for 07:30 (NK_SEND_AT), plus a later fallback that skips if today went out.
   schedule:
-    - cron: "30 22 * * *"          # UTC 22:30 = KST 07:30
+    - cron: "43 20 * * *"          # UTC 20:43 = KST 05:43, waits until 07:30
+    - cron: "13 23 * * *"          # UTC 23:13 = KST 08:13, fallback: skipped if already sent
   workflow_dispatch:
     inputs:
       dry_run:
@@ -20,10 +25,14 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 150           # up to ~107 min of waiting for 07:30, then the run
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          # the branch tip when the job starts, not the commit at trigger time:
+          # the fallback run queues behind the first and must see its metrics row
+          ref: ${{ github.ref_name }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
@@ -42,6 +51,9 @@ jobs:
           # (2026-09-14); from home the feed is 200. Off here, on locally.
           NK_SKIP_SOURCES: DailyNK-JP
           TZ: Asia/Seoul
+          # scheduled runs only; a manual run starts at once and always runs
+          NK_SEND_AT: ${{ github.event_name == 'schedule' && '07:30' || '' }}
+          NK_ONCE_A_DAY: ${{ github.event_name == 'schedule' && '1' || '' }}
 
       - name: 실행 기록 보관
         if: always()
