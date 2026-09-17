@@ -36,6 +36,9 @@ No key, no network. Checks the shape, not the judgement:
   21. another briefing yaml: its sources, keywords, feed body, prompts and
       title are used, tier1 is never fetched without 1차칸, and North Korea
       comes back after
+  22. the run stops midway (no model credit, 2026-09-17): the reader gets a
+      notice naming the cause, once a day, never after a posted brief or in a
+      dry run, and the fallback still retries the brief
 """
 import os, re, sys
 from datetime import datetime, timedelta, timezone
@@ -555,5 +558,78 @@ finally:
     os.environ.pop("DISCORD_WEBHOOK_URL", None)
 assert graph.SOURCES == nk_sources and "북한 뉴스 브리핑 기자" in graph.SYS_DRAFT, "North Korea not restored"
 print("another yaml: its sources, keywords, feed body, prompts and title; tier1 never called; North Korea restored")
+
+print("\n== 22. the run stops midway (no model credit): the reader is told, once a day ==")
+import json, httpx, openai
+def no_credit(system, user, schema):
+    body = {"message": "You have no credits remaining. https://platform.openai.com/settings/organization/billing/",
+            "type": "insufficient_quota", "param": None, "code": "credit_balance_exhausted"}
+    req = httpx.Request("POST", "https://api.openai.com/v1/chat/completions")
+    raise openai.RateLimitError("Error code: 429 https://platform.openai.com/x",
+                                response=httpx.Response(429, request=req, json={"error": body}), body=body)
+tmp_metrics = pathlib.Path(tempfile.mkdtemp()) / "metrics.jsonl"
+saved22 = {k: getattr(graph, k) for k in ("METRICS", "append_row", "parse", "mark_published")}
+graph.METRICS, graph.append_row = str(tmp_metrics), real_append
+os.environ["DRY_RUN"] = "0"
+os.environ["DISCORD_WEBHOOK_URL"] = "https://example.invalid/hook"
+posted = []
+graph.requests.post = lambda url, json, timeout: posted.append(json) or NS(status_code=204, text="")
+def crashed_run():
+    try:
+        graph.run()
+    except openai.RateLimitError:
+        return [json.loads(l) for l in tmp_metrics.read_text(encoding="utf-8").splitlines()][-1]
+    raise AssertionError("the crash must still raise, so Actions goes red")
+try:
+    graph.parse = no_credit                                  # the crash comes in select, after collect
+    graph.fetch_tier1 = lambda led: {"status": "NO_PUBLICATION"}
+    graph.extract_body = lambda it: "나" * LEN[it["source"]]
+    graph.collect_feeds = lambda state: {"items": FEED, "dead": [], "silent": [], "gaps": [], "skips": {},
+                                         "seen_now": {}, "hours": state["hours"]}
+    row = crashed_run()
+    text = posted[-1]["embeds"][0]["description"]
+    assert len(posted) == 1 and text == "⚠️ 모델 사용 크레딧이 떨어져 오늘 브리핑을 만들지 못했습니다.", posted
+    assert "http" not in json.dumps(posted[-1]), "the exception message leaked into the notice"
+    assert row["error"] == "RateLimitError" and row["notice"] is True, row
+    assert runmod.sent_today([row], row["run_id"][:10]) == "", "a crash notice must not count as today's brief"
+    # the fallback run crashes the same way: brief retried, notice not repeated
+    row = crashed_run()
+    assert len(posted) == 1 and row["notice"] is False, (len(posted), row)
+    # a crash after the brief went out: no "no brief today" notice on top of it
+    tmp_metrics.write_text("", encoding="utf-8")
+    posted.clear()
+    graph.parse = real_parse
+    def ledger_broken(items):
+        raise OSError("disk full")
+    graph.mark_published = ledger_broken
+    try:
+        graph.run()
+        raise AssertionError("ledger failure should raise")
+    except OSError:
+        pass
+    assert len(posted) == 1 and "⚠️" not in json.dumps(posted[0], ensure_ascii=False), "notice sent after the brief"
+    assert json.loads(tmp_metrics.read_text(encoding="utf-8").splitlines()[-1])["notice"] is False
+    # a dry run only prints the notice
+    tmp_metrics.write_text("", encoding="utf-8")
+    posted.clear()
+    os.environ["DRY_RUN"] = "1"
+    graph.parse = no_credit
+    graph.mark_published = saved22["mark_published"]
+    row = crashed_run()
+    assert not posted and row["notice"] is False and row["dry_run"] is True, row
+    # reasons by type and code only
+    class APIConnectionError(Exception): pass
+    class RateLimitError(Exception):
+        code, type = "rate_limit_exceeded", "requests"
+    assert graph.crash_reason(APIConnectionError("https://secret")) == "모델 서버에 연결하지 못해"
+    assert graph.crash_reason(RateLimitError()) == "모델 호출 한도에 걸려"
+    assert graph.crash_reason(KeyError("x")) == "실행 중 오류(KeyError)가 나"
+finally:
+    for k, v in saved22.items():
+        setattr(graph, k, v)
+    os.environ["DRY_RUN"] = "1"
+    os.environ.pop("DISCORD_WEBHOOK_URL", None)
+print("credit exhausted: notice posted once and names the cause without the message; fallback retries the brief"
+      " without a second notice; no notice after a posted brief or in a dry run")
 
 print("\nALL OK")

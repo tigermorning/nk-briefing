@@ -706,6 +706,7 @@ def fit_brief(verified):
     return sorted(special + keep, key=lambda a: SLOT_ORDER[a["slot"]]), breaking[len(keep):]
 
 def publish(s: dict) -> dict:
+    global _POSTED
     ver, spare = fit_brief(s["verified"])
     arts = [{**a, "when": datetime.fromisoformat(a["at"]).astimezone(KST).strftime("%m-%d %H:%M")
              if a["slot"] != "tier1" else datetime.fromisoformat(a["at"]).strftime("%m-%d")}
@@ -728,6 +729,7 @@ def publish(s: dict) -> dict:
     embeds, dropped = build_embeds(today, lead, arts, failure)
     payload = {"username": CFG["제목"], "embeds": embeds}
     sent = send(payload, os.environ.get("DISCORD_WEBHOOK_URL"), dry_run=is_dry())
+    _POSTED = bool(sent)                        # a crash after this point must not add a "no brief today" notice
     # the ledger follows the send, not the run: dropped cards and dry runs stay eligible
     shipped = ver[:len(embeds) - 1] if arts else []
     if sent and shipped:
@@ -767,17 +769,79 @@ def append_row(row):
     with open(METRICS, "a", encoding="utf-8") as fh:
         fh.write(json.dumps(row, ensure_ascii=False) + "\n")
 
+_POSTED = False    # publish sets it once the brief went out (or may have); run() resets it
+
+def crash_reason(exc):
+    """The reader-facing reason when a run stops midway. Chosen by exception
+    type name and API error code only: messages can carry URLs and request
+    text. Type names, not isinstance, so openai is still imported lazily.
+    Measured 2026-09-17: both scheduled runs stopped in select on
+    openai.RateLimitError (insufficient_quota / credit_balance_exhausted)
+    and the Discord channel got nothing at all."""
+    name = type(exc).__name__
+    codes = {str(getattr(exc, "code", "") or ""), str(getattr(exc, "type", "") or "")}
+    if name == "RateLimitError" and codes & {"insufficient_quota", "credit_balance_exhausted"}:
+        return "모델 사용 크레딧이 떨어져"
+    if name == "RateLimitError":
+        return "모델 호출 한도에 걸려"
+    if name in ("AuthenticationError", "PermissionDeniedError"):
+        return "모델 API 키가 거절돼"
+    if name in ("APIConnectionError", "APITimeoutError", "InternalServerError"):
+        return "모델 서버에 연결하지 못해"
+    return f"실행 중 오류({name})가 나"
+
+def notice_sent_today(today):
+    """A crash notice already went out today: the fallback run that crashes
+    the same way retries the brief but does not post the notice twice."""
+    try:
+        with open(METRICS, encoding="utf-8") as fh:
+            lines = fh.readlines()
+    except OSError:
+        return False
+    for line in lines:
+        try:
+            r = json.loads(line)
+        except ValueError:
+            continue
+        if (r.get("kind") == "graph" and r.get("dry_run") is False
+                and str(r.get("run_id", "")).startswith(today) and r.get("notice") in (True, "unknown")):
+            return True
+    return False
+
+def crash_notice(exc):
+    """Tell the reader the brief is not coming, instead of leaving the channel
+    silent. Returns True / "unknown" when posted, False when not: a dry run
+    (printed only), a brief already posted this run, a notice already sent
+    today, or the post itself failing -- the original error is what matters."""
+    today = datetime.now(KST).strftime("%Y-%m-%d")
+    embeds, _ = build_embeds(today, "", [], crash_reason(exc))
+    payload = {"username": CFG["제목"], "embeds": embeds}
+    if is_dry():
+        send(payload, None, dry_run=True)
+        return False
+    if _POSTED or notice_sent_today(today):
+        return False
+    try:
+        return send(payload, os.environ.get("DISCORD_WEBHOOK_URL"), dry_run=False)
+    except Exception:
+        return False
+
 def run():
+    global _POSTED
+    _POSTED = False
     t0 = time.time()
     try:
         out = build().compile().invoke(INIT)
     except Exception as exc:
+        notice = crash_notice(exc)
+        print(f"실패 안내: {({True: '보냄', 'unknown': '보냈을 수 있음', False: '안 보냄'})[notice]} "
+              f"({crash_reason(exc)})", flush=True)
         # a crashed run leaves a row too; the scorecard counts these. Only the
         # type and our own RuntimeError text -- other messages may carry URLs
         append_row({"kind": "graph", "ts": datetime.now(timezone.utc).isoformat(),
                     "run_id": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "dry_run": is_dry(),
                     "error": type(exc).__name__ + (f": {exc}" if isinstance(exc, RuntimeError) else ""),
-                    "elapsed_s": round(time.time() - t0, 1)})
+                    "notice": notice, "elapsed_s": round(time.time() - t0, 1)})
         raise
     meta = out["meta"]
     by_source, by_slot, body_via = {}, {}, {}
